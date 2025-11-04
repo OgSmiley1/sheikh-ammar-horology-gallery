@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Header } from "@/components/Header";
-import { VaultMode } from '@/components/VaultMode';
+import { HeroSlideshow } from '@/components/HeroSlideshow';
 import { CinematicSlideshow } from '@/components/CinematicSlideshow';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollProgress } from '@/components/ScrollProgress';
@@ -112,11 +112,6 @@ const top5Watches = [
 
 export default function Home() {
   const { t, isRTL } = useLanguage();
-  const [showVault, setShowVault] = useState(true);
-
-  const handleEnterCollection = () => {
-    setShowVault(false);
-  };
 
   return (
     <>
@@ -124,23 +119,16 @@ export default function Home() {
       <CustomCursor />
 
       {/* Scroll progress bar */}
-      {!showVault && <ScrollProgress />}
+      <ScrollProgress />
 
-      <AnimatePresence mode="wait">
-        {showVault ? (
-          <VaultMode key="vault" onEnter={handleEnterCollection} />
-        ) : (
-          <motion.div
-            key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="min-h-screen bg-[#0a0a0a]"
-          >
-            <Header />
+      <div className="min-h-screen bg-[#0a0a0a]">
+        <Header />
 
-            {/* Cinematic Slideshow */}
-            <CinematicSlideshow watches={top5Watches} />
+        {/* Hero Slideshow with Sheikh Ammar's 17 pictures */}
+        <HeroSlideshow />
+
+        {/* Cinematic Slideshow */}
+        <CinematicSlideshow watches={top5Watches} />
 
             {/* Featured Brands Section */}
             <section className="py-20 bg-[#0a0a0a]">
@@ -260,17 +248,15 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Footer */}
-            <footer className="border-t border-[#d4af37]/20 py-12" style={{ background: 'rgba(212, 175, 55, 0.05)' }}>
-              <div className="container text-center text-[#f5f2e8]/60">
-                <p>
-                  © 2025 {isRTL ? "مجموعة الشيخ عمار الملكية" : "Sheikh Ammar Royal Collection"}. {isRTL ? "جميع الحقوق محفوظة." : "All rights reserved."}
-                </p>
-              </div>
-            </footer>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Footer */}
+        <footer className="border-t border-[#d4af37]/20 py-12" style={{ background: 'rgba(212, 175, 55, 0.05)' }}>
+          <div className="container text-center text-[#f5f2e8]/60">
+            <p>
+              © 2025 {isRTL ? "مجموعة الشيخ عمار الملكية" : "Sheikh Ammar Royal Collection"}. {isRTL ? "جميع الحقوق محفوظة." : "All rights reserved."}
+            </p>
+          </div>
+        </footer>
+      </div>
     </>
   );
 }
