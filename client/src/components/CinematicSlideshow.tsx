@@ -6,19 +6,23 @@ import './CinematicSlideshow.css';
 
 interface Watch {
   id: number;
+  rank?: number;
   brand: { en: string; ar: string };
   model: { en: string; ar: string };
   reference: string;
   price: { min: number; max: number };
+  priceRange?: string;
   story: { en: string; ar: string };
   movement: string;
   case: string;
   diameter: string;
+  thickness?: string;
   complications: string[];
   sheikhImage: string;
   watchImage: string;
   rarity: string;
   year: string;
+  limitedEdition?: string;
 }
 
 interface CinematicSlideshowProps {
@@ -205,7 +209,7 @@ export function CinematicSlideshow({ watches }: CinematicSlideshowProps) {
                   transition={{ duration: 0.5, delay: 0.6 }}
                   className="price"
                 >
-                  ${(currentWatch.price.max / 1000).toFixed(0)}K - ${(currentWatch.price.min / 1000).toFixed(0)}K
+                  {currentWatch.priceRange || `$${(currentWatch.price.max / 1000).toFixed(0)}K - $${(currentWatch.price.min / 1000).toFixed(0)}K`}
                 </motion.p>
 
                 <motion.p
@@ -263,26 +267,32 @@ export function CinematicSlideshow({ watches }: CinematicSlideshowProps) {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="specs-card"
             >
-              <h3>Specifications</h3>
+              <h3>{language === 'ar' ? 'المواصفات' : 'Specifications'}</h3>
               <dl className="specs-list">
                 <div>
-                  <dt>Reference</dt>
+                  <dt>{language === 'ar' ? 'المرجع' : 'Reference'}</dt>
                   <dd>{currentWatch.reference}</dd>
                 </div>
                 <div>
-                  <dt>Movement</dt>
+                  <dt>{language === 'ar' ? 'الحركة' : 'Movement'}</dt>
                   <dd>{currentWatch.movement}</dd>
                 </div>
                 <div>
-                  <dt>Case</dt>
+                  <dt>{language === 'ar' ? 'العلبة' : 'Case'}</dt>
                   <dd>{currentWatch.case}</dd>
                 </div>
                 <div>
-                  <dt>Diameter</dt>
+                  <dt>{language === 'ar' ? 'القطر' : 'Diameter'}</dt>
                   <dd>{currentWatch.diameter}</dd>
                 </div>
+                {currentWatch.thickness && (
+                  <div>
+                    <dt>{language === 'ar' ? 'السمك' : 'Thickness'}</dt>
+                    <dd>{currentWatch.thickness}</dd>
+                  </div>
+                )}
                 <div>
-                  <dt>Complications</dt>
+                  <dt>{language === 'ar' ? 'المضاعفات' : 'Complications'}</dt>
                   <dd>{currentWatch.complications.join(', ')}</dd>
                 </div>
               </dl>
@@ -300,28 +310,34 @@ export function CinematicSlideshow({ watches }: CinematicSlideshowProps) {
                 onClick={() => setSpecsExpanded(!specsExpanded)}
                 className="accordion-button"
               >
-                📋 Specifications {specsExpanded ? '−' : '+'}
+                📋 {language === 'ar' ? 'المواصفات' : 'Specifications'} {specsExpanded ? '−' : '+'}
               </button>
               {specsExpanded && (
                 <dl className="specs-list">
                   <div>
-                    <dt>Reference</dt>
+                    <dt>{language === 'ar' ? 'المرجع' : 'Reference'}</dt>
                     <dd>{currentWatch.reference}</dd>
                   </div>
                   <div>
-                    <dt>Movement</dt>
+                    <dt>{language === 'ar' ? 'الحركة' : 'Movement'}</dt>
                     <dd>{currentWatch.movement}</dd>
                   </div>
                   <div>
-                    <dt>Case</dt>
+                    <dt>{language === 'ar' ? 'العلبة' : 'Case'}</dt>
                     <dd>{currentWatch.case}</dd>
                   </div>
                   <div>
-                    <dt>Diameter</dt>
+                    <dt>{language === 'ar' ? 'القطر' : 'Diameter'}</dt>
                     <dd>{currentWatch.diameter}</dd>
                   </div>
+                  {currentWatch.thickness && (
+                    <div>
+                      <dt>{language === 'ar' ? 'السمك' : 'Thickness'}</dt>
+                      <dd>{currentWatch.thickness}</dd>
+                    </div>
+                  )}
                   <div>
-                    <dt>Complications</dt>
+                    <dt>{language === 'ar' ? 'المضاعفات' : 'Complications'}</dt>
                     <dd>{currentWatch.complications.join(', ')}</dd>
                   </div>
                 </dl>
