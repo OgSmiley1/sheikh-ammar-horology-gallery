@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import { HeroSlideshow } from "@/components/HeroSlideshow";
+import { Top5WatchesSlideshow } from '@/components/Top5WatchesSlideshow';
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { SITE_CONFIG, COLLECTION_INTRO } from "@shared/constants";
@@ -15,7 +15,7 @@ export default function Home() {
       <Header />
 
       {/* Hero Section with Slideshow */}
-      <HeroSlideshow />
+      <Top5WatchesSlideshow />
 
       {/* Featured Brands Section */}
       <section className="py-20 bg-background">
