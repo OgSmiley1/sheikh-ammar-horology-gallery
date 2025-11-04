@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 export function Header() {
   const { t, isRTL } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const [crownMode, setCrownMode] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +28,19 @@ export function Header() {
       <div className="container">
         <div className="flex items-center justify-between h-20">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all">
+          <Link 
+            href="/" 
+            className="flex items-center gap-3 group"
+            onMouseEnter={() => setCrownMode(true)}
+            onMouseLeave={() => setCrownMode(false)}
+          >
+            <div 
+              className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all"
+              style={{
+                boxShadow: crownMode ? '0 0 30px rgba(212, 175, 55, 0.8)' : 'none',
+                background: crownMode ? 'rgba(212, 175, 55, 0.2)' : undefined,
+              }}
+            >
               <span className="text-2xl font-bold text-gold-gradient">
                 {isRTL ? "ع" : "SA"}
               </span>

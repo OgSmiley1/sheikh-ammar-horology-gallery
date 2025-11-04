@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
+import CollectionStories from "./pages/CollectionStories";
 import Collections from "./pages/Collections";
 import BrandCollection from "./pages/BrandCollection";
 import WatchDetail from "./pages/WatchDetail";
@@ -17,6 +18,7 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path="/stories" component={CollectionStories} />
       <Route path="/collections" component={Collections} />
       <Route path="/collection/:slug" component={BrandCollection} />
       <Route path="/watch/:slug" component={WatchDetail} />

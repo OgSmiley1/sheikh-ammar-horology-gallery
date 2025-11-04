@@ -283,3 +283,44 @@
 - [x] Remove any images with visible hands (except Sheikh Ammar)
 - [x] Find better quality images for Patek Philippe 5959P
 - [x] Verify all watch reference numbers are correct
+
+
+## CINEMATIC REDESIGN - IMMERSIVE EXPERIENCE
+- [x] Install required packages (GSAP, Framer Motion, Three.js, react-three-fiber, drei)
+- [ ] Create cinematic landing scene with Sheikh Ammar silhouette video
+- [ ] Add ambient ticking sound to landing
+- [ ] Implement smooth fade transitions between sections (GSAP/Framer Motion)
+- [ ] Redesign collection showcase: one watch per viewport
+- [ ] Add dynamic background gradients extracted from watch images
+- [ ] Implement text reveal animations (brand, ref, rarity, price)
+- [ ] Add glass-like specs panel (bottom-right desktop, accordion mobile)
+- [ ] Create parallax tilt effect on mouse movement
+- [ ] Add light sweep effect on watch hover
+- [ ] Implement sound cues (tick/chime) on watch transitions
+- [ ] Create interactive brand wall (grayscale → gold on hover)
+- [ ] Add brand modal with video/quotes
+- [ ] Create About section with Sheikh's philosophy
+- [ ] Add blurred background from collection room
+- [ ] Implement "Crown Mode" (royal gold color shift on logo hover)
+- [ ] Add "Reflection Mode" (mirror effect for watch under cursor)
+- [ ] Create motion lighting algorithm for metal surfaces
+- [ ] Optimize mobile: hero video → static image fallback
+- [ ] Add swipe gestures for watch navigation
+- [ ] Implement collapsible spec cards for mobile
+- [ ] Add structured data (JSON-LD schema for Product)
+- [ ] Optimize SEO: title format, meta tags
+- [ ] Target Lighthouse: Performance ≥90, SEO ≥95
+- [ ] Preload hero video + first 2 watch images
+- [ ] Lazy-load subsequent media
+
+
+## MOBILE RESPONSIVENESS OVERHAUL (CURRENT PHASE)
+- [x] Phase 1: Add responsive typography with CSS clamp() (320px-4K)
+- [x] Phase 2: Convert split-screen layout to single-column on mobile (<900px)
+- [x] Phase 3: Build specs accordion for mobile devices
+- [x] Phase 4: Add swipe navigation for slideshow
+- [x] Phase 5: Perfect RTL Arabic layout on all screen sizes
+- [x] Phase 6: Add 3D watch rotation with mouse parallax
+- [x] Phase 7: Optimize images to 4K with HDR-style filters
+- [x] Phase 8: Implement light sweep effects with metal reflection
+- [x] Phase 9: Comprehensive device testing (320px-4K, both languages)
