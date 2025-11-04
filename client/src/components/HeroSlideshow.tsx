@@ -92,9 +92,189 @@ const SLIDES: Slide[] = [
     quoteAr: "في السعي نحو التميز، لا توجد خط نهاية.",
   },
   {
-    image: "/slideshow-optimized/13.webp",
-    quoteEn: "The greatest collections are built on passion, not possession.",
-    quoteAr: "أعظم المجموعات تُبنى على الشغف، وليس الملكية.",
+    image: "/slideshow-new/sheikh-17.webp",
+    quoteEn: "Wisdom is the crown of knowledge and experience.",
+    quoteAr: "الحكمة هي تاج المعرفة والخبرة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-18.webp",
+    quoteEn: "True leadership is measured by the legacy you leave.",
+    quoteAr: "القيادة الحقيقية تُقاس بالإرث الذي تتركه.",
+  },
+  {
+    image: "/slideshow-new/sheikh-19.webp",
+    quoteEn: "Excellence begins with attention to the smallest details.",
+    quoteAr: "التميز يبدأ بالاهتمام بأصغر التفاصيل.",
+  },
+  {
+    image: "/slideshow-new/sheikh-20.webp",
+    quoteEn: "Patience and perseverance unlock every door.",
+    quoteAr: "الصبر والمثابرة يفتحان كل باب.",
+  },
+  {
+    image: "/slideshow-new/sheikh-21.webp",
+    quoteEn: "Vision without action is merely a dream.",
+    quoteAr: "الرؤية بدون عمل مجرد حلم.",
+  },
+  {
+    image: "/slideshow-new/sheikh-22.webp",
+    quoteEn: "The finest things in life require dedication and time.",
+    quoteAr: "أفضل الأشياء في الحياة تتطلب التفاني والوقت.",
+  },
+  {
+    image: "/slideshow-new/sheikh-23.webp",
+    quoteEn: "Character is revealed in moments of challenge.",
+    quoteAr: "الشخصية تُكشف في لحظات التحدي.",
+  },
+  {
+    image: "/slideshow-new/sheikh-24.webp",
+    quoteEn: "Humility is the foundation of greatness.",
+    quoteAr: "التواضع هو أساس العظمة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-25.webp",
+    quoteEn: "Knowledge is a treasure that follows its owner everywhere.",
+    quoteAr: "المعرفة كنز يتبع صاحبه في كل مكان.",
+  },
+  {
+    image: "/slideshow-new/sheikh-26.webp",
+    quoteEn: "Respect is earned through consistency and integrity.",
+    quoteAr: "الاحترام يُكتسب من خلال الاتساق والنزاهة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-27.webp",
+    quoteEn: "Every masterpiece begins with a single decision.",
+    quoteAr: "كل تحفة تبدأ بقرار واحد.",
+  },
+  {
+    image: "/slideshow-new/sheikh-28.webp",
+    quoteEn: "Tradition and progress walk hand in hand.",
+    quoteAr: "التقليد والتقدم يسيران جنباً إلى جنب.",
+  },
+  {
+    image: "/slideshow-new/sheikh-29.webp",
+    quoteEn: "The journey of a thousand miles begins with one step.",
+    quoteAr: "رحلة الألف ميل تبدأ بخطوة واحدة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-30.webp",
+    quoteEn: "Strength lies not in power, but in wisdom.",
+    quoteAr: "القوة ليست في السلطة، بل في الحكمة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-31.webp",
+    quoteEn: "Quality always surpasses quantity.",
+    quoteAr: "الجودة تتفوق دائماً على الكمية.",
+  },
+  {
+    image: "/slideshow-new/sheikh-32.webp",
+    quoteEn: "Generosity is the mark of a noble soul.",
+    quoteAr: "الكرم هو علامة النفس النبيلة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-33.webp",
+    quoteEn: "Precision and passion create perfection.",
+    quoteAr: "الدقة والشغف يخلقان الكمال.",
+  },
+  {
+    image: "/slideshow-new/sheikh-34.webp",
+    quoteEn: "True wealth is measured in memories, not possessions.",
+    quoteAr: "الثروة الحقيقية تُقاس بالذكريات، ليس بالممتلكات.",
+  },
+  {
+    image: "/slideshow-new/sheikh-35.webp",
+    quoteEn: "Discipline is the bridge between goals and achievement.",
+    quoteAr: "الانضباط هو الجسر بين الأهداف والإنجاز.",
+  },
+  {
+    image: "/slideshow-new/sheikh-36.webp",
+    quoteEn: "Honor your heritage while embracing the future.",
+    quoteAr: "احترم تراثك بينما تحتضن المستقبل.",
+  },
+  {
+    image: "/slideshow-new/sheikh-37.webp",
+    quoteEn: "Success is built on a foundation of hard work.",
+    quoteAr: "النجاح يُبنى على أساس من العمل الجاد.",
+  },
+  {
+    image: "/slideshow-new/sheikh-38.webp",
+    quoteEn: "Elegance is simplicity refined.",
+    quoteAr: "الأناقة هي البساطة المصقولة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-39.webp",
+    quoteEn: "Courage is not the absence of fear, but mastery of it.",
+    quoteAr: "الشجاعة ليست غياب الخوف، بل السيطرة عليه.",
+  },
+  {
+    image: "/slideshow-new/sheikh-40.webp",
+    quoteEn: "Every moment is an opportunity to create something beautiful.",
+    quoteAr: "كل لحظة هي فرصة لإبداع شيء جميل.",
+  },
+  {
+    image: "/slideshow-new/sheikh-41.webp",
+    quoteEn: "Integrity is doing the right thing when no one is watching.",
+    quoteAr: "النزاهة هي فعل الصواب عندما لا يراقبك أحد.",
+  },
+  {
+    image: "/slideshow-new/sheikh-42.webp",
+    quoteEn: "Inspiration comes from within and shines outward.",
+    quoteAr: "الإلهام يأتي من الداخل ويشع للخارج.",
+  },
+  {
+    image: "/slideshow-new/sheikh-43.webp",
+    quoteEn: "The art of living well is the greatest masterpiece.",
+    quoteAr: "فن العيش بشكل جيد هو أعظم تحفة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-44.webp",
+    quoteEn: "Gratitude turns what we have into enough.",
+    quoteAr: "الامتنان يحول ما لدينا إلى كفاية.",
+  },
+  {
+    image: "/slideshow-new/sheikh-45.webp",
+    quoteEn: "Leadership is influence, nothing more, nothing less.",
+    quoteAr: "القيادة هي التأثير، لا أكثر ولا أقل.",
+  },
+  {
+    image: "/slideshow-new/sheikh-46.webp",
+    quoteEn: "Time reveals the value of patience.",
+    quoteAr: "الوقت يكشف قيمة الصبر.",
+  },
+  {
+    image: "/slideshow-new/sheikh-47.webp",
+    quoteEn: "Ambition fuels progress, humility sustains it.",
+    quoteAr: "الطموح يدفع التقدم، والتواضع يحافظ عليه.",
+  },
+  {
+    image: "/slideshow-new/sheikh-48.webp",
+    quoteEn: "The measure of a man is how he treats those who can do nothing for him.",
+    quoteAr: "مقياس الرجل هو كيف يعامل من لا يستطيعون فعل شيء له.",
+  },
+  {
+    image: "/slideshow-new/sheikh-49.webp",
+    quoteEn: "Wisdom grows in the garden of experience.",
+    quoteAr: "الحكمة تنمو في حديقة التجربة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-50.webp",
+    quoteEn: "Excellence is not a skill, it is an attitude.",
+    quoteAr: "التميز ليس مهارة، بل موقف.",
+  },
+  {
+    image: "/slideshow-new/sheikh-51.webp",
+    quoteEn: "The future belongs to those who believe in their dreams.",
+    quoteAr: "المستقبل ينتمي لمن يؤمنون بأحلامهم.",
+  },
+  {
+    image: "/slideshow-new/sheikh-52.webp",
+    quoteEn: "Greatness is achieved through consistent small actions.",
+    quoteAr: "العظمة تتحقق من خلال الأفعال الصغيرة المتسقة.",
+  },
+  {
+    image: "/slideshow-new/sheikh-53.webp",
+    quoteEn: "Legacy is what you leave in the hearts of others.",
+    quoteAr: "الإرث هو ما تتركه في قلوب الآخرين.",
   },
 ];
 
