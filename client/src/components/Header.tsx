@@ -27,55 +27,43 @@ export function Header() {
       <div className="container">
         <div className="flex items-center justify-between h-20">
           {/* Logo / Brand */}
-          <Link href="/">
-            <a className="flex items-center gap-3 group">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all">
-                <span className="text-2xl font-bold text-gold-gradient">
-                  {isRTL ? "ع" : "SA"}
-                </span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all">
+              <span className="text-2xl font-bold text-gold-gradient">
+                {isRTL ? "ع" : "SA"}
+              </span>
+            </div>
+            <div className="hidden md:block">
+              <div className="text-sm font-semibold text-primary">
+                {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar"}
               </div>
-              <div className="hidden md:block">
-                <div className="text-sm font-semibold text-primary">
-                  {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar"}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {isRTL ? "المجموعة الملكية" : "Royal Collection"}
-                </div>
+              <div className="text-xs text-muted-foreground">
+                {isRTL ? "المجموعة الملكية" : "Royal Collection"}
               </div>
-            </a>
+            </div>
           </Link>
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            <Link href="/">
-              <a className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t(NAV_ITEMS.home)}
-              </a>
+            <Link href="/" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              {t(NAV_ITEMS.home)}
             </Link>
-            <Link href="/collection">
-              <a className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t(NAV_ITEMS.collection)}
-              </a>
+            <Link href="/collections" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              {t(NAV_ITEMS.collection)}
             </Link>
-            <Link href="/brands">
-              <a className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t(NAV_ITEMS.brands)}
-              </a>
+            <Link href="/brands" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              {t(NAV_ITEMS.brands)}
             </Link>
-            <Link href="/about">
-              <a className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t(NAV_ITEMS.about)}
-              </a>
+            <Link href="/about" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              {t(NAV_ITEMS.about)}
             </Link>
           </nav>
 
           {/* Right side actions */}
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <Link href="/admin">
-              <a className="hidden sm:block text-sm font-medium text-foreground/60 hover:text-primary transition-colors">
-                {t(NAV_ITEMS.admin)}
-              </a>
+            <Link href="/admin/login" className="hidden sm:block text-sm font-medium text-foreground/60 hover:text-primary transition-colors">
+              {t(NAV_ITEMS.admin)}
             </Link>
           </div>
         </div>
