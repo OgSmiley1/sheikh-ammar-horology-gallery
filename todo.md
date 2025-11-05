@@ -430,3 +430,46 @@
 - [ ] Verify no image 404s
 - [ ] Verify no console errors
 - [x] Verify deployment URL unchanged
+
+
+## HERO SLIDESHOW REFINEMENT - PHASES 5-7 (FINAL DELIVERY)
+
+### Phase 5: Mobile Layout Fix (PRIORITY) ✅ COMPLETE
+- [x] Implement two-variant content band (mobile stacked, desktop glass overlay)
+- [x] Guard against bleed: ensure static lg:absolute (no unprefixed absolute)
+- [x] Confirm positioned ancestor only on desktop (relative wrapper)
+- [x] Verify Tailwind breakpoints (lg=1024px) + viewport meta present
+- [x] Set z-index: desktop band z-10, nav z-20
+- [x] Use pointer-events-none on glass shell, pointer-events-auto on interactive children
+- [x] Update spec boxes grid: grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4
+
+### Phase 6: Screenshots, Lighthouse, and Regression
+- [ ] Capture iPhone 14 Pro screenshot (390×844) - Puppeteer script created, needs debugging
+- [ ] Capture Pixel 7 screenshot (412×915) - Puppeteer script created, needs debugging
+- [ ] Capture iPad portrait screenshot (768×1024) - Puppeteer script created, needs debugging
+- [x] Capture Desktop screenshot (1440×900) - Verified and saved
+- [ ] Run Lighthouse mobile audit (Performance ≥90, Accessibility ≥95, Best Practices ≥95, SEO ≥95)
+- [ ] Run Lighthouse desktop audit (Performance ≥90, Accessibility ≥95, Best Practices ≥95, SEO ≥95)
+- [ ] Test keyboard navigation (←/→/Space) and focus rings
+- [ ] Test pause on hover (desktop)
+- [ ] Test swipe gestures (mobile)
+- [ ] Test reduced-motion respected
+- [ ] Verify overlay alignment (bottom-center, gold border visible, dots + arrows clickable)
+
+### Phase 7: Polish & Creative Pass
+- [ ] Add fade/blur-in animation on desktop glass band (opacity/blur 150–250ms, respect reduced-motion)
+- [ ] Add hover lift on spec boxes (shadow/translate-y-0.5, respect reduced-motion)
+- [ ] Tighten line-heights for better typography
+- [ ] Clamp headings with clamp() or Tailwind responsive sizes
+- [ ] Ensure readable contrast on all text
+- [ ] Verify gold border color consistency (#D4AF37) on dark backgrounds
+- [ ] Tune shadow on glass for depth without muddying watch imagery
+- [ ] Optional: Add soft vignette behind glass band at ≥lg
+- [ ] Optional: Add subtle parallax on background imagery at ≥xl
+
+### Deliverables
+- [ ] Commit with message: "feat(hero): phase-5 mobile fix + phase-6 audits + phase-7 polish"
+- [ ] Save screenshots to /docs/screenshots/ (named by device + breakpoint)
+- [ ] Save Lighthouse reports to /docs/lighthouse/ (JSON + HTML exports)
+- [ ] Update CHANGELOG.md with "Hero Slideshow Refinement – Phases 5–7 Complete"
+- [ ] Add implementation notes to README (one paragraph on mobile/desktop split)

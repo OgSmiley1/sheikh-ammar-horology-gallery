@@ -182,55 +182,105 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
           </AnimatePresence>
           </div>
 
-          {/* Content Band - Below on Mobile, Overlaid on Desktop */}
+          {/* Mobile Content Band - Below Images (<1024px) */}
+          <div className="lg:hidden mt-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`content-mobile-${slide.id}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="space-y-6"
+              >
+                {/* Titles */}
+                <div className="text-center space-y-2">
+                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
+                    {isRTL ? slide.titleAr : slide.titleEn}
+                  </p>
+                  {slide.subtitleEn && (
+                    <h2 className="text-2xl md:text-3xl font-serif text-[#f5f2e8]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                      {isRTL ? slide.subtitleAr : slide.subtitleEn}
+                    </h2>
+                  )}
+                </div>
+
+                {/* Description */}
+                <p
+                  className="text-[#f5f2e8]/80 leading-relaxed text-sm md:text-base text-center max-w-4xl mx-auto"
+                  dir={isRTL ? 'rtl' : 'ltr'}
+                >
+                  {isRTL ? slide.descriptionAr : slide.descriptionEn}
+                </p>
+
+                {/* Specifications Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto">
+                  {slide.specs.map((spec, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-[#d4af37]/30 rounded-2xl p-4 bg-[#1a1a1a]/50"
+                    >
+                      <p className="text-xs text-[#d4af37] font-semibold uppercase tracking-wider mb-2">
+                        {isRTL ? spec.labelAr : spec.labelEn}
+                      </p>
+                      <p className="text-[#f5f2e8] text-sm" dir={isRTL ? 'rtl' : 'ltr'}>
+                        {isRTL ? spec.valueAr : spec.valueEn}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Desktop Content Band - Glass Overlay (≥1024px) */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={`content-${slide.id}`}
+              key={`content-desktop-${slide.id}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-8 space-y-6 lg:mt-0 lg:absolute lg:bottom-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] lg:max-w-5xl lg:backdrop-blur-xl lg:bg-[#0a0a0a]/80 lg:border lg:border-[#d4af37]/20 lg:rounded-2xl lg:p-8 lg:shadow-2xl"
+              className="hidden lg:block lg:absolute lg:bottom-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] lg:max-w-5xl lg:z-10 lg:pointer-events-none"
             >
-            {/* Titles */}
-            <div className="text-center space-y-2">
-              <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
-                {isRTL ? slide.titleAr : slide.titleEn}
-              </p>
-              {slide.subtitleEn && (
-                <h2 className="text-2xl md:text-3xl font-serif text-[#f5f2e8]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {isRTL ? slide.subtitleAr : slide.subtitleEn}
-                </h2>
-              )}
-            </div>
+              <div className="backdrop-blur-xl bg-[#0a0a0a]/80 border border-[#d4af37]/20 rounded-2xl p-8 shadow-2xl pointer-events-auto">
+                {/* Titles */}
+                <div className="text-center space-y-2">
+                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
+                    {isRTL ? slide.titleAr : slide.titleEn}
+                  </p>
+                  {slide.subtitleEn && (
+                    <h2 className="text-2xl md:text-3xl font-serif text-[#f5f2e8]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                      {isRTL ? slide.subtitleAr : slide.subtitleEn}
+                    </h2>
+                  )}
+                </div>
 
-            {/* Description */}
-            <p
-              className="text-[#f5f2e8]/80 leading-relaxed text-sm md:text-base text-center max-w-4xl mx-auto"
-              dir={isRTL ? 'rtl' : 'ltr'}
-            >
-              {isRTL ? slide.descriptionAr : slide.descriptionEn}
-            </p>
-
-            {/* Specifications Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-              {slide.specs.map((spec, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.3 + idx * 0.05 }}
-                  className="border border-[#d4af37]/30 rounded-2xl p-4 bg-[#1a1a1a]/50"
+                {/* Description */}
+                <p
+                  className="text-[#f5f2e8]/80 leading-relaxed text-sm md:text-base text-center max-w-4xl mx-auto mt-4"
+                  dir={isRTL ? 'rtl' : 'ltr'}
                 >
-                  <p className="text-xs text-[#d4af37] font-semibold uppercase tracking-wider mb-2">
-                    {isRTL ? spec.labelAr : spec.labelEn}
-                  </p>
-                  <p className="text-[#f5f2e8] text-sm" dir={isRTL ? 'rtl' : 'ltr'}>
-                    {isRTL ? spec.valueAr : spec.valueEn}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+                  {isRTL ? slide.descriptionAr : slide.descriptionEn}
+                </p>
+
+                {/* Specifications Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-5xl mx-auto mt-6">
+                  {slide.specs.map((spec, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-[#d4af37]/30 rounded-2xl p-4 bg-[#1a1a1a]/50"
+                    >
+                      <p className="text-xs text-[#d4af37] font-semibold uppercase tracking-wider mb-2">
+                        {isRTL ? spec.labelAr : spec.labelEn}
+                      </p>
+                      <p className="text-[#f5f2e8] text-sm" dir={isRTL ? 'rtl' : 'ltr'}>
+                        {isRTL ? spec.valueAr : spec.valueEn}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
