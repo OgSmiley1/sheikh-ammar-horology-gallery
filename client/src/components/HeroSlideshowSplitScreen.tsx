@@ -12,17 +12,58 @@ type Props = {
 export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const { isRTL } = useLanguage();
 
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Auto-play effect (respects reduced motion and hover state)
   useEffect(() => {
-    if (!autoPlay) return;
+    if (!autoPlay || isHovered || prefersReducedMotion) return;
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, autoPlayMs);
 
     return () => clearInterval(timer);
-  }, [autoPlay, autoPlayMs, slides.length]);
+  }, [autoPlay, isHovered, prefersReducedMotion, autoPlayMs, slides.length]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        setAutoPlay(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Preload next slide images for better performance
+  useEffect(() => {
+    const nextSlideIndex = (currentSlide + 1) % slides.length;
+    const nextSlide = slides[nextSlideIndex];
+    
+    // Preload both Sheikh and watch images for next slide
+    const sheikhImg = new Image();
+    const watchImg = new Image();
+    sheikhImg.src = nextSlide.sheikhImage;
+    watchImg.src = nextSlide.watchImage;
+  }, [currentSlide, slides]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -42,10 +83,43 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
     setTimeout(() => setAutoPlay(true), autoPlayMs * 2);
   };
 
+  // Touch handlers for swipe gestures
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
   const slide = slides[currentSlide];
 
   return (
-    <section className="relative w-full min-h-screen bg-[#0a0a0a] py-12 md:py-20">
+    <section 
+      className="relative w-full min-h-screen bg-[#0a0a0a] py-12 md:py-20"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      aria-label="Watch collection slideshow"
+      role="region"
+    >
       {/* Header with SA Logo */}
       <div className="absolute top-6 left-6 right-6 z-20">
         <div className="flex items-center justify-between">
@@ -61,7 +135,10 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
 
       {/* Main Content Container */}
       <div className="container mx-auto px-4 pt-20 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+        {/* Desktop: Relative container for overlay | Mobile: Normal flow */}
+        <div className="lg:relative">
+          {/* Images Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* Left Side: Sheikh Image */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -74,9 +151,10 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
             >
               <img
                 src={slide.sheikhImage}
-                alt={`Sheikh Ammar with ${slide.titleEn}`}
+                alt={`Sheikh Ammar bin Humaid Al Nuaimi wearing ${slide.titleEn}`}
                 className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                loading="eager"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent rounded-2xl" />
             </motion.div>
@@ -94,25 +172,26 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
             >
               <img
                 src={slide.watchImage}
-                alt={slide.titleEn}
+                alt={`${slide.titleEn} - ${slide.subtitleEn || 'Luxury timepiece'}`}
                 className="w-full h-full object-contain p-8"
-                loading="eager"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </motion.div>
           </AnimatePresence>
-        </div>
+          </div>
 
-        {/* Content Band Below Images */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`content-${slide.id}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 space-y-6"
-          >
+          {/* Content Band - Below on Mobile, Overlaid on Desktop */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`content-${slide.id}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-8 space-y-6 lg:mt-0 lg:absolute lg:bottom-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] lg:max-w-5xl lg:backdrop-blur-xl lg:bg-[#0a0a0a]/80 lg:border lg:border-[#d4af37]/20 lg:rounded-2xl lg:p-8 lg:shadow-2xl"
+            >
             {/* Titles */}
             <div className="text-center space-y-2">
               <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
@@ -152,23 +231,26 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-[#d4af37]/50 hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-300 group"
-        aria-label="Previous slide"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-[#d4af37]/50 hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+        aria-label={`Previous slide (${currentSlide} of ${slides.length})`}
+        title="Previous slide (← arrow key)"
       >
         <ChevronLeft className="w-6 h-6 text-[#d4af37] group-hover:scale-110 transition-transform" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-[#d4af37]/50 hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-300 group"
-        aria-label="Next slide"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-[#d4af37]/50 hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+        aria-label={`Next slide (${currentSlide + 2} of ${slides.length})`}
+        title="Next slide (→ arrow key)"
       >
         <ChevronRight className="w-6 h-6 text-[#d4af37] group-hover:scale-110 transition-transform" />
       </button>
@@ -179,11 +261,13 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
           <motion.button
             key={idx}
             onClick={() => goToSlide(idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2 focus:ring-offset-[#0a0a0a] ${
               idx === currentSlide ? 'bg-[#d4af37] w-8' : 'bg-[#d4af37]/30 w-2 hover:bg-[#d4af37]/60'
             }`}
             whileHover={{ scale: 1.2 }}
-            aria-label={`Go to slide ${idx + 1}`}
+            aria-label={`Go to slide ${idx + 1} of ${slides.length}`}
+            aria-current={idx === currentSlide ? 'true' : 'false'}
+            title={`Slide ${idx + 1}: ${slides[idx].titleEn}`}
           />
         ))}
       </div>

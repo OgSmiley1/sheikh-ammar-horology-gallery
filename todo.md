@@ -406,3 +406,27 @@
 - [x] Implement auto-rotation (7 seconds per slide)
 - [x] Add pause on manual navigation
 - [x] Verify both images display correctly in split-screen layout
+
+
+## HERO SLIDESHOW REFINEMENT - DEFINITION OF DONE COMPLIANCE
+- [x] Add alt text to Sheikh and watch images
+- [x] Add ARIA labels to navigation buttons (prev, next, slide indicators)
+- [x] Implement keyboard navigation (←/→ arrows to navigate, Space to pause/resume)
+- [x] Add pause on hover functionality
+- [x] Change image loading from "eager" to "lazy"
+- [x] Add decoding="async" to all images
+- [x] Implement image preloading for next slide
+- [x] Add prefers-reduced-motion check to disable autoplay
+- [x] Overlay content band on desktop with glass/blur effect
+- [x] Add visible focus rings for keyboard navigation
+- [x] Implement touch swipe gestures for mobile
+- [ ] Fix mobile layout (content band overlaying instead of below)
+- [ ] Test on desktop (1920x1080, 2560x1440, 3840x2160)
+- [ ] Test on mobile (375x667, 414x896, 390x844)
+- [x] Capture desktop screenshot
+- [ ] Capture mobile screenshot
+- [ ] Run Lighthouse audit (Performance ≥85, Accessibility ≥90)
+- [ ] Update CHANGELOG.md with commit hash + description + screenshots
+- [ ] Verify no image 404s
+- [ ] Verify no console errors
+- [x] Verify deployment URL unchanged
