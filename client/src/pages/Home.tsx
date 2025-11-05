@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Header } from "@/components/Header";
-import { HeroSlideshowWithImages } from '@/components/HeroSlideshowWithImages';
+import { HeroSlideshowSplitScreen } from '@/components/HeroSlideshowSplitScreen';
+import { slides } from '@/data/heroSlides';
 import { ExploreMoreCollection } from '@/components/ExploreMoreCollection';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollProgress } from '@/components/ScrollProgress';
@@ -124,8 +125,8 @@ export default function Home() {
       <div className="min-h-screen bg-[#0a0a0a]">
         <Header />
 
-        {/* Hero Slideshow: Sheikh Portrait + 4 Watches with Images */}
-        <HeroSlideshowWithImages />
+        {/* Hero Slideshow: Split-Screen Layout with Sheikh + Watch Images */}
+        <HeroSlideshowSplitScreen slides={slides} autoPlayMs={7000} />
 
         {/* Explore More Collection */}
         <ExploreMoreCollection />

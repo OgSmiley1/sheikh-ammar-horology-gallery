@@ -390,3 +390,19 @@
 - [ ] Ensure clean, luxury aesthetic
 - [ ] Test responsive design on all devices
 - [ ] Save final checkpoint
+
+
+## HERO SLIDESHOW REDESIGN - SPLIT-SCREEN LAYOUT ✅ COMPLETED
+- [x] Redesign hero slideshow to display split-screen layout
+- [x] Left side: Sheikh Ammar's picture (wearing/holding the watch)
+- [x] Right side: Close-up watch picture (product shot)
+- [x] Center/Below: Watch name, description, and specifications
+- [x] Create new HeroSlideshowSplitScreen component with dual image layout
+- [x] Create heroSlides.ts data file with both sheikhImage and watchImage references
+- [x] Add bilingual descriptions (Arabic + English)
+- [x] Add specifications section (Movement, Case, Diameter, Year, Price, Rarity)
+- [x] Implement responsive split-screen for mobile (stack vertically)
+- [x] Add navigation arrows and slide indicators
+- [x] Implement auto-rotation (7 seconds per slide)
+- [x] Add pause on manual navigation
+- [x] Verify both images display correctly in split-screen layout
