@@ -347,6 +347,17 @@
 
 
 ## SLIDESHOW REDESIGN - REMOVE DUPLICATES & IMPROVE LAYOUT ✅ COMPLETE
+
+## FIX: DISPLAY SHEIKH AMMAR'S ACTUAL PICTURES ✅ COMPLETE
+- [x] Identify that slideshow was showing generic/watch images
+- [x] Collect all 20 Sheikh Ammar personal pictures from uploads
+- [x] Convert all images to WebP format
+- [x] Create slideshow-sheikh-only directory with 20 unique pictures
+- [x] Update HeroSlideshow component to use Sheikh's pictures
+- [x] Verify all 20 slides display correctly
+- [x] Confirm crown at top-left (SA 👑)
+- [x] Confirm quotes below pictures
+- [x] Confirm Sheikh's name and title at bottom
 - [x] Identify and remove 4 duplicate pictures from slideshow
 - [x] Remove any other duplicate images (17 total duplicates removed)
 - [x] Move crown emoji from center to top-left corner
