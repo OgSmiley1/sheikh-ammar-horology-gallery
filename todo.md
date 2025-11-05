@@ -366,3 +366,15 @@
 - [x] Ensure first slide has quote at top, name below
 - [x] Test new layout on all slides (58 unique slides)
 - [x] Save checkpoint with redesigned slideshow
+
+
+## PROFESSIONAL GALLERY REFINEMENT
+- [ ] Restructure hero slideshow: 4 watches + Sheikh Ammar portrait only
+- [ ] Create "Explore More Collection" section for remaining watches
+- [ ] Extract watch descriptions from current images/specs
+- [ ] Crop and optimize watch images for clean presentation
+- [ ] Remove duplicate "SA" logos (keep only one)
+- [ ] Center text alignment throughout page
+- [ ] Ensure clean, luxury aesthetic
+- [ ] Test responsive design on all devices
+- [ ] Save final checkpoint

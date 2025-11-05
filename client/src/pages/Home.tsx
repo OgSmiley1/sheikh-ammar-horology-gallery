@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Header } from "@/components/Header";
-import { HeroSlideshow } from '@/components/HeroSlideshow';
-import { CinematicSlideshow } from '@/components/CinematicSlideshow';
+import { HeroSlideshowProfessional } from '@/components/HeroSlideshowProfessional';
+import { ExploreMoreCollection } from '@/components/ExploreMoreCollection';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { Button } from "@/components/ui/button";
@@ -124,11 +124,11 @@ export default function Home() {
       <div className="min-h-screen bg-[#0a0a0a]">
         <Header />
 
-        {/* Hero Slideshow with Sheikh Ammar's 17 pictures */}
-        <HeroSlideshow />
+        {/* Hero Slideshow: 4 Watches + Sheikh Portrait */}
+        <HeroSlideshowProfessional />
 
-        {/* Cinematic Slideshow */}
-        <CinematicSlideshow watches={top5Watches} />
+        {/* Explore More Collection */}
+        <ExploreMoreCollection />
 
             {/* Featured Brands Section */}
             <section className="py-20 bg-[#0a0a0a]">
