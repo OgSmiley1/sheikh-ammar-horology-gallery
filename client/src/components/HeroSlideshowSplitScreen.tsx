@@ -135,115 +135,62 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
 
       {/* Main Content Container */}
       <div className="container mx-auto px-4 pt-20 pb-12">
-        {/* Desktop: Relative container for overlay | Mobile: Normal flow */}
-        <div className="lg:relative">
+        <div className="relative">
           {/* Images Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-          {/* Left Side: Sheikh Image */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`sheikh-${slide.id}`}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.6 }}
-              className="relative h-96 md:h-[600px] flex items-center justify-center"
-            >
-              <img
-                src={slide.sheikhImage}
-                alt={`Sheikh Ammar bin Humaid Al Nuaimi wearing ${slide.titleEn}`}
-                className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent rounded-2xl" />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Right Side: Watch Image */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`watch-${slide.id}`}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.6 }}
-              className="relative h-96 md:h-[600px] flex items-center justify-center bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] rounded-2xl border border-[#d4af37]/20 overflow-hidden"
-            >
-              <img
-                src={slide.watchImage}
-                alt={`${slide.titleEn} - ${slide.subtitleEn || 'Luxury timepiece'}`}
-                className="w-full h-full object-contain p-8"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-            </motion.div>
-          </AnimatePresence>
-          </div>
-
-          {/* Mobile Content Band - Below Images (<1024px) */}
-          <div className="lg:hidden mt-8">
+            {/* Left Side: Sheikh Image */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={`content-mobile-${slide.id}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="space-y-6"
+                key={`sheikh-${slide.id}`}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.6 }}
+                className="relative h-96 md:h-[600px] flex items-center justify-center"
               >
-                {/* Titles */}
-                <div className="text-center space-y-2">
-                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
-                    {isRTL ? slide.titleAr : slide.titleEn}
-                  </p>
-                  {slide.subtitleEn && (
-                    <h2 className="text-2xl md:text-3xl font-serif text-[#f5f2e8]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                      {isRTL ? slide.subtitleAr : slide.subtitleEn}
-                    </h2>
-                  )}
-                </div>
+                <img
+                  src={slide.sheikhImage}
+                  alt={`Sheikh Ammar bin Humaid Al Nuaimi wearing ${slide.titleEn}`}
+                  className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent rounded-2xl" />
+              </motion.div>
+            </AnimatePresence>
 
-                {/* Description */}
-                <p
-                  className="text-[#f5f2e8]/80 leading-relaxed text-sm md:text-base text-center max-w-4xl mx-auto"
-                  dir={isRTL ? 'rtl' : 'ltr'}
-                >
-                  {isRTL ? slide.descriptionAr : slide.descriptionEn}
-                </p>
-
-                {/* Specifications Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto">
-                  {slide.specs.map((spec, idx) => (
-                    <div
-                      key={idx}
-                      className="border border-[#d4af37]/30 rounded-2xl p-4 bg-[#1a1a1a]/50"
-                    >
-                      <p className="text-xs text-[#d4af37] font-semibold uppercase tracking-wider mb-2">
-                        {isRTL ? spec.labelAr : spec.labelEn}
-                      </p>
-                      <p className="text-[#f5f2e8] text-sm" dir={isRTL ? 'rtl' : 'ltr'}>
-                        {isRTL ? spec.valueAr : spec.valueEn}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+            {/* Right Side: Watch Image */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`watch-${slide.id}`}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.6 }}
+                className="relative h-96 md:h-[600px] flex items-center justify-center bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] rounded-2xl border border-[#d4af37]/20 overflow-hidden"
+              >
+                <img
+                  src={slide.watchImage}
+                  alt={`${slide.titleEn} - ${slide.subtitleEn || 'Luxury timepiece'}`}
+                  className="w-full h-full object-contain p-8"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Desktop Content Band - Glass Overlay (≥1024px) */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`content-desktop-${slide.id}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="hidden lg:block lg:absolute lg:bottom-8 lg:left-1/2 lg:-translate-x-1/2 lg:w-[90%] lg:max-w-5xl lg:z-10 lg:pointer-events-none"
-            >
-              <div className="backdrop-blur-xl bg-[#0a0a0a]/80 border border-[#d4af37]/20 rounded-2xl p-8 shadow-2xl pointer-events-auto">
+          <div className="static mt-6 lg:mt-0 lg:absolute lg:inset-x-0 lg:bottom-6 lg:flex lg:justify-center lg:z-10 lg:pointer-events-none">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`content-${slide.id}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="rounded-xl border border-[#D4AF37] bg-white/70 backdrop-blur-0 lg:rounded-2xl lg:bg-white/30 lg:backdrop-blur-xl shadow-sm lg:shadow-[0_8px_30px_rgba(0,0,0,0.2)] max-w-6xl w-full px-4 py-6 sm:px-8 sm:py-8 pointer-events-auto"
+              >
                 {/* Titles */}
                 <div className="text-center space-y-2">
                   <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
@@ -280,9 +227,9 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
                     </div>
                   ))}
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 

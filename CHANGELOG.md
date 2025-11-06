@@ -4,6 +4,9 @@ All notable changes to Sheikh Ammar's Royal Horology Collection will be document
 
 ## [Unreleased]
 
+- Phase 5: Verified mobile stacking and desktop overlay, added pointer-events guards.
+- Phase 6: Lighthouse reports attached; note any follow-ups if thresholds missed.
+
 ### Hero Slideshow Refinement – Phases 1-5 Complete (2025-11-05)
 
 **Commit:** `393ddaf2` → (current working state)
