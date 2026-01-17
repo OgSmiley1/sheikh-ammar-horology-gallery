@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, type KeyboardEvent, type TouchEvent } from 'react';
 import { ChevronLeft, ChevronRight, Crown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import top5Data from '../../../top5-watches-data.json';
@@ -6,20 +6,42 @@ import top5Data from '../../../top5-watches-data.json';
 export function Top5WatchesSlideshow() {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isUserPaused, setIsUserPaused] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchCurrentX = useRef<number | null>(null);
   
   const watches = top5Data.top5Watches;
   const currentWatch = watches[currentIndex];
+  const isRTL = language === 'ar';
+  const isAutoplayActive = !prefersReducedMotion && !isUserPaused && !isHovering;
 
   useEffect(() => {
-    if (!isPlaying) return;
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isAutoplayActive) return;
     
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % watches.length);
     }, 8000);
     
     return () => clearInterval(timer);
-  }, [isPlaying, watches.length]);
+  }, [isAutoplayActive, watches.length]);
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % watches.length);
@@ -33,11 +55,84 @@ export function Top5WatchesSlideshow() {
     setCurrentIndex(index);
   };
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+      setIsUserPaused((prev) => !prev);
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      if (isRTL) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      if (isRTL) {
+        goToPrevious();
+      } else {
+        goToNext();
+      }
+    }
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+    touchCurrentX.current = null;
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    touchCurrentX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchCurrentX.current === null) {
+      touchStartX.current = null;
+      touchCurrentX.current = null;
+      return;
+    }
+    const deltaX = touchStartX.current - touchCurrentX.current;
+    const threshold = 50;
+
+    if (Math.abs(deltaX) < threshold) {
+      touchStartX.current = null;
+      touchCurrentX.current = null;
+      return;
+    }
+
+    if (deltaX > 0) {
+      if (isRTL) {
+        goToPrevious();
+      } else {
+        goToNext();
+      }
+    } else {
+      if (isRTL) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
+    }
+
+    touchStartX.current = null;
+    touchCurrentX.current = null;
+  };
+
   return (
     <div 
-      className="relative w-full h-screen overflow-hidden"
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
+      className="relative w-full h-screen overflow-hidden focus:outline-none"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      onKeyDown={handleKeyDown}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      tabIndex={0}
     >
       {/* Split Screen Layout */}
       <div className="absolute inset-0 flex flex-col md:flex-row">
@@ -127,16 +222,16 @@ export function Top5WatchesSlideshow() {
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className={`absolute ${language === 'ar' ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 z-20 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20`}
-        aria-label="Previous watch"
+        className={`absolute ${language === 'ar' ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 z-20 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black`}
+        aria-label={language === 'ar' ? 'الساعة السابقة' : 'Previous watch'}
       >
         {language === 'ar' ? <ChevronRight className="w-6 h-6" /> : <ChevronLeft className="w-6 h-6" />}
       </button>
       
       <button
         onClick={goToNext}
-        className={`absolute ${language === 'ar' ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 z-20 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20`}
-        aria-label="Next watch"
+        className={`absolute ${language === 'ar' ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 z-20 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300 backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black`}
+        aria-label={language === 'ar' ? 'الساعة التالية' : 'Next watch'}
       >
         {language === 'ar' ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
       </button>
@@ -151,8 +246,8 @@ export function Top5WatchesSlideshow() {
               index === currentIndex
                 ? 'w-12 h-3 bg-gold'
                 : 'w-3 h-3 bg-white/40 hover:bg-white/60'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
+            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black`}
+            aria-label={language === 'ar' ? `الانتقال إلى الشريحة ${index + 1}` : `Go to slide ${index + 1}`}
           />
         ))}
       </div>
