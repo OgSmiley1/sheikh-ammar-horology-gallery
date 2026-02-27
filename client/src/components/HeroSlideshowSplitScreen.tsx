@@ -181,23 +181,38 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
             </AnimatePresence>
           </div>
 
+          {/* Vignette gradient behind glass band at lg+ */}
+          <div className="hidden lg:block absolute inset-x-0 bottom-0 h-64 pointer-events-none z-[9]"
+            style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 100%)' }}
+          />
+
           <div className="static mt-6 lg:mt-0 lg:absolute lg:inset-x-0 lg:bottom-6 lg:flex lg:justify-center lg:z-10 lg:pointer-events-none">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`content-${slide.id}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="rounded-xl border border-[#D4AF37] bg-white/70 backdrop-blur-0 lg:rounded-2xl lg:bg-white/30 lg:backdrop-blur-xl shadow-sm lg:shadow-[0_8px_30px_rgba(0,0,0,0.2)] max-w-6xl w-full px-4 py-6 sm:px-8 sm:py-8 pointer-events-auto"
+                initial={{ opacity: 0, y: 20, filter: prefersReducedMotion ? 'blur(0px)' : 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -20, filter: prefersReducedMotion ? 'blur(0px)' : 'blur(4px)' }}
+                transition={{
+                  opacity: { duration: 0.6, delay: 0.2 },
+                  y: { duration: 0.6, delay: 0.2 },
+                  filter: { duration: prefersReducedMotion ? 0 : 0.2, delay: 0.2 },
+                }}
+                className="rounded-xl border border-[#D4AF37] bg-white/70 backdrop-blur-0 lg:rounded-2xl lg:bg-white/30 lg:backdrop-blur-xl shadow-sm lg:shadow-[0_12px_40px_rgba(0,0,0,0.4),0_0_0_1px_rgba(212,175,55,0.12)] max-w-6xl w-full px-4 py-6 sm:px-8 sm:py-8 pointer-events-auto"
               >
                 {/* Titles */}
                 <div className="text-center space-y-2">
-                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase">
+                  <p className="text-sm text-[#d4af37] font-semibold tracking-widest uppercase leading-tight">
                     {isRTL ? slide.titleAr : slide.titleEn}
                   </p>
                   {slide.subtitleEn && (
-                    <h2 className="text-2xl md:text-3xl font-serif text-[#f5f2e8]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                    <h2
+                      className="font-serif text-[#f5f2e8] leading-snug"
+                      style={{
+                        fontFamily: 'Playfair Display, serif',
+                        fontSize: 'clamp(1.25rem, 2.5vw, 1.875rem)',
+                      }}
+                    >
                       {isRTL ? slide.subtitleAr : slide.subtitleEn}
                     </h2>
                   )}
@@ -205,26 +220,32 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
 
                 {/* Description */}
                 <p
-                  className="text-[#f5f2e8]/80 leading-relaxed text-sm md:text-base text-center max-w-4xl mx-auto mt-4"
+                  className="text-[#f5f2e8]/80 leading-snug text-sm md:text-base text-center max-w-4xl mx-auto mt-3"
                   dir={isRTL ? 'rtl' : 'ltr'}
                 >
                   {isRTL ? slide.descriptionAr : slide.descriptionEn}
                 </p>
 
                 {/* Specifications Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-5xl mx-auto mt-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-5xl mx-auto mt-5">
                   {slide.specs.map((spec, idx) => (
-                    <div
+                    <motion.div
                       key={idx}
-                      className="border border-[#d4af37]/30 rounded-2xl p-4 bg-[#1a1a1a]/50"
+                      className="border border-[#d4af37]/30 rounded-2xl p-4 bg-[#1a1a1a]/50 cursor-default"
+                      whileHover={prefersReducedMotion ? {} : {
+                        y: -2,
+                        boxShadow: '0 8px 20px rgba(212, 175, 55, 0.18)',
+                        borderColor: 'rgba(212, 175, 55, 0.55)',
+                      }}
+                      transition={{ duration: 0.15 }}
                     >
-                      <p className="text-xs text-[#d4af37] font-semibold uppercase tracking-wider mb-2">
+                      <p className="text-xs text-[#d4af37] font-semibold uppercase tracking-wider mb-1.5 leading-tight">
                         {isRTL ? spec.labelAr : spec.labelEn}
                       </p>
-                      <p className="text-[#f5f2e8] text-sm" dir={isRTL ? 'rtl' : 'ltr'}>
+                      <p className="text-[#f5f2e8] text-sm leading-snug" dir={isRTL ? 'rtl' : 'ltr'}>
                         {isRTL ? spec.valueAr : spec.valueEn}
                       </p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
