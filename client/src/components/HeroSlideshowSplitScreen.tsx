@@ -20,8 +20,17 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
 
-  // Check for reduced motion preference
-  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Reactive prefers-reduced-motion — updates if the OS setting changes
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
 
   // Auto-play effect (respects reduced motion and hover state)
   useEffect(() => {
@@ -152,7 +161,8 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
                   src={slide.sheikhImage}
                   alt={`Sheikh Ammar bin Humaid Al Nuaimi wearing ${slide.titleEn}`}
                   className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                  loading="lazy"
+                  loading={currentSlide === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent rounded-2xl" />
@@ -173,7 +183,8 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
                   src={slide.watchImage}
                   alt={`${slide.titleEn} - ${slide.subtitleEn || 'Luxury timepiece'}`}
                   className="w-full h-full object-contain p-8"
-                  loading="lazy"
+                  loading={currentSlide === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
