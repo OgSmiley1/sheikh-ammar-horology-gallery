@@ -22,7 +22,7 @@ const content = {
   sectionLabel: { en: 'THE COLLECTOR', ar: 'جامع التحف' },
   headline: { en: 'A Life Curated in Time', ar: 'حياة منقوشة في الزمن' },
   intro: {
-    en: 'Sheikh Ammar bin Humaid Al Nuaimi has devoted decades to assembling one of the Arab world's most distinguished private horology collections — not as a pursuit of prestige, but as a lifelong devotion to craftsmanship, heritage, and the quiet art of measured time.',
+    en: "Sheikh Ammar bin Humaid Al Nuaimi has devoted decades to assembling one of the Arab world's most distinguished private horology collections — not as a pursuit of prestige, but as a lifelong devotion to craftsmanship, heritage, and the quiet art of measured time.",
     ar: 'أمضى الشيخ عمار بن حميد النعيمي عقوداً في تكوين واحدة من أرقى مجموعات الساعات الخاصة في العالم العربي — لا سعياً للمكانة، بل تعبيراً صادقاً عن شغف بالحرفية والتراث وفن الزمن الرفيع.',
   },
 
@@ -62,7 +62,7 @@ const content = {
       },
       heading: { en: 'In Distinguished Company', ar: 'في صحبة المتميزين' },
       body: {
-        en: 'True connoisseurship transcends the object and speaks to character. Sheikh Ammar's refined taste and values are recognised in the highest circles of leadership in the Arab world. A passion for excellence in craft mirrors a commitment to excellence in governance, vision, and legacy — values shared in the distinguished company he keeps.',
+        en: "True connoisseurship transcends the object and speaks to character. Sheikh Ammar's refined taste and values are recognised in the highest circles of leadership in the Arab world. A passion for excellence in craft mirrors a commitment to excellence in governance, vision, and legacy — values shared in the distinguished company he keeps.",
         ar: 'إن المعرفة الحقيقية تتجاوز الشيء وتتحدث عن الشخصية. يُعرف الشيخ عمار بذوقه الرفيع في أرقى الأوساط القيادية في العالم العربي. إن الشغف بالتميز في الحرفية يعكس الالتزام بالتميز في القيادة والرؤية والإرث — قيم مشتركة في الصحبة المتميزة التي يحظى بها.',
       },
       quote: {

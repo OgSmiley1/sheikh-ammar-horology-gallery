@@ -9,6 +9,7 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
 import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
+import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
 import { registerUploadLocalRoutes } from "../uploadLocal";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -70,6 +71,11 @@ async function startServer() {
   // Run one-time data enrichment migration (idempotent)
   enrichWatchCollection().catch((err) =>
     console.error("[Migration] enrichWatchCollection failed:", err)
+  );
+
+  // Fix brand assignments + fill missing watch data (idempotent)
+  fixBrandAssignmentsAndData().catch((err) =>
+    console.error("[Migration] fixBrandAssignmentsAndData failed:", err)
   );
 
   server.listen(port, () => {

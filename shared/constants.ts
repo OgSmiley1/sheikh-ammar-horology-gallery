@@ -22,6 +22,7 @@ export const SHEIKH_INFO = {
 export const NAV_ITEMS = {
   home: { en: "Home", ar: "الرئيسية" },
   collection: { en: "Collection", ar: "المجموعة" },
+  sheikhGallery: { en: "Sheikh with Watches", ar: "الشيخ مع الساعات" },
   brands: { en: "Brands", ar: "العلامات التجارية" },
   about: { en: "About", ar: "عن سموه" },
   admin: { en: "Admin", ar: "لوحة التحكم" },

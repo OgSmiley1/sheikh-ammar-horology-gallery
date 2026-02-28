@@ -63,20 +63,18 @@ export default function BrandCollection() {
       <section className="relative py-24 px-4 bg-gradient-to-b from-black via-gray-900 to-black border-b border-gold-500/20">
         <div className="container max-w-6xl mx-auto">
           {/* Back Button */}
-          <Link href="/collections">
-            <a className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
-              {language === "ar" ? (
-                <>
-                  <ArrowRight className="w-5 h-5" />
-                  <span>العودة للمجموعات</span>
-                </>
-              ) : (
-                <>
-                  <ArrowLeft className="w-5 h-5" />
-                  <span>Back to Collections</span>
-                </>
-              )}
-            </a>
+          <Link href="/collections" className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
+            {language === "ar" ? (
+              <>
+                <ArrowRight className="w-5 h-5" />
+                <span>العودة للمجموعات</span>
+              </>
+            ) : (
+              <>
+                <ArrowLeft className="w-5 h-5" />
+                <span>Back to Collections</span>
+              </>
+            )}
           </Link>
 
           {/* Brand Info */}
@@ -150,7 +148,7 @@ export default function BrandCollection() {
                       {/* Watch Info */}
                       <div className="p-6">
                         <h3 className="text-xl font-bold text-gold-500 mb-2 group-hover:text-gold-400 transition-colors line-clamp-2">
-                          {language === "ar" ? watch.nameAr : watch.nameEn}
+                          {language === "ar" ? (watch.nameAr || watch.nameEn) : watch.nameEn}
                         </h3>
 
                         {watch.referenceNumber && (
@@ -159,9 +157,9 @@ export default function BrandCollection() {
                           </p>
                         )}
 
-                        {watch.descriptionEn && (
+                        {(watch.descriptionEn || watch.descriptionAr) && (
                           <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
-                            {language === "ar" ? watch.descriptionAr : watch.descriptionEn}
+                            {language === "ar" ? (watch.descriptionAr || watch.descriptionEn) : (watch.descriptionEn || watch.descriptionAr)}
                           </p>
                         )}
 

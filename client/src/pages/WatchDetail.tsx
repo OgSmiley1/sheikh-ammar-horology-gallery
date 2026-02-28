@@ -86,20 +86,18 @@ export default function WatchDetail() {
       <section className="relative py-16 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
         <div className="container max-w-7xl mx-auto">
           {/* Back Button */}
-          <Link href={brand ? `/collection/${brand.slug}` : "/collections"}>
-            <a className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
-              {language === "ar" ? (
-                <>
-                  <ArrowRight className="w-5 h-5" />
-                  <span>العودة للمجموعة</span>
-                </>
-              ) : (
-                <>
-                  <ArrowLeft className="w-5 h-5" />
-                  <span>Back to Collection</span>
-                </>
-              )}
-            </a>
+          <Link href={brand ? `/collection/${brand.slug}` : "/collections"} className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
+            {language === "ar" ? (
+              <>
+                <ArrowRight className="w-5 h-5" />
+                <span>العودة للمجموعة</span>
+              </>
+            ) : (
+              <>
+                <ArrowLeft className="w-5 h-5" />
+                <span>Back to Collection</span>
+              </>
+            )}
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -160,10 +158,8 @@ export default function WatchDetail() {
               {/* Brand */}
               {brand && (
                 <div>
-                  <Link href={`/collection/${brand.slug}`}>
-                    <a className="text-gold-500 hover:text-gold-400 transition-colors font-medium">
-                      {language === "ar" ? brand.nameAr : brand.nameEn}
-                    </a>
+                  <Link href={`/collection/${brand.slug}`} className="text-gold-500 hover:text-gold-400 transition-colors font-medium">
+                    {language === "ar" ? (brand.nameAr || brand.nameEn) : brand.nameEn}
                   </Link>
                 </div>
               )}
@@ -171,7 +167,7 @@ export default function WatchDetail() {
               {/* Watch Name */}
               <div>
                 <h1 className="text-4xl md:text-5xl font-bold text-gold-500 mb-4">
-                  {language === "ar" ? watch.nameAr : watch.nameEn}
+                  {language === "ar" ? (watch.nameAr || watch.nameEn) : watch.nameEn}
                 </h1>
                 {watch.referenceNumber && (
                   <p className="text-gray-400">
@@ -181,9 +177,9 @@ export default function WatchDetail() {
               </div>
 
               {/* Description */}
-              {watch.descriptionEn && (
+              {(watch.descriptionEn || watch.descriptionAr) && (
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  {language === "ar" ? watch.descriptionAr : watch.descriptionEn}
+                  {language === "ar" ? (watch.descriptionAr || watch.descriptionEn) : (watch.descriptionEn || watch.descriptionAr)}
                 </p>
               )}
 
@@ -288,7 +284,7 @@ export default function WatchDetail() {
       </section>
 
       {/* Story Section */}
-      {watch.storyEn && (
+      {(watch.storyEn || watch.storyAr) && (
         <section className="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
           <div className="container max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
@@ -299,7 +295,7 @@ export default function WatchDetail() {
             </div>
             <div className="prose prose-invert prose-lg max-w-none">
               <p className="text-gray-300 leading-relaxed text-lg">
-                {language === "ar" ? watch.storyAr : watch.storyEn}
+                {language === "ar" ? (watch.storyAr || watch.storyEn) : (watch.storyEn || watch.storyAr)}
               </p>
             </div>
           </div>

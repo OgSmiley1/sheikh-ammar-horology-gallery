@@ -1,25 +1,33 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Button } from "@/components/ui/button";
-import { Languages } from "lucide-react";
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "ar" : "en");
-  };
-
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={toggleLanguage}
-      className="gap-2 text-foreground/80 hover:text-foreground hover:bg-primary/10"
-    >
-      <Languages className="h-4 w-4" />
-      <span className="font-semibold">
-        {language === "en" ? "العربية" : "English"}
-      </span>
-    </Button>
+    <div className="flex items-center border border-primary/30 rounded-md overflow-hidden text-xs font-bold">
+      <button
+        onClick={() => setLanguage("ar")}
+        className={`px-3 py-1.5 transition-colors ${
+          language === "ar"
+            ? "bg-primary text-black"
+            : "text-foreground/70 hover:bg-primary/10"
+        }`}
+        aria-label="Arabic"
+      >
+        AR
+      </button>
+      <span className="w-px h-4 bg-primary/30" />
+      <button
+        onClick={() => setLanguage("en")}
+        className={`px-3 py-1.5 transition-colors ${
+          language === "en"
+            ? "bg-primary text-black"
+            : "text-foreground/70 hover:bg-primary/10"
+        }`}
+        aria-label="English"
+      >
+        EN
+      </button>
+    </div>
   );
 }

@@ -36,6 +36,7 @@ export function Header() {
   const navLinks = [
     { href: "/", label: t(NAV_ITEMS.home) },
     { href: "/collections", label: t(NAV_ITEMS.collection) },
+    { href: "/sheikh-gallery", label: t(NAV_ITEMS.sheikhGallery) },
     { href: "/brands", label: t(NAV_ITEMS.brands) },
     { href: "/about", label: t(NAV_ITEMS.about) },
   ];
@@ -54,24 +55,24 @@ export function Header() {
             {/* Logo / Brand */}
             <Link
               href="/"
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-3 group min-w-0 shrink-0"
               onMouseEnter={() => setCrownMode(true)}
               onMouseLeave={() => setCrownMode(false)}
               onClick={() => setMobileOpen(false)}
             >
               <div
-                className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all"
+                className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all"
                 style={{
                   boxShadow: crownMode ? '0 0 30px rgba(212, 175, 55, 0.8)' : 'none',
                   background: crownMode ? 'rgba(212, 175, 55, 0.2)' : undefined,
                 }}
               >
-                <span className="text-2xl font-bold text-gold-gradient">
-                  {isRTL ? "ع" : "SA"}
+                <span className="text-xl font-bold text-gold-gradient" dir="ltr">
+                  SA
                 </span>
               </div>
-              <div className="hidden md:block">
-                <div className="text-sm font-semibold text-primary">
+              <div className="hidden md:block min-w-0">
+                <div className="text-sm font-semibold text-primary truncate max-w-[180px]">
                   {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar"}
                 </div>
                 <div className="text-xs text-muted-foreground">
