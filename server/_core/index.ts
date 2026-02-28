@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
+import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -57,6 +58,11 @@ async function startServer() {
   if (port !== preferredPort) {
     console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
+
+  // Security — hash any admin passwords stored as plaintext (runs first)
+  await fixPlaintextPasswords().catch((err) =>
+    console.error("[Security] fixPlaintextPasswords failed:", err)
+  );
 
   // Run one-time data enrichment migration (idempotent)
   enrichWatchCollection().catch((err) =>
