@@ -1,15 +1,16 @@
 /**
  * CollectorStory — Personal editorial section for Sheikh Ammar's horology gallery.
  *
- * Displays two personal photographs with luxury editorial layout:
- *   1. Sheikh Ammar with his father  → /personal/sheikh-with-father.jpg
- *   2. Sheikh Ammar with H.H. MBZ    → /personal/sheikh-with-mbz.jpg
+ * Three personal photographs:
+ *   1. Sheikh Ammar with his father (intimate conversation)  → /personal/sheikh-with-father.jpg
+ *   2. Sheikh Ammar with H.H. President MBZ (laughing)       → /personal/sheikh-with-mbz.jpg
+ *   3. Sheikh Ammar at formal conference (blue thobe, watch)  → /personal/sheikh-formal.jpg
  *
- * Upload both images via the admin panel or place them at the paths above.
- * The component renders an elegant placeholder if an image is unavailable.
+ * Upload all 3 images via the admin panel or place them at the paths above.
+ * The component renders an elegant placeholder when an image is unavailable.
  *
- * Typography:  Playfair Display (headlines) + Inter/system-ui (body)
- * Palette:     #0a0a0a (bg) · #d4af37 (gold) · #f5f2e8 (cream text) · #6b6b6b (caption grey)
+ * Typography:  Playfair Display (headlines) + system-ui (body)
+ * Palette:     #0a0a0a (bg) · #d4af37 (gold) · #f5f2e8 (cream) · #6b6b6b (captions)
  */
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -30,17 +31,21 @@ const content = {
       id: 'father',
       image: '/personal/sheikh-with-father.jpg',
       imageAlt: {
-        en: 'Sheikh Ammar bin Humaid Al Nuaimi with his father in a candid moment',
-        ar: 'الشيخ عمار بن حميد النعيمي مع والده في لحظة عفوية',
+        en: 'Sheikh Ammar bin Humaid Al Nuaimi in conversation with his father H.H. Sheikh Humaid bin Rashid Al Nuaimi',
+        ar: 'الشيخ عمار بن حميد النعيمي في حوار مع والده صاحب السمو الشيخ حميد بن راشد النعيمي',
       },
       caption: {
-        en: 'With His Father — the roots of a collector's spirit',
-        ar: 'مع والده — جذور روح الجامع',
+        en: 'With His Father H.H. Sheikh Humaid bin Rashid Al Nuaimi, Ruler of Ajman',
+        ar: 'مع والده صاحب السمو الشيخ حميد بن راشد النعيمي، حاكم عجمان',
       },
       heading: { en: 'Roots of a Passion', ar: 'جذور الشغف' },
       body: {
         en: 'Every great collection begins with a story passed quietly between generations. For Sheikh Ammar, the love of precision and beauty was nurtured long before the first watch was acquired — in the unhurried conversations, the values, and the standards his father set. A collection is never merely objects; it is a living record of who taught you to see the world.',
         ar: 'كل مجموعة عظيمة تبدأ بقصة تتناقلها الأجيال بهدوء. بالنسبة للشيخ عمار، نشأ حب الدقة والجمال قبل أن يقتني أولى ساعاته بزمن طويل — في الحوارات الهادئة، والقيم، والمعايير التي غرسها والده. إن المجموعة ليست مجرد أشياء، بل هي سجل حي لمن علّمك رؤية العالم.',
+      },
+      quote: {
+        en: '"A legacy of excellence is not acquired — it is inherited."',
+        ar: '"إرث التميز لا يُقتنى، بل يُورَث"',
       },
       imagePosition: 'left' as const,
     },
@@ -52,15 +57,41 @@ const content = {
         ar: 'الشيخ عمار بن حميد النعيمي مع صاحب السمو الرئيس محمد بن زايد آل نهيان',
       },
       caption: {
-        en: 'With H.H. President Mohammed bin Zayed Al Nahyan',
-        ar: 'مع صاحب السمو الرئيس الشيخ محمد بن زايد آل نهيان',
+        en: 'With H.H. President Mohammed bin Zayed Al Nahyan, President of the UAE',
+        ar: 'مع صاحب السمو الرئيس محمد بن زايد آل نهيان، رئيس الإمارات العربية المتحدة',
       },
       heading: { en: 'In Distinguished Company', ar: 'في صحبة المتميزين' },
       body: {
         en: 'True connoisseurship transcends the object and speaks to character. Sheikh Ammar's refined taste and values are recognised in the highest circles of leadership in the Arab world. A passion for excellence in craft mirrors a commitment to excellence in governance, vision, and legacy — values shared in the distinguished company he keeps.',
         ar: 'إن المعرفة الحقيقية تتجاوز الشيء وتتحدث عن الشخصية. يُعرف الشيخ عمار بذوقه الرفيع في أرقى الأوساط القيادية في العالم العربي. إن الشغف بالتميز في الحرفية يعكس الالتزام بالتميز في القيادة والرؤية والإرث — قيم مشتركة في الصحبة المتميزة التي يحظى بها.',
       },
+      quote: {
+        en: '"Refined taste is a language understood only by the finest minds."',
+        ar: '"الذوق الرفيع لغة تعرفها أرقى العقول"',
+      },
       imagePosition: 'right' as const,
+    },
+    {
+      id: 'formal',
+      image: '/personal/sheikh-formal.jpg',
+      imageAlt: {
+        en: 'Sheikh Ammar bin Humaid Al Nuaimi at a formal occasion in his distinctive blue thobe, wearing a rare timepiece',
+        ar: 'الشيخ عمار بن حميد النعيمي في مناسبة رسمية بثوبه الأزرق المميز، يرتدي ساعة نادرة',
+      },
+      caption: {
+        en: 'H.H. Sheikh Ammar at a formal occasion — timepiece on the wrist',
+        ar: 'سموه الشيخ عمار في مناسبة رسمية — الساعة على معصمه',
+      },
+      heading: { en: 'The Timepiece as Statement', ar: 'الساعة كتعبير عن الشخصية' },
+      body: {
+        en: 'A watch on the wrist of Sheikh Ammar is never incidental. Each piece chosen speaks of a moment, a conversation, a memory. The craft he wears is the craft he lives — a visible extension of the values he holds: precision, rarity, and an unwavering commitment to the exceptional. For him, horology is not worn; it is carried.',
+        ar: 'الساعة على معصم الشيخ عمار ليست أمراً عارضاً. كل قطعة مختارة تتحدث عن لحظة، وحوار، وذكرى. الحرفية التي يرتديها هي الحرفية التي يعيشها — امتداد مرئي للقيم التي يحملها: الدقة، والندرة، والالتزام الراسخ بالاستثنائي. فالساعة عنده لا تُلبَس؛ بل تُحمَل.',
+      },
+      quote: {
+        en: '"A great watch is not worn on the wrist — it is carried in the soul."',
+        ar: '"الساعة العظيمة لا تُلبَس على المعصم — بل تُحمَل في الروح"',
+      },
+      imagePosition: 'left' as const,
     },
   ],
 };
@@ -72,14 +103,12 @@ function PersonalPhoto({ src, alt, className }: { src: string; alt: string; clas
 
   if (failed) {
     return (
-      <div
-        className={`flex items-center justify-center bg-[#111] border border-[#d4af37]/20 rounded-2xl ${className}`}
-      >
+      <div className={`flex items-center justify-center bg-[#111] border border-[#d4af37]/15 rounded-2xl ${className}`}>
         <div className="text-center px-8 py-12">
           <div className="w-14 h-14 border border-[#d4af37]/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-xl font-serif text-[#d4af37]/60">SA</span>
+            <span className="text-xl font-serif text-[#d4af37]/50">SA</span>
           </div>
-          <p className="text-[#f5f2e8]/30 text-xs tracking-widest uppercase">Photo forthcoming</p>
+          <p className="text-[#f5f2e8]/20 text-xs tracking-widest uppercase">Photo forthcoming</p>
         </div>
       </div>
     );
@@ -100,8 +129,12 @@ function PersonalPhoto({ src, alt, className }: { src: string; alt: string; clas
 /* ─── Animation variants ──────────────────────────────────────────────────── */
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] } }),
+  hidden: { opacity: 0, y: 28 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
 };
 
 /* ─── Main component ──────────────────────────────────────────────────────── */
@@ -110,13 +143,16 @@ export function CollectorStory() {
   const { isRTL } = useLanguage();
 
   return (
-    <section className="relative bg-[#0a0a0a] py-24 md:py-32 overflow-hidden" aria-label="Collector's Story">
-      {/* Subtle texture dots */}
+    <section
+      className="relative bg-[#0a0a0a] py-24 md:py-36 overflow-hidden"
+      aria-label="Collector's Story"
+    >
+      {/* Subtle dot texture */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        className="absolute inset-0 pointer-events-none opacity-[0.022]"
         style={{
           backgroundImage: 'radial-gradient(circle, #d4af37 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
+          backgroundSize: '44px 44px',
         }}
         aria-hidden="true"
       />
@@ -125,43 +161,40 @@ export function CollectorStory() {
 
         {/* ── Section header ── */}
         <motion.div
-          className="text-center mb-20 md:mb-28"
+          className="text-center mb-20 md:mb-32"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          custom={0}
           variants={fadeUp}
+          custom={0}
         >
-          {/* Label */}
-          <p className="text-xs text-[#d4af37] font-semibold tracking-[0.4em] uppercase mb-5">
+          <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5">
             {isRTL ? content.sectionLabel.ar : content.sectionLabel.en}
           </p>
 
-          {/* Gold ornamental line */}
-          <div className="flex items-center justify-center gap-4 mb-7">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/60" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/70 rotate-45" />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/60" />
+          {/* Ornamental divider */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#d4af37]/55" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#d4af37]/55" />
           </div>
 
-          {/* Headline */}
           <h2
-            className="text-[#f5f2e8] mb-6"
+            className="text-[#f5f2e8] mb-7"
             style={{
               fontFamily: 'Playfair Display, Georgia, serif',
               fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              lineHeight: 1.18,
+              lineHeight: 1.16,
               fontWeight: 600,
-              letterSpacing: '-0.01em',
+              letterSpacing: '-0.015em',
             }}
           >
             {isRTL ? content.headline.ar : content.headline.en}
           </h2>
 
-          {/* Intro paragraph */}
           <p
-            className="max-w-2xl mx-auto text-[#f5f2e8]/65 leading-relaxed"
-            style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.125rem)', lineHeight: 1.75 }}
+            className="max-w-2xl mx-auto text-[#f5f2e8]/60 leading-relaxed"
+            style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)', lineHeight: 1.8 }}
             dir={isRTL ? 'rtl' : 'ltr'}
           >
             {isRTL ? content.intro.ar : content.intro.en}
@@ -169,7 +202,7 @@ export function CollectorStory() {
         </motion.div>
 
         {/* ── Editorial panels ── */}
-        <div className="space-y-24 md:space-y-36">
+        <div className="space-y-28 md:space-y-40">
           {content.panels.map((panel, panelIdx) => {
             const imageLeft = isRTL
               ? panel.imagePosition === 'right'
@@ -178,7 +211,7 @@ export function CollectorStory() {
             return (
               <div
                 key={panel.id}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center ${
                   imageLeft ? '' : 'lg:[direction:rtl]'
                 }`}
               >
@@ -188,37 +221,45 @@ export function CollectorStory() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-60px' }}
-                  custom={0}
                   variants={fadeUp}
+                  custom={0}
                 >
-                  <div className="relative rounded-2xl overflow-hidden"
-                    style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.10)' }}
+                  {/* Giant faded panel number */}
+                  <div
+                    className="absolute -top-6 -left-3 text-[8rem] font-serif leading-none select-none pointer-events-none"
+                    style={{ color: 'rgba(212,175,55,0.045)' }}
+                    aria-hidden="true"
+                  >
+                    {String(panelIdx + 1).padStart(2, '0')}
+                  </div>
+
+                  <div
+                    className="relative rounded-2xl overflow-hidden"
+                    style={{
+                      boxShadow: '0 28px 70px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.09)',
+                    }}
                   >
                     <PersonalPhoto
                       src={panel.image}
                       alt={isRTL ? panel.imageAlt.ar : panel.imageAlt.en}
-                      className="w-full h-[420px] lg:h-[520px] object-cover"
+                      className="w-full h-[440px] lg:h-[540px] object-cover object-top"
                     />
                     {/* Depth gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
                     {/* Corner accents */}
-                    <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#d4af37]/45 pointer-events-none" />
-                    <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[#d4af37]/45 pointer-events-none" />
-                    <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-[#d4af37]/45 pointer-events-none" />
-                    <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#d4af37]/45 pointer-events-none" />
+                    <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#d4af37]/40 pointer-events-none" />
+                    <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[#d4af37]/40 pointer-events-none" />
+                    <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-[#d4af37]/40 pointer-events-none" />
+                    <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#d4af37]/40 pointer-events-none" />
                   </div>
 
                   {/* Caption */}
-                  <p className="mt-4 text-center text-xs text-[#6b6b6b] tracking-widest uppercase font-light italic"
+                  <p
+                    className="mt-4 text-center text-[11px] text-[#6b6b6b] tracking-[0.18em] uppercase font-light italic"
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     {isRTL ? panel.caption.ar : panel.caption.en}
                   </p>
-
-                  {/* Panel number */}
-                  <div className="absolute -top-5 -left-2 text-[7rem] font-serif text-[#d4af37]/[0.04] leading-none select-none pointer-events-none" aria-hidden="true">
-                    {String(panelIdx + 1).padStart(2, '0')}
-                  </div>
                 </motion.div>
 
                 {/* Text column */}
@@ -227,11 +268,11 @@ export function CollectorStory() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-60px' }}
-                  custom={0.15}
                   variants={fadeUp}
+                  custom={0.18}
                 >
-                  {/* Section number */}
-                  <p className="text-[10px] text-[#d4af37]/50 tracking-[0.5em] uppercase font-medium">
+                  {/* Panel index */}
+                  <p className="text-[10px] text-[#d4af37]/45 tracking-[0.55em] uppercase font-medium">
                     {String(panelIdx + 1).padStart(2, '0')} —
                   </p>
 
@@ -241,7 +282,7 @@ export function CollectorStory() {
                     style={{
                       fontFamily: 'Playfair Display, Georgia, serif',
                       fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-                      lineHeight: 1.22,
+                      lineHeight: 1.2,
                       fontWeight: 600,
                       letterSpacing: '-0.01em',
                     }}
@@ -250,27 +291,25 @@ export function CollectorStory() {
                   </h3>
 
                   {/* Gold rule */}
-                  <div className="h-px w-12 bg-gradient-to-r from-[#d4af37]/70 to-transparent" />
+                  <div className="h-px w-14 bg-gradient-to-r from-[#d4af37]/65 to-transparent" />
 
                   {/* Body */}
                   <p
-                    className="text-[#f5f2e8]/65 leading-loose"
-                    style={{ fontSize: 'clamp(0.9rem, 1.35vw, 1.05rem)', lineHeight: 1.85 }}
+                    className="text-[#f5f2e8]/62 leading-loose"
+                    style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.05rem)', lineHeight: 1.9 }}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     {isRTL ? panel.body.ar : panel.body.en}
                   </p>
 
-                  {/* Pull quote decoration */}
-                  <div className="border-l-2 border-[#d4af37]/30 pl-5 mt-6">
+                  {/* Pull quote */}
+                  <div className="border-l-2 border-[#d4af37]/25 pl-5 pt-1">
                     <p
-                      className="text-[#d4af37]/60 text-sm italic font-light leading-relaxed"
+                      className="text-[#d4af37]/55 text-sm italic font-light leading-relaxed"
                       style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
-                      {panelIdx === 0
-                        ? (isRTL ? '"إرث التميز لا يُقتنى، بل يُورَث"' : '"A legacy of excellence is not acquired — it is inherited."')
-                        : (isRTL ? '"الذوق الرفيع لغة تعرفها أرقى العقول"' : '"Refined taste is a language understood only by the finest minds."')
-                      }
+                      {isRTL ? panel.quote.ar : panel.quote.en}
                     </p>
                   </div>
                 </motion.div>
@@ -281,16 +320,16 @@ export function CollectorStory() {
 
         {/* ── Bottom ornament ── */}
         <motion.div
-          className="mt-24 md:mt-32 flex items-center justify-center gap-5"
+          className="mt-28 md:mt-40 flex items-center justify-center gap-5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          custom={0}
           variants={fadeUp}
+          custom={0}
         >
-          <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#d4af37]/40" />
-          <div className="w-2 h-2 border border-[#d4af37]/50 rotate-45" />
-          <div className="h-px w-24 bg-gradient-to-l from-transparent to-[#d4af37]/40" />
+          <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#d4af37]/35" />
+          <div className="w-2 h-2 border border-[#d4af37]/45 rotate-45" />
+          <div className="h-px w-24 bg-gradient-to-l from-transparent to-[#d4af37]/35" />
         </motion.div>
       </div>
     </section>
