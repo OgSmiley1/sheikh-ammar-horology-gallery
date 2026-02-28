@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Personal Photos — Sheikh Ammar Horology Gallery</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #d4af37;
+      --gold-dim: rgba(212,175,55,0.35);
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --cream: #f5f2e8;
+      --muted: rgba(245,242,232,0.45);
+      --success: #4ade80;
+      --error: #f87171;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Header ── */
+    header { text-align: center; margin-bottom: 52px; }
+
+    .label {
+      font-size: 10px;
+      letter-spacing: .45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim));
+    }
+    .divider::after { transform: scaleX(-1); }
+    .diamond {
+      width: 6px; height: 6px;
+      border: 1px solid var(--gold-dim);
+      transform: rotate(45deg);
+    }
+
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      font-size: .9rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* ── Upload grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 980px;
+    }
+
+    /* ── Upload slot ── */
+    .slot {
+      background: var(--surface);
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: border-color .25s;
+    }
+    .slot.dragging {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.06);
+    }
+
+    .slot-number {
+      font-size: 10px;
+      letter-spacing: .4em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.4);
+    }
+
+    .slot-title {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .slot-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* Drop zone */
+    .drop-zone {
+      border: 1.5px dashed rgba(212,175,55,0.25);
+      border-radius: 12px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .drop-zone:hover {
+      border-color: var(--gold-dim);
+      background: rgba(212,175,55,0.04);
+    }
+
+    .drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drop-icon {
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .drop-text {
+      font-size: .78rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Preview inside drop zone */
+    .drop-zone.has-file {
+      border-style: solid;
+      border-color: var(--gold-dim);
+      height: auto;
+      padding: 0;
+      overflow: hidden;
+    }
+    .drop-zone.has-file img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+    }
+    .drop-zone.has-file .drop-icon,
+    .drop-zone.has-file .drop-text { display: none; }
+
+    /* Status badge */
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      min-height: 24px;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-idle  { background: rgba(255,255,255,0.12); }
+    .dot-ready { background: var(--gold); }
+    .dot-ok    { background: var(--success); }
+    .dot-err   { background: var(--error); }
+
+    .status-text { color: var(--muted); }
+    .status-text.ok  { color: var(--success); }
+    .status-text.err { color: var(--error); }
+
+    /* Upload button */
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--gold-dim);
+      background: transparent;
+      color: var(--gold);
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn:hover:not(:disabled) {
+      background: rgba(212,175,55,0.1);
+      border-color: var(--gold);
+    }
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .btn.uploading { opacity: 0.6; }
+
+    /* ── Upload All button ── */
+    .upload-all-wrap {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-primary {
+      padding: 14px 48px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      background: rgba(212,175,55,0.12);
+      color: var(--gold);
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: rgba(212,175,55,0.22);
+      box-shadow: 0 0 28px rgba(212,175,55,0.15);
+    }
+    .btn-primary:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .global-status {
+      font-size: .82rem;
+      color: var(--muted);
+      text-align: center;
+      min-height: 20px;
+    }
+    .global-status.ok  { color: var(--success); }
+    .global-status.err { color: var(--error); }
+
+    /* ── Footer note ── */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: .72rem;
+      color: rgba(245,242,232,0.2);
+      letter-spacing: .04em;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="label">Sheikh Ammar Horology Gallery</p>
+    <div class="divider"><span class="diamond"></span></div>
+    <h1>Upload Personal Photographs</h1>
+    <p class="subtitle">
+      Select or drag each photo into the matching slot below, then press
+      <em>"Upload All Photos"</em>. Files are saved locally — no external
+      services required.
+    </p>
+  </header>
+
+  <div class="grid" id="grid">
+
+    <!-- Slot 1 -->
+    <div class="slot" id="slot-father">
+      <p class="slot-number">01 —</p>
+      <p class="slot-title">Sheikh Ammar with his Father</p>
+      <p class="slot-desc">
+        Intimate conversation at a table with a starry backdrop.<br>
+        Saves as <code>sheikh-with-father.jpg</code>
+      </p>
+      <div class="drop-zone" id="dz-father">
+        <input type="file" id="file-father" accept="image/*" />
+        <div class="drop-icon">+</div>
+        <p class="drop-text">Click or drag photo here</p>
+      </div>
+      <div class="status" id="status-father">
+        <span class="dot dot-idle"></span>
+        <span class="status-text">No file selected</span>
+      </div>
+    </div>
+
+    <!-- Slot 2 -->
+    <div class="slot" id="slot-mbz">
+      <p class="slot-number">02 —</p>
+      <p class="slot-title">Sheikh Ammar with H.H. President MBZ</p>
+      <p class="slot-desc">
+        Both laughing together at a formal gathering.<br>
+        Saves as <code>sheikh-with-mbz.jpg</code>
+      </p>
+      <div class="drop-zone" id="dz-mbz">
+        <input type="file" id="file-mbz" accept="image/*" />
+        <div class="drop-icon">+</div>
+        <p class="drop-text">Click or drag photo here</p>
+      </div>
+      <div class="status" id="status-mbz">
+        <span class="dot dot-idle"></span>
+        <span class="status-text">No file selected</span>
+      </div>
+    </div>
+
+    <!-- Slot 3 -->
+    <div class="slot" id="slot-formal">
+      <p class="slot-number">03 —</p>
+      <p class="slot-title">Sheikh Ammar at Formal Conference</p>
+      <p class="slot-desc">
+        Blue thobe, seated beside his father, gold watch visible.<br>
+        Saves as <code>sheikh-formal.jpg</code>
+      </p>
+      <div class="drop-zone" id="dz-formal">
+        <input type="file" id="file-formal" accept="image/*" />
+        <div class="drop-icon">+</div>
+        <p class="drop-text">Click or drag photo here</p>
+      </div>
+      <div class="status" id="status-formal">
+        <span class="dot dot-idle"></span>
+        <span class="status-text">No file selected</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Upload All -->
+  <div class="upload-all-wrap">
+    <button class="btn-primary" id="btn-upload-all" disabled>Upload All Photos</button>
+    <p class="global-status" id="global-status"></p>
+  </div>
+
+  <footer>
+    Local upload only · No external API calls · Files saved to /personal/
+  </footer>
+
+<script>
+  const SLOTS = ['father', 'mbz', 'formal'];
+  const files = { father: null, mbz: null, formal: null };
+
+  function toBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload  = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function setStatus(slot, type, text) {
+    const wrap = document.getElementById(`status-${slot}`);
+    const dot  = wrap.querySelector('.dot');
+    const span = wrap.querySelector('.status-text');
+    dot.className  = `dot dot-${type}`;
+    span.className = `status-text${type === 'ok' ? ' ok' : type === 'err' ? ' err' : ''}`;
+    span.textContent = text;
+  }
+
+  function updateUploadBtn() {
+    const any = SLOTS.some(s => files[s] !== null);
+    document.getElementById('btn-upload-all').disabled = !any;
+  }
+
+  SLOTS.forEach(slot => {
+    const input = document.getElementById(`file-${slot}`);
+    const dz    = document.getElementById(`dz-${slot}`);
+
+    function handleFile(file) {
+      if (!file) return;
+      files[slot] = file;
+
+      /* Show preview */
+      dz.querySelectorAll('img').forEach(el => el.remove());
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      dz.classList.add('has-file');
+      dz.insertBefore(img, dz.firstChild);
+
+      setStatus(slot, 'ready', `Ready: ${file.name}`);
+      updateUploadBtn();
+    }
+
+    input.addEventListener('change', () => handleFile(input.files[0]));
+
+    /* Drag-and-drop */
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragging'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragging'));
+    dz.addEventListener('drop', e => {
+      e.preventDefault();
+      dz.classList.remove('dragging');
+      handleFile(e.dataTransfer.files[0]);
+    });
+  });
+
+  /* ── Upload all ── */
+  document.getElementById('btn-upload-all').addEventListener('click', async () => {
+    const btn = document.getElementById('btn-upload-all');
+    const globalStatus = document.getElementById('global-status');
+
+    btn.disabled = true;
+    btn.textContent = 'Uploading…';
+    globalStatus.className = 'global-status';
+    globalStatus.textContent = '';
+
+    const slotsToUpload = SLOTS.filter(s => files[s] !== null);
+    let succeeded = 0;
+    let failed = 0;
+
+    for (const slot of slotsToUpload) {
+      setStatus(slot, 'idle', 'Uploading…');
+      try {
+        const data = await toBase64(files[slot]);
+        const res  = await fetch('/api/upload-personal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slot, data }),
+        });
+        const json = await res.json();
+        if (json.ok) {
+          setStatus(slot, 'ok', `Saved as ${json.filename}`);
+          succeeded++;
+        } else {
+          setStatus(slot, 'err', `Error: ${json.error}`);
+          failed++;
+        }
+      } catch (err) {
+        setStatus(slot, 'err', `Network error: ${err.message}`);
+        failed++;
+      }
+    }
+
+    btn.textContent = 'Upload All Photos';
+    btn.disabled = false;
+
+    if (failed === 0 && succeeded > 0) {
+      globalStatus.className = 'global-status ok';
+      globalStatus.textContent =
+        `✓ ${succeeded} photo${succeeded > 1 ? 's' : ''} saved. Reload the homepage to see them live.`;
+    } else if (succeeded > 0) {
+      globalStatus.className = 'global-status';
+      globalStatus.textContent = `${succeeded} saved, ${failed} failed. See individual slots for details.`;
+    } else {
+      globalStatus.className = 'global-status err';
+      globalStatus.textContent = 'All uploads failed — is the server running?';
+    }
+  });
+</script>
+
+</body>
+</html>
