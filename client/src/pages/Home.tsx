@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { HeroSlideshowSplitScreen } from '@/components/HeroSlideshowSplitScreen';
 import { slides } from '@/data/heroSlides';
 import { ExploreMoreCollection } from '@/components/ExploreMoreCollection';
+import { CollectorStory } from '@/components/CollectorStory';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,9 @@ export default function Home() {
 
         {/* Hero Slideshow: Split-Screen Layout with Sheikh + Watch Images */}
         <HeroSlideshowSplitScreen slides={slides} autoPlayMs={7000} />
+
+        {/* Collector's Story — personal imagery (father + MBZ) + editorial text */}
+        <CollectorStory />
 
         {/* Explore More Collection */}
         <ExploreMoreCollection />
