@@ -37,6 +37,7 @@ export function Header() {
     { href: "/", label: t(NAV_ITEMS.home) },
     { href: "/collections", label: t(NAV_ITEMS.collection) },
     { href: "/sheikh-gallery", label: t(NAV_ITEMS.sheikhGallery) },
+    { href: "/compare", label: isRTL ? "مقارنة الساعات" : "Compare" },
     { href: "/brands", label: t(NAV_ITEMS.brands) },
     { href: "/about", label: t(NAV_ITEMS.about) },
   ];
