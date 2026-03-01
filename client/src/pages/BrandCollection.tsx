@@ -35,10 +35,8 @@ export default function BrandCollection() {
           <div className="text-gold-500 text-2xl">
             {language === "ar" ? "المجموعة غير موجودة" : "Collection not found"}
           </div>
-          <Link href="/collections">
-            <a className="text-gray-400 hover:text-gold-500 transition-colors">
-              {language === "ar" ? "العودة للمجموعات" : "Back to Collections"}
-            </a>
+          <Link to="/collections" className="text-gray-400 hover:text-gold-500 transition-colors">
+            {language === "ar" ? "العودة للمجموعات" : "Back to Collections"}
           </Link>
         </div>
       </div>
@@ -63,7 +61,7 @@ export default function BrandCollection() {
       <section className="relative py-24 px-4 bg-gradient-to-b from-black via-gray-900 to-black border-b border-gold-500/20">
         <div className="container max-w-6xl mx-auto">
           {/* Back Button */}
-          <Link href="/collections" className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
+          <Link to="/collections" className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
             {language === "ar" ? (
               <>
                 <ArrowRight className="w-5 h-5" />

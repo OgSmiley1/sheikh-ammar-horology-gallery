@@ -245,7 +245,7 @@ export default function SheikhGallery() {
                 {(current?.brandEn || current?.brandAr) && (
                   <div>
                     {(current as any).brandSlug ? (
-                      <Link href={`/collection/${(current as any).brandSlug}`} className="text-gold-500 hover:text-gold-400 transition-colors text-sm font-semibold tracking-widest uppercase">
+                      <Link to={`/collection/${(current as any).brandSlug}`} className="text-gold-500 hover:text-gold-400 transition-colors text-sm font-semibold tracking-widest uppercase">
                         {language === "ar" ? (current.brandAr || current.brandEn) : current.brandEn}
                       </Link>
                     ) : (
@@ -260,7 +260,7 @@ export default function SheikhGallery() {
                 {(current?.watchNameEn || current?.watchNameAr) && (
                   <div>
                     {(current as any).slug ? (
-                      <Link href={`/watch/${(current as any).slug}`} className="block">
+                      <Link to={`/watch/${(current as any).slug}`} className="block">
                         <h2 className="text-3xl md:text-4xl font-bold text-white hover:text-gold-400 transition-colors">
                           {language === "ar" ? (current.watchNameAr || current.watchNameEn) : current.watchNameEn}
                         </h2>
@@ -304,7 +304,7 @@ export default function SheikhGallery() {
 
                 {/* View Details Button */}
                 {(current as any).slug && (
-                  <Link href={`/watch/${(current as any).slug}`} className="inline-flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 hover:border-gold-500 text-gold-500 px-6 py-3 rounded-lg transition-all duration-300 font-semibold w-fit">
+                  <Link to={`/watch/${(current as any).slug}`} className="inline-flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 hover:border-gold-500 text-gold-500 px-6 py-3 rounded-lg transition-all duration-300 font-semibold w-fit">
                     {language === "ar" ? "عرض التفاصيل الكاملة" : "View Full Details"}
                     {language === "ar" ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                   </Link>
