@@ -13,15 +13,19 @@ import WatchDetail from "./pages/WatchDetail";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminWatches from "./pages/AdminWatches";
+import SheikhGallery from "./pages/SheikhGallery";
+import WatchComparison from "./pages/WatchComparison";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path="/stories" component={CollectionStories} />
+      <Route path="/sheikh-gallery" component={SheikhGallery} />
       <Route path="/collections" component={Collections} />
       <Route path="/collection/:slug" component={BrandCollection} />
       <Route path="/watch/:slug" component={WatchDetail} />
+      <Route path="/compare" component={WatchComparison} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/watches" component={AdminWatches} />

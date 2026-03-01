@@ -7,6 +7,10 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
+import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
+import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
+import { registerUploadLocalRoutes } from "../uploadLocal";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -35,6 +39,8 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  // Local file upload (no external services — writes to client/public/personal/)
+  registerUploadLocalRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",
@@ -56,6 +62,21 @@ async function startServer() {
   if (port !== preferredPort) {
     console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
+
+  // Security — hash any admin passwords stored as plaintext (runs first)
+  await fixPlaintextPasswords().catch((err) =>
+    console.error("[Security] fixPlaintextPasswords failed:", err)
+  );
+
+  // Run one-time data enrichment migration (idempotent)
+  enrichWatchCollection().catch((err) =>
+    console.error("[Migration] enrichWatchCollection failed:", err)
+  );
+
+  // Fix brand assignments + fill missing watch data (idempotent)
+  fixBrandAssignmentsAndData().catch((err) =>
+    console.error("[Migration] fixBrandAssignmentsAndData failed:", err)
+  );
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
