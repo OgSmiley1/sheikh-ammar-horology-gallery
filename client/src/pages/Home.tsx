@@ -144,7 +144,7 @@ export default function Home() {
                       : COLLECTION_INTRO.descriptionEn}
                   </p>
 
-                  <Link to="/collections">
+                  <Link href="/collections">
                     <Button className="bg-[#d4af37] hover:bg-[#f5f2e8] text-black font-semibold px-8 py-6 text-lg inline-flex items-center gap-2 transition-all duration-300">
                       {isRTL ? "استكشف المجموعة" : "Explore Collection"}
                       <ArrowRight className="w-5 h-5" />

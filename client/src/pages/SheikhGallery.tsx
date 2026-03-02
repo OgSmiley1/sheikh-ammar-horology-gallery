@@ -109,7 +109,7 @@ export default function SheikhGallery() {
       rarity: "Ultra Rare — 30 pieces",
     },
     {
-      imageUrl: "/images/sheikh/IMG_7796.jpeg",
+      imageUrl: "/images/sheikh/sheikh-world-time-5527g.jpg",
       captionEn: "A bilateral meeting in Geneva, Switzerland. His Highness wears the Patek Philippe World Time 5527G Manama Edition — specially commissioned to commemorate the Bahrain International Airshow, featuring a cloisonné enamel dial depicting the Manama skyline.",
       captionAr: "اجتماع ثنائي في جنيف، سويسرا. سموه يرتدي باتيك فيليب التوقيت العالمي 5527G إصدار المنامة — مُكلَّف خصيصًا للاحتفال بمعرض البحرين الدولي للطيران، يتميز بميناء مينا يصور أفق مدينة المنامة.",
       watchNameEn: "Patek Philippe World Time 5527G Manama Edition",
@@ -120,7 +120,7 @@ export default function SheikhGallery() {
       rarity: "Very Rare",
     },
     {
-      imageUrl: "/images/sheikh/IMG_7797(1).jpeg",
+      imageUrl: "/images/sheikh/sheikh-rm65-01.jpg",
       captionEn: "His Highness Sheikh Ammar at a Formula 1 Grand Prix. On his wrist gleams the Richard Mille RM 65-01 Automatic Split-Seconds Chronograph — the first ever RM automatic rattrapante, limited to 150 pieces.",
       captionAr: "سمو الشيخ عمار في سباق الفورمولا 1 للجائزة الكبرى. على معصمه يتلألأ ريتشارد ميل RM 65-01 كرونوغراف أوتوماتيكي مقسم الثواني — أول راتراب أوتوماتيكي من ريتشارد ميل، محدود بـ 150 قطعة.",
       watchNameEn: "Richard Mille RM 65-01 Automatic Split-Seconds Chronograph",
@@ -245,7 +245,7 @@ export default function SheikhGallery() {
                 {(current?.brandEn || current?.brandAr) && (
                   <div>
                     {(current as any).brandSlug ? (
-                      <Link to={`/collection/${(current as any).brandSlug}`} className="text-gold-500 hover:text-gold-400 transition-colors text-sm font-semibold tracking-widest uppercase">
+                      <Link href={`/collection/${(current as any).brandSlug}`} className="text-gold-500 hover:text-gold-400 transition-colors text-sm font-semibold tracking-widest uppercase">
                         {language === "ar" ? (current.brandAr || current.brandEn) : current.brandEn}
                       </Link>
                     ) : (
@@ -260,7 +260,7 @@ export default function SheikhGallery() {
                 {(current?.watchNameEn || current?.watchNameAr) && (
                   <div>
                     {(current as any).slug ? (
-                      <Link to={`/watch/${(current as any).slug}`} className="block">
+                      <Link href={`/watch/${(current as any).slug}`} className="block">
                         <h2 className="text-3xl md:text-4xl font-bold text-white hover:text-gold-400 transition-colors">
                           {language === "ar" ? (current.watchNameAr || current.watchNameEn) : current.watchNameEn}
                         </h2>
@@ -304,7 +304,7 @@ export default function SheikhGallery() {
 
                 {/* View Details Button */}
                 {(current as any).slug && (
-                  <Link to={`/watch/${(current as any).slug}`} className="inline-flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 hover:border-gold-500 text-gold-500 px-6 py-3 rounded-lg transition-all duration-300 font-semibold w-fit">
+                  <Link href={`/watch/${(current as any).slug}`} className="inline-flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 hover:border-gold-500 text-gold-500 px-6 py-3 rounded-lg transition-all duration-300 font-semibold w-fit">
                     {language === "ar" ? "عرض التفاصيل الكاملة" : "View Full Details"}
                     {language === "ar" ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                   </Link>

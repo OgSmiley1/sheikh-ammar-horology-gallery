@@ -58,7 +58,7 @@ export default function WatchDetail() {
           <div className="text-gold-500 text-2xl">
             {language === "ar" ? "الساعة غير موجودة" : "Watch not found"}
           </div>
-          <Link to="/collections" className="text-gray-400 hover:text-gold-500 transition-colors">
+          <Link href="/collections" className="text-gray-400 hover:text-gold-500 transition-colors">
             {language === "ar" ? "العودة للمجموعات" : "Back to Collections"}
           </Link>
         </div>
@@ -84,7 +84,7 @@ export default function WatchDetail() {
       <section className="relative py-16 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
         <div className="container max-w-7xl mx-auto">
           {/* Back Button */}
-          <Link to={brand ? `/collection/${brand.slug}` : "/collections"} className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
+          <Link href={brand ? `/collection/${brand.slug}` : "/collections"} className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
             {language === "ar" ? (
               <>
                 <ArrowRight className="w-5 h-5" />
@@ -156,7 +156,7 @@ export default function WatchDetail() {
               {/* Brand */}
               {brand && (
                 <div>
-                  <Link to={`/collection/${brand.slug}`} className="text-gold-500 hover:text-gold-400 transition-colors font-medium">
+                  <Link href={`/collection/${brand.slug}`} className="text-gold-500 hover:text-gold-400 transition-colors font-medium">
                     {language === "ar" ? (brand.nameAr || brand.nameEn) : brand.nameEn}
                   </Link>
                 </div>

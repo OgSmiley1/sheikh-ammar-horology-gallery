@@ -222,7 +222,7 @@ function WatchSelectorCard({
 
           {/* Watch Name */}
           <div className="p-4">
-            <Link to={`/watch/${selected.slug}`}>
+            <Link href={`/watch/${selected.slug}`}>
               <h3 className="text-white font-bold text-sm leading-snug hover:text-gold-400 transition-colors line-clamp-2">
                 {language === "ar" ? (selected.nameAr || selected.nameEn) : selected.nameEn}
               </h3>
@@ -594,7 +594,7 @@ export default function WatchComparison() {
                 : "Choose two or three timepieces from the Royal Collection to compare their technical specifications and market values"}
             </p>
             <Link
-              to="/collections"
+              href="/collections"
               className="inline-flex items-center gap-2 mt-6 text-gold-500 hover:text-gold-400 border border-gold-500/30 hover:border-gold-500/60 px-6 py-3 rounded-lg transition-all text-sm font-semibold"
             >
               {language === "ar" ? "استعرض المجموعة" : "Browse Collection"}

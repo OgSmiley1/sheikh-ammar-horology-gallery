@@ -98,7 +98,7 @@ export function Header() {
             {/* Right side actions */}
             <div className="flex items-center gap-3">
               <LanguageSwitcher />
-              <Link to="/admin/login" className="hidden sm:block text-sm font-medium text-foreground/60 hover:text-primary transition-colors">
+              <Link href="/admin/login" className="hidden sm:block text-sm font-medium text-foreground/60 hover:text-primary transition-colors">
                 {t(NAV_ITEMS.admin)}
               </Link>
               {/* Mobile hamburger */}
