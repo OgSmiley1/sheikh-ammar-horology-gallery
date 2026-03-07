@@ -21,18 +21,29 @@ import {
   InsertVideoBackground,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
+import { getFallbackBrands, getFallbackWatches } from "./seed-fallback";
 
 let _db: ReturnType<typeof drizzle> | null = null;
+let _dbAttempted = false;
 
 // Lazily create the drizzle instance so local tooling can run without a DB.
+// Only attempts connection once — if it fails, all subsequent calls use fallback.
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
+  if (_dbAttempted) return _db;
+
+  if (process.env.DATABASE_URL) {
+    _dbAttempted = true;
     try {
       _db = drizzle(process.env.DATABASE_URL);
+      // Test the connection with a simple query
+      console.log("[Database] Connected successfully.");
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      console.warn("[Database] Connection failed — using seed-data fallback.", (error as Error).message || error);
       _db = null;
     }
+  } else {
+    _dbAttempted = true;
+    console.log("[Database] No DATABASE_URL set — using seed-data fallback.");
   }
   return _db;
 }
@@ -118,7 +129,7 @@ export async function getUserByOpenId(openId: string) {
 
 export async function getAllBrands() {
   const db = await getDb();
-  if (!db) return [];
+  if (!db) return getFallbackBrands();
 
   return await db
     .select()
@@ -129,7 +140,10 @@ export async function getAllBrands() {
 
 export async function getBrandBySlug(slug: string) {
   const db = await getDb();
-  if (!db) return null;
+  if (!db) {
+    const fb = getFallbackBrands().find((b) => b.slug === slug);
+    return fb ?? null;
+  }
 
   const result = await db
     .select()
@@ -154,7 +168,13 @@ export async function createBrand(brand: InsertBrand) {
 
 export async function getAllWatches() {
   const db = await getDb();
-  if (!db) return [];
+  if (!db) {
+    const all = getFallbackWatches();
+    return all.sort((a, b) => {
+      if (a.isFeatured !== b.isFeatured) return a.isFeatured ? -1 : 1;
+      return a.displayOrder - b.displayOrder;
+    });
+  }
 
   return await db
     .select()
@@ -165,7 +185,11 @@ export async function getAllWatches() {
 
 export async function getWatchesByBrand(brandId: number) {
   const db = await getDb();
-  if (!db) return [];
+  if (!db) {
+    return getFallbackWatches()
+      .filter((w) => w.brandId === brandId)
+      .sort((a, b) => a.displayOrder - b.displayOrder);
+  }
 
   return await db
     .select()
@@ -176,7 +200,10 @@ export async function getWatchesByBrand(brandId: number) {
 
 export async function getWatchBySlug(slug: string) {
   const db = await getDb();
-  if (!db) return null;
+  if (!db) {
+    const fb = getFallbackWatches().find((w) => w.slug === slug);
+    return fb ?? null;
+  }
 
   const result = await db
     .select()
@@ -189,7 +216,12 @@ export async function getWatchBySlug(slug: string) {
 
 export async function getFeaturedWatches(limit: number = 6) {
   const db = await getDb();
-  if (!db) return [];
+  if (!db) {
+    return getFallbackWatches()
+      .filter((w) => w.isFeatured)
+      .sort((a, b) => a.displayOrder - b.displayOrder)
+      .slice(0, limit);
+  }
 
   return await db
     .select()

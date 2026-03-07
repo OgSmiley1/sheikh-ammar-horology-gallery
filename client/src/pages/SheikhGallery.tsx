@@ -109,7 +109,7 @@ export default function SheikhGallery() {
       rarity: "Ultra Rare — 30 pieces",
     },
     {
-      imageUrl: "/images/sheikh/IMG_7796.jpeg",
+      imageUrl: "/images/sheikh/sheikh-world-time-5527g.jpg",
       captionEn: "A bilateral meeting in Geneva, Switzerland. His Highness wears the Patek Philippe World Time 5527G Manama Edition — specially commissioned to commemorate the Bahrain International Airshow, featuring a cloisonné enamel dial depicting the Manama skyline.",
       captionAr: "اجتماع ثنائي في جنيف، سويسرا. سموه يرتدي باتيك فيليب التوقيت العالمي 5527G إصدار المنامة — مُكلَّف خصيصًا للاحتفال بمعرض البحرين الدولي للطيران، يتميز بميناء مينا يصور أفق مدينة المنامة.",
       watchNameEn: "Patek Philippe World Time 5527G Manama Edition",
@@ -120,7 +120,7 @@ export default function SheikhGallery() {
       rarity: "Very Rare",
     },
     {
-      imageUrl: "/images/sheikh/IMG_7797(1).jpeg",
+      imageUrl: "/images/sheikh/sheikh-rm65-01.jpg",
       captionEn: "His Highness Sheikh Ammar at a Formula 1 Grand Prix. On his wrist gleams the Richard Mille RM 65-01 Automatic Split-Seconds Chronograph — the first ever RM automatic rattrapante, limited to 150 pieces.",
       captionAr: "سمو الشيخ عمار في سباق الفورمولا 1 للجائزة الكبرى. على معصمه يتلألأ ريتشارد ميل RM 65-01 كرونوغراف أوتوماتيكي مقسم الثواني — أول راتراب أوتوماتيكي من ريتشارد ميل، محدود بـ 150 قطعة.",
       watchNameEn: "Richard Mille RM 65-01 Automatic Split-Seconds Chronograph",

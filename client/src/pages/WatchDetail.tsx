@@ -58,10 +58,8 @@ export default function WatchDetail() {
           <div className="text-gold-500 text-2xl">
             {language === "ar" ? "الساعة غير موجودة" : "Watch not found"}
           </div>
-          <Link href="/collections">
-            <a className="text-gray-400 hover:text-gold-500 transition-colors">
-              {language === "ar" ? "العودة للمجموعات" : "Back to Collections"}
-            </a>
+          <Link href="/collections" className="text-gray-400 hover:text-gold-500 transition-colors">
+            {language === "ar" ? "العودة للمجموعات" : "Back to Collections"}
           </Link>
         </div>
       </div>

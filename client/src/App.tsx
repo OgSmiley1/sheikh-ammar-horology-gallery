@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminWatches from "./pages/AdminWatches";
 import SheikhGallery from "./pages/SheikhGallery";
 import WatchComparison from "./pages/WatchComparison";
+import Top10Page from "./pages/Top10Page";
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/collection/:slug" component={BrandCollection} />
       <Route path="/watch/:slug" component={WatchDetail} />
       <Route path="/compare" component={WatchComparison} />
+      <Route path="/top10" component={Top10Page} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/watches" component={AdminWatches} />
