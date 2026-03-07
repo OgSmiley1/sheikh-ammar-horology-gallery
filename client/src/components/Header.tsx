@@ -38,8 +38,8 @@ export function Header() {
     { href: "/collections", label: t(NAV_ITEMS.collection) },
     { href: "/sheikh-gallery", label: t(NAV_ITEMS.sheikhGallery) },
     { href: "/compare", label: isRTL ? "مقارنة الساعات" : "Compare" },
-    { href: "/brands", label: t(NAV_ITEMS.brands) },
-    { href: "/about", label: t(NAV_ITEMS.about) },
+    { href: "/top10", label: isRTL ? "أفضل 10" : "Top 10" },
+    { href: "/stories", label: isRTL ? "القصص" : "Stories" },
   ];
 
   return (

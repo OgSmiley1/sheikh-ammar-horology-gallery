@@ -65,7 +65,7 @@ export default function Home() {
                     { name: "Rolex", year: "1905", country: "Switzerland" },
                     { name: "H. Moser & Cie", year: "1828", country: "Switzerland" },
                     { name: "Tudor", year: "1926", country: "Switzerland" },
-                    { name: "Breitling", year: "1884", country: "Switzerland" },
+                    { name: "Artisans de Geneve", year: "2011", country: "Switzerland" },
                   ].map((brand, idx) => (
                     <motion.div
                       key={idx}
