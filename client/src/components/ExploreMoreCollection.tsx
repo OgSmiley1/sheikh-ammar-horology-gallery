@@ -169,7 +169,7 @@ export function ExploreMoreCollection() {
 
                 <div>
                   <p className="text-[#d4af37] text-xs uppercase tracking-widest mb-1">
-                    {watch.brand.en}
+                    {isRTL ? watch.brand.ar : watch.brand.en}
                   </p>
                   <h3 className="text-lg font-serif text-[#f5f2e8] group-hover:text-[#d4af37] transition-colors mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
                     {isRTL ? watch.model.ar : watch.model.en}
@@ -235,7 +235,7 @@ export function ExploreMoreCollection() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
                   <p className="text-[#d4af37] text-sm font-semibold uppercase tracking-widest mb-2">
-                    {selectedWatch.brand.en}
+                    {isRTL ? selectedWatch.brand.ar : selectedWatch.brand.en}
                   </p>
                   <h2 className="text-4xl font-serif text-[#f5f2e8] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
                     {isRTL ? selectedWatch.model.ar : selectedWatch.model.en}

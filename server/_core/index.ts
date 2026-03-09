@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
 import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
 import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
+import { completeWatchData } from "../migrations/completeWatchData";
 import { registerUploadLocalRoutes } from "../uploadLocal";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -76,6 +77,11 @@ async function startServer() {
   // Fix brand assignments + fill missing watch data (idempotent)
   fixBrandAssignmentsAndData().catch((err) =>
     console.error("[Migration] fixBrandAssignmentsAndData failed:", err)
+  );
+
+  // Complete missing watch fields: powerReserve, waterResistance, limitedEdition, yearReleased
+  completeWatchData().catch((err) =>
+    console.error("[Migration] completeWatchData failed:", err)
   );
 
   server.listen(port, () => {
