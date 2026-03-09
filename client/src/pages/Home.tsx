@@ -58,14 +58,14 @@ export default function Home() {
                 {/* Brands Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
-                    { name: "Patek Philippe", year: "1839", country: "Switzerland" },
-                    { name: "Richard Mille", year: "2001", country: "Switzerland" },
-                    { name: "F.P. Journe", year: "1999", country: "Switzerland" },
-                    { name: "Audemars Piguet", year: "1875", country: "Switzerland" },
-                    { name: "Rolex", year: "1905", country: "Switzerland" },
-                    { name: "H. Moser & Cie", year: "1828", country: "Switzerland" },
-                    { name: "Tudor", year: "1926", country: "Switzerland" },
-                    { name: "Artisans de Geneve", year: "2011", country: "Switzerland" },
+                    { name: "Patek Philippe", nameAr: "باتيك فيليب", year: "1839", country: "Switzerland" },
+                    { name: "Richard Mille", nameAr: "ريتشارد ميل", year: "2001", country: "Switzerland" },
+                    { name: "F.P. Journe", nameAr: "إف بي جورن", year: "1999", country: "Switzerland" },
+                    { name: "Audemars Piguet", nameAr: "أوديمار بيغيه", year: "1875", country: "Switzerland" },
+                    { name: "Rolex", nameAr: "رولكس", year: "1905", country: "Switzerland" },
+                    { name: "H. Moser & Cie", nameAr: "إتش موزر وشركاه", year: "1828", country: "Switzerland" },
+                    { name: "Tudor", nameAr: "تيودور", year: "1926", country: "Switzerland" },
+                    { name: "Artisans de Geneve", nameAr: "حرفيو جنيف", year: "2011", country: "Switzerland" },
                   ].map((brand, idx) => (
                     <motion.div
                       key={idx}
@@ -82,7 +82,7 @@ export default function Home() {
                     >
                       <div className="text-center">
                         <h3 className="text-xl font-semibold text-[#d4af37] mb-2 group-hover:text-[#f5f2e8] transition-colors">
-                          {brand.name}
+                          {isRTL ? brand.nameAr : brand.name}
                         </h3>
                         <p className="text-sm text-[#f5f2e8]/60 mb-1">
                           {isRTL ? "تأسس عام" : "Founded"} {brand.year}
