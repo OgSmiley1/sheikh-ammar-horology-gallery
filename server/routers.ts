@@ -384,6 +384,49 @@ export const appRouter = router({
 
         return { success: true, result };
       }),
+
+    // ── SUBSCRIBER MANAGEMENT ──────────────────────────────────────────────
+    getSubscribers: publicProcedure.query(async ({ ctx }) => {
+      const adminCookie = ctx.req.cookies["admin_session"];
+      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+      return await db.getAllSubscribers();
+    }),
+
+    deleteSubscriber: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        const adminCookie = ctx.req.cookies["admin_session"];
+        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+        await db.deleteSubscriber(input.id);
+        return { success: true };
+      }),
+
+    getDashboardStatsWithSubs: publicProcedure.query(async () => {
+      const stats = await db.getPageViewStats();
+      const allWatches = await db.getAllWatches();
+      const allBrands = await db.getAllBrands();
+      const subCount = await db.getSubscriberCount();
+      return {
+        ...stats,
+        totalWatches: allWatches.length,
+        totalBrands: allBrands.length,
+        totalValue: allWatches.reduce((sum, w) => sum + (w.marketValue || 0), 0),
+        totalSubscribers: subCount,
+      };
+    }),
+  }),
+
+  // ============================================================================
+  // PUBLIC NEWSLETTER SUBSCRIPTION
+  // ============================================================================
+
+  newsletter: router({
+    subscribe: publicProcedure
+      .input(z.object({ email: z.string().email(), source: z.string().optional() }))
+      .mutation(async ({ input }) => {
+        await db.addSubscriber(input.email, input.source ?? "website");
+        return { success: true };
+      }),
   }),
 });
 

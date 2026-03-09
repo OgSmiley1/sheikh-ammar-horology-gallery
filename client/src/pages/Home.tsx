@@ -7,14 +7,30 @@ import { CollectorStory } from '@/components/CollectorStory';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
 import { COLLECTION_INTRO } from "@shared/constants";
-import { ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function Home() {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, language } = useLanguage();
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
+    onSuccess: () => {
+      setSubscribed(true);
+      setEmail("");
+      toast.success(language === "ar" ? "تم الاشتراك بنجاح!" : "Successfully subscribed!");
+    },
+    onError: (err) => {
+      toast.error(err.message || (language === "ar" ? "فشل الاشتراك" : "Subscription failed"));
+    },
+  });
 
   return (
     <>
@@ -45,13 +61,11 @@ export default function Home() {
                   transition={{ duration: 0.8 }}
                   className="text-center mb-16"
                 >
-                  <h2 className="text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    {isRTL ? "العلامات التجارية المميزة" : "Featured Brands"}
+                  <h2 className={`text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-4 ${isRTL ? "font-arabic" : ""}`} style={{ fontFamily: isRTL ? undefined : 'Playfair Display, serif' }}>
+                    {t("home.featuredBrands")}
                   </h2>
-                  <p className="text-lg text-[#f5f2e8]/70">
-                    {isRTL
-                      ? "اكتشف أرقى صانعي الساعات في العالم"
-                      : "Discover the world's finest watchmakers"}
+                  <p className={`text-lg text-[#f5f2e8]/70 ${isRTL ? "font-arabic" : ""}`}>
+                    {t("home.discoverWatchmakers")}
                   </p>
                 </motion.div>
 
@@ -84,8 +98,8 @@ export default function Home() {
                         <h3 className="text-xl font-semibold text-[#d4af37] mb-2 group-hover:text-[#f5f2e8] transition-colors">
                           {brand.name}
                         </h3>
-                        <p className="text-sm text-[#f5f2e8]/60 mb-1">
-                          {isRTL ? "تأسس عام" : "Founded"} {brand.year}
+                        <p className={`text-sm text-[#f5f2e8]/60 mb-1 ${isRTL ? "font-arabic" : ""}`}>
+                          {t("common.founded")} {brand.year}
                         </p>
                         <p className="text-xs text-[#f5f2e8]/50">{brand.country}</p>
                       </div>
@@ -131,8 +145,8 @@ export default function Home() {
                   transition={{ duration: 0.8 }}
                   className="max-w-3xl mx-auto text-center"
                 >
-                  <h2 className="text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    {isRTL ? "إرث من التميز" : "A Legacy of Excellence"}
+                  <h2 className={`text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-6 ${isRTL ? "font-arabic" : ""}`} style={{ fontFamily: isRTL ? undefined : 'Playfair Display, serif' }}>
+                    {t("home.collectionTitle")}
                   </h2>
 
                   <p
@@ -145,14 +159,68 @@ export default function Home() {
                   </p>
 
                   <Link href="/collections">
-                    <Button className="bg-[#d4af37] hover:bg-[#f5f2e8] text-black font-semibold px-8 py-6 text-lg inline-flex items-center gap-2 transition-all duration-300">
-                      {isRTL ? "استكشف المجموعة" : "Explore Collection"}
-                      <ArrowRight className="w-5 h-5" />
+                    <Button className={`bg-[#d4af37] hover:bg-[#f5f2e8] text-black font-semibold px-8 py-6 text-lg inline-flex items-center gap-2 transition-all duration-300 ${isRTL ? "font-arabic" : ""}`}>
+                      {t("common.exploreCollection")}
+                      {isRTL ? null : <ArrowRight className="w-5 h-5" />}
                     </Button>
                   </Link>
                 </motion.div>
               </div>
             </section>
+
+        {/* Newsletter Section */}
+        <section className="py-20 border-t border-[#d4af37]/20" style={{ background: 'rgba(212, 175, 55, 0.04)' }} dir={isRTL ? "rtl" : "ltr"}>
+          <div className="container max-w-xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#d4af37]/10 rounded-full border border-[#d4af37]/30 mb-6">
+                <Mail className="w-6 h-6 text-[#d4af37]" />
+              </div>
+              <h2 className={`text-3xl font-bold text-[#f5f2e8] mb-3 ${isRTL ? "font-arabic" : ""}`}>
+                {t("home.newsletterTitle")}
+              </h2>
+              <p className={`text-[#f5f2e8]/60 mb-8 leading-relaxed ${isRTL ? "font-arabic" : ""}`}>
+                {t("home.newsletterSubtitle")}
+              </p>
+              {subscribed ? (
+                <p className={`text-[#d4af37] font-semibold text-lg ${isRTL ? "font-arabic" : ""}`}>
+                  {language === "ar" ? "شكراً على اشتراكك!" : "Thank you for subscribing!"}
+                </p>
+              ) : (
+                <form
+                  className="flex gap-3 max-w-sm mx-auto"
+                  dir={isRTL ? "rtl" : "ltr"}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!email) return;
+                    subscribeMutation.mutate({ email });
+                  }}
+                >
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t("common.emailPlaceholder")}
+                    className="bg-[#1a1a1a] border-[#d4af37]/30 text-[#f5f2e8] placeholder:text-[#f5f2e8]/30 focus:border-[#d4af37] flex-1"
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    className={`bg-[#d4af37] hover:bg-[#f5f2e8] text-black font-semibold transition-all ${isRTL ? "font-arabic" : ""}`}
+                    disabled={subscribeMutation.isPending}
+                  >
+                    {subscribeMutation.isPending
+                      ? "..."
+                      : t("common.subscribe")}
+                  </Button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        </section>
 
         {/* Footer */}
         <footer className="border-t border-[#d4af37]/20 py-12" style={{ background: 'rgba(212, 175, 55, 0.05)' }}>

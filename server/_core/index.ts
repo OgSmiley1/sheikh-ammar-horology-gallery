@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
 import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
 import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
+import { ensureAdminUser } from "../migrations/ensureAdminUser";
 import { registerUploadLocalRoutes } from "../uploadLocal";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -66,6 +67,11 @@ async function startServer() {
   // Security — hash any admin passwords stored as plaintext (runs first)
   await fixPlaintextPasswords().catch((err) =>
     console.error("[Security] fixPlaintextPasswords failed:", err)
+  );
+
+  // Ensure primary admin user exists with correct credentials
+  await ensureAdminUser().catch((err) =>
+    console.error("[Admin] ensureAdminUser failed:", err)
   );
 
   // Run one-time data enrichment migration (idempotent)

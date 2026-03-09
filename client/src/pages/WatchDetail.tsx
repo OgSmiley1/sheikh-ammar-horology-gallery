@@ -4,10 +4,11 @@ import { Header } from "@/components/Header";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Eye, TrendingUp, Calendar, Package, Award } from "lucide-react";
 import { useEffect, useState } from "react";
+// WatchDetail — full bilingual support via LanguageContext
 
 export default function WatchDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { language } = useLanguage();
+  const { language, t, isRTL } = useLanguage();
   const [sessionId] = useState(() => Math.random().toString(36).substring(7));
 
   const { data: watch, isLoading: watchLoading } = trpc.watches.getBySlug.useQuery({ slug: slug! });
@@ -42,8 +43,8 @@ export default function WatchDetail() {
       <div className="min-h-screen bg-black">
         <Header />
         <div className="flex items-center justify-center min-h-screen">
-          <div className="text-gold-500 text-2xl">
-            {language === "ar" ? "جاري التحميل..." : "Loading..."}
+          <div className={`text-gold-500 text-2xl ${language === "ar" ? "font-arabic" : ""}`}>
+            {t("common.loading")}
           </div>
         </div>
       </div>
@@ -54,12 +55,12 @@ export default function WatchDetail() {
     return (
       <div className="min-h-screen bg-black">
         <Header />
-        <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-          <div className="text-gold-500 text-2xl">
-            {language === "ar" ? "الساعة غير موجودة" : "Watch not found"}
+        <div className="flex flex-col items-center justify-center min-h-screen gap-4" dir={isRTL ? "rtl" : "ltr"}>
+          <div className={`text-gold-500 text-2xl ${language === "ar" ? "font-arabic" : ""}`}>
+            {t("common.watchNotFound")}
           </div>
-          <Link href="/collections" className="text-gray-400 hover:text-gold-500 transition-colors">
-            {language === "ar" ? "العودة للمجموعات" : "Back to Collections"}
+          <Link href="/collections" className={`text-gray-400 hover:text-gold-500 transition-colors ${language === "ar" ? "font-arabic" : ""}`}>
+            {t("common.backToCollections")}
           </Link>
         </div>
       </div>
@@ -67,7 +68,7 @@ export default function WatchDetail() {
   }
 
   const formatPrice = (price: number | null) => {
-    if (!price) return language === "ar" ? "السعر عند الطلب" : "Price on Request";
+    if (!price) return t("common.priceOnRequest");
     return new Intl.NumberFormat(language === "ar" ? "ar-AE" : "en-US", {
       style: "currency",
       currency: "USD",
@@ -77,7 +78,7 @@ export default function WatchDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
       {/* Hero Section */}
@@ -125,7 +126,7 @@ export default function WatchDetail() {
                   {watch.isFeatured && (
                     <div className="bg-gold-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-500">
                       <span className="text-gold-500 text-sm font-bold">
-                        {language === "ar" ? "مميزة" : "Featured"}
+                        {t("admin.featured")}
                       </span>
                     </div>
                   )}
@@ -169,7 +170,7 @@ export default function WatchDetail() {
                 </h1>
                 {watch.referenceNumber && (
                   <p className="text-gray-400">
-                    {language === "ar" ? "المرجع" : "Reference"}: {watch.referenceNumber}
+                    {t("common.reference")}: {watch.referenceNumber}
                   </p>
                 )}
               </div>
@@ -186,7 +187,7 @@ export default function WatchDetail() {
                 <TrendingUp className="w-6 h-6 text-gold-500" />
                 <div>
                   <p className="text-sm text-gray-400">
-                    {language === "ar" ? "القيمة السوقية" : "Market Value"}
+                    {t("common.marketValue")}
                   </p>
                   <p className="text-3xl font-bold text-gold-500">{formatPrice(watch.marketValue)}</p>
                 </div>
@@ -195,14 +196,14 @@ export default function WatchDetail() {
               {/* Specifications */}
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gold-500">
-                  {language === "ar" ? "المواصفات" : "Specifications"}
+                  {t("common.specifications")}
                 </h3>
 
                 <div className="grid grid-cols-2 gap-4">
                   {watch.material && (
                     <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
                       <p className="text-gray-400 text-sm mb-1">
-                        {language === "ar" ? "المادة" : "Material"}
+                        {t("common.material")}
                       </p>
                       <p className="text-gray-200 font-medium">{watch.material}</p>
                     </div>
@@ -211,7 +212,7 @@ export default function WatchDetail() {
                   {watch.caseSize && (
                     <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
                       <p className="text-gray-400 text-sm mb-1">
-                        {language === "ar" ? "الحجم" : "Case Size"}
+                        {t("common.caseSize")}
                       </p>
                       <p className="text-gray-200 font-medium">{watch.caseSize}</p>
                     </div>
@@ -220,7 +221,7 @@ export default function WatchDetail() {
                   {watch.movement && (
                     <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
                       <p className="text-gray-400 text-sm mb-1">
-                        {language === "ar" ? "الحركة" : "Movement"}
+                        {t("common.movement")}
                       </p>
                       <p className="text-gray-200 font-medium">{watch.movement}</p>
                     </div>
@@ -229,7 +230,7 @@ export default function WatchDetail() {
                   {watch.dialColor && (
                     <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
                       <p className="text-gray-400 text-sm mb-1">
-                        {language === "ar" ? "لون القرص" : "Dial Color"}
+                        {t("common.dial")}
                       </p>
                       <p className="text-gray-200 font-medium">{watch.dialColor}</p>
                     </div>
@@ -238,7 +239,7 @@ export default function WatchDetail() {
                   {watch.waterResistance && (
                     <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
                       <p className="text-gray-400 text-sm mb-1">
-                        {language === "ar" ? "مقاومة الماء" : "Water Resistance"}
+                        {t("common.waterResistance")}
                       </p>
                       <p className="text-gray-200 font-medium">{watch.waterResistance}</p>
                     </div>
@@ -247,7 +248,7 @@ export default function WatchDetail() {
                   {watch.complications && (
                     <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10 col-span-2">
                       <p className="text-gray-400 text-sm mb-1">
-                        {language === "ar" ? "التعقيدات" : "Complications"}
+                        {t("common.complications")}
                       </p>
                       <p className="text-gray-200 font-medium">{watch.complications}</p>
                     </div>
@@ -261,7 +262,7 @@ export default function WatchDetail() {
                   <div className="flex items-center gap-2 text-gray-400">
                     <Calendar className="w-5 h-5" />
                     <span>
-                      {language === "ar" ? "سنة الإصدار" : "Released"}: {watch.yearReleased}
+                      {t("common.year")}: {watch.yearReleased}
                     </span>
                   </div>
                 )}
@@ -270,7 +271,7 @@ export default function WatchDetail() {
                   <div className="flex items-center gap-2 text-gold-500">
                     <Package className="w-5 h-5" />
                     <span>
-                      {language === "ar" ? "إصدار محدود" : "Limited Edition"}: {watch.productionQuantity}{" "}
+                      {t("common.limitedEdition")}: {watch.productionQuantity}{" "}
                       {language === "ar" ? "قطعة" : "pieces"}
                     </span>
                   </div>
@@ -288,7 +289,7 @@ export default function WatchDetail() {
             <div className="flex items-center gap-3 mb-8">
               <Award className="w-8 h-8 text-gold-500" />
               <h2 className="text-3xl font-bold text-gold-500">
-                {language === "ar" ? "القصة" : "The Story"}
+                {t("common.story")}
               </h2>
             </div>
             <div className="prose prose-invert prose-lg max-w-none">
@@ -305,9 +306,7 @@ export default function WatchDetail() {
         <section className="py-20 px-4">
           <div className="container max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gold-500 mb-12 text-center">
-              {language === "ar"
-                ? "صور سمو الشيخ عمار مع الساعة"
-                : "His Highness Sheikh Ammar with the Watch"}
+              {language === "ar" ? "صور سمو الشيخ عمار مع الساعة" : "His Highness Sheikh Ammar with the Watch"}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

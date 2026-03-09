@@ -13,6 +13,8 @@ import {
   Edit,
   Image as ImageIcon,
   BarChart3,
+  Mail,
+  Clock,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -37,8 +39,11 @@ export default function AdminDashboard() {
     }
   }, []);
 
-  // Fetch analytics data
+  // Fetch analytics + dashboard stats
   const { data: stats } = trpc.analytics.getStats.useQuery(undefined, {
+    enabled: !!adminSession,
+  });
+  const { data: dashStats } = trpc.admin.getDashboardStatsWithSubs.useQuery(undefined, {
     enabled: !!adminSession,
   });
 
@@ -134,33 +139,45 @@ export default function AdminDashboard() {
           </div>
 
           <div className="bg-gradient-to-br from-gray-900 to-black border border-gold-500/30 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-gold-500/20 rounded-lg">
-                  <Watch className="w-6 h-6 text-gold-500" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Total Watches</p>
-                  <p className="text-3xl font-bold text-gold-500">
-                    34+
-                  </p>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gold-500/20 rounded-lg">
+                <Watch className="w-6 h-6 text-gold-500" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Total Watches</p>
+                <p className="text-3xl font-bold text-gold-500">
+                  {dashStats?.totalWatches ?? "—"}
+                </p>
               </div>
             </div>
           </div>
 
           <div className="bg-gradient-to-br from-gray-900 to-black border border-gold-500/30 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-gold-500/20 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-gold-500" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Collection Value</p>
-                  <p className="text-2xl font-bold text-gold-500">
-                    $10M+
-                  </p>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gold-500/20 rounded-lg">
+                <TrendingUp className="w-6 h-6 text-gold-500" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Collection Value</p>
+                <p className="text-2xl font-bold text-gold-500">
+                  {dashStats?.totalValue
+                    ? `$${(dashStats.totalValue / 1_000_000).toFixed(1)}M`
+                    : "$10M+"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-gold-500/30 rounded-lg p-6">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gold-500/20 rounded-lg">
+                <Mail className="w-6 h-6 text-gold-500" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Subscribers</p>
+                <p className="text-3xl font-bold text-gold-500">
+                  {dashStats?.totalSubscribers ?? 0}
+                </p>
               </div>
             </div>
           </div>
@@ -169,31 +186,45 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gold-500 mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button
-              onClick={() => setLocation("/admin/watches/new")}
-              className="bg-gold-500 hover:bg-gold-600 text-black font-bold py-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-gold-500/50"
-            >
-              <Plus className="w-5 h-5 mr-2" />
-              Add New Watch
-            </Button>
-
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             <Button
               onClick={() => setLocation("/admin/watches")}
-              variant="outline"
-              className="border-gold-500/30 text-gold-500 hover:bg-gold-500/10 py-6"
+              className="bg-gold-500 hover:bg-gold-600 text-black font-bold py-5 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-gold-500/30"
             >
-              <Edit className="w-5 h-5 mr-2" />
-              Manage Watches
+              <Watch className="w-5 h-5 mr-2" />
+              Watches
             </Button>
-
+            <Button
+              onClick={() => setLocation("/admin/watches/new")}
+              variant="outline"
+              className="border-gold-500/30 text-gold-500 hover:bg-gold-500/10 py-5"
+            >
+              <Plus className="w-5 h-5 mr-2" />
+              Add Watch
+            </Button>
             <Button
               onClick={() => setLocation("/admin/media")}
               variant="outline"
-              className="border-gold-500/30 text-gold-500 hover:bg-gold-500/10 py-6"
+              className="border-gold-500/30 text-gold-500 hover:bg-gold-500/10 py-5"
             >
               <ImageIcon className="w-5 h-5 mr-2" />
-              Manage Media
+              Media
+            </Button>
+            <Button
+              onClick={() => setLocation("/admin/subscribers")}
+              variant="outline"
+              className="border-gold-500/30 text-gold-500 hover:bg-gold-500/10 py-5"
+            >
+              <Mail className="w-5 h-5 mr-2" />
+              Subscribers
+            </Button>
+            <Button
+              onClick={() => setLocation("/admin/timeline")}
+              variant="outline"
+              className="border-gold-500/30 text-gold-500 hover:bg-gold-500/10 py-5"
+            >
+              <Clock className="w-5 h-5 mr-2" />
+              Timeline
             </Button>
           </div>
         </div>

@@ -13,9 +13,11 @@ import WatchDetail from "./pages/WatchDetail";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminWatches from "./pages/AdminWatches";
+import AdminSubscribers from "./pages/AdminSubscribers";
 import SheikhGallery from "./pages/SheikhGallery";
 import WatchComparison from "./pages/WatchComparison";
 import Top10Page from "./pages/Top10Page";
+import Timeline from "./pages/Timeline";
 
 function Router() {
   return (
@@ -28,9 +30,11 @@ function Router() {
       <Route path="/watch/:slug" component={WatchDetail} />
       <Route path="/compare" component={WatchComparison} />
       <Route path="/top10" component={Top10Page} />
+      <Route path="/timeline" component={Timeline} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/watches" component={AdminWatches} />
+      <Route path="/admin/subscribers" component={AdminSubscribers} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
