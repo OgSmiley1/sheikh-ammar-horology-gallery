@@ -281,6 +281,30 @@ export async function createWatchImage(image: InsertWatchImage) {
   return result;
 }
 
+export async function deleteWatchImage(imageId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(watchImages).where(eq(watchImages.id, imageId));
+}
+
+export async function getAllWatchImages() {
+  const db = await getDb();
+  if (!db) return [];
+  return await db
+    .select()
+    .from(watchImages)
+    .orderBy(desc(watchImages.createdAt));
+}
+
+export async function getAllSheikhPhotosAdmin() {
+  const db = await getDb();
+  if (!db) return [];
+  return await db
+    .select()
+    .from(sheikhPhotos)
+    .orderBy(desc(sheikhPhotos.createdAt));
+}
+
 // ============================================================================
 // SHEIKH PHOTOS
 // ============================================================================

@@ -12,6 +12,7 @@ import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
 import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
 import { ensureAdminUser } from "../migrations/ensureAdminUser";
 import { registerUploadLocalRoutes } from "../uploadLocal";
+import { registerAdminUploadRoutes } from "../uploadAdmin";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -42,6 +43,8 @@ async function startServer() {
   registerOAuthRoutes(app);
   // Local file upload (no external services — writes to client/public/personal/)
   registerUploadLocalRoutes(app);
+  // Admin image upload — writes to client/public/uploads/
+  registerAdminUploadRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",
