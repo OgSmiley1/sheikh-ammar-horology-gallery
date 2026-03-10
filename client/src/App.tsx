@@ -13,6 +13,7 @@ import WatchDetail from "./pages/WatchDetail";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminWatches from "./pages/AdminWatches";
+import AdminWatchForm from "./pages/AdminWatchForm";
 import AdminSubscribers from "./pages/AdminSubscribers";
 import SheikhGallery from "./pages/SheikhGallery";
 import WatchComparison from "./pages/WatchComparison";
@@ -34,6 +35,8 @@ function Router() {
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/watches" component={AdminWatches} />
+      <Route path="/admin/watches/new" component={AdminWatchForm} />
+      <Route path="/admin/watches/edit/:id" component={AdminWatchForm} />
       <Route path="/admin/subscribers" component={AdminSubscribers} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

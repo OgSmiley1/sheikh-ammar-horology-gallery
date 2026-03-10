@@ -120,7 +120,9 @@ export default function WatchDetail() {
                 <div className="absolute top-4 right-4 flex flex-col gap-2">
                   {watch.rarity && (
                     <div className="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-500/50">
-                      <span className="text-gold-500 text-sm font-medium">{watch.rarity}</span>
+                      <span className="text-gold-500 text-sm font-medium">
+                        {language === "ar" ? (watch.rarityAr || watch.rarity) : watch.rarity}
+                      </span>
                     </div>
                   )}
                   {watch.isFeatured && (
@@ -205,7 +207,9 @@ export default function WatchDetail() {
                       <p className="text-gray-400 text-sm mb-1">
                         {t("common.material")}
                       </p>
-                      <p className="text-gray-200 font-medium">{watch.material}</p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.materialAr || watch.material) : watch.material}
+                      </p>
                     </div>
                   )}
 
@@ -214,7 +218,9 @@ export default function WatchDetail() {
                       <p className="text-gray-400 text-sm mb-1">
                         {t("common.caseSize")}
                       </p>
-                      <p className="text-gray-200 font-medium">{watch.caseSize}</p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.caseSizeAr || watch.caseSize) : watch.caseSize}
+                      </p>
                     </div>
                   )}
 
@@ -223,7 +229,9 @@ export default function WatchDetail() {
                       <p className="text-gray-400 text-sm mb-1">
                         {t("common.movement")}
                       </p>
-                      <p className="text-gray-200 font-medium">{watch.movement}</p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.movementAr || watch.movement) : watch.movement}
+                      </p>
                     </div>
                   )}
 
@@ -232,7 +240,9 @@ export default function WatchDetail() {
                       <p className="text-gray-400 text-sm mb-1">
                         {t("common.dial")}
                       </p>
-                      <p className="text-gray-200 font-medium">{watch.dialColor}</p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.dialColorAr || watch.dialColor) : watch.dialColor}
+                      </p>
                     </div>
                   )}
 
@@ -241,7 +251,9 @@ export default function WatchDetail() {
                       <p className="text-gray-400 text-sm mb-1">
                         {t("common.waterResistance")}
                       </p>
-                      <p className="text-gray-200 font-medium">{watch.waterResistance}</p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.waterResistanceAr || watch.waterResistance) : watch.waterResistance}
+                      </p>
                     </div>
                   )}
 
@@ -250,7 +262,9 @@ export default function WatchDetail() {
                       <p className="text-gray-400 text-sm mb-1">
                         {t("common.complications")}
                       </p>
-                      <p className="text-gray-200 font-medium">{watch.complications}</p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.complicationsAr || watch.complications) : watch.complications}
+                      </p>
                     </div>
                   )}
                 </div>
