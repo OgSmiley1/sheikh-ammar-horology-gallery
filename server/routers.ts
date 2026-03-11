@@ -289,17 +289,24 @@ export const appRouter = router({
           storyEn: z.string().optional(),
           storyAr: z.string().optional(),
           material: z.string().optional(),
+          materialAr: z.string().optional(),
           dialColor: z.string().optional(),
+          dialColorAr: z.string().optional(),
           caseSize: z.string().optional(),
+          caseSizeAr: z.string().optional(),
           movement: z.string().optional(),
+          movementAr: z.string().optional(),
           complications: z.string().optional(),
+          complicationsAr: z.string().optional(),
           waterResistance: z.string().optional(),
+          waterResistanceAr: z.string().optional(),
           limitedEdition: z.boolean().optional(),
           productionQuantity: z.number().optional(),
           yearReleased: z.number().optional(),
           retailPrice: z.number().optional(),
           marketValue: z.number().optional(),
           rarity: z.string().optional(),
+          rarityAr: z.string().optional(),
           isFeatured: z.boolean().optional(),
           displayOrder: z.number().optional(),
         })
@@ -349,14 +356,29 @@ export const appRouter = router({
             storyEn: z.string().optional(),
             storyAr: z.string().optional(),
             material: z.string().optional(),
+            materialAr: z.string().optional(),
             dialColor: z.string().optional(),
+            dialColorAr: z.string().optional(),
             caseSize: z.string().optional(),
+            caseSizeAr: z.string().optional(),
             movement: z.string().optional(),
+            movementAr: z.string().optional(),
             complications: z.string().optional(),
-            retailPrice: z.number().optional(),
-            marketValue: z.number().optional(),
+            complicationsAr: z.string().optional(),
+            waterResistance: z.string().optional(),
+            waterResistanceAr: z.string().optional(),
+            powerReserve: z.string().optional(),
+            retailPrice: z.number().nullable().optional(),
+            marketValue: z.number().nullable().optional(),
+            yearReleased: z.number().nullable().optional(),
+            limitedEdition: z.boolean().optional(),
+            productionQuantity: z.number().nullable().optional(),
+            rarity: z.string().optional(),
+            rarityAr: z.string().optional(),
+            mainImageUrl: z.string().optional(),
             isFeatured: z.boolean().optional(),
             isActive: z.boolean().optional(),
+            displayOrder: z.number().optional(),
           }),
         })
       )
@@ -383,6 +405,89 @@ export const appRouter = router({
         }
 
         return { success: true, result };
+      }),
+
+    // ── WATCH IMAGE MANAGEMENT ─────────────────────────────────────────────
+    addWatchImage: publicProcedure
+      .input(z.object({
+        watchId: z.number(),
+        imageUrl: z.string(),
+        imageKey: z.string(),
+        imageType: z.string().default("studio"),
+        captionEn: z.string().optional(),
+        captionAr: z.string().optional(),
+        displayOrder: z.number().optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const adminCookie = ctx.req.cookies["admin_session"];
+        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+        const result = await db.createWatchImage(input);
+        return { success: true, result };
+      }),
+
+    deleteWatchImage: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        const adminCookie = ctx.req.cookies["admin_session"];
+        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+        await db.deleteWatchImage(input.id);
+        return { success: true };
+      }),
+
+    // Get all images (for media library)
+    getAllImages: publicProcedure.query(async ({ ctx }) => {
+      const adminCookie = ctx.req.cookies["admin_session"];
+      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+      return await db.getAllWatchImages();
+    }),
+
+    getAllSheikhPhotos: publicProcedure.query(async ({ ctx }) => {
+      const adminCookie = ctx.req.cookies["admin_session"];
+      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+      return await db.getAllSheikhPhotosAdmin();
+    }),
+
+    // ── SUBSCRIBER MANAGEMENT ──────────────────────────────────────────────
+    getSubscribers: publicProcedure.query(async ({ ctx }) => {
+      const adminCookie = ctx.req.cookies["admin_session"];
+      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+      return await db.getAllSubscribers();
+    }),
+
+    deleteSubscriber: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        const adminCookie = ctx.req.cookies["admin_session"];
+        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
+        await db.deleteSubscriber(input.id);
+        return { success: true };
+      }),
+
+    getDashboardStatsWithSubs: publicProcedure.query(async () => {
+      const stats = await db.getPageViewStats();
+      const allWatches = await db.getAllWatches();
+      const allBrands = await db.getAllBrands();
+      const subCount = await db.getSubscriberCount();
+      return {
+        ...stats,
+        totalWatches: allWatches.length,
+        totalBrands: allBrands.length,
+        totalValue: allWatches.reduce((sum, w) => sum + (w.marketValue || 0), 0),
+        totalSubscribers: subCount,
+      };
+    }),
+  }),
+
+  // ============================================================================
+  // PUBLIC NEWSLETTER SUBSCRIPTION
+  // ============================================================================
+
+  newsletter: router({
+    subscribe: publicProcedure
+      .input(z.object({ email: z.string().email(), source: z.string().optional() }))
+      .mutation(async ({ input }) => {
+        await db.addSubscriber(input.email, input.source ?? "website");
+        return { success: true };
       }),
   }),
 });

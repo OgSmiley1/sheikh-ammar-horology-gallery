@@ -10,7 +10,10 @@ import { serveStatic, setupVite } from "./vite";
 import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
 import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
 import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
+import { ensureAdminUser } from "../migrations/ensureAdminUser";
+import { addBilingualSpecs } from "../migrations/addBilingualSpecs";
 import { registerUploadLocalRoutes } from "../uploadLocal";
+import { registerAdminUploadRoutes } from "../uploadAdmin";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -41,6 +44,8 @@ async function startServer() {
   registerOAuthRoutes(app);
   // Local file upload (no external services — writes to client/public/personal/)
   registerUploadLocalRoutes(app);
+  // Admin image upload — writes to client/public/uploads/
+  registerAdminUploadRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",
@@ -68,6 +73,11 @@ async function startServer() {
     console.error("[Security] fixPlaintextPasswords failed:", err)
   );
 
+  // Ensure primary admin user exists with correct credentials
+  await ensureAdminUser().catch((err) =>
+    console.error("[Admin] ensureAdminUser failed:", err)
+  );
+
   // Run one-time data enrichment migration (idempotent)
   enrichWatchCollection().catch((err) =>
     console.error("[Migration] enrichWatchCollection failed:", err)
@@ -76,6 +86,11 @@ async function startServer() {
   // Fix brand assignments + fill missing watch data (idempotent)
   fixBrandAssignmentsAndData().catch((err) =>
     console.error("[Migration] fixBrandAssignmentsAndData failed:", err)
+  );
+
+  // Add bilingual spec columns + translate existing watch specs to Arabic
+  addBilingualSpecs().catch((err) =>
+    console.error("[Migration] addBilingualSpecs failed:", err)
   );
 
   server.listen(port, () => {

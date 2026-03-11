@@ -11,6 +11,7 @@ import {
   adminUsers,
   adminActivityLog,
   videoBackgrounds,
+  subscribers,
   InsertBrand,
   InsertWatch,
   InsertWatchImage,
@@ -280,6 +281,30 @@ export async function createWatchImage(image: InsertWatchImage) {
   return result;
 }
 
+export async function deleteWatchImage(imageId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(watchImages).where(eq(watchImages.id, imageId));
+}
+
+export async function getAllWatchImages() {
+  const db = await getDb();
+  if (!db) return [];
+  return await db
+    .select()
+    .from(watchImages)
+    .orderBy(desc(watchImages.createdAt));
+}
+
+export async function getAllSheikhPhotosAdmin() {
+  const db = await getDb();
+  if (!db) return [];
+  return await db
+    .select()
+    .from(sheikhPhotos)
+    .orderBy(desc(sheikhPhotos.createdAt));
+}
+
 // ============================================================================
 // SHEIKH PHOTOS
 // ============================================================================
@@ -448,6 +473,61 @@ export async function getRecentAdminActivity(limit: number = 50) {
     .from(adminActivityLog)
     .orderBy(desc(adminActivityLog.createdAt))
     .limit(limit);
+}
+
+// ============================================================================
+// SUBSCRIBER MANAGEMENT
+// ============================================================================
+
+export async function addSubscriber(email: string, source = "website") {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  // Upsert: if already subscribed, set to active
+  try {
+    await dbInstance
+      .insert(subscribers)
+      .values({ email, source, status: "active" })
+      .onDuplicateKeyUpdate({ set: { status: "active" } });
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to add subscriber:", error);
+    throw error;
+  }
+}
+
+export async function getAllSubscribers() {
+  const dbInstance = await getDb();
+  if (!dbInstance) return [];
+  return await dbInstance
+    .select()
+    .from(subscribers)
+    .orderBy(desc(subscribers.createdAt));
+}
+
+export async function deleteSubscriber(id: number) {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+  await dbInstance.delete(subscribers).where(eq(subscribers.id, id));
+}
+
+export async function unsubscribe(email: string) {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+  await dbInstance
+    .update(subscribers)
+    .set({ status: "unsubscribed" })
+    .where(eq(subscribers.email, email));
+}
+
+export async function getSubscriberCount() {
+  const dbInstance = await getDb();
+  if (!dbInstance) return 0;
+  const result = await dbInstance
+    .select({ count: sql<number>`COUNT(*)` })
+    .from(subscribers)
+    .where(eq(subscribers.status, "active"));
+  return result[0]?.count ?? 0;
 }
 
 // ============================================================================

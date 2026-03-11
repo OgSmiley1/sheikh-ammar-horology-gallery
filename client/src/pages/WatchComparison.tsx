@@ -323,7 +323,7 @@ function WatchSelectorCard({
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function WatchComparison() {
-  const { language } = useLanguage();
+  const { language, t, isRTL } = useLanguage();
   const { data: allWatches = [] } = trpc.watches.getAll.useQuery();
   const { data: allBrands = [] } = trpc.brands.getAll.useQuery();
 
@@ -361,7 +361,7 @@ export default function WatchComparison() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
       {/* Hero */}

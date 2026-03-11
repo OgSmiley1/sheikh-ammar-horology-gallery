@@ -1,16 +1,16 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { NAV_ITEMS } from "@shared/constants";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, language } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [crownMode, setCrownMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,26 +20,30 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route changes / resize to desktop
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 1024) setMobileOpen(false); };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  // Close mobile menu on navigation
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location]);
+
   const navLinks = [
-    { href: "/", label: t(NAV_ITEMS.home) },
-    { href: "/collections", label: t(NAV_ITEMS.collection) },
-    { href: "/sheikh-gallery", label: t(NAV_ITEMS.sheikhGallery) },
-    { href: "/compare", label: isRTL ? "مقارنة الساعات" : "Compare" },
-    { href: "/top10", label: isRTL ? "أفضل 10" : "Top 10" },
-    { href: "/stories", label: isRTL ? "القصص" : "Stories" },
+    { href: "/", label: t("common.home") },
+    { href: "/collections", label: t("common.collection") },
+    { href: "/sheikh-gallery", label: t("common.gallery") },
+    { href: "/compare", label: t("common.compare") },
+    { href: "/top10", label: t("common.top10") },
+    { href: "/timeline", label: t("common.timeline") },
+    { href: "/stories", label: t("common.stories") },
   ];
 
   return (
@@ -50,9 +54,10 @@ export function Header() {
             ? "bg-background/95 backdrop-blur-lg border-b border-primary/20 shadow-lg"
             : "bg-transparent"
         }`}
+        dir={isRTL ? "rtl" : "ltr"}
       >
         <div className="container">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo / Brand */}
             <Link
               href="/"
@@ -62,44 +67,54 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
             >
               <div
-                className="w-12 h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all"
+                className="w-10 h-10 lg:w-12 lg:h-12 shrink-0 bg-primary/10 rounded-full flex items-center justify-center border border-primary/30 group-hover:border-primary transition-all"
                 style={{
                   boxShadow: crownMode ? '0 0 30px rgba(212, 175, 55, 0.8)' : 'none',
                   background: crownMode ? 'rgba(212, 175, 55, 0.2)' : undefined,
                 }}
               >
-                <span className="text-xl font-bold text-gold-gradient" dir="ltr">
+                <span className="text-lg lg:text-xl font-bold text-gold-gradient" dir="ltr">
                   SA
                 </span>
               </div>
               <div className="hidden md:block min-w-0">
-                <div className="text-sm font-semibold text-primary truncate max-w-[180px]">
+                <div className={`text-xs lg:text-sm font-semibold text-primary truncate max-w-[160px] ${language === "ar" ? "font-arabic" : ""}`}>
                   {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar"}
                 </div>
-                <div className="text-xs text-muted-foreground">
+                <div className={`text-xs text-muted-foreground ${language === "ar" ? "font-arabic" : ""}`}>
                   {isRTL ? "المجموعة الملكية" : "Royal Collection"}
                 </div>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav
+              className="hidden lg:flex items-center flex-wrap justify-center gap-x-4 gap-y-1 xl:gap-x-6 min-w-0 px-2"
+              dir={isRTL ? "rtl" : "ltr"}
+            >
+              {navLinks.map((link) => {
+                const active = location === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-xs xl:text-sm font-medium whitespace-nowrap transition-colors ${
+                      active
+                        ? "text-primary font-semibold"
+                        : "text-foreground/80 hover:text-primary"
+                    } ${language === "ar" ? "font-arabic" : ""}`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Right side actions */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 lg:gap-3 shrink-0">
               <LanguageSwitcher />
-              <Link href="/admin/login" className="hidden sm:block text-sm font-medium text-foreground/60 hover:text-primary transition-colors">
-                {t(NAV_ITEMS.admin)}
+              <Link href="/admin/login" className="hidden sm:block text-xs lg:text-sm font-medium text-foreground/60 hover:text-primary transition-colors whitespace-nowrap">
+                {t("common.admin")}
               </Link>
               {/* Mobile hamburger */}
               <button
@@ -141,12 +156,12 @@ export function Header() {
               dir={isRTL ? "rtl" : "ltr"}
             >
               {/* Drawer header */}
-              <div className="flex items-center justify-between px-6 h-20 border-b border-[#d4af37]/20">
+              <div className="flex items-center justify-between px-6 h-16 border-b border-[#d4af37]/20">
                 <div>
-                  <p className="text-sm font-semibold text-[#d4af37]">
+                  <p className={`text-sm font-semibold text-[#d4af37] ${language === "ar" ? "font-arabic" : ""}`}>
                     {isRTL ? "الشيخ عمار" : "Sheikh Ammar"}
                   </p>
-                  <p className="text-xs text-[#f5f2e8]/50">
+                  <p className={`text-xs text-[#f5f2e8]/50 ${language === "ar" ? "font-arabic" : ""}`}>
                     {isRTL ? "المجموعة الملكية" : "Royal Collection"}
                   </p>
                 </div>
@@ -161,38 +176,45 @@ export function Header() {
 
               {/* Links */}
               <div className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.07 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center px-4 py-3 rounded-lg text-[#f5f2e8]/80 hover:text-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-base font-medium"
+                {navLinks.map((link, i) => {
+                  const active = location === link.href;
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.07 }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={`flex items-center px-4 py-3 rounded-lg transition-all duration-200 text-base font-medium ${
+                          active
+                            ? "text-[#d4af37] bg-[#d4af37]/10"
+                            : "text-[#f5f2e8]/80 hover:text-[#d4af37] hover:bg-[#d4af37]/10"
+                        } ${language === "ar" ? "font-arabic" : ""}`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
 
                 <div className="pt-4 border-t border-[#d4af37]/20 mt-4">
                   <Link
                     href="/admin/login"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center px-4 py-3 rounded-lg text-[#f5f2e8]/50 hover:text-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-sm"
+                    className={`flex items-center px-4 py-3 rounded-lg text-[#f5f2e8]/50 hover:text-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-sm ${language === "ar" ? "font-arabic" : ""}`}
                   >
-                    {t(NAV_ITEMS.admin)}
+                    {t("common.admin")}
                   </Link>
                 </div>
               </div>
 
               {/* Footer */}
               <div className="px-6 py-4 border-t border-[#d4af37]/20 text-center">
-                <p className="text-xs text-[#f5f2e8]/30">
-                  © 2025 {isRTL ? "المجموعة الملكية" : "Royal Collection"}
+                <p className={`text-xs text-[#f5f2e8]/30 ${language === "ar" ? "font-arabic" : ""}`}>
+                  © 2025 {t("common.copyright")}
                 </p>
               </div>
             </motion.nav>
