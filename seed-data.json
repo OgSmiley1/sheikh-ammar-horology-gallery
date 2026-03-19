@@ -796,6 +796,29 @@
       "displayOrder": 29
     },
     {
+      "brand": "F.P. Journe",
+      "referenceNumber": "Tourbillon Souverain Platinum Mint",
+      "nameEn": "F.P. Journe Tourbillon Souverain",
+      "nameAr": "إف بي جورن توربيون سوفرين",
+      "slug": "fp-journe-tourbillon-souverain-mint",
+      "descriptionEn": "Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman, wears the F.P. Journe Tourbillon Souverain, distinguished by its stunning mint-inspired dial — a uniquely vivid expression of independent haute horlogerie. Crafted in platinum with a hand-wound tourbillon movement.",
+      "descriptionAr": "يرتدي سمو الشيخ عمار بن حميد النعيمي ولي عهد إمارة عجمان ساعة إف بي جورن توربيون سوفرين، تتميز هذه الساعة بلون ميناء مستوحى من النعناع في تعبير بصري مميز لصناعة الساعات الراقية المستقلة. مصنوعة من البلاتين مع حركة توربيون يدوية.",
+      "storyEn": "The F.P. Journe Tourbillon Souverain is François-Paul Journe's magnum opus — the watch that established his reputation as one of the world's greatest independent watchmakers. The tourbillon mechanism, originally invented by Abraham-Louis Breguet to combat the effects of gravity on movement accuracy, is here elevated by Journe's singular genius. This platinum-cased variant with a rare mint-inspired dial represents one of the most desirable and collectible expressions of the reference, combining exceptional mechanical artistry with a visually captivating colour that is unique among fine watchmaking.",
+      "storyAr": "يُعدّ توربيون سوفرين من إف بي جورن العمل الأبرز لفرانسوا بول جورن — الساعة التي أرست سمعته بوصفه أحد أعظم صانعي الساعات المستقلين في العالم. آلية التوربيون، التي اخترعها أصلاً أبراهام-لويس بريغيه لمواجهة تأثيرات الجاذبية على دقة الحركة، ترتقي هنا بفضل عبقرية جورن الفذّة. يمثل هذا الإصدار بعلبة بلاتينية وميناء نادر مستوحى من النعناع أحد أكثر تعبيرات هذا المرجع جاذبيةً وقيمةً للجمع، بجمعه بين براعة ميكانيكية استثنائية ولون بصري رائع فريد في عالم صناعة الساعات الراقية.",
+      "material": "Platinum",
+      "dialColor": "Mint Green",
+      "caseSize": "40mm",
+      "movement": "Manual-winding Tourbillon",
+      "complications": "Tourbillon, Power Reserve",
+      "powerReserve": "42 hours",
+      "limitedEdition": false,
+      "retailPrice": 173340,
+      "marketValue": 1240000,
+      "rarity": "Ultra Rare",
+      "isFeatured": true,
+      "displayOrder": 30
+    },
+    {
       "brand": "Artisans de Geneve",
       "referenceNumber": "La Montoya Custom",
       "nameEn": "Artisans de Geneve 'La Montoya' Custom Rolex",
@@ -817,7 +840,7 @@
       "yearReleased": 2019,
       "rarity": "Ultra Rare — 5 pieces",
       "isFeatured": true,
-      "displayOrder": 30
+      "displayOrder": 31
     }
   ]
 }
