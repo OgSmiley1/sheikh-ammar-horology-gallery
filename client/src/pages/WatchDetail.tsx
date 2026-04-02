@@ -185,13 +185,26 @@ export default function WatchDetail() {
               )}
 
               {/* Price */}
-              <div className="flex items-center gap-4 py-6 border-y border-gold-500/20">
-                <TrendingUp className="w-6 h-6 text-gold-500" />
-                <div>
-                  <p className="text-sm text-gray-400">
-                    {t("common.marketValue")}
-                  </p>
-                  <p className="text-3xl font-bold text-gold-500">{formatPrice(watch.marketValue)}</p>
+              <div className="py-6 border-y border-gold-500/20 space-y-3">
+                {watch.retailPrice && (
+                  <div className="flex items-center gap-4">
+                    <TrendingUp className="w-5 h-5 text-gray-400" />
+                    <div>
+                      <p className="text-sm text-gray-400">
+                        {language === "ar" ? "سعر الريتيل التقريبي" : "Retail Price"}
+                      </p>
+                      <p className="text-xl font-semibold text-gray-300">{formatPrice(watch.retailPrice)}</p>
+                    </div>
+                  </div>
+                )}
+                <div className="flex items-center gap-4">
+                  <TrendingUp className="w-6 h-6 text-gold-500" />
+                  <div>
+                    <p className="text-sm text-gray-400">
+                      {language === "ar" ? "سعر السوق التقريبي" : "Market Value"}
+                    </p>
+                    <p className="text-3xl font-bold text-gold-500">{formatPrice(watch.marketValue)}</p>
+                  </div>
                 </div>
               </div>
 
@@ -254,6 +267,15 @@ export default function WatchDetail() {
                       <p className="text-gray-200 font-medium">
                         {language === "ar" ? (watch.waterResistanceAr || watch.waterResistance) : watch.waterResistance}
                       </p>
+                    </div>
+                  )}
+
+                  {watch.powerReserve && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {language === "ar" ? "احتياطي الطاقة" : "Power Reserve"}
+                      </p>
+                      <p className="text-gray-200 font-medium">{watch.powerReserve}</p>
                     </div>
                   )}
 

@@ -121,7 +121,14 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 1
+      "displayOrder": 1,
+      "materialAr": "تيتانيوم وذهب أحمر 18 قيراط",
+      "dialColorAr": "ذهب أحمر",
+      "caseSizeAr": "40 مم",
+      "movementAr": "تكويك يدوي، كاليبر 1520",
+      "complicationsAr": "رنين، توقيتان، مؤشر احتياطي الطاقة",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "F.P. Journe",
@@ -153,7 +160,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 2
+      "displayOrder": 2,
+      "materialAr": "ذهب وردي 18 قيراط",
+      "dialColorAr": "أزرق دخاني",
+      "caseSizeAr": "38 مم",
+      "movementAr": "تكويك يدوي مع توربيون، كاليبر 1403",
+      "complicationsAr": "توربيون، مؤشر احتياطي الطاقة",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Patek Philippe",
@@ -185,7 +199,14 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 3
+      "displayOrder": 3,
+      "materialAr": "بلاتين 950",
+      "dialColorAr": "قطاعات زرقاء",
+      "caseSizeAr": "41 مم",
+      "movementAr": "تكويك يدوي، كاليبر CH 29-535 PS 1/10",
+      "complicationsAr": "كرونوغراف أحادي الضغط 1/10 ثانية، عداد 30 دقيقة",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Patek Philippe",
@@ -217,7 +238,14 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 4
+      "displayOrder": 4,
+      "materialAr": "فولاذ مقاوم للصدأ مع إطار ماسي",
+      "dialColorAr": "أخضر زيتوني",
+      "caseSizeAr": "40 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 26-330 S C",
+      "complicationsAr": "تاريخ، ثواني مركزية",
+      "waterResistanceAr": "120 متر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Patek Philippe",
@@ -249,7 +277,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 5
+      "displayOrder": 5,
+      "materialAr": "بلاتين 950",
+      "dialColorAr": "أبيض بأرقام بريغيه",
+      "caseSizeAr": "33 مم",
+      "movementAr": "تكويك يدوي، كاليبر CHR 27-525 PS",
+      "complicationsAr": "كرونوغراف مقسم الثواني (راتراب)، عداد 30 دقيقة",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Patek Philippe",
@@ -281,7 +316,14 @@
       "rarity": "Rare",
       "rarityAr": "نادرة",
       "isFeatured": true,
-      "displayOrder": 6
+      "displayOrder": 6,
+      "materialAr": "ذهب أبيض 18 قيراط",
+      "dialColorAr": "أبيض فضي",
+      "caseSizeAr": "38 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 324 S QA",
+      "complicationsAr": "تقويم سنوي، يوم، تاريخ، شهر، مؤشر 24 ساعة",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نسبياً نادر"
     },
     {
       "brand": "Patek Philippe",
@@ -313,7 +355,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": false,
-      "displayOrder": 7
+      "displayOrder": 7,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "مينا كلوازونيه",
+      "caseSizeAr": "40 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 30-255 PS",
+      "complicationsAr": "تاريخ",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Patek Philippe",
@@ -345,7 +394,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 8
+      "displayOrder": 8,
+      "materialAr": "ذهب أبيض 18 قيراط",
+      "dialColorAr": "مينا كلوازونيه — أفق المنامة",
+      "caseSizeAr": "38.5 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 240 HU",
+      "complicationsAr": "توقيت عالمي (24 منطقة زمنية)، مؤشر نهار/ليل",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Patek Philippe",
@@ -378,7 +434,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 9
+      "displayOrder": 9,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "أخضر متدرج",
+      "caseSizeAr": "40 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 240 Q",
+      "complicationsAr": "تقويم دائم، مرحلة القمر، يوم، تاريخ، شهر، سنة كبيسة",
+      "waterResistanceAr": "120 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Richard Mille",
@@ -411,7 +474,14 @@
       "rarity": "Ultra Rare",
       "rarityAr": "فائقة الندرة",
       "isFeatured": true,
-      "displayOrder": 10
+      "displayOrder": 10,
+      "materialAr": "تيتانيوم",
+      "dialColorAr": "مينا مرسومة يدوياً — عين الشر",
+      "caseSizeAr": "45.66 × 39.70 مم",
+      "movementAr": "تكويك يدوي مع توربيون، كاليبر RM 26-02",
+      "complicationsAr": "توربيون، مينا مرسومة يدوياً",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نادر للغاية"
     },
     {
       "brand": "Richard Mille",
@@ -444,7 +514,14 @@
       "rarity": "Ultra Rare",
       "rarityAr": "فائقة الندرة",
       "isFeatured": true,
-      "displayOrder": 11
+      "displayOrder": 11,
+      "materialAr": "كربون TPT",
+      "dialColorAr": "هيكلي شفاف",
+      "caseSizeAr": "44.5 × 49.94 مم",
+      "movementAr": "أوتوماتيكي، كاليبر RMAC4",
+      "complicationsAr": "كرونوغراف مقسم الثواني، عداد 30 دقيقة، محدد وظيفة",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نادر للغاية"
     },
     {
       "brand": "Richard Mille",
@@ -477,7 +554,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 12
+      "displayOrder": 12,
+      "materialAr": "كوارتز TPT ثلاثي الألوان",
+      "dialColorAr": "هيكلي ثلاثي الألوان",
+      "caseSizeAr": "38.7 × 47.52 مم",
+      "movementAr": "أوتوماتيكي، كاليبر CRMA2",
+      "complicationsAr": "ثواني، محدد وظيفة",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Richard Mille",
@@ -510,7 +594,14 @@
       "rarity": "Ultra Rare",
       "rarityAr": "فائقة الندرة",
       "isFeatured": true,
-      "displayOrder": 13
+      "displayOrder": 13,
+      "materialAr": "ذهب أبيض وتيتانيوم",
+      "dialColorAr": "جرافيتي متعدد الألوان مرسوم يدوياً",
+      "caseSizeAr": "42.7 × 50 مم",
+      "movementAr": "تكويك يدوي مع توربيون",
+      "complicationsAr": "توربيون، ساعات، دقائق",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نادر للغاية"
     },
     {
       "brand": "Audemars Piguet",
@@ -543,7 +634,14 @@
       "rarity": "Rare",
       "rarityAr": "نادرة",
       "isFeatured": true,
-      "displayOrder": 14
+      "displayOrder": 14,
+      "materialAr": "سيراميك أزرق",
+      "dialColorAr": "سيراميك أزرق — غراند تابيسيري",
+      "caseSizeAr": "41 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 5134",
+      "complicationsAr": "تقويم دائم، مرحلة القمر، يوم، تاريخ، شهر، سنة كبيسة",
+      "waterResistanceAr": "20 متر",
+      "rarityAr": "نسبياً نادر"
     },
     {
       "brand": "Audemars Piguet",
@@ -575,7 +673,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 15
+      "displayOrder": 15,
+      "materialAr": "ذهب أبيض 18 قيراط",
+      "dialColorAr": "أبيض — غراند تابيسيري",
+      "caseSizeAr": "39 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 2121",
+      "complicationsAr": "تاريخ",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Audemars Piguet",
@@ -607,7 +712,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 16
+      "displayOrder": 16,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "أزرق جليدي — غراند تابيسيري",
+      "caseSizeAr": "41 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 2385",
+      "complicationsAr": "كرونوغراف، تاريخ، عداد 30 دقيقة، عداد 12 ساعة",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Audemars Piguet",
@@ -639,7 +751,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 17
+      "displayOrder": 17,
+      "materialAr": "ذهب وردي 18 قيراط",
+      "dialColorAr": "سلموني — غراند تابيسيري",
+      "caseSizeAr": "41 مم",
+      "movementAr": "تكويك يدوي مع توربيون، كاليبر 2924",
+      "complicationsAr": "توربيون طائر عند 6 ساعات، ساعات، دقائق",
+      "waterResistanceAr": "20 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Audemars Piguet",
@@ -671,7 +790,14 @@
       "rarity": "Rare",
       "rarityAr": "نادرة",
       "isFeatured": false,
-      "displayOrder": 18
+      "displayOrder": 18,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "أبيض — غراند تابيسيري",
+      "caseSizeAr": "39 مم",
+      "movementAr": "تكويك أوتوماتيكي، كاليبر 2121",
+      "complicationsAr": "تاريخ",
+      "waterResistanceAr": "50 متر",
+      "rarityAr": "نسبياً نادر"
     },
     {
       "brand": "Rolex",
@@ -703,7 +829,13 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 19
+      "displayOrder": 19,
+      "materialAr": "ذهب أصفر 18 قيراط",
+      "dialColorAr": "أسود مع مؤشرات فرعية ذهبية (بول نيومان)",
+      "caseSizeAr": "37 مم",
+      "movementAr": "تكويك يدوي، كاليبر 727 (زينيث إل بريميرو معدّل)",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Rolex",
@@ -735,7 +867,13 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 20
+      "displayOrder": 20,
+      "materialAr": "ذهب أصفر 18 قيراط",
+      "dialColorAr": "أسود مع مؤشرات فرعية ذهبية",
+      "caseSizeAr": "37 مم",
+      "movementAr": "تكويك يدوي، كاليبر 727",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Rolex",
@@ -767,7 +905,13 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": false,
-      "displayOrder": 21
+      "displayOrder": 21,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "أسود مع مؤشرات فرعية بيضاء",
+      "caseSizeAr": "37 مم",
+      "movementAr": "تكويك يدوي، فالجو 72",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Rolex",
@@ -799,7 +943,13 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 22
+      "displayOrder": 22,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "أسود نادر مع مؤشرات فرعية بيضاء (بول نيومان)",
+      "caseSizeAr": "37 مم",
+      "movementAr": "تكويك يدوي، كاليبر 722",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Rolex",
@@ -832,7 +982,13 @@
       "rarity": "Ultra Rare — 1/1",
       "rarityAr": "فائقة الندرة — 1/1",
       "isFeatured": true,
-      "displayOrder": 23
+      "displayOrder": 23,
+      "materialAr": "فولاذ مقاوم للصدأ مع مينا مخصصة",
+      "dialColorAr": "مينا مرسومة يدوياً مخصصة",
+      "caseSizeAr": "40 مم",
+      "movementAr": "أوتوماتيكي، كاليبر 4130",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نادر للغاية — 1 من 1"
     },
     {
       "brand": "Rolex",
@@ -864,7 +1020,13 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 24
+      "displayOrder": 24,
+      "materialAr": "ذهب أصفر 18 قيراط",
+      "dialColorAr": "أسود مع مؤشرات فرعية ذهبية",
+      "caseSizeAr": "37 مم",
+      "movementAr": "تكويك يدوي، كاليبر 727",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "Rolex",
@@ -896,7 +1058,13 @@
       "rarity": "Rare",
       "rarityAr": "نادرة",
       "isFeatured": false,
-      "displayOrder": 25
+      "displayOrder": 25,
+      "materialAr": "ذهب أبيض 18 قيراط",
+      "dialColorAr": "فضي/أبيض",
+      "caseSizeAr": "40 مم",
+      "movementAr": "أوتوماتيكي، زينيث إل بريميرو معدّل",
+      "complicationsAr": "كرونوغراف، تاكيمتر",
+      "rarityAr": "نسبياً نادر"
     },
     {
       "brand": "Rolex",
@@ -928,7 +1096,14 @@
       "rarity": "Very Rare",
       "rarityAr": "نادرة جدًا",
       "isFeatured": true,
-      "displayOrder": 26
+      "displayOrder": 26,
+      "materialAr": "ذهب أصفر 18 قيراط",
+      "dialColorAr": "أسود",
+      "caseSizeAr": "40 مم",
+      "movementAr": "أوتوماتيكي، كاليبر 1575",
+      "complicationsAr": "GMT، إطار دوار، تاريخ",
+      "waterResistanceAr": "100 متر",
+      "rarityAr": "نادر"
     },
     {
       "brand": "Rolex",
@@ -960,7 +1135,14 @@
       "rarity": "Extremely Rare",
       "rarityAr": "نادرة للغاية",
       "isFeatured": true,
-      "displayOrder": 27
+      "displayOrder": 27,
+      "materialAr": "ذهب أبيض 18 قيراط",
+      "dialColorAr": "نيزك جيبيون",
+      "caseSizeAr": "40 مم",
+      "movementAr": "أوتوماتيكي، كاليبر 3186",
+      "complicationsAr": "GMT، إطار دوار، تاريخ",
+      "waterResistanceAr": "100 متر",
+      "rarityAr": "نادر جداً"
     },
     {
       "brand": "H. Moser & Cie",
@@ -992,7 +1174,14 @@
       "rarity": "Rare",
       "rarityAr": "نادرة",
       "isFeatured": true,
-      "displayOrder": 28
+      "displayOrder": 28,
+      "materialAr": "ذهب وردي 18 قيراط",
+      "dialColorAr": "مينا أزرق دخاني",
+      "caseSizeAr": "40.8 مم",
+      "movementAr": "تكويك يدوي، HMC 341",
+      "complicationsAr": "تقويم دائم، مؤشر السنة الكبيسة",
+      "waterResistanceAr": "30 متر",
+      "rarityAr": "نسبياً نادر"
     },
     {
       "brand": "Tudor",
@@ -1024,7 +1213,43 @@
       "rarity": "Limited",
       "rarityAr": "محدودة",
       "isFeatured": false,
-      "displayOrder": 29
+      "displayOrder": 29,
+      "materialAr": "فولاذ مقاوم للصدأ",
+      "dialColorAr": "وردي",
+      "caseSizeAr": "41 مم",
+      "movementAr": "أوتوماتيكي، كاليبر MT5813 (معتمد COSC)",
+      "complicationsAr": "كرونوغراف، تاريخ",
+      "waterResistanceAr": "200 متر",
+      "rarityAr": "محدود الإنتاج"
+    },
+    {
+      "brand": "F.P. Journe",
+      "referenceNumber": "Tourbillon Souverain Platinum Mint",
+      "nameEn": "F.P. Journe Tourbillon Souverain",
+      "nameAr": "إف بي جورن توربيون سوفرين",
+      "slug": "fp-journe-tourbillon-souverain-mint",
+      "descriptionEn": "Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman, wears the F.P. Journe Tourbillon Souverain, distinguished by its stunning mint-inspired dial — a uniquely vivid expression of independent haute horlogerie. Crafted in platinum with a hand-wound tourbillon movement.",
+      "descriptionAr": "يرتدي سمو الشيخ عمار بن حميد النعيمي ولي عهد إمارة عجمان ساعة إف بي جورن توربيون سوفرين، تتميز هذه الساعة بلون ميناء مستوحى من النعناع في تعبير بصري مميز لصناعة الساعات الراقية المستقلة. مصنوعة من البلاتين مع حركة توربيون يدوية.",
+      "storyEn": "The F.P. Journe Tourbillon Souverain is François-Paul Journe's magnum opus — the watch that established his reputation as one of the world's greatest independent watchmakers. The tourbillon mechanism, originally invented by Abraham-Louis Breguet to combat the effects of gravity on movement accuracy, is here elevated by Journe's singular genius. This platinum-cased variant with a rare mint-inspired dial represents one of the most desirable and collectible expressions of the reference, combining exceptional mechanical artistry with a visually captivating colour that is unique among fine watchmaking.",
+      "storyAr": "يُعدّ توربيون سوفرين من إف بي جورن العمل الأبرز لفرانسوا بول جورن — الساعة التي أرست سمعته بوصفه أحد أعظم صانعي الساعات المستقلين في العالم. آلية التوربيون، التي اخترعها أصلاً أبراهام-لويس بريغيه لمواجهة تأثيرات الجاذبية على دقة الحركة، ترتقي هنا بفضل عبقرية جورن الفذّة. يمثل هذا الإصدار بعلبة بلاتينية وميناء نادر مستوحى من النعناع أحد أكثر تعبيرات هذا المرجع جاذبيةً وقيمةً للجمع، بجمعه بين براعة ميكانيكية استثنائية ولون بصري رائع فريد في عالم صناعة الساعات الراقية.",
+      "material": "Platinum",
+      "dialColor": "Mint Green",
+      "caseSize": "40mm",
+      "movement": "Manual-winding Tourbillon",
+      "complications": "Tourbillon, Power Reserve",
+      "powerReserve": "42 hours",
+      "limitedEdition": false,
+      "retailPrice": 173340,
+      "marketValue": 1240000,
+      "rarity": "Ultra Rare",
+      "isFeatured": true,
+      "displayOrder": 30,
+      "materialAr": "بلاتين",
+      "dialColorAr": "أخضر نعناعي",
+      "caseSizeAr": "40 مم",
+      "movementAr": "تكويك يدوي مع توربيون",
+      "complicationsAr": "توربيون، احتياطي الطاقة",
+      "rarityAr": "نادر للغاية"
     },
     {
       "brand": "Artisans de Geneve",
@@ -1057,7 +1282,13 @@
       "rarity": "Ultra Rare — 5 pieces",
       "rarityAr": "فائقة الندرة — 5 قطع",
       "isFeatured": true,
-      "displayOrder": 30
+      "displayOrder": 31,
+      "materialAr": "فولاذ مخصص ومعادن ثمينة",
+      "dialColorAr": "مينا مخصصة — طابع سباقات",
+      "caseSizeAr": "40 مم",
+      "movementAr": "أوتوماتيكي، قاعدة رولكس مخصصة",
+      "complicationsAr": "تعقيد مخصص",
+      "rarityAr": "نادر للغاية — 5 قطع"
     }
   ]
 }
