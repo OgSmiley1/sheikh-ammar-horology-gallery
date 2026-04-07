@@ -24,7 +24,7 @@ async function getBrandId(
 export async function fixBrandAssignmentsAndData() {
   const db = await getDb();
   if (!db) {
-    console.warn("[Migration] fixBrandAssignmentsAndData: DB not available, skipping.");
+    console.log("[Migration] fixBrandAssignmentsAndData: DB not available, skipping.");
     return;
   }
 

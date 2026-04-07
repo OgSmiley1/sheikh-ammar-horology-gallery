@@ -36,7 +36,7 @@ async function brandId(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, slug:
 export async function enrichWatchCollection() {
   const db = await getDb();
   if (!db) {
-    console.warn("[Migration] enrichWatchCollection: DB not available, skipping.");
+    console.log("[Migration] enrichWatchCollection: DB not available, skipping.");
     return;
   }
 

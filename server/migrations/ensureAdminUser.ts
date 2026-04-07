@@ -14,7 +14,7 @@ const ADMIN_PLAIN_PASSWORD = "Smile@123";
 export async function ensureAdminUser() {
   const db = await getDb();
   if (!db) {
-    console.warn("[Admin] ensureAdminUser: DB not available, skipping.");
+    console.log("[Admin] ensureAdminUser: DB not available, skipping.");
     return;
   }
 
