@@ -7,14 +7,16 @@ export function LanguageSwitcher() {
     <div className="flex items-center border border-primary/30 rounded-md overflow-hidden text-xs font-bold">
       <button
         onClick={() => setLanguage("ar")}
-        className={`px-3 py-1.5 transition-colors ${
+        className={`px-3 py-1.5 transition-colors font-arabic ${
           language === "ar"
             ? "bg-primary text-black"
             : "text-foreground/70 hover:bg-primary/10"
         }`}
         aria-label="Arabic"
+        lang="ar"
+        translate="no"
       >
-        AR
+        عربي
       </button>
       <span className="w-px h-4 bg-primary/30" />
       <button
@@ -25,8 +27,10 @@ export function LanguageSwitcher() {
             : "text-foreground/70 hover:bg-primary/10"
         }`}
         aria-label="English"
+        lang="en"
+        translate="no"
       >
-        EN
+        English
       </button>
     </div>
   );

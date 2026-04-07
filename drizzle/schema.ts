@@ -58,11 +58,17 @@ export const watches = mysqlTable("watches", {
   storyEn: text("storyEn"),
   storyAr: text("storyAr"),
   material: varchar("material", { length: 255 }),
+  materialAr: varchar("materialAr", { length: 255 }),
   dialColor: varchar("dialColor", { length: 100 }),
+  dialColorAr: varchar("dialColorAr", { length: 100 }),
   caseSize: varchar("caseSize", { length: 50 }),
+  caseSizeAr: varchar("caseSizeAr", { length: 50 }),
   movement: varchar("movement", { length: 255 }),
+  movementAr: varchar("movementAr", { length: 255 }),
   complications: text("complications"),
+  complicationsAr: text("complicationsAr"),
   waterResistance: varchar("waterResistance", { length: 50 }),
+  waterResistanceAr: varchar("waterResistanceAr", { length: 50 }),
   powerReserve: varchar("powerReserve", { length: 50 }),
   limitedEdition: boolean("limitedEdition").default(false).notNull(),
   productionQuantity: int("productionQuantity"),
@@ -70,6 +76,7 @@ export const watches = mysqlTable("watches", {
   retailPrice: int("retailPrice"),
   marketValue: int("marketValue"),
   rarity: varchar("rarity", { length: 50 }),
+  rarityAr: varchar("rarityAr", { length: 100 }),
   mainImageUrl: varchar("mainImageUrl", { length: 500 }),
   viewCount: int("viewCount").default(0).notNull(),
   displayOrder: int("displayOrder").default(0).notNull(),
@@ -253,3 +260,18 @@ export const adminActivityLogRelations = relations(adminActivityLog, ({ one }) =
     references: [adminUsers.id],
   }),
 }));
+
+/**
+ * Newsletter subscribers
+ */
+export const subscribers = mysqlTable("subscribers", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  status: mysqlEnum("status", ["active", "unsubscribed"]).default("active").notNull(),
+  source: varchar("source", { length: 100 }).default("website").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Subscriber = typeof subscribers.$inferSelect;
+export type InsertSubscriber = typeof subscribers.$inferInsert;

@@ -51,8 +51,8 @@ export const WATCH_CATEGORIES = {
 } as const;
 
 export const ADMIN_CONFIG = {
-  username: "MOATH",
-  // Password will be hashed: MOATH123
+  username: "Moatg_123",
+  // Password: Smile@123 (hashed at server startup via ensureAdminUser migration)
 } as const;
 
 export const COLORS = {
