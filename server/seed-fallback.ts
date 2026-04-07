@@ -31,25 +31,25 @@ interface SeedWatch {
   storyEn?: string;
   storyAr?: string;
   material?: string;
-  dialColor?: string;
-  caseSize?: string;
-  movement?: string;
-  complications?: string;
-  waterResistance?: string;
-  powerReserve?: string;
   materialAr?: string;
+  dialColor?: string;
   dialColorAr?: string;
+  caseSize?: string;
   caseSizeAr?: string;
+  movement?: string;
   movementAr?: string;
+  complications?: string;
   complicationsAr?: string;
+  waterResistance?: string;
   waterResistanceAr?: string;
+  powerReserve?: string;
+  rarity?: string;
   rarityAr?: string;
   limitedEdition?: boolean;
   productionQuantity?: number;
   yearReleased?: number;
   retailPrice?: number;
   marketValue?: number;
-  rarity?: string;
   isFeatured?: boolean;
   displayOrder: number;
 }
@@ -83,11 +83,17 @@ export interface FallbackWatch {
   storyEn: string | null;
   storyAr: string | null;
   material: string | null;
+  materialAr: string | null;
   dialColor: string | null;
+  dialColorAr: string | null;
   caseSize: string | null;
+  caseSizeAr: string | null;
   movement: string | null;
+  movementAr: string | null;
   complications: string | null;
+  complicationsAr: string | null;
   waterResistance: string | null;
+  waterResistanceAr: string | null;
   powerReserve: string | null;
   limitedEdition: boolean;
   productionQuantity: number | null;
@@ -95,12 +101,6 @@ export interface FallbackWatch {
   retailPrice: number | null;
   marketValue: number | null;
   rarity: string | null;
-  materialAr: string | null;
-  dialColorAr: string | null;
-  caseSizeAr: string | null;
-  movementAr: string | null;
-  complicationsAr: string | null;
-  waterResistanceAr: string | null;
   rarityAr: string | null;
   mainImageUrl: string | null;
   viewCount: number;
@@ -194,11 +194,17 @@ function loadSeedData(): { brands: FallbackBrand[]; watches: FallbackWatch[] } {
       storyEn: w.storyEn ?? null,
       storyAr: w.storyAr ?? null,
       material: w.material ?? null,
+      materialAr: w.materialAr ?? null,
       dialColor: w.dialColor ?? null,
+      dialColorAr: w.dialColorAr ?? null,
       caseSize: w.caseSize ?? null,
+      caseSizeAr: w.caseSizeAr ?? null,
       movement: w.movement ?? null,
+      movementAr: w.movementAr ?? null,
       complications: w.complications ?? null,
+      complicationsAr: w.complicationsAr ?? null,
       waterResistance: w.waterResistance ?? null,
+      waterResistanceAr: w.waterResistanceAr ?? null,
       powerReserve: w.powerReserve ?? null,
       limitedEdition: w.limitedEdition ?? false,
       productionQuantity: w.productionQuantity ?? null,
@@ -206,12 +212,6 @@ function loadSeedData(): { brands: FallbackBrand[]; watches: FallbackWatch[] } {
       retailPrice: w.retailPrice ?? null,
       marketValue: w.marketValue ?? null,
       rarity: w.rarity ?? null,
-      materialAr: w.materialAr ?? null,
-      dialColorAr: w.dialColorAr ?? null,
-      caseSizeAr: w.caseSizeAr ?? null,
-      movementAr: w.movementAr ?? null,
-      complicationsAr: w.complicationsAr ?? null,
-      waterResistanceAr: w.waterResistanceAr ?? null,
       rarityAr: w.rarityAr ?? null,
       mainImageUrl: null,
       viewCount: 0,
