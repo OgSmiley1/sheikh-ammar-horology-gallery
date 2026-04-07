@@ -18,7 +18,7 @@ const BCRYPT_PREFIX_RE = /^\$2[ab]\$\d+\$/;
 export async function fixPlaintextPasswords() {
   const db = await getDb();
   if (!db) {
-    console.warn("[Security] fixPlaintextPasswords: DB not available, skipping.");
+    console.log("[Security] fixPlaintextPasswords: DB not available, skipping.");
     return;
   }
 

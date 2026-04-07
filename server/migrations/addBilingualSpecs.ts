@@ -80,7 +80,7 @@ function lookupRarity(rar: string | null): string | null {
 export async function addBilingualSpecs() {
   const db = await getDb();
   if (!db) {
-    console.warn("[Migration] addBilingualSpecs: DB not available, skipping.");
+    console.log("[Migration] addBilingualSpecs: DB not available, skipping.");
     return;
   }
 

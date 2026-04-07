@@ -43,13 +43,13 @@ interface SeedWatch {
   waterResistance?: string;
   waterResistanceAr?: string;
   powerReserve?: string;
+  rarity?: string;
+  rarityAr?: string;
   limitedEdition?: boolean;
   productionQuantity?: number;
   yearReleased?: number;
   retailPrice?: number;
   marketValue?: number;
-  rarity?: string;
-  rarityAr?: string;
   isFeatured?: boolean;
   displayOrder: number;
 }
