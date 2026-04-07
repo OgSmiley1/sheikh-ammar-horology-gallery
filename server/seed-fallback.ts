@@ -37,6 +37,13 @@ interface SeedWatch {
   complications?: string;
   waterResistance?: string;
   powerReserve?: string;
+  materialAr?: string;
+  dialColorAr?: string;
+  caseSizeAr?: string;
+  movementAr?: string;
+  complicationsAr?: string;
+  waterResistanceAr?: string;
+  rarityAr?: string;
   limitedEdition?: boolean;
   productionQuantity?: number;
   yearReleased?: number;
@@ -88,6 +95,13 @@ export interface FallbackWatch {
   retailPrice: number | null;
   marketValue: number | null;
   rarity: string | null;
+  materialAr: string | null;
+  dialColorAr: string | null;
+  caseSizeAr: string | null;
+  movementAr: string | null;
+  complicationsAr: string | null;
+  waterResistanceAr: string | null;
+  rarityAr: string | null;
   mainImageUrl: string | null;
   viewCount: number;
   displayOrder: number;
@@ -192,6 +206,13 @@ function loadSeedData(): { brands: FallbackBrand[]; watches: FallbackWatch[] } {
       retailPrice: w.retailPrice ?? null,
       marketValue: w.marketValue ?? null,
       rarity: w.rarity ?? null,
+      materialAr: w.materialAr ?? null,
+      dialColorAr: w.dialColorAr ?? null,
+      caseSizeAr: w.caseSizeAr ?? null,
+      movementAr: w.movementAr ?? null,
+      complicationsAr: w.complicationsAr ?? null,
+      waterResistanceAr: w.waterResistanceAr ?? null,
+      rarityAr: w.rarityAr ?? null,
       mainImageUrl: null,
       viewCount: 0,
       displayOrder: w.displayOrder,
