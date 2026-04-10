@@ -120,6 +120,20 @@
     "404Body": "Sorry, the page you are looking for does not exist.",
     "goHome": "Go Home"
   },
+  "movement": {
+    "pageTitle": "Movement Engineering",
+    "pageSubtitle": "Inside the Mechanical Soul",
+    "layers": "Movement Layers",
+    "techSpecs": "Technical Specifications",
+    "backToWatch": "Back to Watch",
+    "visualizationComingSoon": "Movement visualization coming soon",
+    "addLayer": "Add Layer",
+    "layerName": "Layer Name",
+    "animationType": "Animation Type",
+    "duration": "Duration",
+    "delay": "Delay",
+    "direction": "Direction"
+  },
   "admin": {
     "dashboard": "Dashboard",
     "watches": "Watches",

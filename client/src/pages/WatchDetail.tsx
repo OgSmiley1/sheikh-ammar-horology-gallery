@@ -290,6 +290,18 @@ export default function WatchDetail() {
                 </div>
               </div>
 
+              {/* Movement Engineering Link */}
+              {watch.movement && (
+                <Link
+                  href={`/movement/${watch.slug}`}
+                  className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gold-500/30 bg-gold-500/5 hover:bg-gold-500/10 hover:border-gold-500/60 text-gold-500 text-sm font-medium transition-all duration-300 group ${language === "ar" ? "font-arabic" : ""}`}
+                >
+                  <span className="text-base">⚙️</span>
+                  <span>{t("movement.pageTitle")}</span>
+                  <ArrowRight className={`w-4 h-4 transition-transform group-hover:${isRTL ? "-translate-x-1" : "translate-x-1"}`} />
+                </Link>
+              )}
+
               {/* Additional Info */}
               <div className="flex flex-wrap gap-4">
                 {watch.yearReleased && (

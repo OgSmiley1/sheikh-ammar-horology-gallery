@@ -12,6 +12,7 @@ import {
   adminActivityLog,
   videoBackgrounds,
   subscribers,
+  movementLayers,
   InsertBrand,
   InsertWatch,
   InsertWatchImage,
@@ -20,6 +21,7 @@ import {
   InsertAdminUser,
   InsertAdminActivityLog,
   InsertVideoBackground,
+  InsertMovementLayer,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 import { getFallbackBrands, getFallbackWatches } from "./seed-fallback";
@@ -543,14 +545,80 @@ export async function deleteWatch(watchId: number) {
   try {
     // Delete associated media first
     await dbInstance.delete(watchImages).where(eq(watchImages.watchId, watchId));
-    
+
     // Delete page views
     await dbInstance.delete(pageViews).where(eq(pageViews.watchId, watchId));
-    
+
+    // Delete movement layers
+    await dbInstance.delete(movementLayers).where(eq(movementLayers.watchId, watchId));
+
     // Delete the watch
     await dbInstance.delete(watches).where(eq(watches.id, watchId));
   } catch (error) {
     console.error("[Database] Failed to delete watch:", error);
     throw error;
   }
+}
+
+// ============================================================================
+// MOVEMENT LAYERS
+// ============================================================================
+
+export async function getMovementLayersByWatch(watchId: number) {
+  const dbInstance = await getDb();
+  if (!dbInstance) return [];
+
+  return await dbInstance
+    .select()
+    .from(movementLayers)
+    .where(and(eq(movementLayers.watchId, watchId), eq(movementLayers.isActive, true)))
+    .orderBy(movementLayers.zIndex);
+}
+
+export async function getAllMovementLayersByWatch(watchId: number) {
+  const dbInstance = await getDb();
+  if (!dbInstance) return [];
+
+  return await dbInstance
+    .select()
+    .from(movementLayers)
+    .where(eq(movementLayers.watchId, watchId))
+    .orderBy(movementLayers.zIndex);
+}
+
+export async function createMovementLayer(layer: InsertMovementLayer) {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  const result = await dbInstance.insert(movementLayers).values(layer);
+  return result;
+}
+
+export async function updateMovementLayer(id: number, data: Partial<InsertMovementLayer>) {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  const result = await dbInstance
+    .update(movementLayers)
+    .set(data)
+    .where(eq(movementLayers.id, id));
+  return result;
+}
+
+export async function deleteMovementLayer(id: number) {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  await dbInstance.delete(movementLayers).where(eq(movementLayers.id, id));
+}
+
+export async function reorderMovementLayers(layers: { id: number; zIndex: number }[]) {
+  const dbInstance = await getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  await Promise.all(
+    layers.map(({ id, zIndex }) =>
+      dbInstance.update(movementLayers).set({ zIndex }).where(eq(movementLayers.id, id))
+    )
+  );
 }
