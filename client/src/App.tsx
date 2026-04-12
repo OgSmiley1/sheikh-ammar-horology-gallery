@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { CreativeProvider } from "./contexts/CreativeContext";
 import Home from "./pages/Home";
 import CollectionStories from "./pages/CollectionStories";
 import Collections from "./pages/Collections";
@@ -19,6 +20,8 @@ import SheikhGallery from "./pages/SheikhGallery";
 import WatchComparison from "./pages/WatchComparison";
 import Top10Page from "./pages/Top10Page";
 import Timeline from "./pages/Timeline";
+import MovementEngineeringPage from "./pages/MovementEngineeringPage";
+import AdminMovementAnimations from "./pages/AdminMovementAnimations";
 
 function Router() {
   return (
@@ -37,7 +40,9 @@ function Router() {
       <Route path="/admin/watches" component={AdminWatches} />
       <Route path="/admin/watches/new" component={AdminWatchForm} />
       <Route path="/admin/watches/edit/:id" component={AdminWatchForm} />
+      <Route path="/admin/watches/movement/:watchId" component={AdminMovementAnimations} />
       <Route path="/admin/subscribers" component={AdminSubscribers} />
+      <Route path="/movement/:slug" component={MovementEngineeringPage} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
@@ -49,10 +54,12 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <LanguageProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
+          <CreativeProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Router />
+            </TooltipProvider>
+          </CreativeProvider>
         </LanguageProvider>
       </ThemeProvider>
     </ErrorBoundary>

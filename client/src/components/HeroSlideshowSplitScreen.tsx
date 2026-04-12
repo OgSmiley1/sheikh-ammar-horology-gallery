@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCreative } from '@/contexts/CreativeContext';
 import type { HeroSlide } from '@/data/heroSlides';
 
 type Props = {
@@ -18,7 +19,19 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const rafRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
+  const sectionRef = useRef<HTMLElement>(null);
   const { isRTL } = useLanguage();
+  const { isCinematic } = useCreative();
+
+  // Cinematic parallax — scroll-based depth shifts
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const parallaxScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.08]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 0.6]);
 
   const minSwipeDistance = 50;
 
@@ -126,6 +139,7 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
 
   return (
     <section
+      ref={sectionRef}
       className="relative w-full min-h-screen bg-[#0a0a0a] overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -206,9 +220,23 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
         </div>
       </div>
 
+      {/* ─── Cinematic scroll overlay ─── */}
+      {isCinematic && (
+        <motion.div
+          className="absolute inset-0 bg-black pointer-events-none z-[6]"
+          style={{ opacity: overlayOpacity }}
+        />
+      )}
+
       {/* ─── Main grid ─── */}
-      <div className="relative z-10 container mx-auto px-4 pt-20 pb-20 md:pt-24 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center min-h-[calc(100vh-10rem)]">
+      <motion.div
+        className="relative z-10 container mx-auto px-4 pt-20 pb-20 md:pt-24 md:pb-24"
+        style={isCinematic ? { y: parallaxY, scale: parallaxScale } : undefined}
+      >
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center min-h-[calc(100vh-10rem)]"
+          style={isCinematic ? { opacity: textOpacity } : undefined}
+        >
 
           {/* Left column — Sheikh portrait with Ken Burns */}
           <AnimatePresence mode="wait">
@@ -348,8 +376,8 @@ export function HeroSlideshowSplitScreen({ slides, autoPlayMs = 7000 }: Props) {
               </motion.div>
             </AnimatePresence>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* ─── Navigation arrows ─── */}
       <button

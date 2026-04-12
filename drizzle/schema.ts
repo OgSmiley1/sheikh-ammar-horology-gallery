@@ -227,6 +227,7 @@ export const watchesRelations = relations(watches, ({ one, many }) => ({
   images: many(watchImages),
   sheikhPhotos: many(sheikhPhotos),
   pageViews: many(pageViews),
+  movementLayers: many(movementLayers),
 }));
 
 export const watchImagesRelations = relations(watchImages, ({ one }) => ({
@@ -258,6 +259,36 @@ export const adminActivityLogRelations = relations(adminActivityLog, ({ one }) =
   adminUser: one(adminUsers, {
     fields: [adminActivityLog.adminUserId],
     references: [adminUsers.id],
+  }),
+}));
+
+/**
+ * Movement layer images for watch movement engineering visualization
+ */
+export const movementLayers = mysqlTable("movementLayers", {
+  id: int("id").autoincrement().primaryKey(),
+  watchId: int("watchId").notNull(),
+  layerName: varchar("layerName", { length: 100 }).notNull(),
+  layerNameAr: varchar("layerNameAr", { length: 100 }),
+  imageUrl: varchar("imageUrl", { length: 500 }).notNull(),
+  imageKey: varchar("imageKey", { length: 500 }).notNull(),
+  zIndex: int("zIndex").default(0).notNull(),
+  animationType: mysqlEnum("animationType", ["rotate", "oscillate", "pulse", "none"]).default("none").notNull(),
+  animationDuration: varchar("animationDuration", { length: 20 }).default("4s").notNull(),
+  animationDelay: varchar("animationDelay", { length: 20 }).default("0s").notNull(),
+  rotationDirection: mysqlEnum("rotationDirection", ["cw", "ccw"]).default("cw").notNull(),
+  isActive: boolean("isActive").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MovementLayer = typeof movementLayers.$inferSelect;
+export type InsertMovementLayer = typeof movementLayers.$inferInsert;
+
+export const movementLayersRelations = relations(movementLayers, ({ one }) => ({
+  watch: one(watches, {
+    fields: [movementLayers.watchId],
+    references: [watches.id],
   }),
 }));
 
