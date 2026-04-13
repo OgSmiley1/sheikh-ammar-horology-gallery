@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -112,10 +112,6 @@ export function Header() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-2 lg:gap-3 shrink-0">
-              <LanguageSwitcher />
-              <Link href="/admin/login" className="hidden sm:block text-xs lg:text-sm font-medium text-foreground/60 hover:text-primary transition-colors whitespace-nowrap">
-                {t("common.admin")}
-              </Link>
               {/* Mobile hamburger */}
               <button
                 className="lg:hidden p-2 rounded-md text-primary hover:bg-primary/10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
@@ -200,15 +196,6 @@ export function Header() {
                   );
                 })}
 
-                <div className="pt-4 border-t border-[#d4af37]/20 mt-4">
-                  <Link
-                    href="/admin/login"
-                    onClick={() => setMobileOpen(false)}
-                    className={`flex items-center px-4 py-3 rounded-lg text-[#f5f2e8]/50 hover:text-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-200 text-sm ${language === "ar" ? "font-arabic" : ""}`}
-                  >
-                    {t("common.admin")}
-                  </Link>
-                </div>
               </div>
 
               {/* Footer */}
