@@ -1,37 +1,15 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCreative } from "@/contexts/CreativeContext";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Eye, TrendingUp, Calendar, Package, Award } from "lucide-react";
-import { useEffect, useState, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 // WatchDetail — full bilingual support via LanguageContext
 
 export default function WatchDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { language, t, isRTL } = useLanguage();
-  const { isCinematic } = useCreative();
   const [sessionId] = useState(() => Math.random().toString(36).substring(7));
-  const [dominantColor, setDominantColor] = useState("rgba(212,175,55,0.08)");
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  // Extract dominant color from watch image for cinematic background
-  const extractColor = useCallback(() => {
-    if (!isCinematic || !imgRef.current || !imgRef.current.complete) return;
-    try {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1;
-      canvas.height = 1;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-      ctx.drawImage(imgRef.current, 0, 0, 1, 1);
-      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-      setDominantColor(`rgba(${r},${g},${b},0.15)`);
-    } catch {
-      // CORS or other error — keep default gold
-    }
-  }, [isCinematic]);
 
   const { data: watch, isLoading: watchLoading } = trpc.watches.getBySlug.useQuery({ slug: slug! });
   const { data: allBrands } = trpc.brands.getAll.useQuery();
@@ -104,13 +82,7 @@ export default function WatchDetail() {
       <Header />
 
       {/* Hero Section */}
-      <section
-        className="relative py-16 px-4 bg-gradient-to-b from-black via-gray-900 to-black"
-        style={isCinematic ? {
-          background: `radial-gradient(ellipse 80% 60% at 50% 40%, ${dominantColor}, transparent 70%), linear-gradient(to bottom, #000, #111827, #000)`,
-          transition: "background 1.5s ease-in-out",
-        } : undefined}
-      >
+      <section className="relative py-16 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
         <div className="container max-w-7xl mx-auto">
           {/* Back Button */}
           <Link href={brand ? `/collection/${brand.slug}` : "/collections"} className="inline-flex items-center gap-2 text-gray-400 hover:text-gold-500 transition-colors mb-8">
@@ -134,12 +106,9 @@ export default function WatchDetail() {
               <div className="relative aspect-square bg-gray-900 rounded-lg overflow-hidden border border-gold-500/30">
                 {watch.mainImageUrl ? (
                   <img
-                    ref={imgRef}
                     src={watch.mainImageUrl}
                     alt={language === "ar" ? watch.nameAr : watch.nameEn}
-                    className={`w-full h-full object-cover${isCinematic ? " transition-transform duration-700 hover:scale-110" : ""}`}
-                    crossOrigin="anonymous"
-                    onLoad={extractColor}
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-600">
@@ -241,66 +210,87 @@ export default function WatchDetail() {
 
               {/* Specifications */}
               <div className="space-y-4">
-                <motion.h3
-                  className="text-2xl font-bold text-gold-500"
-                  initial={isCinematic ? { opacity: 0, x: isRTL ? 30 : -30 } : undefined}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
+                <h3 className="text-2xl font-bold text-gold-500">
                   {t("common.specifications")}
-                </motion.h3>
+                </h3>
 
                 <div className="grid grid-cols-2 gap-4">
-                  {[
-                    watch.material && { label: t("common.material"), value: language === "ar" ? (watch.materialAr || watch.material) : watch.material },
-                    watch.caseSize && { label: t("common.caseSize"), value: language === "ar" ? (watch.caseSizeAr || watch.caseSize) : watch.caseSize },
-                    watch.movement && { label: t("common.movement"), value: language === "ar" ? (watch.movementAr || watch.movement) : watch.movement },
-                    watch.dialColor && { label: t("common.dial"), value: language === "ar" ? (watch.dialColorAr || watch.dialColor) : watch.dialColor },
-                    watch.waterResistance && { label: t("common.waterResistance"), value: language === "ar" ? (watch.waterResistanceAr || watch.waterResistance) : watch.waterResistance },
-                    watch.powerReserve && { label: language === "ar" ? "احتياطي الطاقة" : "Power Reserve", value: watch.powerReserve },
-                  ].filter(Boolean).map((spec, idx) => (
-                    <motion.div
-                      key={idx}
-                      className={`bg-gray-900/50 p-4 rounded-lg border border-gold-500/10${isCinematic ? " hover:border-[#d4af37]/40 hover:shadow-[0_4px_20px_rgba(212,175,55,0.1)] transition-all duration-300" : ""}`}
-                      initial={isCinematic ? { opacity: 0, y: 20 } : undefined}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: isCinematic ? idx * 0.08 : 0 }}
-                      viewport={{ once: true }}
-                    >
-                      <p className="text-gray-400 text-sm mb-1">{spec!.label}</p>
-                      <p className="text-gray-200 font-medium">{spec!.value}</p>
-                    </motion.div>
-                  ))}
+                  {watch.material && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {t("common.material")}
+                      </p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.materialAr || watch.material) : watch.material}
+                      </p>
+                    </div>
+                  )}
+
+                  {watch.caseSize && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {t("common.caseSize")}
+                      </p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.caseSizeAr || watch.caseSize) : watch.caseSize}
+                      </p>
+                    </div>
+                  )}
+
+                  {watch.movement && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {t("common.movement")}
+                      </p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.movementAr || watch.movement) : watch.movement}
+                      </p>
+                    </div>
+                  )}
+
+                  {watch.dialColor && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {t("common.dial")}
+                      </p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.dialColorAr || watch.dialColor) : watch.dialColor}
+                      </p>
+                    </div>
+                  )}
+
+                  {watch.waterResistance && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {t("common.waterResistance")}
+                      </p>
+                      <p className="text-gray-200 font-medium">
+                        {language === "ar" ? (watch.waterResistanceAr || watch.waterResistance) : watch.waterResistance}
+                      </p>
+                    </div>
+                  )}
+
+                  {watch.powerReserve && (
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {language === "ar" ? "احتياطي الطاقة" : "Power Reserve"}
+                      </p>
+                      <p className="text-gray-200 font-medium">{watch.powerReserve}</p>
+                    </div>
+                  )}
 
                   {watch.complications && (
-                    <motion.div
-                      className={`bg-gray-900/50 p-4 rounded-lg border border-gold-500/10 col-span-2${isCinematic ? " hover:border-[#d4af37]/40 hover:shadow-[0_4px_20px_rgba(212,175,55,0.1)] transition-all duration-300" : ""}`}
-                      initial={isCinematic ? { opacity: 0, y: 20 } : undefined}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: isCinematic ? 0.5 : 0 }}
-                      viewport={{ once: true }}
-                    >
-                      <p className="text-gray-400 text-sm mb-1">{t("common.complications")}</p>
+                    <div className="bg-gray-900/50 p-4 rounded-lg border border-gold-500/10 col-span-2">
+                      <p className="text-gray-400 text-sm mb-1">
+                        {t("common.complications")}
+                      </p>
                       <p className="text-gray-200 font-medium">
                         {language === "ar" ? (watch.complicationsAr || watch.complications) : watch.complications}
                       </p>
-                    </motion.div>
+                    </div>
                   )}
                 </div>
               </div>
-
-              {/* Movement Engineering Link */}
-              {watch.movement && (
-                <Link
-                  href={`/movement/${watch.slug}`}
-                  className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gold-500/30 bg-gold-500/5 hover:bg-gold-500/10 hover:border-gold-500/60 text-gold-500 text-sm font-medium transition-all duration-300 group ${language === "ar" ? "font-arabic" : ""}`}
-                >
-                  <span className="text-base">⚙️</span>
-                  <span>{t("movement.pageTitle")}</span>
-                  <ArrowRight className={`w-4 h-4 transition-transform group-hover:${isRTL ? "-translate-x-1" : "translate-x-1"}`} />
-                </Link>
-              )}
 
               {/* Additional Info */}
               <div className="flex flex-wrap gap-4">
@@ -332,29 +322,17 @@ export default function WatchDetail() {
       {(watch.storyEn || watch.storyAr) && (
         <section className="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
           <div className="container max-w-4xl mx-auto">
-            <motion.div
-              className="flex items-center gap-3 mb-8"
-              initial={isCinematic ? { opacity: 0, x: isRTL ? 40 : -40 } : undefined}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-            >
+            <div className="flex items-center gap-3 mb-8">
               <Award className="w-8 h-8 text-gold-500" />
               <h2 className="text-3xl font-bold text-gold-500">
                 {t("common.story")}
               </h2>
-            </motion.div>
-            <motion.div
-              className="prose prose-invert prose-lg max-w-none"
-              initial={isCinematic ? { opacity: 0, y: 30 } : undefined}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <p className={`text-gray-300 leading-relaxed text-lg${isCinematic ? " first-letter:text-5xl first-letter:font-serif first-letter:text-[#d4af37] first-letter:float-left first-letter:mr-3 first-letter:mt-1" : ""}`}>
+            </div>
+            <div className="prose prose-invert prose-lg max-w-none">
+              <p className="text-gray-300 leading-relaxed text-lg">
                 {language === "ar" ? (watch.storyAr || watch.storyEn) : (watch.storyEn || watch.storyAr)}
               </p>
-            </motion.div>
+            </div>
           </div>
         </section>
       )}

@@ -1,14 +1,12 @@
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCreative } from "@/contexts/CreativeContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useState, useEffect } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
   const { t, isRTL, language } = useLanguage();
-  const { isCinematic, toggleMode } = useCreative();
   const [scrolled, setScrolled] = useState(false);
   const [crownMode, setCrownMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -114,26 +112,6 @@ export function Header() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-2 lg:gap-3 shrink-0">
-              {/* Creative Mode Toggle */}
-              <button
-                onClick={toggleMode}
-                className={`relative p-2 rounded-full border transition-all duration-300 ${
-                  isCinematic
-                    ? "border-[#d4af37] bg-[#d4af37]/15 text-[#d4af37] shadow-[0_0_12px_rgba(212,175,55,0.3)]"
-                    : "border-[#d4af37]/20 text-[#d4af37]/50 hover:border-[#d4af37]/50 hover:text-[#d4af37]"
-                }`}
-                aria-label={isCinematic ? "Switch to classic mode" : "Switch to cinematic mode"}
-                title={isCinematic ? "Cinematic Mode ON" : "Classic Mode"}
-              >
-                <Sparkles className="w-4 h-4" />
-                {isCinematic && (
-                  <motion.span
-                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#d4af37]"
-                    animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                )}
-              </button>
               <LanguageSwitcher />
               <Link href="/admin/login" className="hidden sm:block text-xs lg:text-sm font-medium text-foreground/60 hover:text-primary transition-colors whitespace-nowrap">
                 {t("common.admin")}
