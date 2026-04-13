@@ -120,20 +120,6 @@
     "404Body": "عذرًا، الصفحة التي تبحث عنها غير موجودة.",
     "goHome": "العودة للرئيسية"
   },
-  "movement": {
-    "pageTitle": "هندسة الحركة",
-    "pageSubtitle": "داخل الروح الميكانيكية",
-    "layers": "طبقات الحركة",
-    "techSpecs": "المواصفات التقنية",
-    "backToWatch": "العودة للساعة",
-    "visualizationComingSoon": "تصور الحركة قادم قريباً",
-    "addLayer": "إضافة طبقة",
-    "layerName": "اسم الطبقة",
-    "animationType": "نوع الحركة",
-    "duration": "المدة",
-    "delay": "التأخير",
-    "direction": "الاتجاه"
-  },
   "admin": {
     "dashboard": "لوحة التحكم",
     "watches": "الساعات",

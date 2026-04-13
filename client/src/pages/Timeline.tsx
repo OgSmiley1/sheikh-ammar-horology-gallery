@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCreative } from "@/contexts/CreativeContext";
 import { Header } from "@/components/Header";
 import { trpc } from "@/lib/trpc";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Calendar, Clock, Award } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Timeline() {
   const { t, language, isRTL } = useLanguage();
-  const { isCinematic } = useCreative();
   const { data: allWatches, isLoading } = trpc.watches.getAll.useQuery();
 
   // Group watches by year
@@ -103,8 +101,8 @@ export default function Timeline() {
           ) : (
             <>
               <div className="flex flex-wrap gap-2 mb-10">
-                {years.map((year, idx) => (
-                  <motion.button
+                {years.map((year) => (
+                  <button
                     key={year}
                     onClick={() => setSelectedYear(year)}
                     className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
@@ -112,14 +110,9 @@ export default function Timeline() {
                         ? "bg-gold-500 border-gold-500 text-black"
                         : "bg-transparent border-gold-500/30 text-gray-400 hover:border-gold-500/60 hover:text-gold-500"
                     }`}
-                    initial={isCinematic ? { opacity: 0, scale: 0.8 } : undefined}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: isCinematic ? idx * 0.05 : 0 }}
-                    whileHover={isCinematic ? { scale: 1.1, boxShadow: "0 0 20px rgba(212,175,55,0.3)" } : undefined}
-                    whileTap={isCinematic ? { scale: 0.95 } : undefined}
                   >
                     {year}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
 
@@ -138,35 +131,23 @@ export default function Timeline() {
                       {t("timeline.noWatchesYear")}
                     </p>
                   ) : (
-                    <AnimatePresence mode="wait">
-                    <motion.div
-                      key={selectedYear}
-                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                      initial={isCinematic ? { opacity: 0 } : undefined}
-                      animate={{ opacity: 1 }}
-                      exit={isCinematic ? { opacity: 0 } : undefined}
-                      transition={{ duration: 0.3 }}
-                    >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {selectedWatches.map((watch, i) => (
                         <motion.div
                           key={watch.id}
-                          initial={isCinematic ? { opacity: 0, y: 40, scale: 0.92 } : { opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          transition={{ duration: isCinematic ? 0.6 : 0.5, delay: i * (isCinematic ? 0.12 : 0.08), ease: [0.25, 0.46, 0.45, 0.94] }}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: i * 0.08 }}
                         >
                           <Link href={`/watch/${watch.slug}`}>
-                            <motion.div
-                              className="group bg-gradient-to-br from-gray-900 to-black border border-gold-500/20 hover:border-gold-500/50 rounded-xl overflow-hidden transition-all duration-500 cursor-pointer"
-                              whileHover={isCinematic ? { y: -6, boxShadow: "0 20px 40px rgba(212,175,55,0.15), 0 0 0 1px rgba(212,175,55,0.3)" } : undefined}
-                              transition={{ duration: 0.3 }}
-                            >
+                            <div className="group bg-gradient-to-br from-gray-900 to-black border border-gold-500/20 hover:border-gold-500/50 rounded-xl overflow-hidden transition-all duration-500 cursor-pointer">
                               {/* Image */}
                               <div className="relative h-48 bg-gray-800 overflow-hidden">
                                 {watch.mainImageUrl ? (
                                   <img
                                     src={watch.mainImageUrl}
                                     alt={language === "ar" ? (watch.nameAr || watch.nameEn) : watch.nameEn}
-                                    className={`w-full h-full object-cover transition-transform duration-700 ${isCinematic ? "group-hover:scale-110" : "group-hover:scale-105"}`}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                   />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center">
@@ -192,12 +173,11 @@ export default function Timeline() {
                                   <span className={`text-gold-500 font-medium ${language === "ar" ? "font-arabic" : ""}`}>{t("common.viewDetails")} →</span>
                                 </div>
                               </div>
-                            </motion.div>
+                            </div>
                           </Link>
                         </motion.div>
                       ))}
-                    </motion.div>
-                    </AnimatePresence>
+                    </div>
                   )}
                 </div>
               )}
