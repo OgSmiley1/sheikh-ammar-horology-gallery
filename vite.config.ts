@@ -6,8 +6,23 @@ import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
-
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
+
+const allowedHosts = [
+  ".manuspre.computer",
+  ".manus.computer",
+  ".manus-asia.computer",
+  ".manuscomputer.ai",
+  ".manusvm.computer",
+  ".railway.app",
+  ".up.railway.app",
+  "localhost",
+  "127.0.0.1",
+  ...(process.env.VITE_ALLOWED_HOSTS || "")
+    .split(",")
+    .map((host) => host.trim())
+    .filter(Boolean),
+];
 
 export default defineConfig({
   plugins,
@@ -27,15 +42,7 @@ export default defineConfig({
   },
   server: {
     host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
-    ],
+    allowedHosts,
     fs: {
       strict: true,
       deny: ["**/.*"],
