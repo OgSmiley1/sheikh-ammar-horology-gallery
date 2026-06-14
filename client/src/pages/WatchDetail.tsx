@@ -160,10 +160,10 @@ export default function WatchDetail() {
             )}
           </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className={`flex flex-col ${isRTL ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-start`}>
             {/* Image Gallery */}
             <motion.div
-              className="space-y-4"
+              className="space-y-4 w-full lg:w-1/2"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -258,7 +258,7 @@ export default function WatchDetail() {
 
             {/* Watch Info */}
             <motion.div
-              className="space-y-7"
+              className="space-y-7 w-full lg:w-1/2"
               initial="hidden"
               animate="visible"
               variants={fadeUp}

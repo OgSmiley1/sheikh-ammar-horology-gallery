@@ -47,6 +47,110 @@ export default function Home() {
         {/* Hero Slideshow: Split-Screen Layout with Sheikh + Watch Images */}
         <HeroSlideshowSplitScreen slides={slides} autoPlayMs={7000} />
 
+        {/* Sheikh Profile — bilingual split layout */}
+        <section className="py-24 px-4 border-b border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.025)' }}>
+          <div className="container max-w-7xl mx-auto">
+            <div className={`flex flex-col ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
+
+              {/* Sheikh Image */}
+              <motion.div
+                className="relative w-full lg:w-5/12 flex-shrink-0"
+                initial={{ opacity: 0, x: isRTL ? 40 : -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className="relative rounded-2xl overflow-hidden"
+                  style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.12)' }}
+                >
+                  <img
+                    src="/images/sheikh/IMG_7787(1).png"
+                    alt={isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
+                    className="w-full aspect-[3/4] object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                  {/* Corner accent decorators */}
+                  <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
+                  <div className="absolute top-4 right-4 w-10 h-10 border-t-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 w-10 h-10 border-b-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
+                  <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
+                </div>
+              </motion.div>
+
+              {/* Sheikh Info */}
+              <motion.div
+                className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}
+                initial={{ opacity: 0, x: isRTL ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                viewport={{ once: true }}
+              >
+                <p className={`text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL ? "المجمِّع الملكي" : "The Royal Collector"}
+                </p>
+                <div className={`flex items-center gap-4 mb-7 ${isRTL ? 'justify-end flex-row-reverse' : ''}`}>
+                  <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+                  <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+                </div>
+
+                <h2 className={`sheikh-name mb-3 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
+                </h2>
+                <p className={`sheikh-title mb-8 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL ? "ولي عهد عجمان — جامع الساعات الملكي" : "Crown Prince of Ajman — Royal Horologist"}
+                </p>
+
+                <p className={`sheikh-bio text-[#f5f2e8]/65 mb-10 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL
+                    ? "يجسّد سمو الشيخ عمار بن حميد النعيمي قيم التراث والابتكار في عالم الساعات الفاخرة. مجموعته الملكية، التي تضم أكثر من 34 قطعة استثنائية من أعرق دور صناعة الساعات في العالم، هي شهادة حية على الذوق الرفيع والعين الثاقبة للجمال."
+                    : "His Highness Sheikh Ammar bin Humaid Al Nuaimi embodies the values of heritage and innovation in the world of fine horology. His Royal Collection — over 34 exceptional timepieces from the world's most distinguished maisons — stands as a testament to refined taste and a discerning eye for beauty."}
+                </p>
+
+                {/* Stats */}
+                <div
+                  className="grid grid-cols-3 gap-6 mb-10 py-8 border-y"
+                  style={{ borderColor: 'rgba(212,175,55,0.15)' }}
+                >
+                  {[
+                    { value: '34+', labelEn: 'Rare Pieces', labelAr: 'قطعة نادرة' },
+                    { value: '$10M+', labelEn: 'Collection Value', labelAr: 'قيمة المجموعة' },
+                    { value: '15+', labelEn: 'Limited Editions', labelAr: 'إصدارات محدودة' },
+                  ].map((stat, idx) => (
+                    <div key={idx} className="text-center">
+                      <span className="sheikh-stat-value">{stat.value}</span>
+                      <span className={`sheikh-stat-label ${isRTL ? 'font-arabic' : ''}`}>
+                        {isRTL ? stat.labelAr : stat.labelEn}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className={`flex flex-wrap gap-4 ${isRTL ? 'justify-end' : ''}`}>
+                  <Link href="/collections">
+                    <button
+                      className={`px-8 py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 hover:opacity-90 ${isRTL ? 'font-arabic' : ''}`}
+                      style={{ background: '#d4af37', color: '#0a0a0a', boxShadow: '0 4px 20px rgba(212,175,55,0.3)' }}
+                    >
+                      {isRTL ? "استعرض المجموعة" : "View Collection"}
+                    </button>
+                  </Link>
+                  <Link href="/sheikh-gallery">
+                    <button
+                      className={`px-8 py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 hover:border-[#d4af37]/70 hover:text-[#f5f2e8] ${isRTL ? 'font-arabic' : ''}`}
+                      style={{ background: 'transparent', color: '#d4af37', border: '1px solid rgba(212,175,55,0.4)' }}
+                    >
+                      {isRTL ? "معرض الصور" : "Photo Gallery"}
+                    </button>
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Collector's Story — personal imagery (father + MBZ) + editorial text */}
         <CollectorStory />
 

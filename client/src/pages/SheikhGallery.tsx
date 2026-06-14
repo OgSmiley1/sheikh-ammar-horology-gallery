@@ -234,9 +234,9 @@ export default function SheikhGallery() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
+            <div className={`flex flex-col ${language === "ar" ? "lg:flex-row-reverse" : "lg:flex-row"} min-h-[500px]`}>
               {/* Image */}
-              <div className="relative overflow-hidden min-h-[350px] lg:min-h-[500px]">
+              <div className="relative overflow-hidden min-h-[350px] lg:min-h-[500px] lg:w-[55%]">
                 {current?.imageUrl ? (
                   <img
                     src={current.imageUrl}
@@ -255,7 +255,7 @@ export default function SheikhGallery() {
               </div>
 
               {/* Info Panel */}
-              <div className="flex flex-col justify-center p-8 lg:p-12 space-y-6">
+              <div className="flex flex-col justify-center p-8 lg:p-12 space-y-6 lg:w-[45%]">
                 {/* Brand */}
                 {(current?.brandEn || current?.brandAr) && (
                   <div>
