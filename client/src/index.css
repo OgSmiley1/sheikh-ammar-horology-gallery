@@ -35,6 +35,18 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  /* Luxury gold palette — used by text-gold-*, bg-gold-*, border-gold-* utilities */
+  --color-gold-50:  oklch(0.97 0.02 70);
+  --color-gold-100: oklch(0.93 0.04 70);
+  --color-gold-200: oklch(0.87 0.07 70);
+  --color-gold-300: oklch(0.80 0.10 70);
+  --color-gold-400: oklch(0.74 0.12 70);
+  --color-gold-500: oklch(0.68 0.12 70);   /* Royal Gold — matches --primary */
+  --color-gold-600: oklch(0.60 0.11 70);
+  --color-gold-700: oklch(0.50 0.09 70);
+  --color-gold-800: oklch(0.40 0.07 70);
+  --color-gold-900: oklch(0.30 0.05 70);
 }
 
 :root {

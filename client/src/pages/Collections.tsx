@@ -1,8 +1,19 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Link } from "wouter";
-import { Crown, ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
+};
 
 export default function Collections() {
   const { language, t, isRTL } = useLanguage();
@@ -10,10 +21,10 @@ export default function Collections() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-background">
         <Header />
         <div className="flex items-center justify-center min-h-screen">
-          <div className={`text-gold-500 text-2xl ${language === "ar" ? "font-arabic" : ""}`}>
+          <div className={`text-gold-500 text-2xl font-serif ${language === "ar" ? "font-arabic" : ""}`}>
             {t("common.loading")}
           </div>
         </div>
@@ -22,90 +33,173 @@ export default function Collections() {
   }
 
   return (
-    <div className="min-h-screen bg-black" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen bg-background" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-32 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
-        <div className="container max-w-6xl mx-auto text-center">
-          <Crown className="w-16 h-16 text-gold-500 mx-auto mb-6" />
-          <h1 className={`text-5xl md:text-7xl font-bold text-gold-500 mb-6 ${language === "ar" ? "font-arabic" : ""}`}>
-            {t("collection.title")}
-          </h1>
-          <p className={`text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed ${language === "ar" ? "font-arabic" : ""}`}>
-            {t("collection.subtitle")}
-          </p>
+      <section className="relative pt-40 pb-28 px-4 overflow-hidden">
+        {/* Subtle dot texture */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.022]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #d4af37 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="container max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={0}
+          >
+            <p className="text-[11px] text-gold-500 font-semibold tracking-[0.45em] uppercase mb-5">
+              {isRTL ? "المجموعة الكاملة" : "The Full Collection"}
+            </p>
+
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-gold-500/55" />
+              <div className="w-1.5 h-1.5 rounded-full bg-gold-500/65 rotate-45" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-gold-500/55" />
+            </div>
+
+            <h1
+              className={`text-[#f5f2e8] mb-6 ${language === "ar" ? "font-arabic" : ""}`}
+              style={{
+                fontFamily: isRTL ? undefined : "Playfair Display, Georgia, serif",
+                fontSize: "clamp(2.5rem, 7vw, 5rem)",
+                fontWeight: 600,
+                lineHeight: 1.1,
+                letterSpacing: "-0.015em",
+              }}
+            >
+              {t("collection.title")}
+            </h1>
+
+            <p
+              className={`text-[#f5f2e8]/60 max-w-2xl mx-auto leading-relaxed ${language === "ar" ? "font-arabic" : ""}`}
+              style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)", lineHeight: 1.75 }}
+            >
+              {t("collection.subtitle")}
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Brands Grid */}
-      <section className="py-20 px-4">
+      <section className="pb-24 px-4">
         <div className="container max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {brands?.map((brand) => (
-              <Link key={brand.id} href={`/collection/${brand.slug}`}>
-                <div className="group relative bg-gradient-to-br from-gray-900 to-black border border-gold-500/20 rounded-lg overflow-hidden hover:border-gold-500/60 transition-all duration-500 cursor-pointer">
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {brands && brands.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {brands.map((brand, idx) => (
+                <motion.div
+                  key={brand.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-60px" }}
+                  variants={fadeUp}
+                  custom={idx * 0.08}
+                >
+                  <Link href={`/collection/${brand.slug}`}>
+                    <div className="group relative rounded-xl overflow-hidden cursor-pointer h-full transition-all duration-500"
+                      style={{
+                        background: "rgba(17, 20, 26, 0.55)",
+                        backdropFilter: "blur(12px)",
+                        border: "1px solid rgba(212, 175, 55, 0.15)",
+                        boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      {/* Hover glow overlay */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                        style={{
+                          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,0.07), transparent 70%)",
+                        }}
+                      />
 
-                  <div className="relative p-8">
-                    {/* Brand Name */}
-                    <div className="mb-6">
-                      <h2 className={`text-3xl font-bold text-gold-500 mb-2 group-hover:text-gold-400 transition-colors ${language === "ar" ? "font-arabic" : ""}`}>
-                        {language === "ar" ? (brand.nameAr || brand.nameEn) : brand.nameEn}
-                      </h2>
-                      <div className="h-1 w-16 bg-gold-500/50 group-hover:w-24 transition-all duration-500" />
+                      <div className="relative p-8">
+                        {/* Index number */}
+                        <div
+                          className="absolute top-5 end-6 text-[3rem] font-serif leading-none select-none pointer-events-none"
+                          style={{ color: "rgba(212,175,55,0.06)" }}
+                          aria-hidden="true"
+                        >
+                          {String(idx + 1).padStart(2, "0")}
+                        </div>
+
+                        {/* Brand Name */}
+                        <div className="mb-5">
+                          <p className="text-[10px] text-gold-500/50 tracking-[0.45em] uppercase font-medium mb-2">
+                            {brand.country || "Switzerland"}
+                          </p>
+                          <h2
+                            className={`text-[#f5f2e8] mb-3 group-hover:text-gold-400 transition-colors duration-300 ${language === "ar" ? "font-arabic" : ""}`}
+                            style={{
+                              fontFamily: isRTL ? undefined : "Playfair Display, Georgia, serif",
+                              fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
+                              fontWeight: 600,
+                              lineHeight: 1.2,
+                            }}
+                          >
+                            {language === "ar" ? (brand.nameAr || brand.nameEn) : brand.nameEn}
+                          </h2>
+                          <div
+                            className="h-px bg-gradient-to-r from-gold-500/50 to-transparent transition-all duration-500 group-hover:from-gold-500"
+                            style={{ width: "3rem" }}
+                          />
+                        </div>
+
+                        {/* Description */}
+                        {(language === "ar" ? (brand.descriptionAr || brand.descriptionEn) : brand.descriptionEn) && (
+                          <p
+                            className={`text-[#f5f2e8]/45 text-sm leading-relaxed mb-6 line-clamp-3 ${language === "ar" ? "font-arabic" : ""}`}
+                          >
+                            {language === "ar" ? (brand.descriptionAr || brand.descriptionEn) : brand.descriptionEn}
+                          </p>
+                        )}
+
+                        {/* Meta */}
+                        <div className="flex items-center justify-between text-xs text-[#f5f2e8]/30 mb-6">
+                          {brand.foundedYear && (
+                            <span>
+                              {t("common.founded")} {brand.foundedYear}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* CTA */}
+                        <div className="flex items-center gap-2 text-gold-500 group-hover:text-gold-400 transition-colors duration-300">
+                          <span className={`text-sm font-medium ${language === "ar" ? "font-arabic" : ""}`}>
+                            {t("common.exploreCollection")}
+                          </span>
+                          {isRTL ? (
+                            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                          ) : (
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Bottom gold line on hover */}
+                      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
                     </div>
-
-                    {/* Description */}
-                    <p className={`text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 ${language === "ar" ? "font-arabic" : ""}`}>
-                      {language === "ar" ? (brand.descriptionAr || brand.descriptionEn) : brand.descriptionEn}
-                    </p>
-
-                    {/* Meta Info */}
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
-                      <span className={language === "ar" ? "font-arabic" : ""}>
-                        {t("common.founded")} {brand.foundedYear}
-                      </span>
-                      <span>{brand.country}</span>
-                    </div>
-
-                    {/* View Collection Button */}
-                    <div className="flex items-center gap-2 text-gold-500 group-hover:text-gold-400 transition-colors">
-                      <span className={`font-medium ${language === "ar" ? "font-arabic" : ""}`}>
-                        {t("common.exploreCollection")}
-                      </span>
-                      {isRTL ? (
-                        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                      ) : (
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Bottom accent */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-              </Link>
-            ))}
-          </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-24">
+              <p className={`text-[#f5f2e8]/40 text-xl ${language === "ar" ? "font-arabic" : ""}`}>
+                {t("collection.empty")}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-gold-500/20 py-8 px-4 mt-20">
-        <div className="container max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p className={`mb-2 ${language === "ar" ? "font-arabic" : ""}`}>
-            {t("about.title")}
-          </p>
-          <p className={language === "ar" ? "font-arabic" : ""}>
-            {t("about.subtitle")}
-          </p>
-          <p className="mt-4 text-xs">
-            © 2025 {language === "ar" ? "جميع الحقوق محفوظة" : "All Rights Reserved"}
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

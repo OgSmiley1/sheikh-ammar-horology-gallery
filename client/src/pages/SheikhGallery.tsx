@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Link } from "wouter";
 import { ChevronLeft, ChevronRight, TrendingUp, Award, Clock } from "lucide-react";
 
@@ -179,19 +180,33 @@ export default function SheikhGallery() {
   const total = displayItems.length;
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Banner */}
-      <section className="pt-24 pb-12 px-4 bg-gradient-to-b from-black via-gray-900/50 to-black text-center">
+      <section className="pt-36 pb-14 px-4 text-center">
         <div className="container max-w-4xl mx-auto">
-          <p className="text-gold-500 text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+          <p className="text-[11px] text-gold-500 font-semibold tracking-[0.45em] uppercase mb-5">
             {language === "ar" ? "معرض حصري" : "Exclusive Gallery"}
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <div className="flex items-center justify-center gap-4 mb-7">
+            <div className="h-px w-14 bg-gradient-to-r from-transparent to-gold-500/50" />
+            <div className="w-1.5 h-1.5 rounded-full bg-gold-500/65 rotate-45" />
+            <div className="h-px w-14 bg-gradient-to-l from-transparent to-gold-500/50" />
+          </div>
+          <h1
+            className="text-[#f5f2e8] mb-5"
+            style={{
+              fontFamily: "Playfair Display, Georgia, serif",
+              fontSize: "clamp(2.5rem, 7vw, 5rem)",
+              fontWeight: 600,
+              lineHeight: 1.1,
+              letterSpacing: "-0.015em",
+            }}
+          >
             {language === "ar" ? "الشيخ مع الساعات" : "Sheikh with Watches"}
           </h1>
-          <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
+          <p className="text-[#f5f2e8]/55 text-lg leading-relaxed max-w-2xl mx-auto">
             {language === "ar"
               ? "لحظات حصرية تجسد صاحب السمو مع أندر الساعات في مجموعته الملكية"
               : "Exclusive moments capturing His Highness with the rarest timepieces in the Royal Collection"}
@@ -202,7 +217,7 @@ export default function SheikhGallery() {
       {/* Main Carousel */}
       <section className="py-8 px-4">
         <div className="container max-w-6xl mx-auto">
-          <div className="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden border border-gold-500/20">
+          <div className="relative rounded-2xl overflow-hidden" style={{ background: "rgba(17,20,26,0.6)", border: "1px solid rgba(212,175,55,0.15)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}>
             {/* Counter */}
             <div className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-500/30">
               <span className="text-gold-500 text-sm font-bold">
@@ -232,7 +247,7 @@ export default function SheikhGallery() {
                     }}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gray-800">
+                  <div className="w-full h-full flex items-center justify-center" style={{ background: "rgba(10,10,10,0.8)" }}>
                     <Clock className="w-24 h-24 text-gold-500/30" />
                   </div>
                 )}
@@ -261,12 +276,28 @@ export default function SheikhGallery() {
                   <div>
                     {(current as any).slug ? (
                       <Link href={`/watch/${(current as any).slug}`} className="block">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white hover:text-gold-400 transition-colors">
+                        <h2
+                          className="text-[#f5f2e8] hover:text-gold-400 transition-colors"
+                          style={{
+                            fontFamily: "Playfair Display, Georgia, serif",
+                            fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                            fontWeight: 600,
+                            lineHeight: 1.2,
+                          }}
+                        >
                           {language === "ar" ? (current.watchNameAr || current.watchNameEn) : current.watchNameEn}
                         </h2>
                       </Link>
                     ) : (
-                      <h2 className="text-3xl md:text-4xl font-bold text-white">
+                      <h2
+                        className="text-[#f5f2e8]"
+                        style={{
+                          fontFamily: "Playfair Display, Georgia, serif",
+                          fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                          fontWeight: 600,
+                          lineHeight: 1.2,
+                        }}
+                      >
                         {language === "ar" ? (current.watchNameAr || current.watchNameEn) : current.watchNameEn}
                       </h2>
                     )}
@@ -275,7 +306,7 @@ export default function SheikhGallery() {
 
                 {/* Caption */}
                 {(current?.captionEn || current?.captionAr) && (
-                  <p className="text-gray-300 text-base leading-relaxed">
+                  <p className="text-[#f5f2e8]/65 text-base leading-relaxed">
                     {language === "ar" ? (current.captionAr || current.captionEn) : (current.captionEn || current.captionAr)}
                   </p>
                 )}
@@ -295,8 +326,8 @@ export default function SheikhGallery() {
                     <div className="flex items-center gap-2">
                       <Award className="w-5 h-5 text-gold-500" />
                       <div>
-                        <p className="text-xs text-gray-500">{language === "ar" ? "الندرة" : "Rarity"}</p>
-                        <p className="text-sm font-semibold text-white">{current.rarity}</p>
+                        <p className="text-xs text-[#f5f2e8]/35">{language === "ar" ? "الندرة" : "Rarity"}</p>
+                        <p className="text-sm font-semibold text-[#f5f2e8]/80">{current.rarity}</p>
                       </div>
                     </div>
                   )}
@@ -387,15 +418,15 @@ export default function SheikhGallery() {
                 descAr: "استثمارات تزداد قيمتها بمرور الوقت",
               },
             ].map((item, i) => (
-              <div key={i} className="bg-gradient-to-br from-gray-900 to-black border border-gold-500/20 rounded-xl p-6 text-center hover:border-gold-500/50 transition-all">
+              <div key={i} className="rounded-xl p-6 text-center transition-all duration-300" style={{ background: "rgba(17,20,26,0.5)", border: "1px solid rgba(212,175,55,0.12)" }}>
                 <div className="text-gold-500 flex justify-center mb-4">{item.icon}</div>
-                <p className="text-xs text-gray-500 uppercase tracking-widest mb-2">
+                <p className="text-[10px] text-[#f5f2e8]/30 uppercase tracking-[0.3em] mb-2">
                   {language === "ar" ? item.titleAr : item.titleEn}
                 </p>
-                <p className="text-xl font-bold text-white mb-2">
+                <p className="text-xl font-semibold text-[#f5f2e8]/80 mb-2" style={{ fontFamily: "Playfair Display, Georgia, serif" }}>
                   {language === "ar" ? item.valueAr : item.valueEn}
                 </p>
-                <p className="text-gray-400 text-sm">
+                <p className="text-[#f5f2e8]/40 text-sm">
                   {language === "ar" ? item.descAr : item.descEn}
                 </p>
               </div>
@@ -404,18 +435,7 @@ export default function SheikhGallery() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-gold-500/20 py-8 px-4 mt-8">
-        <div className="container max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p className="mb-2">
-            {language === "ar" ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
-          </p>
-          <p>{language === "ar" ? "ولي عهد إمارة عجمان" : "Crown Prince of Ajman"}</p>
-          <p className="mt-4 text-xs">
-            © 2025 {language === "ar" ? "جميع الحقوق محفوظة" : "All Rights Reserved"}
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

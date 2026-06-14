@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Link } from "wouter";
 import {
   X,
@@ -361,7 +362,7 @@ export default function WatchComparison() {
   };
 
   return (
-    <div className="min-h-screen bg-black" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen bg-background" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
       {/* Hero */}
@@ -616,18 +617,7 @@ export default function WatchComparison() {
         </section>
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-gold-500/20 py-8 px-4 mt-8 print:hidden">
-        <div className="container max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p className="mb-2">
-            {language === "ar" ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
-          </p>
-          <p>{language === "ar" ? "ولي عهد إمارة عجمان" : "Crown Prince of Ajman"}</p>
-          <p className="mt-4 text-xs">
-            © 2025 {language === "ar" ? "جميع الحقوق محفوظة" : "All Rights Reserved"}
-          </p>
-        </div>
-      </footer>
+      <div className="print:hidden"><Footer /></div>
 
       {/* Print styles */}
       <style>{`
