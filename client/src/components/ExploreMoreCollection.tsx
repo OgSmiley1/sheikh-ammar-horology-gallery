@@ -119,66 +119,98 @@ export function ExploreMoreCollection() {
   return (
     <>
       {/* Explore More Section */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section className="py-24 bg-[#0a0a0a]">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5">
+              {isRTL ? 'التحف الاستثنائية' : 'Selected Pieces'}
+            </p>
+            <div className="flex items-center justify-center gap-4 mb-7">
+              <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+              <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+            </div>
+            <h2
+              className="text-[#f5f2e8] mb-4"
+              style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 600,
+                lineHeight: 1.15,
+                letterSpacing: '-0.015em',
+              }}
+            >
               {isRTL ? 'استكشف المجموعة الكاملة' : 'Explore the Full Collection'}
             </h2>
-            <p className="text-lg text-[#f5f2e8]/70">
-              {isRTL ? 'اكتشف أندر الساعات الفاخرة في العالم' : 'Discover the world\'s rarest luxury timepieces'}
+            <p className="text-[#f5f2e8]/55" style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)' }}>
+              {isRTL ? 'اكتشف أندر الساعات الفاخرة في العالم' : "Discover the world's rarest luxury timepieces"}
             </p>
           </motion.div>
 
           {/* Watches Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             {allWatches.map((watch, idx) => (
               <motion.button
                 key={watch.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.6, delay: idx * 0.08 }}
+                viewport={{ once: true }}
                 onClick={() => setSelectedWatch(watch)}
                 className="group cursor-pointer text-left"
               >
                 <div
-                  className="relative overflow-hidden rounded-lg mb-4 aspect-square"
+                  className="relative overflow-hidden rounded-xl mb-4 aspect-square"
                   style={{
-                    background: 'rgba(17, 20, 26, 0.6)',
-                    backdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(212, 175, 55, 0.2)',
+                    background: 'rgba(10, 10, 10, 0.85)',
+                    border: '1px solid rgba(212, 175, 55, 0.12)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
                   }}
                 >
                   <img
                     src={watch.watchImage}
                     alt={watch.model.en}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                    loading="lazy"
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                    <p className="text-[#d4af37] text-sm font-semibold">
-                      {isRTL ? 'اعرض التفاصيل' : 'View Details'}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end justify-center pb-4">
+                    <p className="text-[#d4af37] text-xs font-semibold tracking-wider uppercase">
+                      {isRTL ? 'عرض التفاصيل' : 'View Details'}
                     </p>
                   </div>
+                  {/* Corner accents */}
+                  <div className="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t border-l border-[#d4af37]/25 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t border-r border-[#d4af37]/25 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-2.5 left-2.5 w-3.5 h-3.5 border-b border-l border-[#d4af37]/25 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 border-b border-r border-[#d4af37]/25 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <div>
-                  <p className="text-[#d4af37] text-xs uppercase tracking-widest mb-1">
+                  <p className="text-[#d4af37]/65 text-[10px] uppercase tracking-[0.3em] mb-1.5">
                     {watch.brand.en}
                   </p>
-                  <h3 className="text-lg font-serif text-[#f5f2e8] group-hover:text-[#d4af37] transition-colors mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  <h3
+                    className="text-[#f5f2e8] group-hover:text-[#d4af37] transition-colors duration-300 mb-1.5 leading-snug"
+                    style={{
+                      fontFamily: 'Playfair Display, serif',
+                      fontSize: 'clamp(0.8rem, 1.3vw, 0.95rem)',
+                      fontWeight: 600,
+                    }}
+                  >
                     {isRTL ? watch.model.ar : watch.model.en}
                   </h3>
-                  <p className="text-[#f5f2e8]/60 text-sm mb-2">
+                  <p className="text-[#f5f2e8]/30 text-[11px] tracking-wider mb-1">
                     {watch.reference}
                   </p>
-                  <p className="text-[#d4af37] font-semibold text-sm">
-                    ${watch.price.min.toLocaleString()} - ${watch.price.max.toLocaleString()}
+                  <p className="text-[#d4af37] font-semibold text-xs">
+                    ${watch.price.min.toLocaleString()} – ${watch.price.max.toLocaleString()}
                   </p>
                 </div>
               </motion.button>
@@ -202,15 +234,17 @@ export function ExploreMoreCollection() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#0a0a0a] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#d4af37]/20"
+              className="relative bg-[#0a0a0a] rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#d4af37]/20"
+              style={{ boxShadow: '0 28px 70px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.08)' }}
               dir={isRTL ? 'rtl' : 'ltr'}
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedWatch(null)}
-                className="absolute top-4 right-4 z-10 p-2 hover:bg-[#d4af37]/10 rounded-full transition-colors"
+                className="absolute top-4 end-4 z-10 p-2 hover:bg-[#d4af37]/10 rounded-full transition-colors"
+                aria-label="Close"
               >
-                <X className="w-6 h-6 text-[#d4af37]" />
+                <X className="w-5 h-5 text-[#d4af37]" />
               </button>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCreative } from "@/contexts/CreativeContext";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, Award } from "lucide-react";
@@ -41,11 +42,11 @@ export default function Timeline() {
   const yearsCollecting = maxYear - minYear + 1;
 
   return (
-    <div className="min-h-screen bg-black" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen bg-background" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-16 px-4 bg-gradient-to-b from-black via-gray-900/50 to-black text-center">
+      <section className="relative pt-32 pb-16 px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -57,10 +58,19 @@ export default function Timeline() {
               {t("common.timeline")}
             </span>
           </div>
-          <h1 className={`text-4xl md:text-6xl font-bold text-white mb-4 ${language === "ar" ? "font-arabic" : ""}`}>
+          <h1
+            className={`text-[#f5f2e8] mb-4 ${language === "ar" ? "font-arabic" : ""}`}
+            style={{
+              fontFamily: isRTL ? undefined : "Playfair Display, Georgia, serif",
+              fontSize: "clamp(2.5rem, 7vw, 5rem)",
+              fontWeight: 600,
+              lineHeight: 1.1,
+              letterSpacing: "-0.015em",
+            }}
+          >
             {t("timeline.title")}
           </h1>
-          <p className={`text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed ${language === "ar" ? "font-arabic" : ""}`}>
+          <p className={`text-[#f5f2e8]/55 text-lg max-w-2xl mx-auto leading-relaxed ${language === "ar" ? "font-arabic" : ""}`}>
             {t("timeline.subtitle")}
           </p>
         </motion.div>
@@ -156,12 +166,13 @@ export default function Timeline() {
                         >
                           <Link href={`/watch/${watch.slug}`}>
                             <motion.div
-                              className="group bg-gradient-to-br from-gray-900 to-black border border-gold-500/20 hover:border-gold-500/50 rounded-xl overflow-hidden transition-all duration-500 cursor-pointer"
+                              className="group rounded-xl overflow-hidden transition-all duration-500 cursor-pointer"
+                              style={{ background: "rgba(17, 20, 26, 0.55)", border: "1px solid rgba(212,175,55,0.12)" }}
                               whileHover={isCinematic ? { y: -6, boxShadow: "0 20px 40px rgba(212,175,55,0.15), 0 0 0 1px rgba(212,175,55,0.3)" } : undefined}
                               transition={{ duration: 0.3 }}
                             >
                               {/* Image */}
-                              <div className="relative h-48 bg-gray-800 overflow-hidden">
+                              <div className="relative h-48 overflow-hidden" style={{ background: "rgba(10,10,10,0.8)" }}>
                                 {watch.mainImageUrl ? (
                                   <img
                                     src={watch.mainImageUrl}
@@ -183,11 +194,14 @@ export default function Timeline() {
 
                               {/* Content */}
                               <div className="p-5">
-                                <h3 className={`text-white font-bold text-base mb-1 group-hover:text-gold-400 transition-colors ${language === "ar" ? "font-arabic" : ""}`}>
+                                <h3
+                                  className={`text-[#f5f2e8] font-semibold text-base mb-1 group-hover:text-gold-400 transition-colors ${language === "ar" ? "font-arabic" : ""}`}
+                                  style={{ fontFamily: isRTL ? undefined : "Playfair Display, serif" }}
+                                >
                                   {language === "ar" ? (watch.nameAr || watch.nameEn) : watch.nameEn}
                                 </h3>
-                                <p className="text-gray-500 text-xs mb-3">{watch.referenceNumber}</p>
-                                <div className="flex items-center justify-between text-xs text-gray-400">
+                                <p className="text-[#f5f2e8]/30 text-xs mb-3">{watch.referenceNumber}</p>
+                                <div className="flex items-center justify-between text-xs text-[#f5f2e8]/40">
                                   <span className={language === "ar" ? "font-arabic" : ""}>{t("common.year")}: {watch.yearReleased}</span>
                                   <span className={`text-gold-500 font-medium ${language === "ar" ? "font-arabic" : ""}`}>{t("common.viewDetails")} →</span>
                                 </div>
@@ -206,14 +220,7 @@ export default function Timeline() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-gold-500/20 py-8 px-4 mt-10">
-        <div className="container max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p className={language === "ar" ? "font-arabic" : ""}>
-            © 2025 {language === "ar" ? "المجموعة الملكية" : "Royal Collection"}
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

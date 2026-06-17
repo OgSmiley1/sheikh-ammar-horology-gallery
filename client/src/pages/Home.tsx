@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { HeroSlideshowSplitScreen } from '@/components/HeroSlideshowSplitScreen';
 import { slides } from '@/data/heroSlides';
 import { ExploreMoreCollection } from '@/components/ExploreMoreCollection';
@@ -46,6 +47,110 @@ export default function Home() {
         {/* Hero Slideshow: Split-Screen Layout with Sheikh + Watch Images */}
         <HeroSlideshowSplitScreen slides={slides} autoPlayMs={7000} />
 
+        {/* Sheikh Profile — bilingual split layout */}
+        <section className="py-24 px-4 border-b border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.025)' }}>
+          <div className="container max-w-7xl mx-auto">
+            <div className={`flex flex-col ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
+
+              {/* Sheikh Image */}
+              <motion.div
+                className="relative w-full lg:w-5/12 flex-shrink-0"
+                initial={{ opacity: 0, x: isRTL ? 40 : -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className="relative rounded-2xl overflow-hidden"
+                  style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.12)' }}
+                >
+                  <img
+                    src="/images/sheikh/IMG_7787(1).png"
+                    alt={isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
+                    className="w-full aspect-[3/4] object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                  {/* Corner accent decorators */}
+                  <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
+                  <div className="absolute top-4 right-4 w-10 h-10 border-t-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 w-10 h-10 border-b-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
+                  <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
+                </div>
+              </motion.div>
+
+              {/* Sheikh Info */}
+              <motion.div
+                className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}
+                initial={{ opacity: 0, x: isRTL ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                viewport={{ once: true }}
+              >
+                <p className={`text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL ? "المجمِّع الملكي" : "The Royal Collector"}
+                </p>
+                <div className={`flex items-center gap-4 mb-7 ${isRTL ? 'justify-end flex-row-reverse' : ''}`}>
+                  <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+                  <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+                </div>
+
+                <h2 className={`sheikh-name mb-3 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
+                </h2>
+                <p className={`sheikh-title mb-8 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL ? "ولي عهد عجمان — جامع الساعات الملكي" : "Crown Prince of Ajman — Royal Horologist"}
+                </p>
+
+                <p className={`sheikh-bio text-[#f5f2e8]/65 mb-10 ${isRTL ? 'font-arabic' : ''}`}>
+                  {isRTL
+                    ? "يجسّد سمو الشيخ عمار بن حميد النعيمي قيم التراث والابتكار في عالم الساعات الفاخرة. مجموعته الملكية، التي تضم أكثر من 34 قطعة استثنائية من أعرق دور صناعة الساعات في العالم، هي شهادة حية على الذوق الرفيع والعين الثاقبة للجمال."
+                    : "His Highness Sheikh Ammar bin Humaid Al Nuaimi embodies the values of heritage and innovation in the world of fine horology. His Royal Collection — over 34 exceptional timepieces from the world's most distinguished maisons — stands as a testament to refined taste and a discerning eye for beauty."}
+                </p>
+
+                {/* Stats */}
+                <div
+                  className="grid grid-cols-3 gap-6 mb-10 py-8 border-y"
+                  style={{ borderColor: 'rgba(212,175,55,0.15)' }}
+                >
+                  {[
+                    { value: '34+', labelEn: 'Rare Pieces', labelAr: 'قطعة نادرة' },
+                    { value: '$10M+', labelEn: 'Collection Value', labelAr: 'قيمة المجموعة' },
+                    { value: '15+', labelEn: 'Limited Editions', labelAr: 'إصدارات محدودة' },
+                  ].map((stat, idx) => (
+                    <div key={idx} className="text-center">
+                      <span className="sheikh-stat-value">{stat.value}</span>
+                      <span className={`sheikh-stat-label ${isRTL ? 'font-arabic' : ''}`}>
+                        {isRTL ? stat.labelAr : stat.labelEn}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className={`flex flex-wrap gap-4 ${isRTL ? 'justify-end' : ''}`}>
+                  <Link href="/collections">
+                    <button
+                      className={`px-8 py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 hover:opacity-90 ${isRTL ? 'font-arabic' : ''}`}
+                      style={{ background: '#d4af37', color: '#0a0a0a', boxShadow: '0 4px 20px rgba(212,175,55,0.3)' }}
+                    >
+                      {isRTL ? "استعرض المجموعة" : "View Collection"}
+                    </button>
+                  </Link>
+                  <Link href="/sheikh-gallery">
+                    <button
+                      className={`px-8 py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 hover:border-[#d4af37]/70 hover:text-[#f5f2e8] ${isRTL ? 'font-arabic' : ''}`}
+                      style={{ background: 'transparent', color: '#d4af37', border: '1px solid rgba(212,175,55,0.4)' }}
+                    >
+                      {isRTL ? "معرض الصور" : "Photo Gallery"}
+                    </button>
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Collector's Story — personal imagery (father + MBZ) + editorial text */}
         <CollectorStory />
 
@@ -53,7 +158,7 @@ export default function Home() {
         <ExploreMoreCollection />
 
             {/* Featured Brands Section */}
-            <section className="py-20 bg-[#0a0a0a]">
+            <section className="py-24 bg-[#0a0a0a]">
               <div className="container">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -61,48 +166,79 @@ export default function Home() {
                   transition={{ duration: 0.8 }}
                   className="text-center mb-16"
                 >
-                  <h2 className={`text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-4 ${isRTL ? "font-arabic" : ""}`} style={{ fontFamily: isRTL ? undefined : 'Playfair Display, serif' }}>
+                  <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5">
+                    {isRTL ? "البيوت العريقة" : "The Maisons"}
+                  </p>
+                  <div className="flex items-center justify-center gap-4 mb-7">
+                    <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+                    <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+                  </div>
+                  <h2
+                    className={`text-[#f5f2e8] mb-4 ${isRTL ? "font-arabic" : ""}`}
+                    style={{
+                      fontFamily: isRTL ? undefined : 'Playfair Display, serif',
+                      fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                      fontWeight: 600,
+                      lineHeight: 1.15,
+                      letterSpacing: '-0.015em',
+                    }}
+                  >
                     {t("home.featuredBrands")}
                   </h2>
-                  <p className={`text-lg text-[#f5f2e8]/70 ${isRTL ? "font-arabic" : ""}`}>
+                  <p className={`text-[#f5f2e8]/55 ${isRTL ? "font-arabic" : ""}`} style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)' }}>
                     {t("home.discoverWatchmakers")}
                   </p>
                 </motion.div>
 
                 {/* Brands Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { name: "Patek Philippe", year: "1839", country: "Switzerland" },
-                    { name: "Richard Mille", year: "2001", country: "Switzerland" },
-                    { name: "F.P. Journe", year: "1999", country: "Switzerland" },
-                    { name: "Audemars Piguet", year: "1875", country: "Switzerland" },
-                    { name: "Rolex", year: "1905", country: "Switzerland" },
-                    { name: "H. Moser & Cie", year: "1828", country: "Switzerland" },
-                    { name: "Tudor", year: "1926", country: "Switzerland" },
-                    { name: "Artisans de Geneve", year: "2011", country: "Switzerland" },
+                    { name: "Patek Philippe", nameAr: "باتيك فيليب", year: "1839", slug: "patek-philippe" },
+                    { name: "Richard Mille", nameAr: "ريتشارد ميل", year: "2001", slug: "richard-mille" },
+                    { name: "F.P. Journe", nameAr: "إف.بي. جورن", year: "1999", slug: "fp-journe" },
+                    { name: "Audemars Piguet", nameAr: "أوديمار بيغيه", year: "1875", slug: "audemars-piguet" },
+                    { name: "Rolex", nameAr: "رولكس", year: "1905", slug: "rolex" },
+                    { name: "H. Moser & Cie", nameAr: "هـ. موزر وشركاه", year: "1828", slug: "h-moser-cie" },
+                    { name: "Tudor", nameAr: "تيودور", year: "1926", slug: "tudor" },
+                    { name: "Artisans de Genève", nameAr: "أرتيزانس دو جنيف", year: "2011", slug: "artisans-de-geneve" },
                   ].map((brand, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 16 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: idx * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="rounded-lg p-6 cursor-pointer group"
-                      style={{
-                        background: 'rgba(17, 20, 26, 0.6)',
-                        backdropFilter: 'blur(12px)',
-                        border: '1px solid rgba(212, 175, 55, 0.2)',
-                      }}
+                      transition={{ duration: 0.5, delay: idx * 0.07 }}
+                      viewport={{ once: true }}
                     >
-                      <div className="text-center">
-                        <h3 className="text-xl font-semibold text-[#d4af37] mb-2 group-hover:text-[#f5f2e8] transition-colors">
-                          {brand.name}
-                        </h3>
-                        <p className={`text-sm text-[#f5f2e8]/60 mb-1 ${isRTL ? "font-arabic" : ""}`}>
-                          {t("common.founded")} {brand.year}
-                        </p>
-                        <p className="text-xs text-[#f5f2e8]/50">{brand.country}</p>
-                      </div>
+                      <Link href={`/collection/${brand.slug}`}>
+                        <div
+                          className="rounded-xl p-5 cursor-pointer group transition-all duration-300 text-center"
+                          style={{
+                            background: 'rgba(17, 20, 26, 0.5)',
+                            backdropFilter: 'blur(12px)',
+                            border: '1px solid rgba(212, 175, 55, 0.12)',
+                          }}
+                        >
+                          <div
+                            className="text-[2rem] font-serif leading-none text-center mb-3 select-none pointer-events-none"
+                            style={{ color: 'rgba(212,175,55,0.07)' }}
+                            aria-hidden="true"
+                          >
+                            {String(idx + 1).padStart(2, '0')}
+                          </div>
+                          <h3
+                            className="font-semibold text-[#d4af37] mb-1.5 group-hover:text-[#f5f2e8] transition-colors duration-300 leading-tight"
+                            style={{
+                              fontFamily: isRTL ? undefined : 'Playfair Display, serif',
+                              fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+                            }}
+                          >
+                            {isRTL ? brand.nameAr : brand.name}
+                          </h3>
+                          <p className="text-[11px] text-[#f5f2e8]/30 tracking-wider">Est. {brand.year}</p>
+                          <div className="h-px w-6 bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent mx-auto mt-3 group-hover:w-10 transition-all duration-300" />
+                        </div>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
@@ -110,26 +246,39 @@ export default function Home() {
             </section>
 
             {/* Collection Stats */}
-            <section className="py-20 border-y border-[#d4af37]/20" style={{ background: 'rgba(212, 175, 55, 0.05)' }}>
+            <section className="py-20 border-y border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.04)' }}>
               <div className="container">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                   {[
-                    { label: isRTL ? "ساعة فاخرة" : "Luxury Watches", value: "34+" },
-                    { label: isRTL ? "علامة تجارية" : "Brands", value: "8" },
-                    { label: isRTL ? "القيمة الإجمالية" : "Total Value", value: "$10M+" },
-                    { label: isRTL ? "إصدارات محدودة" : "Limited Editions", value: "15+" },
+                    { label: isRTL ? "ساعة فاخرة" : "Luxury Watches", value: "34+", sub: isRTL ? "قطعة" : "pieces" },
+                    { label: isRTL ? "دور صناعة" : "Maisons", value: "8", sub: isRTL ? "بيت عريق" : "houses" },
+                    { label: isRTL ? "القيمة الإجمالية" : "Total Value", value: "$10M+", sub: isRTL ? "تقديري" : "estimated" },
+                    { label: isRTL ? "إصدارات محدودة" : "Limited Editions", value: "15+", sub: isRTL ? "قطعة نادرة" : "rare pieces" },
                   ].map((stat, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: idx * 0.1 }}
+                      viewport={{ once: true }}
                       className="text-center"
                     >
-                      <div className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-2">
+                      <div
+                        className="mb-1"
+                        style={{
+                          fontFamily: isRTL ? undefined : 'Playfair Display, serif',
+                          fontSize: 'clamp(2rem, 5vw, 3rem)',
+                          fontWeight: 700,
+                          background: 'linear-gradient(135deg, #C9A961 0%, #D4B896 50%, #A67C52 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                        }}
+                      >
                         {stat.value}
                       </div>
-                      <p className="text-[#f5f2e8]/70">{stat.label}</p>
+                      <p className={`text-[#f5f2e8]/65 text-sm ${isRTL ? "font-arabic" : ""}`}>{stat.label}</p>
+                      <p className="text-[#f5f2e8]/25 text-[11px] tracking-widest uppercase mt-0.5">{stat.sub}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -137,21 +286,40 @@ export default function Home() {
             </section>
 
             {/* Collection Intro */}
-            <section className="py-20 bg-[#0a0a0a]">
+            <section className="py-24 bg-[#0a0a0a]">
               <div className="container">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
                   className="max-w-3xl mx-auto text-center"
                 >
-                  <h2 className={`text-4xl md:text-5xl font-serif text-[#f5f2e8] mb-6 ${isRTL ? "font-arabic" : ""}`} style={{ fontFamily: isRTL ? undefined : 'Playfair Display, serif' }}>
+                  <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5">
+                    {isRTL ? "المجموعة" : "The Collection"}
+                  </p>
+                  <div className="flex items-center justify-center gap-4 mb-7">
+                    <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+                    <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+                  </div>
+                  <h2
+                    className={`text-[#f5f2e8] mb-6 ${isRTL ? "font-arabic" : ""}`}
+                    style={{
+                      fontFamily: isRTL ? undefined : 'Playfair Display, serif',
+                      fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                      fontWeight: 600,
+                      lineHeight: 1.15,
+                      letterSpacing: '-0.015em',
+                    }}
+                  >
                     {t("home.collectionTitle")}
                   </h2>
 
                   <p
-                    className="text-lg text-[#f5f2e8]/80 mb-8 leading-relaxed"
+                    className="text-[#f5f2e8]/60 mb-10 leading-loose"
                     dir={isRTL ? "rtl" : "ltr"}
+                    style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)', lineHeight: 1.85 }}
                   >
                     {isRTL
                       ? COLLECTION_INTRO.descriptionAr
@@ -159,9 +327,17 @@ export default function Home() {
                   </p>
 
                   <Link href="/collections">
-                    <Button className={`bg-[#d4af37] hover:bg-[#f5f2e8] text-black font-semibold px-8 py-6 text-lg inline-flex items-center gap-2 transition-all duration-300 ${isRTL ? "font-arabic" : ""}`}>
+                    <Button
+                      className={`font-semibold px-9 py-6 text-base inline-flex items-center gap-2.5 transition-all duration-300 ${isRTL ? "font-arabic" : ""}`}
+                      style={{
+                        background: '#d4af37',
+                        color: '#0a0a0a',
+                        border: '1px solid rgba(212,175,55,0.8)',
+                        boxShadow: '0 4px 20px rgba(212,175,55,0.25)',
+                      }}
+                    >
                       {t("common.exploreCollection")}
-                      {isRTL ? null : <ArrowRight className="w-5 h-5" />}
+                      {isRTL ? null : <ArrowRight className="w-4 h-4" />}
                     </Button>
                   </Link>
                 </motion.div>
@@ -169,20 +345,32 @@ export default function Home() {
             </section>
 
         {/* Newsletter Section */}
-        <section className="py-20 border-t border-[#d4af37]/20" style={{ background: 'rgba(212, 175, 55, 0.04)' }} dir={isRTL ? "rtl" : "ltr"}>
+        <section className="py-24 border-t border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.035)' }} dir={isRTL ? "rtl" : "ltr"}>
           <div className="container max-w-xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#d4af37]/10 rounded-full border border-[#d4af37]/30 mb-6">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#d4af37]/08 rounded-full border border-[#d4af37]/25 mb-6">
                 <Mail className="w-6 h-6 text-[#d4af37]" />
               </div>
-              <h2 className={`text-3xl font-bold text-[#f5f2e8] mb-3 ${isRTL ? "font-arabic" : ""}`}>
+              <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-4">
+                {isRTL ? "النشرة البريدية" : "Newsletter"}
+              </p>
+              <h2
+                className={`text-[#f5f2e8] mb-3 ${isRTL ? "font-arabic" : ""}`}
+                style={{
+                  fontFamily: isRTL ? undefined : 'Playfair Display, serif',
+                  fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                  fontWeight: 600,
+                  lineHeight: 1.2,
+                }}
+              >
                 {t("home.newsletterTitle")}
               </h2>
-              <p className={`text-[#f5f2e8]/60 mb-8 leading-relaxed ${isRTL ? "font-arabic" : ""}`}>
+              <p className={`text-[#f5f2e8]/50 mb-8 leading-relaxed text-sm ${isRTL ? "font-arabic" : ""}`}>
                 {t("home.newsletterSubtitle")}
               </p>
               {subscribed ? (
@@ -222,14 +410,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-[#d4af37]/20 py-12" style={{ background: 'rgba(212, 175, 55, 0.05)' }}>
-          <div className="container text-center text-[#f5f2e8]/60">
-            <p>
-              © 2025 {isRTL ? "مجموعة الشيخ عمار الملكية" : "Sheikh Ammar Royal Collection"}. {isRTL ? "جميع الحقوق محفوظة." : "All rights reserved."}
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

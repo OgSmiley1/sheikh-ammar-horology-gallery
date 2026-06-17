@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Link } from "wouter";
 import {
   X,
@@ -361,22 +362,36 @@ export default function WatchComparison() {
   };
 
   return (
-    <div className="min-h-screen bg-black" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="min-h-screen bg-background" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
 
       {/* Hero */}
-      <section className="pt-24 pb-10 px-4 bg-gradient-to-b from-black via-gray-900/40 to-black text-center">
+      <section className="pt-32 pb-16 px-4 text-center" style={{ background: "rgba(212,175,55,0.025)" }}>
         <div className="container max-w-5xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 rounded-full px-4 py-1.5 mb-6">
             <GitCompare className="w-4 h-4 text-gold-500" />
-            <span className="text-gold-500 text-sm font-semibold tracking-widest uppercase">
+            <span className={`text-gold-500 text-sm font-semibold tracking-widest uppercase ${language === "ar" ? "font-arabic" : ""}`}>
               {language === "ar" ? "أداة المقارنة" : "Comparison Tool"}
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <div className="flex items-center justify-center gap-4 mb-7">
+            <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+            <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+          </div>
+          <h1
+            className={`text-[#f5f2e8] mb-4 ${language === "ar" ? "font-arabic" : ""}`}
+            style={{
+              fontFamily: isRTL ? undefined : "Playfair Display, Georgia, serif",
+              fontSize: "clamp(2.5rem, 7vw, 5rem)",
+              fontWeight: 600,
+              lineHeight: 1.1,
+              letterSpacing: "-0.015em",
+            }}
+          >
             {language === "ar" ? "قارن بين الساعات" : "Compare Watches"}
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className={`text-[#f5f2e8]/55 text-lg max-w-2xl mx-auto leading-relaxed ${language === "ar" ? "font-arabic" : ""}`}>
             {language === "ar"
               ? "اختر حتى 3 ساعات من المجموعة الملكية وقارن مواصفاتها جنبًا إلى جنب"
               : "Select up to 3 timepieces from the Royal Collection and compare their specifications side by side"}
@@ -616,18 +631,7 @@ export default function WatchComparison() {
         </section>
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-gold-500/20 py-8 px-4 mt-8 print:hidden">
-        <div className="container max-w-7xl mx-auto text-center text-gray-500 text-sm">
-          <p className="mb-2">
-            {language === "ar" ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
-          </p>
-          <p>{language === "ar" ? "ولي عهد إمارة عجمان" : "Crown Prince of Ajman"}</p>
-          <p className="mt-4 text-xs">
-            © 2025 {language === "ar" ? "جميع الحقوق محفوظة" : "All Rights Reserved"}
-          </p>
-        </div>
-      </footer>
+      <div className="print:hidden"><Footer /></div>
 
       {/* Print styles */}
       <style>{`

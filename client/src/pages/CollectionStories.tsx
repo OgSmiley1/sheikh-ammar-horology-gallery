@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -258,25 +259,34 @@ export default function CollectionStories() {
         </div>
       </div>
 
-      {/* Footer CTA */}
-      <div className="relative py-20 text-center">
+      {/* Quote CTA */}
+      <div className="relative py-20 text-center border-t border-[#d4af37]/15" style={{ background: "rgba(212,175,55,0.025)" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="max-w-2xl mx-auto px-4"
         >
-          <p className="text-2xl text-[#d4af37] font-light italic mb-8" style={{ fontFamily: 'Playfair Display, serif' }}>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
+            <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+          </div>
+          <p
+            className={`text-2xl text-[#d4af37] font-light italic mb-6 ${isRTL ? 'font-arabic' : ''}`}
+            style={{ fontFamily: isRTL ? undefined : 'Playfair Display, serif', lineHeight: 1.7 }}
+          >
             {language === 'ar'
               ? '"كل ساعة تحكي قصة من الدقة والصبر والشغف"'
               : '"Every watch tells a story of precision, patience, and passion"'}
           </p>
-          
-          <p className="text-[#f5f2e8]/60">
+          <p className={`text-[#f5f2e8]/50 text-sm tracking-widest ${isRTL ? 'font-arabic' : ''}`}>
             {language === 'ar' ? '— الشيخ عمار بن حميد النعيمي' : '— Sheikh Ammar bin Humaid Al Nuaimi'}
           </p>
         </motion.div>
       </div>
+
+      <Footer />
     </div>
   );
 }
