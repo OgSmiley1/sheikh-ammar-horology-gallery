@@ -9,6 +9,7 @@
  */
 
 import { Router, Request, Response } from "express";
+import type { Express } from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -27,9 +28,7 @@ function generateFilename(originalName?: string): string {
   return `${ts}-${rand}${ext}`;
 }
 
-export function registerAdminUploadRoutes(
-  app: ReturnType<typeof import("express")["default"]>
-) {
+export function registerAdminUploadRoutes(app: Express) {
   const router = Router();
 
   router.get("/", (_req: Request, res: Response) => {

@@ -176,7 +176,12 @@
   html[lang="ar"] body {
     font-family: 'Noto Naskh Arabic', 'Amiri', serif;
   }
-  
+
+  .font-arabic {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    letter-spacing: 0;
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 10px;

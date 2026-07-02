@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, type ReactElement } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
@@ -79,7 +79,17 @@ const rarityColor = (rarity: string | null) => {
 // Spec row definition
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SPEC_ROWS = [
+interface SpecRow {
+  icon: ReactElement;
+  labelEn: string;
+  labelAr: string;
+  key: keyof WatchRow;
+  isPrice?: boolean;
+  isHighlight?: boolean;
+  isRarity?: boolean;
+}
+
+const SPEC_ROWS: SpecRow[] = [
   {
     icon: <Layers className="w-4 h-4" />,
     labelEn: "Case Material",
@@ -150,7 +160,7 @@ const SPEC_ROWS = [
     key: "rarity",
     isRarity: true,
   },
-] as const;
+];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Watch Selector Card

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Header } from "@/components/Header";
@@ -14,13 +14,16 @@ export default function AdminSubscribers() {
   const [search, setSearch] = useState("");
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
 
-  const { data: subscribers, isLoading, refetch } = trpc.admin.getSubscribers.useQuery(undefined, {
+  const { data: subscribers, isLoading, error, refetch } = trpc.admin.getSubscribers.useQuery(undefined, {
     retry: false,
-    onError: () => {
+  });
+
+  useEffect(() => {
+    if (error) {
       toast.error("Unauthorized — please log in");
       setLocation("/admin/login");
-    },
-  });
+    }
+  }, [error, setLocation]);
 
   const deleteMutation = trpc.admin.deleteSubscriber.useMutation({
     onSuccess: () => {

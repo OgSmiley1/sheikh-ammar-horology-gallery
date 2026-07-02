@@ -5,6 +5,7 @@ import { HeroSlideshowSplitScreen } from '@/components/HeroSlideshowSplitScreen'
 import { slides } from '@/data/heroSlides';
 import { ExploreMoreCollection } from '@/components/ExploreMoreCollection';
 import { CollectorStory } from '@/components/CollectorStory';
+import { BillingualLayout } from '@/components/BillingualLayout';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { Button } from "@/components/ui/button";
@@ -50,42 +51,10 @@ export default function Home() {
         {/* Sheikh Profile — bilingual split layout */}
         <section className="py-24 px-4 border-b border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.025)' }}>
           <div className="container max-w-7xl mx-auto">
-            <div className={`flex flex-col ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
-
-              {/* Sheikh Image */}
-              <motion.div
-                className="relative w-full lg:w-5/12 flex-shrink-0"
-                initial={{ opacity: 0, x: isRTL ? 40 : -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-                viewport={{ once: true }}
-              >
-                <div
-                  className="relative rounded-2xl overflow-hidden"
-                  style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.12)' }}
-                >
-                  <img
-                    src="/images/sheikh/IMG_7787(1).png"
-                    alt={isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
-                    className="w-full aspect-[3/4] object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                  {/* Corner accent decorators */}
-                  <div className="absolute top-4 left-4 w-10 h-10 border-t-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
-                  <div className="absolute top-4 right-4 w-10 h-10 border-t-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 w-10 h-10 border-b-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
-                  <div className="absolute bottom-4 right-4 w-10 h-10 border-b-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
-                </div>
-              </motion.div>
-
-              {/* Sheikh Info */}
-              <motion.div
-                className={`flex-1 min-w-0 ${isRTL ? 'text-right' : ''}`}
-                initial={{ opacity: 0, x: isRTL ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-                viewport={{ once: true }}
-              >
+            <BillingualLayout
+              imageSrc="/images/sheikh/IMG_7787(1).png"
+              imageAlt={isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
+            >
                 <p className={`text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5 ${isRTL ? 'font-arabic' : ''}`}>
                   {isRTL ? "المجمِّع الملكي" : "The Royal Collector"}
                 </p>
@@ -146,8 +115,7 @@ export default function Home() {
                     </button>
                   </Link>
                 </div>
-              </motion.div>
-            </div>
+            </BillingualLayout>
           </div>
         </section>
 
