@@ -14,6 +14,7 @@
  */
 
 import { Router, Request, Response } from "express";
+import type { Express } from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -31,7 +32,7 @@ const SLOT_TO_FILENAME: Record<string, string> = {
 /* Resolve the public/personal directory relative to project root */
 const PUBLIC_PERSONAL = path.resolve(__dirname, "../../client/public/personal");
 
-export function registerUploadLocalRoutes(app: ReturnType<typeof import("express")["default"]>) {
+export function registerUploadLocalRoutes(app: Express) {
   const router = Router();
 
   /* ── Health check ─────────────────────────────────────────────────────── */

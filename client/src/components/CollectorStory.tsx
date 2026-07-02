@@ -13,7 +13,7 @@
  * Palette:     #0a0a0a (bg) · #d4af37 (gold) · #f5f2e8 (cream) · #6b6b6b (captions)
  */
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 /* ─── Content ──────────────────────────────────────────────────────────────── */
@@ -128,7 +128,7 @@ function PersonalPhoto({ src, alt, className }: { src: string; alt: string; clas
 
 /* ─── Animation variants ──────────────────────────────────────────────────── */
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: (delay = 0) => ({
     opacity: 1,

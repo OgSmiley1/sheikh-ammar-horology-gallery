@@ -6,9 +6,9 @@ import { Footer } from "@/components/Footer";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Eye, TrendingUp, Calendar, Package, Award } from "lucide-react";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay = 0) => ({
     opacity: 1,
@@ -35,7 +35,8 @@ export default function WatchDetail() {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
       ctx.drawImage(imgRef.current, 0, 0, 1, 1);
-      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+      const { data } = ctx.getImageData(0, 0, 1, 1);
+      const [r, g, b] = [data[0], data[1], data[2]];
       setDominantColor(`rgba(${r},${g},${b},0.15)`);
     } catch {
       // CORS or other error — keep default gold
@@ -385,7 +386,7 @@ export default function WatchDetail() {
                       value: watch.powerReserve,
                     },
                   ]
-                    .filter(Boolean)
+                    .filter((s): s is { label: string; value: string } => Boolean(s))
                     .map((spec, idx) => (
                       <div
                         key={idx}
@@ -395,8 +396,8 @@ export default function WatchDetail() {
                           border: "1px solid rgba(212, 175, 55, 0.1)",
                         }}
                       >
-                        <p className="text-[10px] text-gold-500/55 tracking-widest uppercase mb-1">{spec!.label}</p>
-                        <p className="text-[#f5f2e8]/80 text-sm font-medium">{spec!.value}</p>
+                        <p className="text-[10px] text-gold-500/55 tracking-widest uppercase mb-1">{spec.label}</p>
+                        <p className="text-[#f5f2e8]/80 text-sm font-medium">{spec.value}</p>
                       </div>
                     ))}
 

@@ -4,9 +4,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Eye, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay = 0) => ({
     opacity: 1,
