@@ -1,0 +1,145 @@
+(function(){
+"use strict";
+/* language: persisted through ?lang= on every internal link */
+var qs=new URLSearchParams(location.search);
+var lang=(qs.get('lang')==='ar')?'ar':'en';
+document.documentElement.lang=lang;
+document.documentElement.dir=(lang==='ar'?'rtl':'ltr');
+
+function applyText(){
+  Array.prototype.forEach.call(document.querySelectorAll('[data-en]'),function(el){
+    var v=el.getAttribute(lang==='ar'?'data-ar':'data-en');
+    if(v!=null) el.textContent=v;
+  });
+  var lb=document.getElementById('langBtn');
+  if(lb) lb.textContent=(lang==='ar'?'English':'العربية');
+  document.title=document.documentElement.getAttribute(lang==='ar'?'data-title-ar':'data-title-en')||document.title;
+}
+function decorateLinks(){
+  if(lang!=='ar') return;
+  Array.prototype.forEach.call(document.querySelectorAll('a[href]'),function(a){
+    var h=a.getAttribute('href');
+    if(!h||/^(https?:|#|mailto:)/.test(h)) return;
+    a.setAttribute('href',h+(h.indexOf('?')>-1?'&':'?')+'lang=ar');
+  });
+}
+var lb=document.getElementById('langBtn');
+if(lb) lb.addEventListener('click',function(){
+  var u=new URL(location.href);
+  if(lang==='ar') u.searchParams.delete('lang'); else u.searchParams.set('lang','ar');
+  location.href=u.toString();
+});
+
+/* mobile nav */
+var bg=document.getElementById('burger');
+if(bg) bg.addEventListener('click',function(){document.getElementById('mainNav').classList.toggle('open')});
+
+/* live Ajman time (GST, UTC+4) */
+function gulfNow(){var d=new Date();return new Date(d.getTime()+(d.getTimezoneOffset()+240)*60000)}
+function pad(n){return String(n).padStart(2,'0')}
+function tick(){
+  var d=gulfNow(),h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();
+  var t=document.getElementById('hdTime');
+  if(t) t.textContent=(lang==='ar'?'عجمان ':'AJMAN ')+pad(h)+':'+pad(m)+' GST';
+  rot('hH',((h%12)+m/60)*30);rot('hM',(m+s/60)*6);rot('hS',s*6);
+}
+function rot(id,deg){var e=document.getElementById(id);if(e)e.setAttribute('transform','rotate('+deg+' 100 100)')}
+function buildDial(){
+  var g=document.getElementById('guill');if(!g)return;
+  var s='';for(var r=10;r<=84;r+=6.5)s+='<circle cx="100" cy="100" r="'+r+'"/>';g.innerHTML=s;
+  var tk=document.getElementById('ticks'),th='';
+  for(var i=0;i<60;i++){var a=i*6*Math.PI/180,maj=i%5===0,r1=maj?80:85,r2=90;
+    th+='<line x1="'+(100+r1*Math.sin(a)).toFixed(2)+'" y1="'+(100-r1*Math.cos(a)).toFixed(2)+'" x2="'+(100+r2*Math.sin(a)).toFixed(2)+'" y2="'+(100-r2*Math.cos(a)).toFixed(2)+'" stroke="'+(maj?'#C9A45C':'rgba(201,164,92,.4)')+'" stroke-width="'+(maj?1.6:.6)+'"/>';}
+  tk.innerHTML=th;
+}
+
+/* cinema hero (home): crossfading films with chapter captions */
+function cinema(){
+  var wrap=document.getElementById('cinema');if(!wrap)return;
+  var slides=Array.prototype.slice.call(wrap.querySelectorAll('.cine'));
+  if(!slides.length)return;
+  var caps=Array.prototype.slice.call(document.querySelectorAll('.hero-cap .capsule'));
+  var marks=Array.prototype.slice.call(document.querySelectorAll('.chapters .chap'));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var save=navigator.connection&&navigator.connection.saveData;
+  var useVideo=!reduce&&!save;
+  var DUR=9500,i=-1,timer=null;
+  function show(n){
+    if(i>-1){slides[i].classList.remove('on');if(caps[i])caps[i].classList.remove('on');if(marks[i])marks[i].classList.remove('on');}
+    i=((n%slides.length)+slides.length)%slides.length;
+    slides[i].classList.add('on');if(caps[i])caps[i].classList.add('on');if(marks[i])marks[i].classList.add('on');
+    if(useVideo){
+      var v=slides[i].querySelector('video');
+      if(v){try{v.currentTime=0}catch(e){}
+        var p=v.play();if(p&&p.catch)p.catch(function(){useVideo=false});}
+      var nx=slides[(i+1)%slides.length].querySelector('video');
+      if(nx&&nx.getAttribute('preload')!=='auto'){nx.setAttribute('preload','auto');nx.load();}
+    }
+  }
+  function arm(){if(reduce)return;clearInterval(timer);timer=setInterval(function(){show(i+1)},DUR);}
+  marks.forEach(function(m,idx){m.addEventListener('click',function(){show(idx);arm();});});
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){clearInterval(timer);}else{show(i);arm();}
+  });
+  show(0);arm();
+}
+
+/* ambient films: play when visible, settle when done */
+function ambientFilms(){
+  var hosts=document.querySelectorAll('[data-ambient]');if(!hosts.length)return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var save=navigator.connection&&navigator.connection.saveData;
+  Array.prototype.forEach.call(hosts,function(h){
+    var v=h.querySelector('video');if(!v)return;
+    if(reduce||save){v.removeAttribute('autoplay');return;}
+    if(!('IntersectionObserver' in window)){var p0=v.play();if(p0&&p0.catch)p0.catch(function(){});return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){
+      if(en.isIntersecting){try{v.currentTime=0}catch(e){} var p=v.play();if(p&&p.catch)p.catch(function(){});}
+      else{v.pause();}
+    })},{threshold:.25});
+    io.observe(h);
+  });
+}
+
+/* scroll reveals */
+function reveals(){
+  var all=document.querySelectorAll('.rev');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){
+    Array.prototype.forEach.call(all,function(e){e.classList.add('in')});return;
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.1});
+  Array.prototype.forEach.call(all,function(e){io.observe(e)});
+}
+
+/* collection filters */
+function filters(){
+  var bar=document.getElementById('filterBar');if(!bar)return;
+  var brand='all',q='';
+  var input=document.getElementById('fSearch');
+  function apply(){
+    var shown=0;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-w]'),function(c){
+      var okB=(brand==='all'||c.getAttribute('data-brand')===brand);
+      var okQ=!q||c.getAttribute('data-q').indexOf(q)>-1;
+      var on=okB&&okQ; c.style.display=on?'':'none'; if(on)shown++;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.house'),function(h){
+      var any=Array.prototype.some.call(h.querySelectorAll('[data-w]'),function(c){return c.style.display!=='none'});
+      h.style.display=any?'':'none';
+    });
+    var cn=document.getElementById('countNote');
+    if(cn)cn.textContent=(lang==='ar'?(shown+' قطعة'):(shown+(shown===1?' piece':' pieces')));
+  }
+  Array.prototype.forEach.call(bar.querySelectorAll('.chip'),function(ch){
+    ch.addEventListener('click',function(){
+      bar.querySelector('.chip.on').classList.remove('on');ch.classList.add('on');
+      brand=ch.getAttribute('data-f');apply();
+    });
+  });
+  if(input)input.addEventListener('input',function(){q=input.value.trim().toLowerCase();apply()});
+  apply();
+}
+
+applyText();decorateLinks();buildDial();cinema();ambientFilms();reveals();filters();
+tick();setInterval(tick,1000);
+})();
