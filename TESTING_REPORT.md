@@ -139,7 +139,7 @@ The Sheikh Ammar Horology Gallery has been thoroughly tested across all major fe
   - "Back to Gallery" button
 - ✅ Username input accepts text (MOATH)
 - ✅ Password input masks characters (••••••••)
-- ✅ Login with correct credentials (MOATH/MOATH123) succeeds
+- ✅ Login with correct credentials succeeds (default credentials used in testing — rotate before production)
 - ✅ Redirects to admin dashboard after successful login
 - ✅ Session is stored in localStorage
 - ✅ "Back to Gallery" button works

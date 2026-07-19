@@ -41,7 +41,7 @@
 - [x] Create related watches carousel
 
 ## Phase 6: Admin Authentication & Analytics Dashboard ✅
-- [x] Implement admin login page (username: MOATH, password: MOATH123)
+- [x] Implement admin login page (default credentials — rotate before production, see CLAUDE.md §6)
 - [x] Create protected admin routes
 - [x] Build analytics dashboard homepage
 - [x] Implement visitor count tracking
@@ -76,7 +76,7 @@
 - [x] Upload Sheikh Ammar photos
 - [x] Create seed script for media references
 - [x] Verify all data integrity
-- [x] Create admin user (MOATH/MOATH123)
+- [x] Create admin user (default credentials — rotate before production, see CLAUDE.md §6)
 
 ## Phase 10: Comprehensive Testing ✅
 - [x] Test homepage video background on all browsers

@@ -86,7 +86,7 @@ Comprehensive information for each timepiece:
 ### Login Credentials
 - **URL:** `https://your-gallery-url.com/admin/login`
 - **Username:** `MOATH`
-- **Password:** `MOATH123`
+- **Password:** *(rotate before going live — see CLAUDE.md §6; do not commit the live value)*
 
 ### Security
 - Secure authentication with bcrypt password hashing
@@ -340,7 +340,7 @@ For technical support, feature requests, or questions about the gallery:
 ### Admin Login
 - URL: `/admin/login`
 - Username: `MOATH`
-- Password: `MOATH123`
+- Password: *(rotate before going live — see CLAUDE.md §6; do not commit the live value)*
 
 ### Key Pages
 - Homepage: `/`

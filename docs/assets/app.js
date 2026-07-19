@@ -19,7 +19,7 @@ function decorateLinks(){
   if(lang!=='en') return; /* Arabic is default; persist English when chosen */
   Array.prototype.forEach.call(document.querySelectorAll('a[href]'),function(a){
     var h=a.getAttribute('href');
-    if(!h||/^(https?:|#|mailto:)/.test(h)) return;
+    if(!h||/^(https?:|#|mailto:)/.test(h)||/\.pdf$/i.test(h)) return;
     a.setAttribute('href',h+(h.indexOf('?')>-1?'&':'?')+'lang=en');
   });
 }
@@ -118,6 +118,21 @@ function reveals(){
   Array.prototype.forEach.call(all,function(e){io.observe(e)});
 }
 
+/* His Highness's Piece of the Day — rotates once per Gulf day through the RRR series */
+var RRR_PIECES=[{"slug":"artisans-de-geneve-la-montoya-custom","en":"Artisans de Geneve 'La Montoya' Custom Rolex","ar":"حرفيو جنيف 'لا مونتويا' رولكس مخصص","img":"assets/artisans-de-geneve-la-montoya-custom.webp"},{"slug":"fp-journe-chronom-tre-r-sonance","en":"F.P. Journe Chronomètre à Résonance","ar":"إف بي جورن كرونومتر ريزونانس","img":"assets/fp-journe-chronom-tre-r-sonance.webp"},{"slug":"fp-journe-tourbillon-souverain-mint","en":"F.P. Journe Tourbillon Souverain","ar":"إف بي جورن توربيون سوفرين","img":"assets/fp-journe-tourbillon-souverain-mint.jpeg"},{"slug":"patek-nautilus-5711-olive-green-diamond","en":"Patek Philippe Nautilus 5711/1300A Olive Green Diamond","ar":"باتيك فيليب ناوتيلوس 5711/1300A أخضر زيتوني ماسي","img":"assets/patek-nautilus-5711-olive-green-diamond.webp"},{"slug":"patek-philippe-5470p","en":"Patek Philippe 5470P Chronograph","ar":"باتيك فيليب 5470P كرونوغراف","img":"assets/patek-philippe-5470p.webp"},{"slug":"richard-mille-rm-26-02-evil-eye","en":"Richard Mille RM 26-02 Tourbillon Evil Eye","ar":"ريتشارد ميل RM 26-02 توربيون عين الشر","img":"assets/richard-mille-rm-26-02-evil-eye.webp"},{"slug":"richard-mille-rm-65-01","en":"Richard Mille RM 65-01 Automatic Winding Split-Seconds Chronograph","ar":"ريتشارد ميل RM 65-01 كرونوغراف مقسم الثواني","img":"assets/richard-mille-rm-65-01.jpeg"},{"slug":"richard-mille-rm-68-01-cyril-kongo","en":"Richard Mille RM 68-01 Cyril Kongo","ar":"ريتشارد ميل RM 68-01 سيريل كونغو","img":"assets/richard-mille-rm-68-01-cyril-kongo.webp"},{"slug":"rolex-daytona-6239-paul-newman","en":"Rolex Daytona 6239 Paul Newman","ar":"رولكس دايتونا 6239 بول نيومان","img":"assets/rolex-daytona-6239-paul-newman.webp"},{"slug":"rolex-daytona-6241-john-player-special","en":"Rolex Daytona 6241 'John Player Special'","ar":"رولكس دايتونا 6241 'جون بلاير سبيشيال'","img":"assets/rolex-daytona-6241-john-player-special.webp"},{"slug":"rolex-daytona-6263-quraysh","en":"Rolex Daytona 6263 'Quraysh'","ar":"رولكس دايتونا 6263 'قريش'","img":"assets/rolex-daytona-6263-quraysh.webp"},{"slug":"rolex-daytona-6264","en":"Rolex Daytona Reference 6264","ar":"رولكس دايتونا المرجع 6264","img":"assets/rolex-daytona-6264.webp"},{"slug":"rolex-daytona-aet-remould","en":"Rolex Daytona AET Remould Custom","ar":"رولكس دايتونا AET ريمولد مخصص","img":"assets/rolex-daytona-aet-remould.webp"},{"slug":"rolex-daytona-paul-newman-6265","en":"Rolex Daytona 'Paul Newman' Reference 6265","ar":"رولكس دايتونا 'بول نيومان' المرجع 6265","img":"assets/rolex-daytona-paul-newman-6265.webp"},{"slug":"rolex-gmt-master-ii-pepsi-meteorite","en":"Rolex GMT-Master II 'Pepsi' Meteorite Dial","ar":"رولكس GMT-ماستر II 'بيبسي' ميناء نيزكي","img":"assets/rolex-gmt-master-ii-pepsi-meteorite.webp"}];
+function pieceOfDay(){
+  var link=document.getElementById('potdLink');if(!link)return;
+  var d=gulfNow();
+  var start=new Date(d.getFullYear(),0,0);
+  var doy=Math.floor((d-start)/86400000);
+  var w=RRR_PIECES[doy%RRR_PIECES.length];
+  var name=(lang==='ar'?w.ar:w.en);
+  var img=document.getElementById('potdImg');
+  if(img){img.src=w.img;img.alt=name;}
+  var nm=document.getElementById('potdName');if(nm)nm.textContent=name;
+  link.setAttribute('href','watch/'+w.slug+'.html'+(lang==='en'?'?lang=en':''));
+}
+
 /* collection filters */
 function filters(){
   var bar=document.getElementById('filterBar');if(!bar)return;
@@ -177,6 +192,6 @@ var tt=document.getElementById('toTop');
 if(tt){window.addEventListener('scroll',function(){tt.classList.toggle('show',window.scrollY>800)},{passive:true});
   tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});}
 
-applyText();decorateLinks();buildDial();cinema();ambientFilms();reveals();filters();
+applyText();decorateLinks();buildDial();cinema();ambientFilms();reveals();filters();pieceOfDay();
 tick();setInterval(tick,1000);
 })();
