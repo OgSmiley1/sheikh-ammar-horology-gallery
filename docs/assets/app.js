@@ -2,7 +2,7 @@
 "use strict";
 /* language: persisted through ?lang= on every internal link */
 var qs=new URLSearchParams(location.search);
-var lang=(qs.get('lang')==='ar')?'ar':'en';
+var lang=(qs.get('lang')==='en')?'en':'ar'; /* Arabic-first: the Sheikh is greeted in his language */
 document.documentElement.lang=lang;
 document.documentElement.dir=(lang==='ar'?'rtl':'ltr');
 
@@ -16,23 +16,30 @@ function applyText(){
   document.title=document.documentElement.getAttribute(lang==='ar'?'data-title-ar':'data-title-en')||document.title;
 }
 function decorateLinks(){
-  if(lang!=='ar') return;
+  if(lang!=='en') return; /* Arabic is default; persist English when chosen */
   Array.prototype.forEach.call(document.querySelectorAll('a[href]'),function(a){
     var h=a.getAttribute('href');
     if(!h||/^(https?:|#|mailto:)/.test(h)) return;
-    a.setAttribute('href',h+(h.indexOf('?')>-1?'&':'?')+'lang=ar');
+    a.setAttribute('href',h+(h.indexOf('?')>-1?'&':'?')+'lang=en');
   });
 }
 var lb=document.getElementById('langBtn');
 if(lb) lb.addEventListener('click',function(){
   var u=new URL(location.href);
-  if(lang==='ar') u.searchParams.delete('lang'); else u.searchParams.set('lang','ar');
+  if(lang==='ar') u.searchParams.set('lang','en'); else u.searchParams.delete('lang');
   location.href=u.toString();
 });
 
 /* mobile nav */
 var bg=document.getElementById('burger');
-if(bg) bg.addEventListener('click',function(){document.getElementById('mainNav').classList.toggle('open')});
+var om=document.getElementById('omenu');
+if(bg&&om){
+  bg.addEventListener('click',function(){om.classList.add('open')});
+  om.addEventListener('click',function(e){if(e.target.tagName==='A'||e.target.classList.contains('oclose')||e.target===om)om.classList.remove('open')});
+}
+/* cinematic veil lift */
+window.addEventListener('load',function(){setTimeout(function(){document.body.classList.add('loaded')},700)});
+setTimeout(function(){document.body.classList.add('loaded')},2600);
 
 /* live Ajman time (GST, UTC+4) */
 function gulfNow(){var d=new Date();return new Date(d.getTime()+(d.getTimezoneOffset()+240)*60000)}
@@ -139,6 +146,36 @@ function filters(){
   if(input)input.addEventListener('input',function(){q=input.value.trim().toLowerCase();apply()});
   apply();
 }
+
+/* youtube facade */
+var yt=document.getElementById('yt');
+if(yt){var go=function(){var id=yt.getAttribute('data-id');yt.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="Film" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'};
+  yt.addEventListener('click',go);yt.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')go()});}
+/* copy link */
+Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'),function(btn){
+  btn.addEventListener('click',function(){
+    var t=btn.getAttribute('data-copy');
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){
+      var o=btn.textContent;btn.textContent='\u2713';setTimeout(function(){btn.textContent=o},1400);
+    }).catch(function(){prompt('',t)});
+  });
+});
+/* count-up ledger */
+(function(){
+  var ns=document.querySelectorAll('.stamp .n');if(!ns.length)return;
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var io2=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(!en.isIntersecting)return;var el=en.target,txt=el.textContent.trim();io2.unobserve(el);
+    var m=txt.match(/^(\d+)$/);if(!m)return;var N=+m[1],t0=null;
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1200,1);el.textContent=Math.round(N*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)}
+    requestAnimationFrame(step);
+  })},{threshold:.6});
+  Array.prototype.forEach.call(ns,function(n){io2.observe(n)});
+})();
+/* back to top */
+var tt=document.getElementById('toTop');
+if(tt){window.addEventListener('scroll',function(){tt.classList.toggle('show',window.scrollY>800)},{passive:true});
+  tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});}
 
 applyText();decorateLinks();buildDial();cinema();ambientFilms();reveals();filters();
 tick();setInterval(tick,1000);
