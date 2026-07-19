@@ -139,7 +139,7 @@ sheikh-ammar-horology-gallery/
 
 **Default Admin Credentials:**
 - Username: `MOATH`
-- Password: `MOATH123`
+- Password: *(rotate before going live — see CLAUDE.md §6; do not commit the live value)*
 
 **Admin Panel URL:** `/admin`
 

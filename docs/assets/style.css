@@ -93,6 +93,20 @@ html[dir=rtl] .pgban p,html[dir=rtl] .sec-head p{font-style:normal}
 html[dir=rtl] .stamp .l{letter-spacing:.02em;font-size:.9rem}
 @media(max-width:700px){.ledger .wrap{grid-template-columns:repeat(2,1fr)}}
 
+/* piece of the day */
+.potd{background:var(--lacquer);border-bottom:1px solid var(--hairline)}
+.potd-row{display:flex;align-items:center;gap:1.4rem;padding:1.1rem 0;color:inherit}
+.potd-img{width:52px;height:52px;flex:none;border-radius:50%;overflow:hidden;border:1px solid var(--gold)}
+.potd-img img{width:100%;height:100%;object-fit:cover}
+.potd-bd{min-width:0}
+.potd-k{display:block;font-family:var(--disp);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+html[dir=rtl] .potd-k{letter-spacing:.02em;font-size:.85rem;font-family:var(--ar)}
+.potd-name{font-family:var(--disp);font-size:.98rem;color:var(--ivory);margin-top:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[dir=rtl] .potd-name{font-family:var(--ar);font-size:1.05rem}
+.potd-go{display:none;font-family:var(--disp);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-inline-start:auto;flex:none;transition:color .3s}
+.potd-row:hover .potd-go{color:var(--gold-hi)}
+@media(min-width:560px){.potd-go{display:block;margin-inline-start:auto}}
+
 /* cards & grids */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.6rem}
 .card{background:var(--panel);border:1px solid rgba(201,164,92,.14);display:flex;flex-direction:column;transition:border-color .35s,transform .35s}
@@ -276,6 +290,15 @@ html[dir=rtl] .rgrid span{font-family:var(--ar);font-size:.95rem}
 .yt .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;background:var(--gold);color:#0A0E0B;display:grid;place-items:center;font-size:1.7rem;box-shadow:0 12px 44px rgba(0,0,0,.55);transition:transform .3s}
 .yt:hover .play{transform:translate(-50%,-50%) scale(1.09)}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* connoisseur's note (e.g. the Quraysh falcon thread) */
+.insight{margin-top:1.6rem;padding:1.1rem 1.3rem;border-inline-start:2px solid #96742E;background:rgba(150,116,46,.06)}
+.insight .ins-k{display:block;font-family:var(--disp);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#96742E;margin-bottom:.5rem}
+html[dir=rtl] .insight .ins-k{letter-spacing:.02em;font-size:.85rem;font-family:var(--ar)}
+.insight p{font-style:italic;color:#3A3428;font-size:.98rem;line-height:1.75;margin:0}
+html[dir=rtl] .insight p{font-style:normal;font-family:var(--ar);font-size:1.08rem;line-height:2}
+/* certificate download */
+.cert-dl{display:inline-block;margin-top:1.8rem;color:#96742E}
+.cert-dl:hover{background:#96742E;color:var(--ivory)}
 /* share bar */
 .share{display:flex;gap:.7rem;align-items:center;margin-top:1.8rem;flex-wrap:wrap}
 .share>span{font-family:var(--disp);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}

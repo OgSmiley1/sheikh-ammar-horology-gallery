@@ -87,7 +87,7 @@ The Sheikh Ammar Royal Horology Collection website is functionally complete with
 
 **Admin User Guide (2 hours)**
 - [ ] Create `/docs/ADMIN_GUIDE.md`
-- [ ] Document login process (username: MOATH, password: MOATH123)
+- [ ] Document login process (do not publish the live password — see CLAUDE.md §6)
 - [ ] Explain CMS features (Add/Edit/Delete watches)
 - [ ] Document media upload process
 - [ ] Explain analytics dashboard
