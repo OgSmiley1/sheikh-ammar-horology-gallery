@@ -351,3 +351,18 @@ html[dir=rtl] .chap i::after{transform-origin:right center}
 .pgban.filmic .pgv{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,14,11,.5),rgba(10,14,11,.94))}
 .pgban.filmic>*{position:relative;z-index:2}
 .pgban.filmic video,.pgban.filmic .pgv{z-index:0}
+
+/* ambient gallery banner: live crossfading stills (collection/maisons/timeline) */
+.pgban.gallery{position:relative;overflow:hidden}
+.pgban.gallery .gwrap{position:absolute;inset:0;z-index:0}
+.pgban.gallery .gslide{position:absolute;inset:0;background-size:cover;background-position:center 32%;opacity:0;transition:opacity 2.4s ease;will-change:opacity,transform}
+.pgban.gallery .gslide.on{opacity:.26}
+@media (prefers-reduced-motion:no-preference){
+  .pgban.gallery .gslide.on{animation:gkb 7.2s linear forwards}
+  @keyframes gkb{from{transform:scale(1.03)}to{transform:scale(1.1)}}
+}
+.pgban.gallery .pgv{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,14,11,.55),rgba(10,14,11,.95));z-index:1}
+.pgban.gallery>*{position:relative;z-index:2}
+.pgban.gallery .gticks{position:absolute;bottom:1.1rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:2}
+.pgban.gallery .gticks i{width:14px;height:2px;background:rgba(201,164,92,.3);transition:background .3s,width .3s}
+.pgban.gallery .gticks i.on{background:var(--gold-hi);width:26px}
