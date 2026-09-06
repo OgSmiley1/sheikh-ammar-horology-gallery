@@ -115,6 +115,97 @@ function gallery(){
   });
 }
 
+/* Arabic-Indic digits for the Arabic reading of counters */
+function arDigits(s){return lang==='ar'?String(s).replace(/\d/g,function(d){return '٠١٢٣٤٥٦٧٨٩'[d]}):String(s)}
+
+/* The Exhibition Hall: one vitrine per screen, walked by arrow, key, rail, or curator's tour */
+function exhibition(){
+  var track=document.getElementById('track');if(!track)return;
+  var vs=Array.prototype.slice.call(track.querySelectorAll('.vitrine'));if(!vs.length)return;
+  var rail=document.getElementById('rail'),ticks=[];
+  var now=document.getElementById('hcNow'),all=document.getElementById('hcAll');
+  var prev=document.getElementById('hPrev'),next=document.getElementById('hNext'),tourBtn=document.getElementById('tourBtn');
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.hall-map .chip'));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i=0,tour=false,timer=null,DUR=7200;
+  if(all)all.textContent=arDigits(pad(vs.length));
+  if(rail){vs.forEach(function(v,idx){var t=document.createElement('i');t.setAttribute('role','button');t.setAttribute('tabindex','-1');t.setAttribute('aria-label',(lang==='ar'?'المعروض ':'Exhibit ')+arDigits(idx+1));t.addEventListener('click',function(){go(idx);stopTour()});rail.appendChild(t);ticks.push(t)});}
+  function paint(){
+    vs.forEach(function(v,idx){v.classList.toggle('on',idx===i)});
+    ticks.forEach(function(t,idx){t.classList.toggle('on',idx===i);t.classList.toggle('fill',tour&&idx===i)});
+    if(now)now.textContent=arDigits(pad(i+1));
+    var m=vs[i].getAttribute('data-maison');
+    chips.forEach(function(c){c.classList.toggle('on',c.getAttribute('data-m')===m)});
+    if(prev)prev.disabled=(i===0);if(next)next.disabled=(i===vs.length-1);
+  }
+  function go(n){
+    n=Math.max(0,Math.min(vs.length-1,n));
+    var target=vs[n];
+    /* scroll along the inline axis only — works identically in LTR and RTL */
+    track.scrollTo({left:target.offsetLeft-track.offsetLeft,behavior:reduce?'auto':'smooth'});
+    i=n;paint();
+  }
+  function step(d){go(i+d)}
+  function arm(){clearInterval(timer);timer=setInterval(function(){if(i>=vs.length-1){stopTour();return}go(i+1);paint()},DUR)}
+  function startTour(){if(reduce)return;tour=true;tourBtn&&tourBtn.classList.add('on');if(tourBtn)tourBtn.textContent=(lang==='ar'?'إيقاف الجولة':'Pause the tour');paint();arm()}
+  function stopTour(){tour=false;clearInterval(timer);tourBtn&&tourBtn.classList.remove('on');if(tourBtn)tourBtn.textContent=(lang==='ar'?'ابدأ جولة القيّم':"Begin the curator's tour");paint()}
+  /* follow the user's own scrolling (trackpad, swipe) */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting&&en.intersectionRatio>=.6){var k=vs.indexOf(en.target);if(k>-1&&k!==i){i=k;paint()}}})},{root:track,threshold:.6});
+    vs.forEach(function(v){io.observe(v)});
+  }
+  if(prev)prev.addEventListener('click',function(){step(-1);stopTour()});
+  if(next)next.addEventListener('click',function(){step(1);stopTour()});
+  if(tourBtn){tourBtn.addEventListener('click',function(){tour?stopTour():startTour()});if(reduce)tourBtn.style.display='none';}
+  chips.forEach(function(c){c.addEventListener('click',function(){var m=c.getAttribute('data-m');for(var k=0;k<vs.length;k++){if(vs[k].getAttribute('data-maison')===m){go(k);break}}stopTour()})});
+  var rtl=document.documentElement.dir==='rtl';
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('vlb')&&document.getElementById('vlb').classList.contains('open'))return;
+    if(e.target&&/INPUT|TEXTAREA/.test(e.target.tagName))return;
+    var fwd=rtl?'ArrowLeft':'ArrowRight',back=rtl?'ArrowRight':'ArrowLeft';
+    if(e.key===fwd){step(1);stopTour();e.preventDefault()}
+    else if(e.key===back){step(-1);stopTour();e.preventDefault()}
+    else if(e.key==='Home'){go(0);stopTour();e.preventDefault()}
+    else if(e.key==='End'){go(vs.length-1);stopTour();e.preventDefault()}
+    else if(e.key===' '&&tourBtn&&document.activeElement!==tourBtn){tour?stopTour():startTour();e.preventDefault()}
+  });
+  document.addEventListener('visibilitychange',function(){if(document.hidden){clearInterval(timer)}else if(tour){arm()}});
+  /* localised arrow labels */
+  if(prev)prev.setAttribute('aria-label',lang==='ar'?'المعروض السابق':'Previous exhibit');
+  if(next)next.setAttribute('aria-label',lang==='ar'?'المعروض التالي':'Next exhibit');
+  if(tourBtn)tourBtn.textContent=(lang==='ar'?'ابدأ جولة القيّم':"Begin the curator's tour");
+  paint();
+}
+
+/* The vitrine: any watch image steps into a spotlit glass case */
+function vitrine(){
+  var hosts=[];
+  var w=document.querySelector('.wimg');
+  if(w){var im=w.querySelector('img');var h1=document.querySelector('.wbd h1');var ln=document.querySelector('.wbd .lot-no');
+    if(im)hosts.push({el:w,img:im,name:h1?h1.textContent:im.alt,lot:ln?ln.textContent:''});}
+  Array.prototype.forEach.call(document.querySelectorAll('.case'),function(c){
+    var im=c.querySelector('img'),p=c.closest('.vitrine');var h2=p&&p.querySelector('.placard h2'),ln=p&&p.querySelector('.placard .lot-no');
+    if(im)hosts.push({el:c,img:im,name:h2?h2.textContent:im.alt,lot:ln?ln.textContent:''});
+  });
+  if(!hosts.length)return;
+  var hint=lang==='ar'?'افتح الواجهة':'Open the vitrine';
+  var box=document.createElement('div');box.id='vlb';box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');box.setAttribute('aria-label',lang==='ar'?'الواجهة الزجاجية':'The vitrine');
+  box.innerHTML='<button class="vlb-x" type="button" aria-label="'+(lang==='ar'?'إغلاق':'Close')+'">✕</button><div class="vlb-stage"><div class="vlb-case"><span class="beam" aria-hidden="true"></span><img alt=""></div><div class="vlb-plate"><span class="lot-no"></span><h3></h3></div></div><span class="vlb-k">'+(lang==='ar'?'اضغط ESC للخروج':'Press ESC to step back')+'</span>';
+  document.body.appendChild(box);
+  var bimg=box.querySelector('img'),bname=box.querySelector('h3'),blot=box.querySelector('.lot-no'),bx=box.querySelector('.vlb-x'),last=null;
+  function open(h){bimg.src=h.img.currentSrc||h.img.src;bimg.alt=h.name;bname.textContent=h.name;blot.textContent=h.lot;last=document.activeElement;box.classList.add('open');document.body.classList.add('vlb-open');setTimeout(function(){bx.focus()},60)}
+  function close(){box.classList.remove('open');document.body.classList.remove('vlb-open');if(last&&last.focus)last.focus()}
+  hosts.forEach(function(h){
+    var s=document.createElement('span');s.className='vhint';s.textContent=hint;h.el.appendChild(s);
+    h.el.setAttribute('tabindex','0');h.el.setAttribute('role','button');h.el.setAttribute('aria-label',hint+' — '+h.name);
+    h.el.addEventListener('click',function(e){e.preventDefault();open(h)});
+    h.el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(h)}});
+  });
+  bx.addEventListener('click',close);
+  box.addEventListener('click',function(e){if(e.target===box||e.target.classList.contains('vlb-stage'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&box.classList.contains('open'))close()});
+}
+
 /* ambient films: play when visible, settle when done */
 function ambientFilms(){
   var hosts=document.querySelectorAll('[data-ambient]');if(!hosts.length)return;
@@ -216,6 +307,6 @@ var tt=document.getElementById('toTop');
 if(tt){window.addEventListener('scroll',function(){tt.classList.toggle('show',window.scrollY>800)},{passive:true});
   tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});}
 
-applyText();decorateLinks();buildDial();cinema();ambientFilms();gallery();reveals();filters();pieceOfDay();
+applyText();decorateLinks();buildDial();cinema();ambientFilms();gallery();exhibition();vitrine();reveals();filters();pieceOfDay();
 tick();setInterval(tick,1000);
 })();
