@@ -1,385 +1,266 @@
-import { useState } from 'react';
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { HeroSlideshowSplitScreen } from '@/components/HeroSlideshowSplitScreen';
-import { slides } from '@/data/heroSlides';
-import { ExploreMoreCollection } from '@/components/ExploreMoreCollection';
-import { CollectorStory } from '@/components/CollectorStory';
-import { BillingualLayout } from '@/components/BillingualLayout';
-import { CustomCursor } from '@/components/CustomCursor';
-import { ScrollProgress } from '@/components/ScrollProgress';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
-import { COLLECTION_INTRO } from "@shared/constants";
-import { ArrowRight, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowUpRight, Quote } from "lucide-react";
+import { ArchiveStorySlideshow } from "@/components/ArchiveStorySlideshow";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
-import { toast } from "sonner";
+
+const pathwayCards = [
+  {
+    href: "/collection",
+    index: "01",
+    enTitle: "The Collection Atlas",
+    arTitle: "أطلس المجموعة",
+    enBody: "Source-conscious records, arranged to reward close looking.",
+    arBody: "سجلات موثقة تُرتّب لتكافئ النظر المتأني.",
+  },
+  {
+    href: "/constellation",
+    index: "02",
+    enTitle: "Constellation of Time",
+    arTitle: "كوكبة الزمن",
+    enBody: "A visual reading of the maisons, movements, and moments that connect the archive.",
+    arBody: "قراءة بصرية للدور والحركات واللحظات التي تصل بين سجلات الأرشيف.",
+  },
+  {
+    href: "/sheikh-gallery",
+    index: "03",
+    enTitle: "The Gallery",
+    arTitle: "المعرض",
+    enBody: "A quieter view of publicly observed appearances and their editorial context.",
+    arBody: "مشهد أكثر هدوءاً للظهورات العلنية وسياقها التحريري.",
+  },
+] as const;
 
 export default function Home() {
-  const { t, isRTL, language } = useLanguage();
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const subscribeMutation = trpc.newsletter.subscribe.useMutation({
-    onSuccess: () => {
-      setSubscribed(true);
-      setEmail("");
-      toast.success(language === "ar" ? "تم الاشتراك بنجاح!" : "Successfully subscribed!");
-    },
-    onError: (err) => {
-      toast.error(err.message || (language === "ar" ? "فشل الاشتراك" : "Subscription failed"));
-    },
-  });
+  const { language } = useLanguage();
+  const isRTL = language === "ar";
+  const { data: archiveRecords = [] } = trpc.watches.getAll.useQuery();
+  const { data: maisons = [] } = trpc.brands.getAll.useQuery();
+  const {
+    data: approvedReflections = [],
+    isLoading: reflectionsLoading,
+    isError: reflectionsError,
+    refetch: refetchReflections,
+  } = trpc.comments.getApprovedForHomepage.useQuery({ language, limit: 3 });
 
   return (
-    <>
-      {/* Custom cursor */}
-      <CustomCursor />
+    <div className="reference-vault-home min-h-screen overflow-x-clip bg-background text-foreground" dir={isRTL ? "rtl" : "ltr"} data-home-release="reference-vault-v1">
+      <Header />
 
-      {/* Scroll progress bar */}
-      <ScrollProgress />
+      <main>
+        <section className="reference-vault-hero" aria-label={isRTL ? "مدخل المجموعة الملكية" : "Royal collection opening"}>
+          <div className={`reference-vault-hero__prologue ${isRTL ? "text-right" : "text-left"}`} aria-label={isRTL ? "تعريف المتحف الخاص للساعات" : "Private horology museum introduction"}>
+            <span className="reference-vault-hero__prologue-mark" aria-hidden="true">RRR</span>
+            <div>
+              <p className="reference-vault-hero__prologue-kicker">{isRTL ? "متحف الساعات الخاص" : "THE PRIVATE HOROLOGY MUSEUM"}</p>
+              <p className="reference-vault-hero__prologue-name">{isRTL ? "من محفوظات صاحب السمو الشيخ عمار بن حميد النعيمي" : "From the archive of His Highness Sheikh Ammar bin Humaid Al Nuaimi"}</p>
+            </div>
+            <a href="#watch-stories" className="reference-vault-hero__prologue-entry">{isRTL ? "ادخل إلى الحكاية" : "Enter the story"}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          </div>
+          <ArchiveStorySlideshow />
+          <dl className={`reference-vault-hero__metrics ${isRTL ? "text-right" : "text-left"}`} aria-label={isRTL ? "مقياس الأرشيف" : "Archive measures"}>
+            <div>
+              <dt>{isRTL ? "سجلات الأرشيف" : "ARCHIVE RECORDS"}</dt>
+              <dd>{archiveRecords.length || "—"}</dd>
+            </div>
+            <div>
+              <dt>{isRTL ? "الدور" : "MAISONS"}</dt>
+              <dd>{maisons.length || "—"}</dd>
+            </div>
+            <div>
+              <dt>{isRTL ? "حدود التحرير" : "EDITORIAL BOUNDARY"}</dt>
+              <dd className="reference-vault-hero__metric-word">{isRTL ? "موثق" : "SOURCED"}</dd>
+            </div>
+          </dl>
+        </section>
 
-      <div className="min-h-screen bg-[#0a0a0a]">
-        <Header />
+        <section className="editorial-entry-guide border-b border-primary/15 px-4 py-8 md:py-10" aria-label={isRTL ? "دليل البداية" : "Journey guide"}>
+          <div className="container mx-auto">
+            <div className={`grid gap-px overflow-hidden border border-primary/25 bg-primary/25 md:grid-cols-3 ${isRTL ? "text-right" : "text-left"}`}>
+              <a href="#watch-stories" className="editorial-entry-guide__step group bg-background/90 p-5 transition-colors hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
+                <span className="editorial-entry-guide__index">01</span>
+                <span className="editorial-entry-guide__label">{isRTL ? "ابدأ بقصص الساعات" : "Begin with the watch stories"}</span>
+                <span className="editorial-entry-guide__body">{isRTL ? "شاهد الدراسة المتحركة واختر السجل الذي يلفت انتباهك." : "Watch the opening sequence, then choose the record that draws you in."}</span>
+              </a>
+              <Link href="/collection" className="editorial-entry-guide__step group bg-background/90 p-5 transition-colors hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
+                <span className="editorial-entry-guide__index">02</span>
+                <span className="editorial-entry-guide__label">{isRTL ? "اقرأ أطلس الأرشيف" : "Read the archive atlas"}</span>
+                <span className="editorial-entry-guide__body">{isRTL ? "انتقل إلى السجلات، ثم صفِّها بحسب الدار أو السنة أو التصنيف." : "Move into the records and filter by maison, year, or classification."}</span>
+              </Link>
+              <Link href="/collection#collection-film" className="editorial-entry-guide__step group bg-background/90 p-5 transition-colors hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
+                <span className="editorial-entry-guide__index">03</span>
+                <span className="editorial-entry-guide__label">{isRTL ? "شاهد المرجع المصوّر" : "View the film reference"}</span>
+                <span className="editorial-entry-guide__body">{isRTL ? "مرجع فيديو خارجي منسوب بوضوح قبل الانتقال إلى الاستكشاف التفصيلي." : "An attributed external video reference before you continue into the full archive."}</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
-        {/* Hero Slideshow: Split-Screen Layout with Sheikh + Watch Images */}
-        <HeroSlideshowSplitScreen slides={slides} autoPlayMs={7000} />
-
-        {/* Sheikh Profile — bilingual split layout */}
-        <section className="py-24 px-4 border-b border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.025)' }}>
-          <div className="container max-w-7xl mx-auto">
-            <BillingualLayout
-              imageSrc="/images/sheikh/IMG_7787(1).png"
-              imageAlt={isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
-            >
-                <p className={`text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5 ${isRTL ? 'font-arabic' : ''}`}>
-                  {isRTL ? "المجمِّع الملكي" : "The Royal Collector"}
-                </p>
-                <div className={`flex items-center gap-4 mb-7 ${isRTL ? 'justify-end flex-row-reverse' : ''}`}>
-                  <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
-                  <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
-                </div>
-
-                <h2 className={`sheikh-name mb-3 ${isRTL ? 'font-arabic' : ''}`}>
-                  {isRTL ? "الشيخ عمار بن حميد النعيمي" : "Sheikh Ammar bin Humaid Al Nuaimi"}
+        <section id="archive-prelude" className={`archive-prelude relative overflow-hidden px-4 py-24 md:py-32 ${isRTL ? "text-left" : "text-left"}`} aria-labelledby="archive-prelude-heading">
+          <div className="container relative z-10 mx-auto">
+            <div className="grid gap-10 lg:grid-cols-[0.42fr_1fr_0.58fr] lg:items-end">
+              <div className={`archive-prelude__index ${isRTL ? "lg:order-3" : ""}`} aria-hidden="true">
+                <span>01</span>
+                <i />
+                <small>{isRTL ? "البداية" : "THE OPENING"}</small>
+              </div>
+              <div className={isRTL ? "lg:order-2" : ""}>
+                <p className="ornament-line">{isRTL ? "مدخل الأرشيف" : "THE ARCHIVE PRELUDE"}</p>
+                <h2 id="archive-prelude-heading" className="section-heading mt-6 max-w-4xl text-foreground">
+                  {isRTL ? "يبدأ الأرشيف بظهور علني، لا بفرضية." : "The archive begins with a public appearance, not an assumption."}
                 </h2>
-                <p className={`sheikh-title mb-8 ${isRTL ? 'font-arabic' : ''}`}>
-                  {isRTL ? "ولي عهد عجمان — جامع الساعات الملكي" : "Crown Prince of Ajman — Royal Horologist"}
-                </p>
-
-                <p className={`sheikh-bio text-[#f5f2e8]/65 mb-10 ${isRTL ? 'font-arabic' : ''}`}>
+              </div>
+              <div className={`${isRTL ? "lg:order-1" : ""} border-primary/35 ${isRTL ? "border-l pl-6" : "border-l pl-6"}`}>
+                <p className="text-lg leading-8 text-muted-foreground">
                   {isRTL
-                    ? "يجسّد سمو الشيخ عمار بن حميد النعيمي قيم التراث والابتكار في عالم الساعات الفاخرة. مجموعته الملكية، التي تضم أكثر من 34 قطعة استثنائية من أعرق دور صناعة الساعات في العالم، هي شهادة حية على الذوق الرفيع والعين الثاقبة للجمال."
-                    : "His Highness Sheikh Ammar bin Humaid Al Nuaimi embodies the values of heritage and innovation in the world of fine horology. His Royal Collection — over 34 exceptional timepieces from the world's most distinguished maisons — stands as a testament to refined taste and a discerning eye for beauty."}
+                    ? "كل سجل يفصل بين ما شوهد علناً، وما تؤكده الدار المصنعة، وما لم تثبته المصادر بعد. هذه الدقة هي ما يمنح المجموعة حضورها."
+                    : "Each record separates what was seen publicly, what the maison confirms, and what evidence does not yet establish. That discipline is what gives the archive its presence."}
                 </p>
-
-                {/* Stats */}
-                <div
-                  className="grid grid-cols-3 gap-6 mb-10 py-8 border-y"
-                  style={{ borderColor: 'rgba(212,175,55,0.15)' }}
-                >
-                  {[
-                    { value: '34+', labelEn: 'Rare Pieces', labelAr: 'قطعة نادرة' },
-                    { value: '$10M+', labelEn: 'Collection Value', labelAr: 'قيمة المجموعة' },
-                    { value: '15+', labelEn: 'Limited Editions', labelAr: 'إصدارات محدودة' },
-                  ].map((stat, idx) => (
-                    <div key={idx} className="text-center">
-                      <span className="sheikh-stat-value">{stat.value}</span>
-                      <span className={`sheikh-stat-label ${isRTL ? 'font-arabic' : ''}`}>
-                        {isRTL ? stat.labelAr : stat.labelEn}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* CTAs */}
-                <div className={`flex flex-wrap gap-4 ${isRTL ? 'justify-end' : ''}`}>
-                  <Link href="/collections">
-                    <button
-                      className={`px-8 py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 hover:opacity-90 ${isRTL ? 'font-arabic' : ''}`}
-                      style={{ background: '#d4af37', color: '#0a0a0a', boxShadow: '0 4px 20px rgba(212,175,55,0.3)' }}
-                    >
-                      {isRTL ? "استعرض المجموعة" : "View Collection"}
-                    </button>
-                  </Link>
-                  <Link href="/sheikh-gallery">
-                    <button
-                      className={`px-8 py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 hover:border-[#d4af37]/70 hover:text-[#f5f2e8] ${isRTL ? 'font-arabic' : ''}`}
-                      style={{ background: 'transparent', color: '#d4af37', border: '1px solid rgba(212,175,55,0.4)' }}
-                    >
-                      {isRTL ? "معرض الصور" : "Photo Gallery"}
-                    </button>
-                  </Link>
-                </div>
-            </BillingualLayout>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Collector's Story — personal imagery (father + MBZ) + editorial text */}
-        <CollectorStory />
-
-        {/* Explore More Collection */}
-        <ExploreMoreCollection />
-
-            {/* Featured Brands Section */}
-            <section className="py-24 bg-[#0a0a0a]">
-              <div className="container">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="text-center mb-16"
-                >
-                  <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5">
-                    {isRTL ? "البيوت العريقة" : "The Maisons"}
-                  </p>
-                  <div className="flex items-center justify-center gap-4 mb-7">
-                    <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
-                    <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
-                  </div>
-                  <h2
-                    className={`text-[#f5f2e8] mb-4 ${isRTL ? "font-arabic" : ""}`}
-                    style={{
-                      fontFamily: isRTL ? undefined : 'Playfair Display, serif',
-                      fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                      fontWeight: 600,
-                      lineHeight: 1.15,
-                      letterSpacing: '-0.015em',
-                    }}
-                  >
-                    {t("home.featuredBrands")}
-                  </h2>
-                  <p className={`text-[#f5f2e8]/55 ${isRTL ? "font-arabic" : ""}`} style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)' }}>
-                    {t("home.discoverWatchmakers")}
-                  </p>
-                </motion.div>
-
-                {/* Brands Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { name: "Patek Philippe", nameAr: "باتيك فيليب", year: "1839", slug: "patek-philippe" },
-                    { name: "Richard Mille", nameAr: "ريتشارد ميل", year: "2001", slug: "richard-mille" },
-                    { name: "F.P. Journe", nameAr: "إف.بي. جورن", year: "1999", slug: "fp-journe" },
-                    { name: "Audemars Piguet", nameAr: "أوديمار بيغيه", year: "1875", slug: "audemars-piguet" },
-                    { name: "Rolex", nameAr: "رولكس", year: "1905", slug: "rolex" },
-                    { name: "H. Moser & Cie", nameAr: "هـ. موزر وشركاه", year: "1828", slug: "h-moser-cie" },
-                    { name: "Tudor", nameAr: "تيودور", year: "1926", slug: "tudor" },
-                    { name: "Artisans de Genève", nameAr: "أرتيزانس دو جنيف", year: "2011", slug: "artisans-de-geneve" },
-                  ].map((brand, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: idx * 0.07 }}
-                      viewport={{ once: true }}
-                    >
-                      <Link href={`/collection/${brand.slug}`}>
-                        <div
-                          className="rounded-xl p-5 cursor-pointer group transition-all duration-300 text-center"
-                          style={{
-                            background: 'rgba(17, 20, 26, 0.5)',
-                            backdropFilter: 'blur(12px)',
-                            border: '1px solid rgba(212, 175, 55, 0.12)',
-                          }}
-                        >
-                          <div
-                            className="text-[2rem] font-serif leading-none text-center mb-3 select-none pointer-events-none"
-                            style={{ color: 'rgba(212,175,55,0.07)' }}
-                            aria-hidden="true"
-                          >
-                            {String(idx + 1).padStart(2, '0')}
-                          </div>
-                          <h3
-                            className="font-semibold text-[#d4af37] mb-1.5 group-hover:text-[#f5f2e8] transition-colors duration-300 leading-tight"
-                            style={{
-                              fontFamily: isRTL ? undefined : 'Playfair Display, serif',
-                              fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
-                            }}
-                          >
-                            {isRTL ? brand.nameAr : brand.name}
-                          </h3>
-                          <p className="text-[11px] text-[#f5f2e8]/30 tracking-wider">Est. {brand.year}</p>
-                          <div className="h-px w-6 bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent mx-auto mt-3 group-hover:w-10 transition-all duration-300" />
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
+        <section className="collection-constellation relative overflow-hidden px-4 py-24 md:py-32" aria-labelledby="constellation-paths-heading">
+          <div className="collection-constellation__grid" aria-hidden="true" />
+          <div className="container relative z-10 mx-auto">
+            <div className={`mb-12 flex flex-col justify-between gap-7 md:flex-row md:items-end ${isRTL ? "md:flex-row-reverse" : ""}`}>
+              <div className={isRTL ? "text-left" : "text-left"}>
+                <p className="ornament-line">{isRTL ? "مسارات في الزمن" : "PATHWAYS THROUGH TIME"}</p>
+                <h2 id="constellation-paths-heading" className="section-heading mt-5 max-w-3xl text-secondary-foreground">
+                  {isRTL ? "ثلاث طرق للدخول إلى الحكاية." : "Three ways into the story."}
+                </h2>
               </div>
-            </section>
-
-            {/* Collection Stats */}
-            <section className="py-20 border-y border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.04)' }}>
-              <div className="container">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                  {[
-                    { label: isRTL ? "ساعة فاخرة" : "Luxury Watches", value: "34+", sub: isRTL ? "قطعة" : "pieces" },
-                    { label: isRTL ? "دور صناعة" : "Maisons", value: "8", sub: isRTL ? "بيت عريق" : "houses" },
-                    { label: isRTL ? "القيمة الإجمالية" : "Total Value", value: "$10M+", sub: isRTL ? "تقديري" : "estimated" },
-                    { label: isRTL ? "إصدارات محدودة" : "Limited Editions", value: "15+", sub: isRTL ? "قطعة نادرة" : "rare pieces" },
-                  ].map((stat, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: idx * 0.1 }}
-                      viewport={{ once: true }}
-                      className="text-center"
-                    >
-                      <div
-                        className="mb-1"
-                        style={{
-                          fontFamily: isRTL ? undefined : 'Playfair Display, serif',
-                          fontSize: 'clamp(2rem, 5vw, 3rem)',
-                          fontWeight: 700,
-                          background: 'linear-gradient(135deg, #C9A961 0%, #D4B896 50%, #A67C52 100%)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                        }}
-                      >
-                        {stat.value}
-                      </div>
-                      <p className={`text-[#f5f2e8]/65 text-sm ${isRTL ? "font-arabic" : ""}`}>{stat.label}</p>
-                      <p className="text-[#f5f2e8]/25 text-[11px] tracking-widest uppercase mt-0.5">{stat.sub}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Collection Intro */}
-            <section className="py-24 bg-[#0a0a0a]">
-              <div className="container">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                  className="max-w-3xl mx-auto text-center"
-                >
-                  <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-5">
-                    {isRTL ? "المجموعة" : "The Collection"}
-                  </p>
-                  <div className="flex items-center justify-center gap-4 mb-7">
-                    <div className="h-px w-14 bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/65 rotate-45" />
-                    <div className="h-px w-14 bg-gradient-to-l from-transparent to-[#d4af37]/50" />
-                  </div>
-                  <h2
-                    className={`text-[#f5f2e8] mb-6 ${isRTL ? "font-arabic" : ""}`}
-                    style={{
-                      fontFamily: isRTL ? undefined : 'Playfair Display, serif',
-                      fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                      fontWeight: 600,
-                      lineHeight: 1.15,
-                      letterSpacing: '-0.015em',
-                    }}
-                  >
-                    {t("home.collectionTitle")}
-                  </h2>
-
-                  <p
-                    className="text-[#f5f2e8]/60 mb-10 leading-loose"
-                    dir={isRTL ? "rtl" : "ltr"}
-                    style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)', lineHeight: 1.85 }}
-                  >
-                    {isRTL
-                      ? COLLECTION_INTRO.descriptionAr
-                      : COLLECTION_INTRO.descriptionEn}
-                  </p>
-
-                  <Link href="/collections">
-                    <Button
-                      className={`font-semibold px-9 py-6 text-base inline-flex items-center gap-2.5 transition-all duration-300 ${isRTL ? "font-arabic" : ""}`}
-                      style={{
-                        background: '#d4af37',
-                        color: '#0a0a0a',
-                        border: '1px solid rgba(212,175,55,0.8)',
-                        boxShadow: '0 4px 20px rgba(212,175,55,0.25)',
-                      }}
-                    >
-                      {t("common.exploreCollection")}
-                      {isRTL ? null : <ArrowRight className="w-4 h-4" />}
-                    </Button>
-                  </Link>
-                </motion.div>
-              </div>
-            </section>
-
-        {/* Newsletter Section */}
-        <section className="py-24 border-t border-[#d4af37]/15" style={{ background: 'rgba(212, 175, 55, 0.035)' }} dir={isRTL ? "rtl" : "ltr"}>
-          <div className="container max-w-xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#d4af37]/08 rounded-full border border-[#d4af37]/25 mb-6">
-                <Mail className="w-6 h-6 text-[#d4af37]" />
-              </div>
-              <p className="text-[11px] text-[#d4af37] font-semibold tracking-[0.45em] uppercase mb-4">
-                {isRTL ? "النشرة البريدية" : "Newsletter"}
+              <p className={`max-w-md text-base leading-7 text-secondary-foreground/72 ${isRTL ? "text-left" : "text-left"}`}>
+                {isRTL
+                  ? "اختر المسار الذي يلفت نظرك، ثم دع السجل يقودك من التفاصيل إلى المعنى."
+                  : "Choose the path that catches your eye, then let the record lead from detail toward meaning."}
               </p>
-              <h2
-                className={`text-[#f5f2e8] mb-3 ${isRTL ? "font-arabic" : ""}`}
-                style={{
-                  fontFamily: isRTL ? undefined : 'Playfair Display, serif',
-                  fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-                  fontWeight: 600,
-                  lineHeight: 1.2,
-                }}
-              >
-                {t("home.newsletterTitle")}
-              </h2>
-              <p className={`text-[#f5f2e8]/50 mb-8 leading-relaxed text-sm ${isRTL ? "font-arabic" : ""}`}>
-                {t("home.newsletterSubtitle")}
-              </p>
-              {subscribed ? (
-                <p className={`text-[#d4af37] font-semibold text-lg ${isRTL ? "font-arabic" : ""}`}>
-                  {language === "ar" ? "شكراً على اشتراكك!" : "Thank you for subscribing!"}
-                </p>
-              ) : (
-                <form
-                  className="flex gap-3 max-w-sm mx-auto"
-                  dir={isRTL ? "rtl" : "ltr"}
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (!email) return;
-                    subscribeMutation.mutate({ email });
-                  }}
-                >
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t("common.emailPlaceholder")}
-                    className="bg-[#1a1a1a] border-[#d4af37]/30 text-[#f5f2e8] placeholder:text-[#f5f2e8]/30 focus:border-[#d4af37] flex-1"
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    className={`bg-[#d4af37] hover:bg-[#f5f2e8] text-black font-semibold transition-all ${isRTL ? "font-arabic" : ""}`}
-                    disabled={subscribeMutation.isPending}
-                  >
-                    {subscribeMutation.isPending
-                      ? "..."
-                      : t("common.subscribe")}
-                  </Button>
-                </form>
-              )}
-            </motion.div>
+            </div>
+
+            <div className="grid gap-px overflow-hidden border border-primary/25 bg-primary/25 md:grid-cols-3">
+              {pathwayCards.map((card) => (
+                <Link key={card.href} href={card.href} className={`collection-constellation__card group ${isRTL ? "text-left" : "text-left"}`}>
+                  <span className="collection-constellation__number">{card.index}</span>
+                  <div className="relative z-10 mt-20">
+                    <h3 className="text-3xl leading-tight text-secondary-foreground md:text-4xl">
+                      {isRTL ? card.arTitle : card.enTitle}
+                    </h3>
+                    <p className="mt-4 max-w-sm text-base leading-7 text-secondary-foreground/70">
+                      {isRTL ? card.arBody : card.enBody}
+                    </p>
+                    <span className="mt-9 inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-primary">
+                      {isRTL ? "افتح المسار" : "OPEN PATH"}
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
-        <Footer />
-      </div>
-    </>
+        <section className={`relative overflow-hidden border-b border-primary/15 bg-card/35 px-4 py-24 md:py-32 ${isRTL ? "text-left" : "text-left"}`} aria-labelledby="reader-reflections-heading">
+          <div className="container mx-auto">
+            <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+              <div className={isRTL ? "lg:order-2" : ""}>
+                <p className="ornament-line">{isRTL ? "ملاحظات موثقة" : "EDITOR-REVIEWED NOTES"}</p>
+                <h2 id="reader-reflections-heading" className="section-heading mt-5 text-foreground">
+                  {isRTL ? "انطباعات القرّاء" : "Reader reflections"}
+                </h2>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
+                  {isRTL
+                    ? "تُعرض هنا الملاحظات التي وافق عليها المحررون فقط، وباللغة التي كُتبت بها. لا تُنشئ هذه الصفحة شهادات أو مراجعات مسبقة."
+                    : "Only editor-approved notes appear here, in the language in which they were written. This archive does not pre-populate testimonials or reviews."}
+                </p>
+              </div>
+
+              <div className={`grid gap-4 sm:grid-cols-2 ${isRTL ? "lg:order-1" : ""}`} aria-live="polite">
+                {reflectionsLoading ? (
+                  <div className="luxury-panel col-span-full border-primary/25 bg-card/55 p-7 text-muted-foreground" aria-busy="true">
+                    {isRTL ? "يجري تحميل الملاحظات المعتمدة…" : "Loading approved reflections…"}
+                  </div>
+                ) : reflectionsError ? (
+                  <div className="luxury-panel col-span-full border-primary/30 bg-card/55 p-7">
+                    <p className="text-muted-foreground">
+                      {isRTL ? "تعذر تحميل الملاحظات المعتمدة مؤقتاً." : "Approved reflections are temporarily unavailable."}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => void refetchReflections()}
+                      className="mt-4 rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+                    >
+                      {isRTL ? "إعادة المحاولة" : "Try again"}
+                    </button>
+                  </div>
+                ) : approvedReflections.length > 0 ? (
+                  approvedReflections.map((reflection) => (
+                    <blockquote key={reflection.id} className="luxury-panel flex min-h-56 flex-col border-primary/25 bg-card/55 p-7 text-foreground">
+                      <Quote className={`h-6 w-6 text-primary/80 ${isRTL ? "self-end" : ""}`} aria-hidden="true" />
+                      <p className="mt-5 flex-1 text-lg leading-8 text-foreground/90">{reflection.body}</p>
+                      <footer className="mt-6 border-t border-primary/15 pt-4 text-xs font-semibold tracking-[0.14em] text-primary">
+                        {isRTL ? "ملاحظة معتمدة" : "APPROVED REFLECTION"}
+                      </footer>
+                    </blockquote>
+                  ))
+                ) : (
+                  <div className="luxury-panel col-span-full border-primary/25 bg-card/55 p-7 text-muted-foreground">
+                    <p>{isRTL ? "لا توجد انطباعات معتمدة منشورة بهذه اللغة حتى الآن." : "No approved reflections are published in this language yet."}</p>
+                    <Link href="/collection" className="mt-4 inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline">
+                      {isRTL ? "استكشف السجلات الموثقة" : "Explore documented records"}
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className={`relative overflow-hidden border-b border-primary/15 bg-[color:var(--nocturne-olive)] px-4 py-24 text-secondary-foreground md:py-32 ${isRTL ? "text-left" : "text-left"}`} aria-labelledby="maison-film-heading">
+          <div className="container relative z-10 mx-auto">
+            <div className={`grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-center ${isRTL ? "lg:grid-cols-[1.16fr_0.84fr]" : ""}`}>
+              <div className={isRTL ? "lg:order-2" : ""}>
+                <p className="ornament-line text-primary">{isRTL ? "خاتمة الرحلة" : "A CLOSING STUDY"}</p>
+                <h2 id="maison-film-heading" className="section-heading mt-5 text-secondary-foreground">
+                  {isRTL ? "الفيلم الذي يعود إلى الصمت." : "A film that returns to silence."}
+                </h2>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-secondary-foreground/75">
+                  {isRTL
+                    ? "فيلم أرشيفي بتعليق عربي أصلي، يجمع بين دراسة تجريدية للحرفة والتسلسل السينمائي المعتمد في هذا الأرشيف. لا يضيف هذا الفيلم ادعاءات عن الملكية أو الجرد أو التوافر."
+                    : "An Arabic-narrated archival study, bringing an abstract meditation on craft together with the approved cinematic sequence in this archive. The film adds no claim of ownership, inventory, or availability."}
+                </p>
+                <div className={`mt-8 flex flex-wrap gap-x-5 gap-y-3 text-xs leading-6 text-secondary-foreground/55 ${isRTL ? "flex-row-reverse" : ""}`}>
+                  <span>{isRTL ? "المراجع العامة المعتمدة في المسار الختامي:" : "Public references credited in the closing pathway:"}</span>
+                  <a href="https://youtu.be/P3mrmovvtn8w" target="_blank" rel="noreferrer" className="text-primary transition-colors hover:text-primary/75">
+                    {isRTL ? "يا عمار الخير — Ajman Media" : "Ya Ammar Al Khair — Ajman Media"}
+                  </a>
+                  <a href="https://youtu.be/Air31Kly7Ys" target="_blank" rel="noreferrer" className="text-primary transition-colors hover:text-primary/75">
+                    {isRTL ? "مرجع IFL Watches الخارجي" : "IFL Watches external reference"}
+                  </a>
+                </div>
+              </div>
+              <div className={`overflow-hidden rounded-xl border border-primary/35 bg-background/20 shadow-[0_28px_80px_rgba(0,0,0,0.34)] ${isRTL ? "lg:order-1" : ""}`}>
+                <video
+                  className="aspect-video w-full object-cover"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  aria-describedby="maison-film-heading"
+                >
+                  <source src="/manus-storage/royal-horology-maison-film-arabic_5df9808d.mp4" type="video/mp4" />
+                  {isRTL ? "المتصفح لا يدعم تشغيل الفيديو." : "Your browser does not support embedded video."}
+                </video>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <NewsletterSignup />
+      <Footer />
+    </div>
   );
 }

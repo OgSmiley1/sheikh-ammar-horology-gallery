@@ -1,4 +1,5 @@
 import { eq, desc, and, sql } from "drizzle-orm";
+import { randomBytes } from "node:crypto";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   InsertUser,
@@ -11,8 +12,6 @@ import {
   adminUsers,
   adminActivityLog,
   videoBackgrounds,
-  subscribers,
-  movementLayers,
   InsertBrand,
   InsertWatch,
   InsertWatchImage,
@@ -21,32 +20,23 @@ import {
   InsertAdminUser,
   InsertAdminActivityLog,
   InsertVideoBackground,
-  InsertMovementLayer,
+  contactMessages,
+  InsertContactMessage,
+  watchComments,
+  InsertWatchComment,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
-import { getFallbackBrands, getFallbackWatches } from "./seed-fallback";
 
 let _db: ReturnType<typeof drizzle> | null = null;
-let _dbAttempted = false;
 
 // Lazily create the drizzle instance so local tooling can run without a DB.
-// Only attempts connection once — if it fails, all subsequent calls use fallback.
 export async function getDb() {
-  if (_dbAttempted) return _db;
-
-  if (process.env.DATABASE_URL) {
-    _dbAttempted = true;
+  if (!_db && process.env.DATABASE_URL) {
     try {
       _db = drizzle(process.env.DATABASE_URL);
-      // Test the connection with a simple query
-      console.log("[Database] Connected successfully.");
     } catch (error) {
-      console.warn("[Database] Connection failed — using seed-data fallback.", (error as Error).message || error);
       _db = null;
     }
-  } else {
-    _dbAttempted = true;
-    console.log("[Database] No DATABASE_URL set — using seed-data fallback.");
   }
   return _db;
 }
@@ -62,7 +52,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot upsert user: database not available");
     return;
   }
 
@@ -109,7 +98,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       set: updateSet,
     });
   } catch (error) {
-    console.error("[Database] Failed to upsert user:", error);
     throw error;
   }
 }
@@ -117,7 +105,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get user: database not available");
     return undefined;
   }
 
@@ -132,7 +119,7 @@ export async function getUserByOpenId(openId: string) {
 
 export async function getAllBrands() {
   const db = await getDb();
-  if (!db) return getFallbackBrands();
+  if (!db) return [];
 
   return await db
     .select()
@@ -143,10 +130,7 @@ export async function getAllBrands() {
 
 export async function getBrandBySlug(slug: string) {
   const db = await getDb();
-  if (!db) {
-    const fb = getFallbackBrands().find((b) => b.slug === slug);
-    return fb ?? null;
-  }
+  if (!db) return null;
 
   const result = await db
     .select()
@@ -171,13 +155,7 @@ export async function createBrand(brand: InsertBrand) {
 
 export async function getAllWatches() {
   const db = await getDb();
-  if (!db) {
-    const all = getFallbackWatches();
-    return all.sort((a, b) => {
-      if (a.isFeatured !== b.isFeatured) return a.isFeatured ? -1 : 1;
-      return a.displayOrder - b.displayOrder;
-    });
-  }
+  if (!db) return [];
 
   return await db
     .select()
@@ -188,11 +166,7 @@ export async function getAllWatches() {
 
 export async function getWatchesByBrand(brandId: number) {
   const db = await getDb();
-  if (!db) {
-    return getFallbackWatches()
-      .filter((w) => w.brandId === brandId)
-      .sort((a, b) => a.displayOrder - b.displayOrder);
-  }
+  if (!db) return [];
 
   return await db
     .select()
@@ -203,10 +177,7 @@ export async function getWatchesByBrand(brandId: number) {
 
 export async function getWatchBySlug(slug: string) {
   const db = await getDb();
-  if (!db) {
-    const fb = getFallbackWatches().find((w) => w.slug === slug);
-    return fb ?? null;
-  }
+  if (!db) return null;
 
   const result = await db
     .select()
@@ -219,12 +190,7 @@ export async function getWatchBySlug(slug: string) {
 
 export async function getFeaturedWatches(limit: number = 6) {
   const db = await getDb();
-  if (!db) {
-    return getFallbackWatches()
-      .filter((w) => w.isFeatured)
-      .sort((a, b) => a.displayOrder - b.displayOrder)
-      .slice(0, limit);
-  }
+  if (!db) return [];
 
   return await db
     .select()
@@ -283,28 +249,46 @@ export async function createWatchImage(image: InsertWatchImage) {
   return result;
 }
 
-export async function deleteWatchImage(imageId: number) {
+export type WatchImageUploadInput = {
+  imageBase64: string;
+  fileName: string;
+  mimeType: "image/jpeg" | "image/png" | "image/webp";
+  imageType: "studio" | "wrist" | "detail" | "movement";
+  captionEn?: string;
+  captionAr?: string;
+};
+
+export async function uploadWatchImages(watchId: number, inputs: WatchImageUploadInput[]) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  await db.delete(watchImages).where(eq(watchImages.id, imageId));
-}
 
-export async function getAllWatchImages() {
-  const db = await getDb();
-  if (!db) return [];
-  return await db
-    .select()
-    .from(watchImages)
-    .orderBy(desc(watchImages.createdAt));
-}
+  const { storagePut } = await import("./storage");
+  const lastImage = await db.select({ displayOrder: watchImages.displayOrder }).from(watchImages).where(eq(watchImages.watchId, watchId)).orderBy(desc(watchImages.displayOrder)).limit(1);
+  const firstDisplayOrder = (lastImage[0]?.displayOrder ?? -1) + 1;
+  const uploads = [];
 
-export async function getAllSheikhPhotosAdmin() {
-  const db = await getDb();
-  if (!db) return [];
-  return await db
-    .select()
-    .from(sheikhPhotos)
-    .orderBy(desc(sheikhPhotos.createdAt));
+  for (let index = 0; index < inputs.length; index += 1) {
+    const input = inputs[index];
+    const safeFileName = input.fileName.replace(/[^a-zA-Z0-9._-]/g, "-").slice(-120) || "watch-image";
+    const fileKey = `watch-galleries/${watchId}/${Date.now()}-${randomBytes(8).toString("hex")}-${safeFileName}`;
+    const imageBuffer = decodeGalleryImage(input.imageBase64);
+    const { url } = await storagePut(fileKey, imageBuffer, input.mimeType);
+    const image: InsertWatchImage = {
+      watchId,
+      imageUrl: url,
+      imageKey: fileKey,
+      imageType: input.imageType,
+      captionEn: input.captionEn,
+      captionAr: input.captionAr,
+      displayOrder: firstDisplayOrder + index,
+      fileSize: imageBuffer.length,
+      mimeType: input.mimeType,
+    };
+
+    uploads.push(await db.insert(watchImages).values(image));
+  }
+
+  return uploads;
 }
 
 // ============================================================================
@@ -315,18 +299,47 @@ export async function getSheikhPhotos(watchId?: number) {
   const db = await getDb();
   if (!db) return [];
 
+  const galleryPhotoFields = {
+    id: sheikhPhotos.id,
+    watchId: sheikhPhotos.watchId,
+    imageUrl: sheikhPhotos.imageUrl,
+    imageKey: sheikhPhotos.imageKey,
+    captionEn: sheikhPhotos.captionEn,
+    captionAr: sheikhPhotos.captionAr,
+    eventName: sheikhPhotos.eventName,
+    photoDate: sheikhPhotos.photoDate,
+    displayOrder: sheikhPhotos.displayOrder,
+    isActive: sheikhPhotos.isActive,
+    createdAt: sheikhPhotos.createdAt,
+    watchSlug: watches.slug,
+    watchNameEn: watches.nameEn,
+    watchNameAr: watches.nameAr,
+  };
+
   if (watchId) {
     return await db
-      .select()
+      .select(galleryPhotoFields)
       .from(sheikhPhotos)
+      .leftJoin(watches, eq(sheikhPhotos.watchId, watches.id))
       .where(and(eq(sheikhPhotos.watchId, watchId), eq(sheikhPhotos.isActive, true)))
       .orderBy(sheikhPhotos.displayOrder);
   }
 
   return await db
+    .select(galleryPhotoFields)
+    .from(sheikhPhotos)
+    .leftJoin(watches, eq(sheikhPhotos.watchId, watches.id))
+    .where(eq(sheikhPhotos.isActive, true))
+    .orderBy(sheikhPhotos.displayOrder);
+}
+
+export async function getAllSheikhPhotos() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
     .select()
     .from(sheikhPhotos)
-    .where(eq(sheikhPhotos.isActive, true))
     .orderBy(sheikhPhotos.displayOrder);
 }
 
@@ -336,6 +349,105 @@ export async function createSheikhPhoto(photo: InsertSheikhPhoto) {
 
   const result = await db.insert(sheikhPhotos).values(photo);
   return result;
+}
+
+export type SheikhPhotoUploadInput = {
+  imageBase64: string;
+  fileName: string;
+  mimeType: "image/jpeg" | "image/png" | "image/webp";
+  captionEn?: string;
+  captionAr?: string;
+  eventName?: string;
+  photoDate?: string;
+  watchId?: number;
+};
+
+function decodeGalleryImage(imageBase64: string) {
+  const commaIndex = imageBase64.indexOf(",");
+  if (commaIndex < 0) throw new Error("Invalid gallery image data");
+
+  const imageBuffer = Buffer.from(imageBase64.slice(commaIndex + 1), "base64");
+  if (!imageBuffer.length || imageBuffer.length > 12 * 1024 * 1024) {
+    throw new Error("Gallery images must be smaller than 12 MB");
+  }
+
+  return imageBuffer;
+}
+
+export async function uploadSheikhPhotos(inputs: SheikhPhotoUploadInput[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const { storagePut } = await import("./storage");
+  const lastPhoto = await db.select({ displayOrder: sheikhPhotos.displayOrder }).from(sheikhPhotos).orderBy(desc(sheikhPhotos.displayOrder)).limit(1);
+  const firstDisplayOrder = (lastPhoto[0]?.displayOrder ?? -1) + 1;
+  const uploads = [];
+
+  for (let index = 0; index < inputs.length; index += 1) {
+    const input = inputs[index];
+    const safeFileName = input.fileName.replace(/[^a-zA-Z0-9._-]/g, "-").slice(-120) || "gallery-image";
+    const fileKey = `sheikh-gallery/${Date.now()}-${randomBytes(8).toString("hex")}-${safeFileName}`;
+    const imageBuffer = decodeGalleryImage(input.imageBase64);
+    const { url } = await storagePut(fileKey, imageBuffer, input.mimeType);
+    const photo: InsertSheikhPhoto = {
+      imageUrl: url,
+      imageKey: fileKey,
+      captionEn: input.captionEn,
+      captionAr: input.captionAr,
+      eventName: input.eventName,
+      photoDate: input.photoDate ? new Date(input.photoDate) : undefined,
+      watchId: input.watchId,
+      displayOrder: firstDisplayOrder + index,
+      isActive: true,
+    };
+
+    uploads.push(await db.insert(sheikhPhotos).values(photo));
+  }
+
+  return uploads;
+}
+
+export async function uploadSheikhPhoto(input: SheikhPhotoUploadInput) {
+  const [upload] = await uploadSheikhPhotos([input]);
+  return upload;
+}
+
+export async function updateSheikhPhoto(id: number, input: any) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const updates: any = {};
+  if (input.captionEn !== undefined) updates.captionEn = input.captionEn;
+  if (input.captionAr !== undefined) updates.captionAr = input.captionAr;
+  if (input.eventName !== undefined) updates.eventName = input.eventName;
+  if (input.photoDate !== undefined) updates.photoDate = input.photoDate ? new Date(input.photoDate) : null;
+  if (input.watchId !== undefined) updates.watchId = input.watchId;
+  if (input.isActive !== undefined) updates.isActive = input.isActive;
+
+  const result = await db
+    .update(sheikhPhotos)
+    .set(updates)
+    .where(eq(sheikhPhotos.id, id));
+
+  return result;
+}
+
+export async function deleteSheikhPhoto(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.delete(sheikhPhotos).where(eq(sheikhPhotos.id, id));
+}
+
+export async function reorderSheikhPhotos(photoIds: number[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.transaction(async (tx) => {
+    for (let displayOrder = 0; displayOrder < photoIds.length; displayOrder += 1) {
+      await tx.update(sheikhPhotos).set({ displayOrder }).where(eq(sheikhPhotos.id, photoIds[displayOrder]));
+    }
+  });
 }
 
 // ============================================================================
@@ -375,7 +487,7 @@ export async function trackPageView(view: InsertPageView) {
   try {
     await db.insert(pageViews).values(view);
   } catch (error) {
-    console.error("[Database] Failed to track page view:", error);
+    // Silently fail to avoid blocking page loads
   }
 }
 
@@ -417,6 +529,103 @@ export async function getPageViewStats() {
     topWatches,
     topBrands,
   };
+}
+
+// ============================================================================
+// CONTACT MESSAGES
+// ============================================================================
+
+export async function createContactMessage(message: InsertContactMessage) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(contactMessages).values(message);
+}
+
+// ============================================================================
+// MODERATED WATCH COMMENTS
+// ============================================================================
+
+export async function getApprovedWatchComments(watchId: number, language: "en" | "ar") {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select({
+      id: watchComments.id,
+      body: watchComments.body,
+      createdAt: watchComments.createdAt,
+    })
+    .from(watchComments)
+    .where(and(
+      eq(watchComments.watchId, watchId),
+      eq(watchComments.language, language),
+      eq(watchComments.status, "approved"),
+    ))
+    .orderBy(desc(watchComments.createdAt))
+    .limit(20);
+}
+
+/**
+ * Returns a small, language-scoped selection of reflections that an administrator
+ * has explicitly approved. Author identifiers and pending or rejected entries are
+ * intentionally excluded from this public homepage feed.
+ */
+export async function getApprovedHomepageComments(language: "en" | "ar", limit: number = 3) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select({
+      id: watchComments.id,
+      body: watchComments.body,
+      createdAt: watchComments.createdAt,
+    })
+    .from(watchComments)
+    .where(and(
+      eq(watchComments.language, language),
+      eq(watchComments.status, "approved"),
+    ))
+    .orderBy(desc(watchComments.createdAt))
+    .limit(limit);
+}
+
+export async function createWatchComment(comment: InsertWatchComment) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(watchComments).values(comment);
+}
+
+export async function getPendingWatchComments(limit: number = 50) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select({
+      id: watchComments.id,
+      body: watchComments.body,
+      language: watchComments.language,
+      createdAt: watchComments.createdAt,
+      watchId: watchComments.watchId,
+      watchNameEn: watches.nameEn,
+      watchNameAr: watches.nameAr,
+    })
+    .from(watchComments)
+    .innerJoin(watches, eq(watchComments.watchId, watches.id))
+    .where(eq(watchComments.status, "pending"))
+    .orderBy(desc(watchComments.createdAt))
+    .limit(limit);
+}
+
+export async function moderateWatchComment(id: number, status: "approved" | "rejected") {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .update(watchComments)
+    .set({ status, reviewedAt: new Date() })
+    .where(eq(watchComments.id, id));
 }
 
 // ============================================================================
@@ -462,7 +671,7 @@ export async function logAdminActivity(activity: InsertAdminActivityLog) {
   try {
     await db.insert(adminActivityLog).values(activity);
   } catch (error) {
-    console.error("[Database] Failed to log admin activity:", error);
+    // Silently fail to avoid blocking admin operations
   }
 }
 
@@ -478,61 +687,6 @@ export async function getRecentAdminActivity(limit: number = 50) {
 }
 
 // ============================================================================
-// SUBSCRIBER MANAGEMENT
-// ============================================================================
-
-export async function addSubscriber(email: string, source = "website") {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-
-  // Upsert: if already subscribed, set to active
-  try {
-    await dbInstance
-      .insert(subscribers)
-      .values({ email, source, status: "active" })
-      .onDuplicateKeyUpdate({ set: { status: "active" } });
-    return { success: true };
-  } catch (error) {
-    console.error("[Database] Failed to add subscriber:", error);
-    throw error;
-  }
-}
-
-export async function getAllSubscribers() {
-  const dbInstance = await getDb();
-  if (!dbInstance) return [];
-  return await dbInstance
-    .select()
-    .from(subscribers)
-    .orderBy(desc(subscribers.createdAt));
-}
-
-export async function deleteSubscriber(id: number) {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-  await dbInstance.delete(subscribers).where(eq(subscribers.id, id));
-}
-
-export async function unsubscribe(email: string) {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-  await dbInstance
-    .update(subscribers)
-    .set({ status: "unsubscribed" })
-    .where(eq(subscribers.email, email));
-}
-
-export async function getSubscriberCount() {
-  const dbInstance = await getDb();
-  if (!dbInstance) return 0;
-  const result = await dbInstance
-    .select({ count: sql<number>`COUNT(*)` })
-    .from(subscribers)
-    .where(eq(subscribers.status, "active"));
-  return result[0]?.count ?? 0;
-}
-
-// ============================================================================
 // DELETE OPERATIONS
 // ============================================================================
 
@@ -545,80 +699,13 @@ export async function deleteWatch(watchId: number) {
   try {
     // Delete associated media first
     await dbInstance.delete(watchImages).where(eq(watchImages.watchId, watchId));
-
+    
     // Delete page views
     await dbInstance.delete(pageViews).where(eq(pageViews.watchId, watchId));
-
-    // Delete movement layers
-    await dbInstance.delete(movementLayers).where(eq(movementLayers.watchId, watchId));
-
+    
     // Delete the watch
     await dbInstance.delete(watches).where(eq(watches.id, watchId));
   } catch (error) {
-    console.error("[Database] Failed to delete watch:", error);
     throw error;
   }
-}
-
-// ============================================================================
-// MOVEMENT LAYERS
-// ============================================================================
-
-export async function getMovementLayersByWatch(watchId: number) {
-  const dbInstance = await getDb();
-  if (!dbInstance) return [];
-
-  return await dbInstance
-    .select()
-    .from(movementLayers)
-    .where(and(eq(movementLayers.watchId, watchId), eq(movementLayers.isActive, true)))
-    .orderBy(movementLayers.zIndex);
-}
-
-export async function getAllMovementLayersByWatch(watchId: number) {
-  const dbInstance = await getDb();
-  if (!dbInstance) return [];
-
-  return await dbInstance
-    .select()
-    .from(movementLayers)
-    .where(eq(movementLayers.watchId, watchId))
-    .orderBy(movementLayers.zIndex);
-}
-
-export async function createMovementLayer(layer: InsertMovementLayer) {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-
-  const result = await dbInstance.insert(movementLayers).values(layer);
-  return result;
-}
-
-export async function updateMovementLayer(id: number, data: Partial<InsertMovementLayer>) {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-
-  const result = await dbInstance
-    .update(movementLayers)
-    .set(data)
-    .where(eq(movementLayers.id, id));
-  return result;
-}
-
-export async function deleteMovementLayer(id: number) {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-
-  await dbInstance.delete(movementLayers).where(eq(movementLayers.id, id));
-}
-
-export async function reorderMovementLayers(layers: { id: number; zIndex: number }[]) {
-  const dbInstance = await getDb();
-  if (!dbInstance) throw new Error("Database not available");
-
-  await Promise.all(
-    layers.map(({ id, zIndex }) =>
-      dbInstance.update(movementLayers).set({ zIndex }).where(eq(movementLayers.id, id))
-    )
-  );
 }

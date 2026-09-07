@@ -50,7 +50,7 @@ export function CustomCursor() {
           mass: 0.5,
         }}
       >
-        <div className="w-full h-full rounded-full border-2 border-[#d4af37]" />
+        <div className="h-full w-full rounded-full border-2 border-primary" />
       </motion.div>
 
       {/* Light reflection */}
@@ -67,7 +67,7 @@ export function CustomCursor() {
         }}
       >
         <div
-          className="w-full h-full rounded-full bg-[#d4af37]"
+          className="h-full w-full rounded-full bg-primary"
           style={{
             boxShadow: '0 0 20px rgba(212, 175, 55, 0.8)',
           }}

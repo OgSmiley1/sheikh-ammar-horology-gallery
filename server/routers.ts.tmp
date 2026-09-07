@@ -1,0 +1,11 @@
+
+    reorderGalleryPhotos: publicProcedure
+      .input(z.object({ photoIds: z.array(z.number()) }))
+      .mutation(async ({ input, ctx }) => {
+        const adminCookie = ctx.req.cookies["admin_session"];
+        if (!adminCookie) {
+          throw new TRPCError({ code: "UNAUTHORIZED" });
+        }
+        await db.reorderSheikhPhotos(input.photoIds);
+        return { success: true };
+      }),

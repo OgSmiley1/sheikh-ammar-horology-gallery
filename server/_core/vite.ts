@@ -53,12 +53,26 @@ export function serveStatic(app: Express) {
       ? path.resolve(import.meta.dirname, "../..", "dist", "public")
       : path.resolve(import.meta.dirname, "public");
   if (!fs.existsSync(distPath)) {
-    console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
+    // Build directory not found - will serve index.html for SPA routing
   }
 
-  app.use(express.static(distPath));
+  app.use(express.static(distPath, {
+    index: false,
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".html")) {
+        res.setHeader("Cache-Control", "no-cache");
+        return;
+      }
+
+      const isFingerprintedAsset = /-[A-Za-z0-9_-]{8,}\.(?:js|css|svg|png|jpe?g|webp|woff2?)$/i.test(filePath);
+      res.setHeader(
+        "Cache-Control",
+        isFingerprintedAsset
+          ? "public, max-age=31536000, immutable"
+          : "public, max-age=3600",
+      );
+    },
+  }));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {

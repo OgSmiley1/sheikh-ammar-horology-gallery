@@ -22,7 +22,6 @@ export const SHEIKH_INFO = {
 export const NAV_ITEMS = {
   home: { en: "Home", ar: "الرئيسية" },
   collection: { en: "Collection", ar: "المجموعة" },
-  sheikhGallery: { en: "Sheikh with Watches", ar: "الشيخ مع الساعات" },
   brands: { en: "Brands", ar: "العلامات التجارية" },
   about: { en: "About", ar: "عن سموه" },
   admin: { en: "Admin", ar: "لوحة التحكم" },
@@ -51,8 +50,8 @@ export const WATCH_CATEGORIES = {
 } as const;
 
 export const ADMIN_CONFIG = {
-  username: "Moatg_123",
-  // Password: Smile@123 (hashed at server startup via ensureAdminUser migration)
+  username: "MOATH",
+  // Password will be hashed: MOATH123
 } as const;
 
 export const COLORS = {

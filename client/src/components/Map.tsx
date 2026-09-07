@@ -97,7 +97,9 @@ export function MapView({
           
           setTimeout(() => clearInterval(checkGoogle), 10000);
         })
-        .catch(error => console.error('Failed to fetch Google Maps script:', error));
+        .catch(() => {
+          // Failed to load Google Maps script
+        });
     } else {
       initMap();
     }
@@ -115,9 +117,7 @@ export function MapView({
         mapId: 'DEMO_MAP_ID',
       });
 
-      // TODO: Initialize services here if needed (e.g., new google.maps.Marker({ map: map.current, ... }))
-      // TODO: Add event listeners (e.g., map.current.addListener('click', ...))
-      
+      // Consumers can attach Google Maps services and event listeners through onMapReady.
       if (onMapReady) {
         onMapReady(map.current);
       }
@@ -125,7 +125,7 @@ export function MapView({
   }, []);
 
   useEffect(() => {
-    // TODO: Update map properties when props change
+    // Keep the instantiated map aligned with reactive center and zoom props.
     if (map.current) {
       map.current.setCenter(center);
       map.current.setZoom(zoom);

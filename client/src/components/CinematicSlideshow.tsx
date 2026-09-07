@@ -53,7 +53,7 @@ const useSwipe = (onSwipeLeft: () => void, onSwipeRight: () => void) => {
 export function CinematicSlideshow({ watches }: CinematicSlideshowProps) {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [dominantColor, setDominantColor] = useState('#0a0a0a');
+  const [dominantColor, setDominantColor] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [specsExpanded, setSpecsExpanded] = useState(false);
   const watchImageRef = useRef<HTMLImageElement>(null);
@@ -140,7 +140,7 @@ export function CinematicSlideshow({ watches }: CinematicSlideshowProps) {
     >
       <motion.div
         animate={{
-          background: `radial-gradient(ellipse at center, ${dominantColor}22 0%, #0a0a0a 70%)`,
+          background: `radial-gradient(ellipse at center, ${dominantColor ? `${dominantColor}22` : 'transparent'} 0%, var(--secondary) 70%)`,
         }}
         transition={{ duration: 1.5 }}
         className="slide-background"

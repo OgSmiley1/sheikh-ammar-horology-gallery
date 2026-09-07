@@ -2,19 +2,12 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
-import { parse as parseCookieHeader } from "cookie";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
-import { enrichWatchCollection } from "../migrations/enrichWatchCollection";
-import { fixPlaintextPasswords } from "../migrations/fixPlaintextPasswords";
-import { fixBrandAssignmentsAndData } from "../migrations/fixBrandAssignmentsAndData";
-import { ensureAdminUser } from "../migrations/ensureAdminUser";
-import { addBilingualSpecs } from "../migrations/addBilingualSpecs";
-import { registerUploadLocalRoutes } from "../uploadLocal";
-import { registerAdminUploadRoutes } from "../uploadAdmin";
+import { registerStorageProxy } from "./storageProxy";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -41,17 +34,10 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  // Populate req.cookies (no cookie-parser dependency — reuse the existing `cookie` package)
-  app.use((req, _res, next) => {
-    req.cookies = req.headers.cookie ? parseCookieHeader(req.headers.cookie) : {};
-    next();
-  });
+  // Managed web assets use non-enumerable storage keys routed through this proxy.
+  registerStorageProxy(app);
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
-  // Local file upload (no external services — writes to client/public/personal/)
-  registerUploadLocalRoutes(app);
-  // Admin image upload — writes to client/public/uploads/
-  registerAdminUploadRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",
@@ -71,37 +57,14 @@ async function startServer() {
   const port = await findAvailablePort(preferredPort);
 
   if (port !== preferredPort) {
-    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
 
-  // Security — hash any admin passwords stored as plaintext (runs first)
-  await fixPlaintextPasswords().catch((err) =>
-    console.error("[Security] fixPlaintextPasswords failed:", err)
-  );
-
-  // Ensure primary admin user exists with correct credentials
-  await ensureAdminUser().catch((err) =>
-    console.error("[Admin] ensureAdminUser failed:", err)
-  );
-
-  // Run one-time data enrichment migration (idempotent)
-  enrichWatchCollection().catch((err) =>
-    console.error("[Migration] enrichWatchCollection failed:", err)
-  );
-
-  // Fix brand assignments + fill missing watch data (idempotent)
-  fixBrandAssignmentsAndData().catch((err) =>
-    console.error("[Migration] fixBrandAssignmentsAndData failed:", err)
-  );
-
-  // Add bilingual spec columns + translate existing watch specs to Arabic
-  addBilingualSpecs().catch((err) =>
-    console.error("[Migration] addBilingualSpecs failed:", err)
-  );
-
   server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+    // Server started successfully
   });
 }
 
-startServer().catch(console.error);
+startServer().catch((error) => {
+  // Error starting server
+  process.exit(1);
+});

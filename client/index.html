@@ -3,19 +3,81 @@
 
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
-    <title>Sheikh Ammar bin Humaid Al Nuaimi — Royal Horology Collection</title>
-    <meta
-      name="description"
-      content="The Royal Horology Collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi — a curated bilingual gallery of the world's finest timepieces."
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="description" content="Explore Sheikh Ammar bin Humaid Al Nuaimi's exclusive collection of 30+ luxury timepieces from the world's finest watchmakers. Featuring Rolex, Patek Philippe, Richard Mille, and more." />
+    <meta name="keywords" content="luxury watches, timepieces, Sheikh Ammar, horology, watch collection, Rolex, Patek Philippe, Richard Mille, rare watches" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English, Arabic" />
+    <meta name="author" content="Sheikh Ammar bin Humaid Al Nuaimi" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://horologygal-es99fpfz.manus.space/" />
+    <meta property="og:title" content="Sheikh Ammar's Royal Horology Collection" />
+    <meta property="og:description" content="Discover an extraordinary collection of 30+ luxury watches valued at $5M+ from the world's finest watchmakers" />
+    <meta property="og:image" content="https://horologygal-es99fpfz.manus.space/og-image.png" />
+    <meta property="og:site_name" content="Sheikh Ammar Horology Gallery" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://horologygal-es99fpfz.manus.space/" />
+    <meta name="twitter:title" content="Sheikh Ammar's Royal Horology Collection" />
+    <meta name="twitter:description" content="Explore luxury timepieces from the world's finest watchmakers" />
+    <meta name="twitter:image" content="https://horologygal-es99fpfz.manus.space/og-image.png" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://horologygal-es99fpfz.manus.space/" />
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
+    <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    
+    <title>%VITE_APP_TITLE% | Royal Horology Collection</title>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sheikh Ammar Horology Gallery",
+      "url": "https://horologygal-es99fpfz.manus.space",
+      "logo": "%VITE_APP_LOGO%",
+      "description": "A world-class digital gallery showcasing the extraordinary watch collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi",
+      "founder": {
+        "@type": "Person",
+        "name": "Sheikh Ammar bin Humaid Al Nuaimi",
+        "title": "Crown Prince of Ajman"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AE"
+      },
+      "sameAs": [
+        "https://www.instagram.com",
+        "https://www.twitter.com"
+      ]
+    }
+    </script>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" as="image" href="%VITE_APP_LOGO%" />
+    
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script defer src="%VITE_ANALYTICS_ENDPOINT%/umami" data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   </body>
 
 </html>
