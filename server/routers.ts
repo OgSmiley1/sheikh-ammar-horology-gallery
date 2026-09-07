@@ -9,9 +9,31 @@ import * as bcrypt from "bcryptjs";
 import { TRPCError } from "@trpc/server";
 import { eq, desc, sql } from "drizzle-orm";
 import { watches, brands, pageViews } from "../drizzle/schema";
+import { adminMvpRouter } from "./routers/admin-mvp";
+import { csvImportRouter } from "./routers/csv-import";
+import { issueAdminSessionToken, verifyAdminSessionToken } from "./admin-session";
+
+async function requireVerifiedAdminSession(ctx: { req: { cookies?: Record<string, string | undefined> } }) {
+  const session = await verifyAdminSessionToken(ctx.req.cookies?.admin_session);
+  if (!session) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+  const admin = await db.getAdminUserByUsername(session.username);
+  if (!admin || admin.id !== session.id || admin.role !== session.role) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return admin;
+}
+
+const verifiedAdminProcedure = publicProcedure.use(async ({ ctx, next }) => {
+  await requireVerifiedAdminSession(ctx);
+  return next();
+});
 
 export const appRouter = router({
   system: systemRouter,
+  adminMvp: adminMvpRouter,
+  csvImport: csvImportRouter,
 
   auth: router({
     me: publicProcedure.query((opts) => opts.ctx.user),
@@ -139,7 +161,7 @@ export const appRouter = router({
         return result;
       }),
 
-    getRecentPageViews: publicProcedure
+    getRecentPageViews: verifiedAdminProcedure
       .input(z.object({ limit: z.number().default(20) }))
       .query(async ({ input }) => {
         const db = await getDb();
@@ -152,6 +174,72 @@ export const appRouter = router({
           .limit(input.limit);
 
         return result;
+      }),
+  }),
+
+  // ==========================================================================
+  // PUBLIC CORRESPONDENCE
+  // ==========================================================================
+
+  contact: router({
+    submit: publicProcedure
+      .input(
+        z.object({
+          name: z.string().trim().min(2).max(255),
+          email: z.string().trim().email().max(320),
+          subject: z.string().trim().max(255).optional(),
+          message: z.string().trim().min(10).max(4000),
+          language: z.enum(["en", "ar"]),
+          website: z.string().max(0).optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        // Honeypot submissions receive an indistinguishable success response.
+        if (input.website) return { success: true };
+
+        await db.createContactMessage({
+          name: input.name,
+          email: input.email,
+          subject: input.subject || null,
+          message: input.message,
+          language: input.language,
+        });
+
+        return { success: true };
+      }),
+  }),
+
+  // ===========================================================================
+  // MODERATED VISITOR COMMENTS
+  // ===========================================================================
+
+  comments: router({
+    getApprovedByWatch: publicProcedure
+      .input(z.object({ watchId: z.number().int().positive(), language: z.enum(["en", "ar"]) }))
+      .query(async ({ input }) => db.getApprovedWatchComments(input.watchId, input.language)),
+
+    getApprovedForHomepage: publicProcedure
+      .input(z.object({
+        language: z.enum(["en", "ar"]),
+        limit: z.number().int().min(1).max(6).default(3),
+      }))
+      .query(async ({ input }) => db.getApprovedHomepageComments(input.language, input.limit)),
+
+    submit: protectedProcedure
+      .input(z.object({
+        watchId: z.number().int().positive(),
+        body: z.string().trim().min(2).max(800),
+        language: z.enum(["en", "ar"]),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        await db.createWatchComment({
+          watchId: input.watchId,
+          userId: ctx.user.id,
+          body: input.body,
+          language: input.language,
+          status: "pending",
+        });
+        return { success: true };
       }),
   }),
 
@@ -198,14 +286,21 @@ export const appRouter = router({
           details: "Admin logged in",
         });
 
-        // Store admin session in cookie (simplified - in production use proper session management)
+        const adminSessionToken = await issueAdminSessionToken({
+          id: admin.id,
+          username: admin.username,
+          role: admin.role,
+        });
+
+        // Store a signed, time-limited administrator session in an HTTP-only cookie.
         ctx.res.cookie(
           "admin_session",
-          JSON.stringify({ id: admin.id, username: admin.username }),
+          adminSessionToken,
           {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
+            path: "/",
             maxAge: 24 * 60 * 60 * 1000, // 24 hours
           }
         );
@@ -224,18 +319,8 @@ export const appRouter = router({
 
     // Get current admin session
     me: publicProcedure.query(async ({ ctx }) => {
-      const adminCookie = ctx.req.cookies["admin_session"];
-      if (!adminCookie) {
-        return null;
-      }
-
       try {
-        const session = JSON.parse(adminCookie);
-        const admin = await db.getAdminUserByUsername(session.username);
-        if (!admin) {
-          return null;
-        }
-
+        const admin = await requireVerifiedAdminSession(ctx);
         return {
           id: admin.id,
           username: admin.username,
@@ -250,12 +335,12 @@ export const appRouter = router({
 
     // Admin logout
     logout: publicProcedure.mutation(({ ctx }) => {
-      ctx.res.clearCookie("admin_session");
+      ctx.res.clearCookie("admin_session", { path: "/" });
       return { success: true };
     }),
 
     // Get analytics for admin dashboard
-    getDashboardStats: publicProcedure.query(async () => {
+    getDashboardStats: verifiedAdminProcedure.query(async () => {
       const stats = await db.getPageViewStats();
       const allWatches = await db.getAllWatches();
       const allBrands = await db.getAllBrands();
@@ -269,14 +354,14 @@ export const appRouter = router({
     }),
 
     // Get recent activity
-    getRecentActivity: publicProcedure
+    getRecentActivity: verifiedAdminProcedure
       .input(z.object({ limit: z.number().optional() }).optional())
       .query(async ({ input }) => {
         return await db.getRecentAdminActivity(input?.limit);
       }),
 
     // Create new watch
-    createWatch: publicProcedure
+    createWatch: verifiedAdminProcedure
       .input(
         z.object({
           brandId: z.number(),
@@ -289,62 +374,54 @@ export const appRouter = router({
           storyEn: z.string().optional(),
           storyAr: z.string().optional(),
           material: z.string().optional(),
-          materialAr: z.string().optional(),
           dialColor: z.string().optional(),
-          dialColorAr: z.string().optional(),
           caseSize: z.string().optional(),
-          caseSizeAr: z.string().optional(),
           movement: z.string().optional(),
-          movementAr: z.string().optional(),
           complications: z.string().optional(),
-          complicationsAr: z.string().optional(),
           waterResistance: z.string().optional(),
-          waterResistanceAr: z.string().optional(),
           limitedEdition: z.boolean().optional(),
           productionQuantity: z.number().optional(),
           yearReleased: z.number().optional(),
           retailPrice: z.number().optional(),
           marketValue: z.number().optional(),
           rarity: z.string().optional(),
-          rarityAr: z.string().optional(),
           isFeatured: z.boolean().optional(),
           displayOrder: z.number().optional(),
         })
       )
       .mutation(async ({ input, ctx }) => {
-        // Check admin auth
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) {
-          throw new TRPCError({ code: "UNAUTHORIZED" });
-        }
-
+        const admin = await requireVerifiedAdminSession(ctx);
         const result = await db.createWatch(input);
 
         // Log activity
-        const session = JSON.parse(adminCookie);
-        const admin = await db.getAdminUserByUsername(session.username);
-        if (admin) {
-          await db.logAdminActivity({
-            adminUserId: admin.id,
-            action: "create",
-            entityType: "watch",
-            details: JSON.stringify({ name: input.nameEn, slug: input.slug }),
-          });
-        }
+        await db.logAdminActivity({
+          adminUserId: admin.id,
+          action: "create",
+          entityType: "watch",
+          details: JSON.stringify({ name: input.nameEn, slug: input.slug }),
+        });
 
         return { success: true, admin };
       }),
 
     // Delete watch
-    deleteWatch: publicProcedure
+    deleteWatch: verifiedAdminProcedure
       .input(z.object({ id: z.number() }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
+        const admin = await requireVerifiedAdminSession(ctx);
         await db.deleteWatch(input.id);
+        await db.logAdminActivity({
+          adminUserId: admin.id,
+          action: "delete",
+          entityType: "watch",
+          entityId: input.id,
+          details: "Watch deleted",
+        });
         return { success: true };
       }),
 
     // Update watch
-    updateWatch: publicProcedure
+    updateWatch: verifiedAdminProcedure
       .input(
         z.object({
           id: z.number(),
@@ -356,222 +433,99 @@ export const appRouter = router({
             storyEn: z.string().optional(),
             storyAr: z.string().optional(),
             material: z.string().optional(),
-            materialAr: z.string().optional(),
             dialColor: z.string().optional(),
-            dialColorAr: z.string().optional(),
             caseSize: z.string().optional(),
-            caseSizeAr: z.string().optional(),
             movement: z.string().optional(),
-            movementAr: z.string().optional(),
             complications: z.string().optional(),
-            complicationsAr: z.string().optional(),
-            waterResistance: z.string().optional(),
-            waterResistanceAr: z.string().optional(),
-            powerReserve: z.string().optional(),
-            retailPrice: z.number().nullable().optional(),
-            marketValue: z.number().nullable().optional(),
-            yearReleased: z.number().nullable().optional(),
-            limitedEdition: z.boolean().optional(),
-            productionQuantity: z.number().nullable().optional(),
-            rarity: z.string().optional(),
-            rarityAr: z.string().optional(),
-            mainImageUrl: z.string().optional(),
+            retailPrice: z.number().optional(),
+            marketValue: z.number().optional(),
             isFeatured: z.boolean().optional(),
             isActive: z.boolean().optional(),
-            displayOrder: z.number().optional(),
           }),
         })
       )
       .mutation(async ({ input, ctx }) => {
-        // Check admin auth
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) {
-          throw new TRPCError({ code: "UNAUTHORIZED" });
-        }
-
+        const admin = await requireVerifiedAdminSession(ctx);
         const result = await db.updateWatch(input.id, input.data);
 
         // Log activity
-        const session = JSON.parse(adminCookie);
-        const admin = await db.getAdminUserByUsername(session.username);
-        if (admin) {
-          await db.logAdminActivity({
-            adminUserId: admin.id,
-            action: "update",
-            entityType: "watch",
-            entityId: input.id,
-            details: JSON.stringify({ changes: input.data }),
-          });
-        }
+        await db.logAdminActivity({
+          adminUserId: admin.id,
+          action: "update",
+          entityType: "watch",
+          entityId: input.id,
+          details: JSON.stringify({ changes: input.data }),
+        });
 
         return { success: true, result };
       }),
 
-    // ── WATCH IMAGE MANAGEMENT ─────────────────────────────────────────────
-    addWatchImage: publicProcedure
-      .input(z.object({
-        watchId: z.number(),
-        imageUrl: z.string(),
-        imageKey: z.string(),
-        imageType: z.string().default("studio"),
-        captionEn: z.string().optional(),
-        captionAr: z.string().optional(),
-        displayOrder: z.number().optional(),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        const result = await db.createWatchImage(input);
-        return { success: true, result };
-      }),
-
-    deleteWatchImage: publicProcedure
-      .input(z.object({ id: z.number() }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        await db.deleteWatchImage(input.id);
-        return { success: true };
-      }),
-
-    // Get all images (for media library)
-    getAllImages: publicProcedure.query(async ({ ctx }) => {
-      const adminCookie = ctx.req.cookies["admin_session"];
-      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await db.getAllWatchImages();
+    getGalleryPhotos: publicProcedure.query(async () => {
+      return await db.getAllSheikhPhotos();
     }),
 
-    getAllSheikhPhotos: publicProcedure.query(async ({ ctx }) => {
-      const adminCookie = ctx.req.cookies["admin_session"];
-      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await db.getAllSheikhPhotosAdmin();
-    }),
-
-    // ── SUBSCRIBER MANAGEMENT ──────────────────────────────────────────────
-    getSubscribers: publicProcedure.query(async ({ ctx }) => {
-      const adminCookie = ctx.req.cookies["admin_session"];
-      if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await db.getAllSubscribers();
-    }),
-
-    deleteSubscriber: publicProcedure
-      .input(z.object({ id: z.number() }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        await db.deleteSubscriber(input.id);
-        return { success: true };
-      }),
-
-    getDashboardStatsWithSubs: publicProcedure.query(async () => {
-      const stats = await db.getPageViewStats();
-      const allWatches = await db.getAllWatches();
-      const allBrands = await db.getAllBrands();
-      const subCount = await db.getSubscriberCount();
-      return {
-        ...stats,
-        totalWatches: allWatches.length,
-        totalBrands: allBrands.length,
-        totalValue: allWatches.reduce((sum, w) => sum + (w.marketValue || 0), 0),
-        totalSubscribers: subCount,
-      };
-    }),
-
-    // ── MOVEMENT LAYER MANAGEMENT ──────────────────────────────────────────
-    getMovementLayers: publicProcedure
-      .input(z.object({ watchId: z.number() }))
-      .query(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        return await db.getAllMovementLayersByWatch(input.watchId);
-      }),
-
-    createMovementLayer: publicProcedure
+    uploadGalleryPhoto: verifiedAdminProcedure
       .input(z.object({
-        watchId: z.number(),
-        layerName: z.string(),
-        layerNameAr: z.string().optional(),
-        imageUrl: z.string(),
-        imageKey: z.string(),
-        zIndex: z.number().default(0),
-        animationType: z.enum(["rotate", "oscillate", "pulse", "none"]).default("none"),
-        animationDuration: z.string().default("4s"),
-        animationDelay: z.string().default("0s"),
-        rotationDirection: z.enum(["cw", "ccw"]).default("cw"),
-        isActive: z.boolean().default(true),
+        imageBase64: z.string().regex(/^data:image\/(?:jpeg|png|webp);base64,/),
+        fileName: z.string().trim().min(1).max(255),
+        mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]),
+        captionEn: z.string().trim().max(255).optional(),
+        captionAr: z.string().trim().max(255).optional(),
+        eventName: z.string().trim().max(255).optional(),
+        photoDate: z.string().date().optional(),
+        watchId: z.number().int().positive().optional(),
       }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        const result = await db.createMovementLayer(input);
-        return { success: true, result };
-      }),
-
-    updateMovementLayer: publicProcedure
-      .input(z.object({
-        id: z.number(),
-        data: z.object({
-          layerName: z.string().optional(),
-          layerNameAr: z.string().optional(),
-          imageUrl: z.string().optional(),
-          imageKey: z.string().optional(),
-          zIndex: z.number().optional(),
-          animationType: z.enum(["rotate", "oscillate", "pulse", "none"]).optional(),
-          animationDuration: z.string().optional(),
-          animationDelay: z.string().optional(),
-          rotationDirection: z.enum(["cw", "ccw"]).optional(),
-          isActive: z.boolean().optional(),
-        }),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        const result = await db.updateMovementLayer(input.id, input.data);
-        return { success: true, result };
-      }),
-
-    deleteMovementLayer: publicProcedure
-      .input(z.object({ id: z.number() }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        await db.deleteMovementLayer(input.id);
-        return { success: true };
-      }),
-
-    reorderMovementLayers: publicProcedure
-      .input(z.object({
-        layers: z.array(z.object({ id: z.number(), zIndex: z.number() })),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        const adminCookie = ctx.req.cookies["admin_session"];
-        if (!adminCookie) throw new TRPCError({ code: "UNAUTHORIZED" });
-        await db.reorderMovementLayers(input.layers);
-        return { success: true };
-      }),
-  }),
-
-  // ============================================================================
-  // MOVEMENT LAYERS (public read + admin write)
-  // ============================================================================
-
-  movementLayers: router({
-    getByWatch: publicProcedure
-      .input(z.object({ watchId: z.number() }))
-      .query(async ({ input }) => {
-        return await db.getMovementLayersByWatch(input.watchId);
-      }),
-  }),
-
-  // ============================================================================
-  // PUBLIC NEWSLETTER SUBSCRIPTION
-  // ============================================================================
-
-  newsletter: router({
-    subscribe: publicProcedure
-      .input(z.object({ email: z.string().email(), source: z.string().optional() }))
       .mutation(async ({ input }) => {
-        await db.addSubscriber(input.email, input.source ?? "website");
+        const result = await db.uploadSheikhPhoto(input);
+        return { success: true, photo: result };
+      }),
+
+    uploadGalleryPhotos: verifiedAdminProcedure
+      .input(z.object({
+        photos: z.array(z.object({
+          imageBase64: z.string().regex(/^data:image\/(?:jpeg|png|webp);base64,/),
+          fileName: z.string().trim().min(1).max(255),
+          mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]),
+          captionEn: z.string().trim().max(255).optional(),
+          captionAr: z.string().trim().max(255).optional(),
+          eventName: z.string().trim().max(255).optional(),
+          photoDate: z.string().date().optional(),
+          watchId: z.number().int().positive().optional(),
+        })).min(1).max(8),
+      }))
+      .mutation(async ({ input }) => {
+        const photos = await db.uploadSheikhPhotos(input.photos);
+        return { success: true, photos };
+      }),
+
+    updateGalleryPhoto: verifiedAdminProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          captionEn: z.string().optional(),
+          captionAr: z.string().optional(),
+          eventName: z.string().optional(),
+          photoDate: z.string().optional(),
+          watchId: z.number().optional(),
+          isActive: z.boolean().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        const result = await db.updateSheikhPhoto(input.id, input);
+        return { success: true, photo: result };
+      }),
+
+    deleteGalleryPhoto: verifiedAdminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        await db.deleteSheikhPhoto(input.id);
+        return { success: true };
+      }),
+
+    reorderGalleryPhotos: verifiedAdminProcedure
+      .input(z.object({ photoIds: z.array(z.number().int().positive()).min(1).max(200).refine((ids) => new Set(ids).size === ids.length) }))
+      .mutation(async ({ input }) => {
+        await db.reorderSheikhPhotos(input.photoIds);
         return { success: true };
       }),
   }),

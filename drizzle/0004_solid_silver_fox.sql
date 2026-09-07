@@ -1,0 +1,1 @@
+ALTER TABLE `watchComments` ADD `reviewedAt` timestamp;

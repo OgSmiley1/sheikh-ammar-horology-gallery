@@ -1,0 +1,258 @@
+{
+  "generatedAt": "2026-08-26T05:36:47.960Z",
+  "excludedIds": [
+    60017,
+    60024,
+    60008
+  ],
+  "sourceCount": 32,
+  "reviews": [
+    {
+      "approved": true,
+      "id": 60029,
+      "reason": "Arabic is idiomatic, faithful to the source, preserves the product name in Latin script, and adds no unsupported claims."
+    },
+    {
+      "approved": true,
+      "id": 60002,
+      "reason": "Translation is idiomatic Modern Standard Arabic, faithfully renders all details (including 'for the first time') and preserves proper names."
+    },
+    {
+      "approved": true,
+      "id": 60003,
+      "reason": "Accurate and idiomatic MSA; preserves factual details and the historical claim about Audemars Piguet without adding unsupported information."
+    },
+    {
+      "approved": false,
+      "id": 60004,
+      "reason": "Minor grammatical agreement error: 'منطقة خارجية أزرق غامق' should agree in gender with 'منطقة' (suggested: 'منطقة خارجية زرقاء غامقة'). Fix that and the sentence will be idiomatic and faithful."
+    },
+    {
+      "approved": true,
+      "id": 60006,
+      "reason": "Idiomatic, faithful to the source, preserves proper names and does not introduce unsupported claims."
+    },
+    {
+      "approved": false,
+      "id": 60027,
+      "reason": "Wording is slightly non-idiomatic: the phrase 'الأكثر رغبةً' is awkward in MSA. Suggested revision: 'إحدى التكوينات الأكثر طلبًا لدى صانع الساعات المستقل' or 'إحدى التكوينات الأكثر طلبًا لدى جامعي الساعات' to be more natural."
+    },
+    {
+      "approved": true,
+      "id": 60028,
+      "reason": "Arabic is idiomatic MSA, materially faithful to the source, preserves boundaries and adds no unsupported claims."
+    },
+    {
+      "approved": true,
+      "id": 90002,
+      "reason": "Translation is accurate and idiomatic, preserves the provenance caveat and does not add extra facts."
+    },
+    {
+      "approved": true,
+      "id": 90006,
+      "reason": "Arabic rendering is natural MSA, faithful to the English, preserves the 'Only Watch' reference and contains no unsupported assertions."
+    },
+    {
+      "approved": true,
+      "id": 90007,
+      "reason": "Translation is idiomatic and faithful, keeps technical terms and availability variants without adding new claims."
+    },
+    {
+      "approved": true,
+      "id": 60001,
+      "reason": "Arabic is clear and faithful, preserves the source-linked/public-appearance qualification and adds no ownership claim."
+    },
+    {
+      "approved": true,
+      "id": 60018,
+      "reason": "Translation is idiomatic MSA, accurately conveys the new complication and preserves the original scope without extra assertions."
+    },
+    {
+      "approved": true,
+      "id": 60019,
+      "reason": "الترجمة عربية فصحى طبيعية، ماديةً وفيما يتعلق بالمضمون مطابقة للنص الإنجليزي، تحافظ على حدود المصدر ولا تضيف أي ادعاءات غير مدعومة."
+    },
+    {
+      "approved": true,
+      "id": 60020,
+      "reason": "الترجمة صيغت بعبارات فصحى طبيعية («أخضر زيتوني بتأثير شعاعي») ومادية وصحيحة مقارنةً بالنص الإنجليزي، تحافظ على حدود المصدر."
+    },
+    {
+      "approved": true,
+      "id": 60021,
+      "reason": "النص العربي سليم ومطابق ماديًا للمصدر الإنجليزي، بصياغة فصحى طبيعية ويحتفظ بالمعنى دون إضافات."
+    },
+    {
+      "approved": true,
+      "id": 60022,
+      "reason": "الترجمة فصحى ومطابقة للنص الإنجليزي في المضمون، تحافظ على حدود الوصف ولا تضيف معلومات غير مدعومة."
+    },
+    {
+      "approved": true,
+      "id": 60023,
+      "reason": "الترجمة عربية فصحى ومطابقة للمضمون الإنجليزي، تحافظ على اسم المدينة والحدود الوصفية كما في النص الأصلي."
+    },
+    {
+      "approved": true,
+      "id": 90001,
+      "reason": "الترجمة فصحى دقيقة ومطابقة للبيان الرسمي المشار إليه، تحتفظ بمصطلحات الطراز والخصائص دون إضافة ادعاءات خارج النص."
+    },
+    {
+      "approved": true,
+      "id": 90008,
+      "reason": "Arabic is idiomatic MSA, materially faithful to the English, preserves the source-boundary sentence, and adds no unsupported claims."
+    },
+    {
+      "approved": true,
+      "id": 90010,
+      "reason": "Translation is idiomatic MSA, faithful to the source (keeps model and caliber names), preserves scope and adds no unsupported facts."
+    },
+    {
+      "approved": false,
+      "id": 60026,
+      "reason": "Not fully idiomatic MSA: the phrase «لاعب التزلج الفرنسي» is awkward. Prefer «المتسابق الفرنسي في التزلج الألبي Alexis Pinturault» to match the English ‘French alpine ski racer’. Suggested correction: «تُعدّ Richard Mille RM 67-02 Automatic Alexis Pinturault Edition نسخة مصمَّمة للمتسابق الفرنسي في التزلج الألبي Alexis Pinturault، وبُنيت لتحمُّل ظروف التزلج الاحترافية القاسية.»"
+    },
+    {
+      "approved": true,
+      "id": 90003,
+      "reason": "Arabic is idiomatic MSA, faithfully renders technical terms and the source-boundary sentence, and introduces no unsupported information."
+    },
+    {
+      "approved": true,
+      "id": 60010,
+      "reason": "Translation is idiomatic MSA, faithful to the English (keeps model name), preserves descriptive scope, and adds no unsupported claims."
+    },
+    {
+      "approved": true,
+      "id": 60011,
+      "reason": "Arabic is idiomatic MSA, materially faithful to the source, preserves meaning and scope, and does not add unsupported information."
+    },
+    {
+      "approved": true,
+      "id": 60012,
+      "reason": "Arabic is idiomatic Modern Standard Arabic, faithful to the English source, preserves boundaries (model name and Paul Newman left in Latin), and introduces no unsupported claims."
+    },
+    {
+      "approved": false,
+      "id": 60013,
+      "reason": "Translation is mostly faithful but has stylistic and grammatical issues that make it non-idiomatic MSA: (1) gender/agreement: “ذات المينا الأسود” should be “ذات المينا السوداء”; (2) phrasing for “screw-down pushers” is awkward—“أزرار ضغط قابلة للإحكام بالمسامير” is not idiomatic. Suggested correction: “تمثل Rolex Daytona مرجع 6265 ذات المينا السوداء إحدى أكثر تكوينات دايتونا القديمة رغبةً؛ وتتميز بمزوّدٍ بأزرار ضغط قابلة للغلق بواسطة البراغي (screw‑down pushers) والحركة المتينة Valjoux 727.”"
+    },
+    {
+      "approved": true,
+      "id": 60014,
+      "reason": "Arabic is clear, idiomatic, and materially faithful to the English. It preserves the source boundary (mentions Sotheby's) and does not add unsupported factual claims; it correctly limits the record to model context."
+    },
+    {
+      "approved": true,
+      "id": 60015,
+      "reason": "Arabic is idiomatic MSA and faithful to the source. It preserves the descriptive tone without adding unsupported factual claims; proper names remaining in Latin script are allowed."
+    },
+    {
+      "approved": true,
+      "id": 60016,
+      "reason": "Arabic is idiomatic and faithful. It preserves the quoted model name 'Abu Dhabi' and the maker AET Remould in Latin script, and does not add unsupported claims while accurately conveying the description of a fully transparent sapphire case."
+    }
+  ],
+  "approvedTranslations": [
+    {
+      "descriptionAr": "Artisans De Geneve La Montoya Platinum Challenge — تحفة مُنفَّذة خصيصًا ومستندة إلى Rolex Daytona، مُحوَّلة إلى عمل فني فريد.",
+      "id": 60029
+    },
+    {
+      "descriptionAr": "مكسوة بالكامل باللون الأزرق، تعرض Royal Oak Perpetual Calendar بقياس 41 مم علبةً وسوارًا مصنوعين كليًا من السيراميك الأزرق للمرة الأولى. الميناء الأزرق مزخرف بنمط 'Grande Tapisserie' مع عدَّادات زرقاء، وعلامات ساعات مطبقة من الذهب الأبيض، وعقارب Royal Oak بطبقة مضيئة.",
+      "id": 60002
+    },
+    {
+      "descriptionAr": "يأتي Royal Oak Perpetual Calendar بقياس 41 مم والمصنوع من السيراميك الأبيض مزوَّدًا بمؤشرات اليوم والتاريخ والشهر والقمر الفلكي وأسبوع السنة. يتضمن الميناء الأزرق المزخرف بنمط Grande Tapisserie أيضًا مؤشر السنة الكبيسة، الذي طرحت Audemars Piguet فكْرته لأول مرة عام 1955.",
+      "id": 60003
+    },
+    {
+      "descriptionAr": "الـ Royal Oak 'Jumbo' Extra‑Thin الأيقوني في أكثر أشكاله أناقة، يضم الميناء بلون السلمون النادر الذي أصبح من بين أكثر التكوينات طلبًا لدى جامعي الساعات.",
+      "id": 60006
+    },
+    {
+      "descriptionAr": "ساعة F.P. Journe Chronomètre à Résonance من البلاتين بمينا رمادي — واحدة من أكثر الساعات تعقيدًا تقنيًا على الإطلاق، تعتمد مبدأ الرنين.",
+      "id": 60028
+    },
+    {
+      "descriptionAr": "توثّق سجلات مزاد فيليبس ساعة Tourbillon Souverain من البلاتين قطرها 40 مم تعود لعام 2015، بمينا من اليشم الأخضر بطلب خاص، وعيار يدوي 1403، وريمونتوار قوة ثابتة، واحتياطي طاقة، وثوانٍ قافزة. يوضح هذا السجل مصدر الطراز فقط ولا يؤكد أن ساعة المزاد تظهر ضمن مجموعة خاصة.",
+      "id": 90002
+    },
+    {
+      "descriptionAr": "تكرّم ساعة F.P. Journe FFC صانع الأفلام الأسطوري فرانسيس فورد كوبولا. مسمّاة تيمناً بقطعة مزاد \"Only Watch\"، تتميز هذه القطعة بالحركة الاستثنائية Calibre 1300.3 ومخزون طاقة مدته 120 ساعة. تحفة حقيقية لصانع ساعات مستقل.",
+      "id": 90006
+    },
+    {
+      "descriptionAr": "تمثل ساعة F.P. Journe Chronographe Rattrapante ذروة تصميم كرونوغراف الثواني المنفصلة (rattrapante). تتميز حركة Calibre 1518 بتشطيب فولاذي استثنائي وآلية rattrapante متطورة. متوفرة بالتيتانيوم والذهب الأحمر والبلاتين، وتبرز كل نسخة التزام Journe بالتميّز في صناعة الساعات.",
+      "id": 90007
+    },
+    {
+      "descriptionAr": "سجل مرتبط بمصدر يشير إلى ظهور عام لطراز Endeavour Tourbillon Concept Vantablack مرجع 1804-0212. تحدد بيانات مرجعية متخصصة طرازًا بعلبة من الذهب الأبيض قطرها 42 مم، وتوربيون أوتوماتيكي، ومينا Vantablack، وعيار HMC 804، واحتياطي طاقة مدته 72 ساعة. يوثق هذا السجل سياق الطراز ولا يمثل ادعاء ملكية خاصة.",
+      "id": 60001
+    },
+    {
+      "descriptionAr": "تقدّم Patek Philippe Calatrava 5326G-001 تعقيدًا جديدًا إلى خط Calatrava: مؤشر تقويم أسبوعي يُظهر اليوم والتاريخ ورقم الأسبوع.",
+      "id": 60018
+    },
+    {
+      "descriptionAr": "تمثل Patek Philippe Calatrava 6007A ذات المينا 'رمادي مزرق' عرضًا نادرًا من Patek Philippe: Calatrava مصنوعة من فولاذ مقاوم للصدأ.",
+      "id": 60019
+    },
+    {
+      "descriptionAr": "Patek Philippe Nautilus 5711/1300A بمينا 'أخضر زيتوني بتأثير شعاعي' — إحدى أكثر ساعات Patek Philippe الحديثة طلبًا.",
+      "id": 60020
+    },
+    {
+      "descriptionAr": "تجمع Patek Philippe Perpetual Calendar Chronograph 5270P ذات المينا الأخضر اللافت بين اثنتين من أكثر التعقيدات احترامًا في عالم صناعة الساعات.",
+      "id": 60021
+    },
+    {
+      "descriptionAr": "تمثل Patek Philippe Nautilus Perpetual Calendar 5740 من الذهب الأبيض التجسيد الأسمى لمجموعة Nautilus، حيث تجمع التصميم الأيقوني للساعة الرياضية مع إحدى أكثر التعقيدات تطورًا في صناعة الساعات.",
+      "id": 60022
+    },
+    {
+      "descriptionAr": "Patek Philippe World Time 5230G-011 Manama بالذهب الأبيض — إصدار خاص يُظهر Manama كإحدى المدن الأربع والعشرين لمناطق التوقيت على الميناء.",
+      "id": 60023
+    },
+    {
+      "descriptionAr": "تدرج Patek Philippe رسمياً المرجع 5178G-012 كساعَة مكرِّرة للدقائق ذاتية التعبئة من الذهب الأبيض، مزوّدة بجرسين كاتدرائيين، ومينا أزرق من نوع Grand Feu flinque، وعلبة بقطر 40 مم. يحفظ هذا السجل سياق الطراز الرسمي؛ أما أي ظهور عام مُشار إليه فيبقى مرتبطاً بمصدر مستقل.",
+      "id": 90001
+    },
+    {
+      "descriptionAr": "يحدد تقرير متخصص عن مجموعة Rare Handcrafts لعام 2025 المرجع 5278/500G-001 كساعَة مكرِّرة للدقائق من الذهب الأبيض بقطر 40 مم، مزوّدة بجرسين من نوع الكاتدرائية ومينا على هيئة حصان من الذهب الأبيض مشغول يدوياً، وصَدَرَت ضمن إصدار من 20 قطعة. يقدم هذا السجل سياق الطراز الموثق فقط؛ ولا يثبت ملكية خاصة أو ظهوراً عاماً.",
+      "id": 90008
+    },
+    {
+      "descriptionAr": "تمثل ساعة Patek Philippe Aquanaut التوازن المثالي بين الطابع الرياضي والأناقة. تأتي هذه القطعة الفولاذية بقطر 40 مم مُزوَّدة بحركة Caliber 324 S C الموثوقة وحزام مطاطي متكامل. إنها ساعة فاخرة متعددة الاستخدامات مناسبة لمختلف المناسبات.",
+      "id": 90010
+    },
+    {
+      "descriptionAr": "تصف Richard Mille رسمياً ساعة RM 65-01 McLaren W1 بأنها كرونوغراف أوتوماتيكي بثوانٍ منقسمة مستوحًى من McLaren W1، مزوَّد بعيار RMAC4 وإصدار من 500 قطعة. يسجل هذا الإدخال سياق الطراز الموثق؛ بينما يبقى أي ظهور عام منسوب مرتبطاً بمصدر مستقل.",
+      "id": 90003
+    },
+    {
+      "descriptionAr": "ساعة GMT‑Master II «Pepsi» بمينا نيزكي نادر في علبة من الذهب الأبيض، تجمع الإطار الأحمر والأزرق الأيقوني مع ميناء يبدو غير دنيوي ومصنوعًا من نيزك حقيقي.",
+      "id": 60010
+    },
+    {
+      "descriptionAr": "الأسطورية Rolex Daytona ذات مينا Paul Newman الأيقوني، إحدى أكثر الكرونوغرافات العتيقة طلبًا في العالم.",
+      "id": 60011
+    },
+    {
+      "descriptionAr": "ساعة Rolex Daytona نادرة مرجع 6264 مزوّدة بمينا Paul Newman المطلوب، مع سوار جلدي أخضر مميز يضفي طابعًا فريدًا على هذا الكرونوغراف الأسطوري.",
+      "id": 60012
+    },
+    {
+      "descriptionAr": "سجل مرجعي قائم على ظهور عام منسوب لساعة Rolex Daytona مرجع 6241. توثق أبحاث مزادات Sotheby's مثالًا للمرجع 6241 بعلبة من الذهب الأصفر عيار 14 قيراطًا وعائلة المرجع التاريخية، لكنها لا تثبت أن الظهور المنسوب هو الساعة نفسها ولا تؤكد تكوين المينا. يوثق هذا السجل سياق الطراز فقط.",
+      "id": 60014
+    },
+    {
+      "descriptionAr": "Rolex Cosmograph Daytona من الذهب الأبيض وبقرص أزرق لافت، تجسّد أناقة ورُقِيّ دايتونا المعاصر.",
+      "id": 60015
+    },
+    {
+      "descriptionAr": "Rolex Cosmograph Daytona 'Abu Dhabi' من الياقوت، مصنوعة بواسطة AET Remould. هذه التحفة المخصصة الاستثنائية تتميز بعلبة من الياقوت شفافة بالكامل تتيح رؤية كاملة للحركة.",
+      "id": 60016
+    }
+  ]
+}

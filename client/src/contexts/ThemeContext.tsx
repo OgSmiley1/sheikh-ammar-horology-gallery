@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
+const THEME_STORAGE_KEY = "royal-horology-theme-vault-v1";
+
 interface ThemeContextType {
   theme: Theme;
   toggleTheme?: () => void;
@@ -23,7 +25,7 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (switchable) {
-      const stored = localStorage.getItem("theme");
+      const stored = localStorage.getItem(THEME_STORAGE_KEY);
       return (stored as Theme) || defaultTheme;
     }
     return defaultTheme;
@@ -38,7 +40,7 @@ export function ThemeProvider({
     }
 
     if (switchable) {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
     }
   }, [theme, switchable]);
 
