@@ -14,7 +14,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const stored = localStorage.getItem("language");
-    return (stored === "ar" || stored === "en") ? stored : "en";
+    // The museum opens in its Arabic register; visitors can move to English explicitly.
+    return (stored === "ar" || stored === "en") ? stored : "ar";
   });
 
   const setLanguage = (lang: Language) => {

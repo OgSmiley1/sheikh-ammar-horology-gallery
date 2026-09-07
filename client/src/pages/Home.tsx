@@ -51,7 +51,7 @@ export default function Home() {
       <Header />
 
       <main>
-        <section className="reference-vault-hero" aria-label={isRTL ? "مدخل المجموعة الملكية" : "Royal collection opening"}>
+        <section className="reference-vault-hero museum-uae-rule" aria-label={isRTL ? "مدخل المتحف الإماراتي الخاص للساعات" : "Private UAE horology museum opening"}>
           <div className={`reference-vault-hero__prologue ${isRTL ? "text-right" : "text-left"}`} aria-label={isRTL ? "تعريف المتحف الخاص للساعات" : "Private horology museum introduction"}>
             <span className="reference-vault-hero__prologue-mark" aria-hidden="true">RRR</span>
             <div>
