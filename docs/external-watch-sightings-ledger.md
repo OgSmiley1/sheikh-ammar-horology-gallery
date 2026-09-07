@@ -51,3 +51,50 @@ Example:
 3. Add source URL and confidence to the structured record.
 4. Keep external images out of Git until permission is documented.
 5. Run bilingual and image-deduplication checks before publishing.
+
+
+## Display-ready bilingual cards
+
+These cards are ready for a museum presentation while the image and reference are being reviewed. The language describes the public appearance without turning it into a sales listing.
+
+### إف. بي. جورن — توربيون سوفراين بميناء اليشم
+**العربية:** تظهر في اللقطة ساعة إف. بي. جورن توربيون سوفراين بميناء أخضر مرصّع باليشم؛ حضور هادئ تتقدّم فيه الحرفة على البريق.  
+**English:** A public appearance of an F.P. Journe Tourbillon Souverain with a jade-set green dial; a study in quiet craft rather than display.  
+**Source:** https://www.instagram.com/p/DV8vb2IDEyf/
+
+### باتيك فيليب — جراند كومبليكاسيون 5016P-018
+**العربية:** قراءة أولية لباتيك فيليب 5016P-018 كما تظهر في الصورة؛ الميناء والتعقيد يحتاجان إلى مطابقة نهائية قبل اعتماد السجل.  
+**English:** A preliminary reading of the Patek Philippe 5016P-018 as pictured; the dial and complication require final verification before the record is published.  
+**Source:** https://www.instagram.com/p/DSpn0LZExYz/
+
+### غروبل فورسي — GMT Sport
+**العربية:** ساعة رياضية من غروبل فورسي بعلبة تيتانيوم؛ توازن بين خفة الحضور وتعقيد الحركة.  
+**English:** A titanium Greubel Forsey GMT Sport: light in presence, elaborate in mechanical expression.  
+**Source:** https://www.instagram.com/p/DXZeCL_k51E/
+
+### إف. بي. جورن — FFC
+**العربية:** إف. بي. جورن FFC؛ قراءة معاصرة للزمن، حيث تتحوّل الإشارة إلى حركة بصرية على الميناء.  
+**English:** The F.P. Journe FFC: a contemporary reading of time, turning indication into a visual gesture across the dial.  
+**Source:** https://www.instagram.com/p/DE4sM3ztGlt/
+
+### رولكس — Daytona المعدّلة من Artisans de Genève
+**العربية:** دايتونا أعيدت صياغتها في تعاون مع Artisans de Genève وأندريا بيرلو؛ قطعة ذات شخصية مستقلة داخل أرشيف الساعات المعدّلة.  
+**English:** A Daytona reinterpreted in collaboration with Artisans de Genève and Andrea Pirlo; an independent voice within the archive of modified timepieces.  
+**Source:** https://www.instagram.com/p/Dcz80y0MOuZ/
+
+### رولكس — 6100 بميناء التنين
+**العربية:** رولكس 6100 بميناء تنين من المينا المينائية؛ مثال على انتقال الحكاية الإماراتية من الصورة إلى تفاصيل الصنعة.  
+**English:** A Rolex 6100 with a dragon cloisonné enamel dial; an example of how a public image can open into a study of craft.  
+**Source:** https://waqt.com/en/article/rolex-6100-with-chinese-dragon-cloisonne-enamel-dial
+
+## Image treatment
+
+Use the public post as a small source thumbnail or linked reference while the gallery's large hero image uses a project or supplied asset. Pair each card with:
+
+- a portrait or wrist appearance;
+- the watch image;
+- Arabic first, then English;
+- reference and complication only when verified;
+- a small source line: “ظهور علني / Public appearance”.
+
+Do not show market prices, “owned by”, or purchase language on these cards.
