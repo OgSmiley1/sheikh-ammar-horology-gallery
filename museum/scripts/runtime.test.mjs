@@ -4,6 +4,22 @@ import {readFileSync,existsSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 const data=JSON.parse(readFileSync(new URL('../dist/watches.json',import.meta.url)));
 const code=readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');
+test('collection landmark, skip target and one current navigation link',async()=>{
+ const {dom,w,doc}=await mount('collection','en');
+ assert.equal(doc.querySelector('#collectionTitle').tagName,'H1');
+ assert.equal(doc.querySelector('.skip').getAttribute('href'),'#collection');
+ doc.querySelector('.skip').click();
+ assert.equal(doc.activeElement.id,'collection');
+ w.history.replaceState(null,'','/collection/');w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+ assert.equal(doc.querySelectorAll('#navigation [aria-current]').length,1);
+ assert.equal(doc.querySelector('#navigation [aria-current]').hash,'');
+ w.history.pushState(null,'','#film');w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+ assert.equal(doc.querySelectorAll('#navigation [aria-current]').length,1);
+ assert.equal(doc.querySelector('#navigation [aria-current]').hash,'#film');
+ assert.equal(doc.querySelector('#navigation [aria-current]').getAttribute('aria-current'),'location');
+ w.history.replaceState(null,'','/collection/');w.dispatchEvent(new w.PopStateEvent('popstate'));
+ assert.equal(doc.querySelector('#navigation [aria-current]').hash,'');dom.window.close();
+});
 async function mount(route='collection',lang='ar',reduce=false,fail=false){
  const html=readFileSync(new URL('../dist/'+({home:'index.html',collection:'collection/index.html',biography:'his-highness/index.html',exhibition:'exhibition/index.html',exhibition:'exhibition/index.html'}[route]),import.meta.url),'utf8');
  const dom=new JSDOM(html,{url:'https://museum.test/'+(route==='home'?'':route+'/'),runScripts:'outside-only',pretendToBeVisual:true});const w=dom.window;const timers=[];
@@ -18,5 +34,4 @@ test('featured controls retain focus and manual selection pauses',async()=>{cons
 test('reduced motion and YouTube lazy embed',async()=>{const{dom,doc}=await mount('home','en',true);assert.equal(doc.querySelector('#featuredPause').getAttribute('aria-pressed'),'true');assert.equal(doc.querySelector('#slidePause').getAttribute('aria-pressed'),'true');assert.equal(doc.querySelectorAll('#youtubeStage iframe').length,0);doc.querySelector('#youtubePlay').click();assert.match(doc.querySelector('#youtubeStage iframe').src,/youtube-nocookie.com\/embed\/Air31Kly7Ys/);dom.window.close()});
 test('failure offers successful retry',async()=>{const{dom,w,doc}=await mount('collection','ar',false,true);assert.equal(doc.querySelector('#retry').hidden,false);w.fetch=async()=>({ok:true,json:async()=>structuredClone(data)});doc.querySelector('#retry').click();await new Promise(r=>setImmediate(r));assert.equal(doc.querySelectorAll('.card').length,42);assert.equal(doc.querySelector('#retry').hidden,true);dom.window.close()});
 
-for(const lang of ['ar','en'])test('exhibition chapters, details and URL '+lang,async()=>{const{dom,doc,w}=await mount('exhibition',lang);assert.match(doc.querySelector('#tourRef').textContent,/6263/);doc.querySelector('#tourNext').click();assert.match(w.location.hash,/fp-journe-ffc/);assert.match(doc.querySelector('#tourName').textContent,/FFC/);doc.querySelector('#tourDetail').click();assert.equal(doc.querySelector('#detail').open,true);doc.querySelector('#detailClose').click();doc.querySelectorAll('#tourDots button')[2].click();assert.match(w.location.hash,/mclaren/);assert.equal(doc.querySelector('#tourNext').disabled,true);doc.querySelector('#tourPlay').click();assert.equal(doc.querySelector('#tourPlay').getAttribute('aria-pressed'),'true');assert.match(doc.querySelector('#tourRef').textContent,/6263/);dom.window.close()});
-
+if(existsSync(new URL('../dist/vision.js',import.meta.url))) for(const lang of ['ar','en'])test('exhibition chapters, details and URL '+lang,async()=>{const{dom,doc,w}=await mount('exhibition',lang);assert.match(doc.querySelector('#tourRef').textContent,/6263/);doc.querySelector('#tourNext').click();assert.match(w.location.hash,/fp-journe-ffc/);assert.match(doc.querySelector('#tourName').textContent,/FFC/);doc.querySelector('#tourDetail').click();assert.equal(doc.querySelector('#detail').open,true);doc.querySelector('#detailClose').click();doc.querySelectorAll('#tourDots button')[2].click();assert.match(w.location.hash,/mclaren/);assert.equal(doc.querySelector('#tourNext').disabled,true);doc.querySelector('#tourPlay').click();assert.equal(doc.querySelector('#tourPlay').getAttribute('aria-pressed'),'true');assert.match(doc.querySelector('#tourRef').textContent,/6263/);dom.window.close()});

@@ -52,7 +52,23 @@ $('#slideNext').onclick=()=>stepSlide(1,true);$('#slidePrev').onclick=()=>stepSl
 setInterval(()=>{if(!state.paused&&state.heroVisible&&!document.hidden&&!$('#detail').open)stepSlide(1)},6500);
 $('.hero').addEventListener('focusin',()=>{state.paused=true;updateSlides()});
 new IntersectionObserver(es=>{state.heroVisible=es[0].isIntersecting},{threshold:.15}).observe($('.hero'));
-$$('#navigation a').forEach(a=>{if(a.pathname===location.pathname)a.setAttribute('aria-current','page')});
+function updateCurrentNavigation(){
+ const links=$$('#navigation a');
+ const exact=links.find(a=>a.pathname===location.pathname&&a.hash===location.hash);
+ const active=exact||links.find(a=>a.pathname===location.pathname&&!a.hash);
+ links.forEach(a=>{if(a===active)a.setAttribute('aria-current',a.hash?'location':'page');else a.removeAttribute('aria-current')});
+}
+window.addEventListener('hashchange',updateCurrentNavigation);
+window.addEventListener('popstate',updateCurrentNavigation);
+updateCurrentNavigation();
+if(document.body.dataset.page==='collection'){
+ const previous=$('#collectionTitle');const title=document.createElement('h1');
+ for(const attribute of previous.attributes)title.setAttribute(attribute.name,attribute.value);
+ title.textContent=previous.textContent;previous.replaceWith(title);
+ const skip=$('.skip');skip.href='#collection';
+ $('#collection').setAttribute('tabindex','-1');
+ skip.addEventListener('click',()=>$('#collection').focus({preventScroll:true}));
+}
 $('#lang').onclick=changeLanguage;$('#detailLang').onclick=changeLanguage;$('#menu').onclick=()=>toggleMenu($('#menu').getAttribute('aria-expanded')!=='true');$('#navigation').addEventListener('click',e=>{if(e.target.closest('a'))toggleMenu(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleMenu(false);if($('#detail').open)$('#detail').close()}if($('#detail').open&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){e.preventDefault();const step=(e.key==='ArrowRight'?1:-1)*(state.ar?-1:1);const next=state.list[state.list.indexOf(state.selected)+step];if(next)openDetail(next)}});document.addEventListener('click',e=>{if(!e.target.closest('.nav'))toggleMenu(false)});
 $('#filters').onclick=e=>{const b=e.target.closest('[data-brand]');if(!b)return;state.filter=b.dataset.brand;renderFilters();render()};$('#search').oninput=e=>{state.query=e.target.value;render()};$('#grid').onclick=e=>{const b=e.target.closest('[data-watch]');if(b)openDetail(state.all.find(w=>w.slug===b.dataset.watch))};

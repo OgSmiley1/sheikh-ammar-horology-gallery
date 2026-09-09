@@ -6,6 +6,7 @@ const fail = (message) => { throw new Error(message); };
 const read = (file) => readFileSync(path.join(root, file), 'utf8');
 
 const routes = ['dist/index.html', 'dist/collection/index.html', 'dist/his-highness/index.html'];
+if (existsSync(path.join(root, 'dist/vision.js'))) routes.push('dist/exhibition/index.html');
 for (const route of routes) {
   const html = read(route);
   if (!html.includes('<html') || !html.includes('<body')) fail(`${route}: malformed document shell`);
