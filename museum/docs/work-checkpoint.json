@@ -1,0 +1,60 @@
+{
+  "updated_at": "2026-09-09T17:49:00Z",
+  "goal": "Finish and verify two bilingual Sheikh Ammar museum editions; preserve managed application",
+  "complete": false,
+  "stage": "live visitor-journey verification",
+  "next_action": "Exercise both live editions across Arabic/English and 360/390/tablet/desktop; capture screenshots, fix overflow or interaction defects, then verify exact live revisions.",
+  "criteria": [
+    {
+      "id": "current_source",
+      "status": "passed",
+      "evidence": "release/museum-current-v2 7ee6f5c6ed7a9f158b05fc0451f8a86da5cc15d4"
+    },
+    {
+      "id": "creative_source",
+      "status": "passed",
+      "evidence": "feat/majlis-of-time-v2 59a995ebb9195eefafa94526cbb268c9de86cebf"
+    },
+    {
+      "id": "local_functional_tests",
+      "status": "passed",
+      "evidence": "14 current and 16 creative Node/JSDOM/HTTP tests passed. Not managed React tests."
+    },
+    {
+      "id": "deployment",
+      "status": "passed",
+      "evidence": "Railway current599d5f4a and creativee6540d52 SUCCESS exact source SHAs; current /healthz returned ok."
+    },
+    {
+      "id": "full_responsive_journey",
+      "status": "pending",
+      "evidence": "Partial current journey checked; browser matrix timed out. Creative full browser journey outstanding."
+    },
+    {
+      "id": "performance_measurement",
+      "status": "pending"
+    },
+    {
+      "id": "full_model_photo_verification",
+      "status": "pending",
+      "evidence": "42 assigned local photos; assignment coverage does not establish every model identity."
+    },
+    {
+      "id": "main_merge_gate",
+      "status": "pending",
+      "evidence": "No merge. Managed validators/tests plus review required."
+    }
+  ],
+  "urls": {
+    "current": "https://museum-current-production.up.railway.app",
+    "creative": "https://museum-vision-production.up.railway.app"
+  },
+  "lessons": [
+    "Verify actual deployment commit, not requested branch parameter.",
+    "Docker root '/' and museum/Dockerfile required; root /museum breaks COPY museum/dist.",
+    "Railway commitStagedChanges already deploys; avoid duplicate deploy call.",
+    "Public dist must exclude unrelated Library photos/private screenshots.",
+    "Sites remains older version2; Railway deployment does not publish Sites."
+  ],
+  "source_notes": "Only museum/ and scoped CI/hosting additions; never replace managed root app. Refresh branches and PR22–25 before edits. No paid purchases."
+}
