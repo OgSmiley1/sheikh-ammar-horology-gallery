@@ -1,0 +1,11 @@
+# Delivery checklist
+- [x] Refresh GitHub main and PR22–25 status; preserve managed source.
+- [x] 42 bilingual records and 42 local media paths validate.
+- [x] Repair startup, Top 3, YouTube and responsive opening.
+- [x] 14 executable runtime/server tests pass.
+- [ ] Full browser AR/EN matrix at 360/390/768/1280.
+- [ ] Verify external YouTube playback.
+- [ ] Measure performance in Lighthouse.
+- [ ] Verify Railway deployment and exact branch revision.
+- [ ] Complete creative comparison branch and journey.
+- [ ] Merge only after all applicable gates.

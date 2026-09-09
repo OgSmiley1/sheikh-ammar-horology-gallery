@@ -1,0 +1,3 @@
+node_modules/
+.museum-build/
+.museum-*.tar
