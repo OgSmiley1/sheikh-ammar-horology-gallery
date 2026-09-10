@@ -23,3 +23,5 @@ html[lang=en]{--title:Georgia,'Times New Roman',serif}html[lang=en] .hero h1{lin
 @media(max-width:760px){.hero{display:block;min-height:0}.hero-portraits{position:relative;height:340px;z-index:0}.portrait{inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%}.hero:after,html[dir=ltr] .hero:after{display:none}.hero-content{padding:35px 7% 38px;width:100%}.hero h1,html[lang=en] .hero h1{font-size:clamp(2.6rem,11vw,3.4rem)}.featured-stage,.featured-lead{grid-template-columns:minmax(0,1fr)}.youtube-stage{aspect-ratio:auto}.youtube-stage>button{grid-template-columns:1fr}.youtube-stage img{height:240px}.youtube-stage iframe{aspect-ratio:16/9;display:block}.youtube-label{padding:24px;grid-template-columns:48px minmax(0,1fr);align-items:center}.play-icon{height:48px;width:48px}}
 
 .portrait{transition:none}
+.nav-actions #ambientPause{position:static;inset:auto;flex:none;border-radius:0;min-width:44px;min-height:44px;padding:8px;backdrop-filter:none}
+@media(max-width:440px){.nav-actions{gap:6px}.nav .wordmark{font-size:1.1rem}.nav .identity{gap:7px}.nav .identity:before{width:28px;height:28px;font-size:19px}}

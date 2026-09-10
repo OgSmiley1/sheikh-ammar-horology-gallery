@@ -4,6 +4,17 @@ import {readFileSync,existsSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 const data=JSON.parse(readFileSync(new URL('../dist/watches.json',import.meta.url)));
 const code=readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');
+test('Emirati navigation stays bilingual and ambient control stays in header',async()=>{
+ const {dom,doc}=await mount('collection','ar');
+ assert.equal(doc.querySelector('#navigation [data-i18n=collection]').textContent,'نفائس السوع');
+ assert.equal(doc.querySelector('#navigation [data-i18n=home]').textContent,'المجلس');
+ assert.ok(doc.querySelector('.nav-actions #ambientPause'));
+ doc.querySelector('#lang').click();
+ assert.equal(doc.querySelector('#navigation [data-i18n=collection]').textContent,'The Timepieces');
+ assert.equal(doc.documentElement.dir,'ltr');
+ doc.querySelector('#ambientPause').click();
+ assert.equal(doc.querySelector('#ambientPause').getAttribute('aria-pressed'),'true');dom.window.close();
+});
 test('collection landmark, skip target and one current navigation link',async()=>{
  const {dom,w,doc}=await mount('collection','en');
  assert.equal(doc.querySelector('#collectionTitle').tagName,'H1');

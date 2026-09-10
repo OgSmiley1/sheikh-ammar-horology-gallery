@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-09-10T08:46:30Z",
+  "updated_at": "2026-09-10T22:00:00Z",
   "goal": "Finish and verify two bilingual Sheikh Ammar museum editions; preserve managed application",
   "complete": false,
-  "stage": "live visitor-journey verification",
-  "next_action": "Restore responsive browser viewport access and finish AR/EN 360/390/768/1280 visitor matrix. Then measure performance and resolve photo-model verification before any main merge.",
+  "stage": "editorial refinement and responsive QA",
+  "next_action": "Verify exact editorial deployments and new bilingual labels; finish remaining responsive route matrix and media/performance checks before merge.",
   "criteria": [
     {
       "id": "current_source",
@@ -77,7 +77,7 @@
   "source_notes": "Only museum/ and scoped CI/hosting additions; never replace managed root app. Refresh branches and PR22–25 before edits. No paid purchases.",
   "project": "Sheikh Ammar Horology Museum",
   "blockers": [
-    "Local Vite default host crashed uv_interface_addresses; 127.0.0.1 server started but cloud-browser terminal.local:4173 connection refused. No supported viewport resizing capability exposed. This is a preview connection limitation, not a claimed site defect."
+    "Responsive preview restored using supervised Sites preview; some frame evaluations still time out. Full bilingual route/device matrix and Lighthouse incomplete."
   ],
   "actions": [
     {
@@ -90,5 +90,19 @@
       "status": "succeeded",
       "evidence": "43361f10 SUCCESS; live navigation verified"
     }
-  ]
+  ],
+  "editorial_update": {
+    "ar_navigation": [
+      "المجلس",
+      "نفائس السوع",
+      "درب النوادر",
+      "صاحب السمو",
+      "عين على الصنعة"
+    ],
+    "scope": "Both editions shared navigation/reception/film copy; creative three chapter essays; Quraysh AR/EN description. Factual specification fields unchanged.",
+    "reference": "https://www.vacheron-constantin.com/ww/ar/home.html",
+    "tests": "Current16/16;creative18/18 Node/JSDOM/server; no managed React claim.",
+    "preview": "Creative home360px content345px scroll345px; mobile navigation entered collection;390px collection screenshot inspected. Remaining iframe DOM measurements timed out.",
+    "layout_fix": "Ambient pause moved into header so it no longer floats over reading content."
+  }
 }
