@@ -1,48 +1,63 @@
 {
-  "updated_at": "2026-09-09T17:49:00Z",
+  "updated_at": "2026-09-10T08:46:30Z",
   "goal": "Finish and verify two bilingual Sheikh Ammar museum editions; preserve managed application",
   "complete": false,
   "stage": "live visitor-journey verification",
-  "next_action": "Exercise both live editions across Arabic/English and 360/390/tablet/desktop; capture screenshots, fix overflow or interaction defects, then verify exact live revisions.",
+  "next_action": "Restore responsive browser viewport access and finish AR/EN 360/390/768/1280 visitor matrix. Then measure performance and resolve photo-model verification before any main merge.",
   "criteria": [
     {
       "id": "current_source",
       "status": "passed",
-      "evidence": "release/museum-current-v2 7ee6f5c6ed7a9f158b05fc0451f8a86da5cc15d4"
+      "evidence": [
+        "GitHub release/museum-current-v2 48a7ac1dab274499f9784fea6f7a5ac4f9c7e18c"
+      ]
     },
     {
       "id": "creative_source",
       "status": "passed",
-      "evidence": "feat/majlis-of-time-v2 59a995ebb9195eefafa94526cbb268c9de86cebf"
+      "evidence": [
+        "GitHub feat/majlis-of-time-v2 7be6e41fee75914b187dbacf44cceb80fd2c1a3a"
+      ]
     },
     {
       "id": "local_functional_tests",
       "status": "passed",
-      "evidence": "14 current and 16 creative Node/JSDOM/HTTP tests passed. Not managed React tests."
+      "evidence": [
+        "Current:15 Node/JSDOM/server tests passed; creative:17 passed. Creative diagnostic Vite build passed with classic-script warnings. Not managed React tests."
+      ]
     },
     {
       "id": "deployment",
       "status": "passed",
-      "evidence": "Railway current599d5f4a and creativee6540d52 SUCCESS exact source SHAs; current /healthz returned ok."
+      "evidence": [
+        "Railway 7af215e8 current SUCCESS exact48a7ac1; 43361f10 creative SUCCESS exact7be6e41. Both live collection heading and hash navigation verified via Browser."
+      ]
     },
     {
       "id": "full_responsive_journey",
-      "status": "pending",
-      "evidence": "Partial current journey checked; browser matrix timed out. Creative full browser journey outstanding."
+      "status": "in_progress",
+      "evidence": [
+        "Creative desktop: chapters,detail,zoom,Escape,EN switch,back,biography,Rolex11,empty0,Daytona8,YouTube iframe tested. Live fix in both: one current tab, H1. Creative1348px document and scroll widths equal. Full mobile/tablet matrix remains unverified."
+      ]
     },
     {
       "id": "performance_measurement",
-      "status": "pending"
+      "status": "pending",
+      "evidence": []
     },
     {
       "id": "full_model_photo_verification",
       "status": "pending",
-      "evidence": "42 assigned local photos; assignment coverage does not establish every model identity."
+      "evidence": [
+        "42 assigned local photos; assignment coverage does not establish every model identity."
+      ]
     },
     {
       "id": "main_merge_gate",
       "status": "pending",
-      "evidence": "No merge. Managed validators/tests plus review required."
+      "evidence": [
+        "No merge. Managed validators/tests plus review required."
+      ]
     }
   ],
   "urls": {
@@ -54,7 +69,26 @@
     "Docker root '/' and museum/Dockerfile required; root /museum breaks COPY museum/dist.",
     "Railway commitStagedChanges already deploys; avoid duplicate deploy call.",
     "Public dist must exclude unrelated Library photos/private screenshots.",
-    "Sites remains older version2; Railway deployment does not publish Sites."
+    "Sites remains older version2; Railway deployment does not publish Sites.",
+    "Collection pathname-only matching marked Collection and Watchmaking current together; match hash first with pathname fallback and update hashchange/popstate. Regression test verifies one current link.",
+    "Collection lacked visible H1 and skip link reloaded same page. Promote collectionTitle to H1; skip #collection focuses region.",
+    "Checkpoint validator requires project string and evidence arrays; normalized old checkpoint schema."
   ],
-  "source_notes": "Only museum/ and scoped CI/hosting additions; never replace managed root app. Refresh branches and PR22–25 before edits. No paid purchases."
+  "source_notes": "Only museum/ and scoped CI/hosting additions; never replace managed root app. Refresh branches and PR22–25 before edits. No paid purchases.",
+  "project": "Sheikh Ammar Horology Museum",
+  "blockers": [
+    "Local Vite default host crashed uv_interface_addresses; 127.0.0.1 server started but cloud-browser terminal.local:4173 connection refused. No supported viewport resizing capability exposed. This is a preview connection limitation, not a claimed site defect."
+  ],
+  "actions": [
+    {
+      "key": "deploy:current:48a7ac1",
+      "status": "succeeded",
+      "evidence": "7af215e8 SUCCESS; live navigation verified"
+    },
+    {
+      "key": "deploy:vision:7be6e41",
+      "status": "succeeded",
+      "evidence": "43361f10 SUCCESS; live navigation verified"
+    }
+  ]
 }
