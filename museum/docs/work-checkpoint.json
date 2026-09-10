@@ -1,43 +1,45 @@
 {
-  "updated_at": "2026-09-10T22:00:00Z",
+  "updated_at": "2026-09-10T13:48:08Z",
   "goal": "Finish and verify two bilingual Sheikh Ammar museum editions; preserve managed application",
   "complete": false,
-  "stage": "editorial refinement and responsive QA",
-  "next_action": "Verify exact editorial deployments and new bilingual labels; finish remaining responsive route matrix and media/performance checks before merge.",
+  "stage": "published editorial refinement; remaining comprehensive QA",
+  "next_action": "Refresh remote heads and this checkpoint. Finish the remaining authorized responsive browser matrix if access is available, then performance and all-photo identity verification. Do not retry the browser-policy-blocked preview through another surface. No main merge before managed validation and review.",
   "criteria": [
     {
       "id": "current_source",
       "status": "passed",
       "evidence": [
-        "GitHub release/museum-current-v2 48a7ac1dab274499f9784fea6f7a5ac4f9c7e18c"
+        "GitHub release/museum-current-v2 284c19cedfbcf11e40be540b37fea73dc1619374"
       ]
     },
     {
       "id": "creative_source",
       "status": "passed",
       "evidence": [
-        "GitHub feat/majlis-of-time-v2 7be6e41fee75914b187dbacf44cceb80fd2c1a3a"
+        "GitHub feat/majlis-of-time-v2 7a2c29c326a7446e6f6f1cb9bd26a70b9cca402f"
       ]
     },
     {
       "id": "local_functional_tests",
       "status": "passed",
       "evidence": [
-        "Current:15 Node/JSDOM/server tests passed; creative:17 passed. Creative diagnostic Vite build passed with classic-script warnings. Not managed React tests."
+        "Fresh current16/16 and creative18/18 Node/JSDOM/server tests passed; 42 bilingual records/42 local asset paths validated. Creative diagnostic Vite build passed with classic-script warnings. Production uses authored dist, not diagnostic bundle. Not managed React tests."
       ]
     },
     {
       "id": "deployment",
       "status": "passed",
       "evidence": [
-        "Railway 7af215e8 current SUCCESS exact48a7ac1; 43361f10 creative SUCCESS exact7be6e41. Both live collection heading and hash navigation verified via Browser."
+        "Railway current98a7814b-60c1-49e2-8688-e14b2defe213 SUCCESS exact284c19c; creative240adcf1-83b0-43a8-bd3d-19ff5e145542 SUCCESS exact7a2c29c. Both public homepages verified with new Arabic/English navigation. Current ambient pause aria-pressed true; creative ambient control computed position static in header. Creative live English chapter1 and Arabic chapter2 navigation/copy verified and desktop Arabic screenshot inspected."
       ]
     },
     {
       "id": "full_responsive_journey",
       "status": "in_progress",
       "evidence": [
-        "Creative desktop: chapters,detail,zoom,Escape,EN switch,back,biography,Rolex11,empty0,Daytona8,YouTube iframe tested. Live fix in both: one current tab, H1. Creative1348px document and scroll widths equal. Full mobile/tablet matrix remains unverified."
+        "Creative desktop: chapters,detail,zoom,Escape,EN switch,back,biography,Rolex11,empty0,Daytona8,YouTube iframe tested. Live fix in both: one current tab, H1. Creative1348px document and scroll widths equal. Full mobile/tablet matrix remains unverified.",
+        "Creative home360px content345px scroll345px; mobile navigation entered collection;390px collection screenshot inspected. Remaining iframe DOM measurements timed out.",
+        "Latest live desktop Arabic FFC chapter screenshot: title, prose and image visually separated. Full device/route matrix not complete."
       ]
     },
     {
@@ -72,12 +74,15 @@
     "Sites remains older version2; Railway deployment does not publish Sites.",
     "Collection pathname-only matching marked Collection and Watchmaking current together; match hash first with pathname fallback and update hashchange/popstate. Regression test verifies one current link.",
     "Collection lacked visible H1 and skip link reloaded same page. Promote collectionTitle to H1; skip #collection focuses region.",
-    "Checkpoint validator requires project string and evidence arrays; normalized old checkpoint schema."
+    "Checkpoint validator requires project string and evidence arrays; normalized old checkpoint schema.",
+    "Use actual observed UTC time in checkpoints; corrected erroneous future timestamp from editorial staging.",
+    "Scope git staging to museum files; unrelated client/public/slideshow-sheikh-only/slide-19.webp modification belongs to user and is preserved."
   ],
   "source_notes": "Only museum/ and scoped CI/hosting additions; never replace managed root app. Refresh branches and PR22–25 before edits. No paid purchases.",
   "project": "Sheikh Ammar Horology Museum",
   "blockers": [
-    "Responsive preview restored using supervised Sites preview; some frame evaluations still time out. Full bilingual route/device matrix and Lighthouse incomplete."
+    "Latest responsive preview recovery returned browser URL-policy block; stop this browser path. Earlier partial360/390 screenshots remain valid but cannot stand in for full mobile/tablet matrix.",
+    "Performance metrics and independent verification of every photo-model association remain incomplete."
   ],
   "actions": [
     {
@@ -89,6 +94,16 @@
       "key": "deploy:vision:7be6e41",
       "status": "succeeded",
       "evidence": "43361f10 SUCCESS; live navigation verified"
+    },
+    {
+      "key": "deploy:current:284c19c",
+      "status": "succeeded",
+      "evidence": "98a7814b SUCCESS exact source; live AR/EN verified"
+    },
+    {
+      "key": "deploy:vision:7a2c29c",
+      "status": "succeeded",
+      "evidence": "240adcf1 SUCCESS exact source; live AR/EN tour verified"
     }
   ],
   "editorial_update": {
