@@ -1,6 +1,6 @@
 # CLAUDE.md — Sheikh Ammar Royal Horology Collection
 **Single source of truth. Read this before touching anything.**
-Last updated: 31 July 2026 · Owner: Smiley (OgSmiley1)
+Last updated: 14 September 2026 · Owner: Smiley (OgSmiley1)
 
 ---
 
@@ -55,6 +55,45 @@ Rolex Daytona DiW "Motley 3S" Carbon was added from a photo Smiley uploaded dire
 
 ---
 
+### Image provenance — read before touching `docs/assets/`
+
+Every photograph originally in this repo came from third-party watch-spotter
+social posts, not from a commissioned shoot. Twenty-seven of the thirty-two were
+**split-screen collages**: a candid photograph of a person on the left, a studio
+watch render on the right, divided by a hard black seam. They were being rendered
+full-bleed as the homepage hero, as ambient page banners, and as every card and
+vitrine image on the site.
+
+What was wrong with them, beyond the seam:
+
+- one clip carried a **burned-in IFL Watches watermark**;
+- one showed an **identifiable child**;
+- one appears not to depict H.H. Sheikh Ammar at all;
+- `patron.jpg` is an Arab Watch Guide card, watermark and caption baked in;
+- the hero laid the live dial and the page headline **across His Highness's face**.
+
+**The fix:** `docs/assets/plates/` now holds one uniform 800×800 plate per piece —
+the watch half, trimmed of its black surround and centred on black. Every page
+renders from `plates/`. The originals are untouched on disk and the four hero
+clips were moved to `retired-assets/` (see the README there).
+
+**Rules from here:**
+1. Never render a source file from `docs/assets/*.webp|jpeg|jpg` directly — use its plate.
+2. Do not restore anything from `retired-assets/`.
+3. The only image of His Highness the site will show is one the owner supplies as
+   `docs/assets/patron-official.jpg`. Until it exists, the slot shows a monogram.
+   Do not substitute a candid, and do not generate a portrait of him.
+
+### Pieces whose photograph does not match their name
+
+Found while auditing the plates. **Not corrected — these need Smiley's call**, because
+the fix might be the name, the image, or both:
+
+- `richard-mille-rm-65-01` — the image is a **Cartier Tank with an Arabic-numeral salmon dial**. Not a Richard Mille, and Cartier is not among the eight maisons.
+- `tudor-black-bay-chronograph-pink-dial` — the image is a **skeletonised dress watch on a brown alligator strap**. Not a Black Bay chronograph.
+- `patek-philippe-5470p` — the image is a **baguette-sapphire-set perpetual calendar chronograph, blue dial**, consistent with the **5271/11P "Blue Sapphire"** already suspected in §3, not a 5470P.
+- `patron.jpg`'s own caption names a **Cartier Crash** in the collection — a piece the ledger does not list at all.
+
 ## 4. STRUCTURE
 
 ```
@@ -62,11 +101,16 @@ Rolex Daytona DiW "Motley 3S" Carbon was added from a photo Smiley uploaded dire
 ├─ CLAUDE.md              ← you are here
 ├─ data/watches.json      ← reference export of all 32 pieces (see §0.3 — not yet the live source)
 ├─ docs/                  ← THE PUBLIC WEBSITE (GitHub Pages serves this)
-│  ├─ sitemap.xml         all 38 pages, for search engines
+│  ├─ sitemap.xml         all 39 pages, for search engines
 │  ├─ robots.txt          allows all crawlers, points at sitemap.xml
 │  ├─ index.html          Home: veil, video hero (4 films, chapter captions),
 │  │                      live Ajman dial, ledger, Piece of the Day, hawk
 │  │                      band, catalogue teaser, film section, dedication
+│  ├─ exhibition.html     THE EXHIBITION HALL — 32 spotlit vitrines, one per screen,
+│  │                      museum placards (lot · maison · ref · year · hallmark),
+│  │                      arrow/keyboard/rail navigation, hall map by maison,
+│  │                      Curator's Tour autoplay. Generated once from data/watches.json
+│  │                      (generator lives outside the repo; the HTML is the artifact)
 │  ├─ collection.html     All 32, grouped by maison, live filters + search
 │  ├─ masterpieces.html   6 lots, ivory catalogue paper, ambient video banner
 │  ├─ maisons.html        8 houses
@@ -76,18 +120,21 @@ Rolex Daytona DiW "Motley 3S" Carbon was added from a photo Smiley uploaded dire
 │  ├─ certificates/       16 bilingual "Certificate of Provenance" PDFs, one per RRR piece
 │  └─ assets/
 │     ├─ style.css        entire design system
-│     ├─ app.js           lang, dial, video hero, filters, share, Piece of the Day, reveals
-│     ├─ films/           4 produced hero video clips (mp4+webm+poster) + posters for banners
-│     ├─ favicon.svg      ع monogram favicon (done — used on all 38 pages)
+│     ├─ app.js           lang, dial, video hero, filters, share, Piece of the Day, reveals,
+│     │                   exhibition hall (exhibition()), vitrine lightbox (vitrine())
+│     ├─ plates/          32 uniform 800×800 studio plates — the images the site renders
+│     ├─ favicon.svg      ع monogram favicon (done — used on all 39 pages)
 │     ├─ og-cover.jpg     social link preview
-│     ├─ patron-arch.jpg  clean-cropped patron portrait (the original patron.jpg carries a
-│     │                   burned-in third-party watermark — use the -arch version everywhere)
+│     ├─ patron-official.jpg  ← DROP AN OFFICIAL PORTRAIT HERE (see §7) — not present;
+│     │                   the slot falls back to a ع monogram medallion while absent
 │     ├─ emblem.png       ← DROP OFFICIAL AJMAN EMBLEM HERE (see §7) — still not present
 │     └─ *.webp/jpeg      33 images (32 watches + patron portrait)
 └─ BLUEPRINT.md           strategy: launch plan, captions, next-level ideas
 ```
 
-**38 HTML pages + 16 certificate PDFs.** Verified in-browser: 0 JS errors, video hero crossfades and advances chapters correctly, Arabic-first load confirmed.
+**39 HTML pages + 16 certificate PDFs.** Verified in-browser: 0 JS errors, video hero crossfades and advances chapters correctly, Arabic-first load confirmed.
+
+**Header nav carries 7 links.** The burger menu takes over below **1300px** (measured: the full 7-link nav needs ~1260px in English, ~1240px in Arabic; 1300 leaves margin for Marcellus rendering wider than the test fallback). If you add an 8th link, re-measure — don't guess.
 
 ---
 
@@ -95,8 +142,13 @@ Rolex Daytona DiW "Motley 3S" Carbon was added from a photo Smiley uploaded dire
 
 - Cinematic veil entrance (ع monogram lifts on load) + film-grain texture
 - Live engraved guilloché dial showing real Ajman time (GST, UTC+4)
-- **Video hero**: 4 produced films (Quraysh Daytona, Manama World Time, Chronomètre à Résonance, RM 68-01 Kongo) crossfading with bilingual chapter captions and clickable progress ticks; falls back to still posters under `prefers-reduced-motion` or data-saver
-- Ambient video banners on the Patron and Masterpieces page headers
+- **Chapter hero**: four studio plates (Quraysh Daytona, Manama World Time, Chronomètre à Résonance, RM 68-01 Kongo) crossfading on a slow ken-burns drift, with bilingual chapter captions and clickable progress ticks; the drift is dropped under `prefers-reduced-motion`
+- Crossfading gallery banners on the Patron and Masterpieces page headers
+- Live crossfading gallery banners (stills from the collection's own photography) on Collection, Maisons, Timeline
+- **The Exhibition Hall** (`exhibition.html`) — the museum: 32 vitrines walked one per screen (scroll-snap), each under its own spotlight with a brass placard; ← → keys (mirrored in RTL), Home/End, a 32-tick rail, a hall map by maison, and a **Curator's Tour** that auto-advances every 7.2s (space to pause; hidden under `prefers-reduced-motion`). Opens with the royal Rolex wing, Quraysh first. Arabic reading uses Arabic-Indic numerals.
+- **The vitrine lightbox** — clicking the watch image on any folio (or any case in the hall) opens a spotlit glass-case view with the piece's lot and name; ESC / click-outside / ✕ closes, focus returns. No zoom bars, no percentages.
+- **The doorway** on the homepage — an arched, spotlit invitation into the Exhibition Hall, placed after Piece of the Day
+- The Film facade shows the site's own film poster (`films/film-kongo.jpg`), never YouTube's thumbnail — the video still plays on click
 - Full-bleed parallax "chapter band" — «الوقت لا يُملك… بل يُحفظ»
 - Full bilingual EN/AR with RTL, persisted across pages via `?lang=` (Arabic is default; `.pdf` links are excluded from this decoration)
 - RRR · RR · R rarity hallmarks (auction convention) — 16 pieces carry RRR
@@ -135,9 +187,10 @@ Live at: `https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/`
 
 **Remaining manual items:**
 1. Drop the official Ajman emblem into `docs/assets/emblem.png` (header + footer slots are already coded; if the file is absent the slot hides itself). Use an authentic official file — do not generate a state emblem.
-2. Custom domain (e.g. `majlisoftime.com`) → Settings → Pages → Custom domain
-3. Rotate the `MOATH123` credential (§6) — this is the one item here with real security weight, do it before the site draws attention
-4. Compress the heaviest images in `docs/assets/` if any exceed ~250KB (spot-check; most are already reasonably sized)
+2. Drop an official portrait into `docs/assets/patron-official.jpg` (Patron + Home slots are coded; absent, they show a ع monogram medallion)
+3. Custom domain (e.g. `majlisoftime.com`) → Settings → Pages → Custom domain
+4. Rotate the `MOATH123` credential (§6) — this is the one item here with real security weight, do it before the site draws attention
+5. Compress the heaviest images in `docs/assets/` if any exceed ~250KB (spot-check; most are already reasonably sized)
 
 ---
 
@@ -148,8 +201,11 @@ Live at: `https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/`
 - [x] Redact leaked credential from markdown docs — done (§6); `seed-database.ts` still needs Smiley's hand
 - [x] Add `sitemap.xml` + `robots.txt` to `docs/` — done, plus `rel="canonical"` on all pages
 - [x] Full-site image audit — watermarks removed, wrong images flagged (not guessed at), Arabic translation gaps fixed
+- [x] The Exhibition Hall, the vitrine lightbox, the homepage doorway — done (§5)
 - [ ] Rotate the live `MOATH123` credential and remove the hardcoded default from `seed-database.ts` (needs Smiley — see §6)
-- [ ] Resolve the three flagged piece-identity questions in §3 (5470P vs 5271P; the two Tourbillon Souverain entries)
+- [x] Replace the split-screen collage imagery with uniform studio plates — done (§3, Image provenance)
+- [ ] Supply `docs/assets/patron-official.jpg` — an official portrait, to fill the monogram slot
+- [ ] Resolve the flagged piece-identity questions in §3 (5470P vs 5271P; the two Tourbillon Souverain entries; the RM 65-01 / Tudor image mismatches; the unlisted Cartier Crash)
 - [ ] Lighthouse pass — target ≥90 performance, ≥95 accessibility
 - [ ] Verify OG cards unfurl correctly once the site is live
 - [ ] Do **not** touch valuations without Smiley's instruction (§2)
