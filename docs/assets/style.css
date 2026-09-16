@@ -499,7 +499,11 @@ body.vlb-open{overflow:hidden}
 .vlb-case{position:relative;border:1px solid var(--hairline);padding:10px;background:linear-gradient(180deg,#0C120E,#050705);box-shadow:0 70px 140px -50px rgba(0,0,0,1);transform:scale(.97) translateY(10px);transition:transform .6s cubic-bezier(.22,.8,.3,1)}
 #vlb.open .vlb-case{transform:none}
 .vlb-case::before{content:"";position:absolute;inset:18px;border:1px solid rgba(201,164,92,.22);pointer-events:none;z-index:2}
-.vlb-case img{display:block;max-height:min(72vh,820px);max-width:100%;width:auto;object-fit:contain}
+.vlb-case img{display:block;max-height:min(72vh,820px);max-width:100%;width:auto;object-fit:contain;transform-origin:center center;transition:transform .28s cubic-bezier(.22,.8,.3,1);will-change:transform}
+.vlb-case{cursor:zoom-in;overflow:hidden;touch-action:none;overscroll-behavior:contain}
+#vlb.zoomed .vlb-case{cursor:grab}
+#vlb.zoomed .vlb-case:active{cursor:grabbing}
+#vlb.zoomed .vlb-case img{transition:none}
 .vlb-case .beam{position:absolute;inset:-30% 0 0;background:conic-gradient(from 180deg at 50% -6%,transparent 42%,rgba(237,210,154,.1) 50%,transparent 58%);pointer-events:none;z-index:1}
 .vlb-plate{text-align:center;max-width:60ch}
 .vlb-plate .lot-no{color:var(--gold);letter-spacing:.42em}
@@ -510,3 +514,56 @@ html[dir=rtl] .vlb-plate h3{font-family:var(--ar)}
 .vlb-k{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);font-family:var(--disp);font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-dim);white-space:nowrap}
 html[dir=rtl] .vlb-k{letter-spacing:.03em;font-size:.82rem;font-family:var(--ar)}
 @media (prefers-reduced-motion:reduce){#vlb,.vlb-case,.case img,.vhint{transition:none}.vlb-case{transform:none}}
+
+/* ===== The Patron: house, offices, works, honours ===== */
+.pwrap{max-width:980px;margin:0 auto;padding:0 1.4rem}
+.psec{padding:4.2rem 0 1rem}
+.psec+.psec{padding-top:2.4rem}
+.ptitle{font-family:var(--disp);font-size:clamp(1.15rem,2.4vw,1.5rem);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-hi);font-weight:400;text-align:center}
+html[dir=rtl] .ptitle{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:clamp(1.4rem,2.8vw,1.85rem)}
+.ptitle::after{content:"";display:block;width:120px;height:18px;margin:1.1rem auto 0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'><g stroke='%23C9A45C' fill='none' stroke-width='1'><line x1='0' y1='12' x2='44' y2='12' opacity='.5'/><line x1='76' y1='12' x2='120' y2='12' opacity='.5'/><rect x='52' y='4' width='16' height='16' transform='rotate(45 60 12)'/><circle cx='60' cy='12' r='1.6' fill='%23C9A45C' stroke='none'/></g></svg>") center/contain no-repeat}
+.pnote{max-width:60ch;margin:1.6rem auto 0;text-align:center;color:rgba(244,237,220,.7);font-size:1.05rem;line-height:1.75}
+
+/* the house */
+.house-line{display:grid;gap:1px;background:var(--hairline);border:1px solid var(--hairline);margin-top:2.4rem}
+.hrow{background:var(--majlis);padding:1.25rem 1.5rem;display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr);gap:.6rem 1.8rem;align-items:baseline}
+.hrow dt{font-family:var(--disp);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dim);line-height:1.8}
+html[dir=rtl] .hrow dt{font-family:var(--ar);font-size:.92rem;letter-spacing:0;text-transform:none}
+.hrow dd{color:rgba(244,237,220,.86);font-size:1.03rem;line-height:1.7;min-width:0}
+
+/* offices */
+.offices{margin-top:2.4rem;border-top:1px solid var(--hairline)}
+.office{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 2rem;align-items:baseline;padding:1.15rem .2rem;border-bottom:1px solid var(--hairline)}
+.office .ttl{font-size:1.05rem;color:var(--ivory);line-height:1.6;min-width:0}
+.office .since{font-family:var(--disp);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);white-space:nowrap}
+html[dir=rtl] .office .since{font-family:var(--ar);font-size:.92rem;letter-spacing:0;text-transform:none}
+
+/* works */
+.deeds{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:1px;background:var(--majlis);margin-top:2.4rem}
+/* rules are drawn per card, so a row that does not fill leaves no empty lit cell */
+.deed{background:var(--majlis);padding:1.9rem 1.6rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:0 0 0 1px var(--hairline)}
+.deed .n{font-family:var(--disp);font-size:.66rem;letter-spacing:.3em;color:#7F6227}
+html[dir=rtl] .deed .n{font-family:var(--ar);font-size:.95rem;letter-spacing:0}
+.deed h4{font-family:var(--disp);font-size:.94rem;font-weight:400;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-hi);line-height:1.55}
+html[dir=rtl] .deed h4{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:1.12rem}
+.deed p{color:rgba(244,237,220,.66);font-size:.98rem;line-height:1.72}
+
+/* honour */
+.honour{margin:2.8rem auto 0;max-width:640px;border:1px solid var(--gold);padding:2.4rem 1.8rem;text-align:center;position:relative;background:linear-gradient(to bottom,rgba(201,164,92,.06),transparent)}
+.honour .mk2{font-family:var(--ar);font-size:2rem;color:var(--gold-hi);line-height:1;display:block;margin-bottom:.9rem}
+.honour h4{font-family:var(--disp);font-size:1.02rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);line-height:1.6}
+html[dir=rtl] .honour h4{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:1.25rem}
+.honour p{margin-top:.8rem;color:rgba(244,237,220,.66);font-size:1rem;line-height:1.7}
+
+/* the closing line into the collection */
+.pbridge{margin:4rem auto 1rem;max-width:760px;text-align:center;padding:0 1.4rem}
+.pbridge blockquote{font-size:clamp(1.1rem,2.4vw,1.42rem);line-height:1.9;color:var(--gold-hi);font-style:italic}
+html[dir=rtl] .pbridge blockquote{font-style:normal;font-family:var(--ar)}
+.pbridge .cite{display:block;margin-top:1.4rem;font-family:var(--disp);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim)}
+html[dir=rtl] .pbridge .cite{font-family:var(--ar);font-size:.9rem;letter-spacing:0;text-transform:none}
+
+@media(max-width:640px){
+  .hrow{grid-template-columns:1fr;gap:.35rem}
+  .office{grid-template-columns:1fr;gap:.3rem}
+  .office .since{white-space:normal}
+}

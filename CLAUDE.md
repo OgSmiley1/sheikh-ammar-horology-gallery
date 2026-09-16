@@ -1,6 +1,6 @@
 # CLAUDE.md — Sheikh Ammar Royal Horology Collection
 **Single source of truth. Read this before touching anything.**
-Last updated: 16 September 2026 · Owner: Smiley (OgSmiley1)
+Last updated: 16 September 2026 (second pass) · Owner: Smiley (OgSmiley1)
 
 ---
 
@@ -105,6 +105,43 @@ Ajman. Recorded here as the owner's representation — it has not been independe
 verified from this repo. If that permission lapses, remove the file; the monogram returns
 by itself.
 
+### Evidence from the owner's watch-spotter screenshots (16 September 2026)
+
+The owner supplied a set of Instagram posts (`arabswatchspotting`, `watchleaderskw`,
+`timekeeperkw`, `arabwatchguide`). Read as evidence, they **settle two of the open
+questions** and surface pieces the ledger does not hold. Nothing below has been applied
+to the site yet — each needs the owner's word on whether the fix is the name, the image,
+or a new entry.
+
+**Settled — the name is right, the picture is wrong:**
+
+- `richard-mille-rm-65-01` — the real piece is the **RM 65-01 McLaren**, carbon on an
+  orange strap (quoted ~US$ 460,000). The picture currently filed under this slug is a
+  **Cartier Tank**, which is a different watch he also owns.
+- `patek-philippe-5470p` — the real 5470P is **platinum, black dial, red 1/10th-second
+  hand** (quoted ~US$ 500,000 at retail). The picture currently filed under this slug is
+  the **baguette-sapphire perpetual calendar chronograph** — i.e. the 5271P long suspected
+  in §3. The collection appears to hold **both**, filed as one.
+
+**Evidenced but not in the ledger** (each would need its own folio and plate):
+
+- **F.P. Journe Chronographe Monopoussoir Rattrapante** — Tokyo boutique 20th anniversary,
+  200 pieces, 40 mm titanium with red-gold crown and pushers, 80 h, ~US$ 101,000
+- **F.P. Journe FFC** — platinum, the hand that tells the hours
+- **Breitling Avenger Blackbird** — DLC titanium, 44 × 12.7 mm, 38 h (would be a 10th maison)
+- **Rolex Day-Date "Puzzle"** — rose gold, 36 mm, 70 h
+- **Patek Philippe ref. 1463 "Tasti Tondi"** — gold chronograph
+- **Cartier Tank** — salmon dial, and a second steel Tank (would be an 11th maison)
+
+**Not his.** One post shows the **RM 67-01 Automatic Extra Flat** on
+H.H. Sheikh Humaid bin Rashid Al Nuaimi, **Ruler of Ajman** — his father. Do not add it
+to this collection. (The site's `richard-mille-rm-67-02-alexis-pinturault` is a different
+reference and is unaffected.)
+
+**Caution on captions.** The Tudor Black Bay post names Sheikh Ammar but the photograph
+shows a different man. Spotter captions are a lead, not a provenance. Verify against the
+maker before anything enters the ledger.
+
 ### Pieces whose photograph does not match their name
 
 Found while auditing the plates. **Not corrected — these need Smiley's call**, because
@@ -179,7 +216,8 @@ Any new piece gets the same line — do not reword it per watch.
 - Crossfading gallery banners on the Patron and Masterpieces page headers
 - Live crossfading gallery banners (stills from the collection's own photography) on Collection, Maisons, Timeline
 - **The Exhibition Hall** (`exhibition.html`) — the museum: 32 vitrines walked one per screen (scroll-snap), each under its own spotlight with a brass placard; ← → keys (mirrored in RTL), Home/End, a 32-tick rail, a hall map by maison, and a **Curator's Tour** that auto-advances every 7.2s (space to pause; hidden under `prefers-reduced-motion`). Opens with the royal Rolex wing, Quraysh first. Arabic reading uses Arabic-Indic numerals.
-- **The vitrine lightbox** — clicking the watch image on any folio (or any case in the hall) opens a spotlit glass-case view with the piece's lot and name; ESC / click-outside / ✕ closes, focus returns. No zoom bars, no percentages.
+- **The vitrine lightbox, with a loupe** — clicking the watch image on any folio (or any case in the hall) opens a spotlit glass-case view with the piece's lot and name. It **genuinely magnifies**: wheel, pinch, or double-click to go to 4.5×, drag to pan, `+` `-` `0` on the keyboard, and the pan is clamped to the plate's edges so it never drifts into empty black. ESC / click-outside / ✕ closes and focus returns. No zoom bars, no percentages.
+- **The Patron** (`patron.html`) — the full record, bilingual: the arch portrait, the life timeline, **The House of Al Nuaimi** (an eight-row register: name, birth, father, mother, consort, children, schooling, training), **Offices** (five chairmanships with dates), **The Works** (seven numbered cards — Ajman Vision 2030, the Excellence Programme, Zero Bureaucracy, the Global Star Rating, the Mystery Shopper, Treatment Abroad, Private Education Coordination), and **Honours** (the Mohammed bin Rashid Sash, December 2024). Sourced from the Ajman Media Office, the Government of Ajman and UAE press — not invented.
 - **The doorway** on the homepage — an arched, spotlit invitation into the Exhibition Hall, placed after Piece of the Day
 - The Film facade shows the site's own film poster (`films/film-kongo.jpg`), never YouTube's thumbnail — the video still plays on click
 - Full-bleed parallax "chapter band" — «الوقت لا يُملك… بل يُحفظ»
@@ -238,7 +276,9 @@ Live at: `https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/`
 - [x] Replace the split-screen collage imagery with uniform studio plates — done (§3, Image provenance)
 - [x] Supply `docs/assets/patron-official.jpg` — done, supplied by the owner
 - [ ] Regenerate the certificate set as 17 so the Lederer can carry one (see §3)
-- [ ] Resolve the flagged piece-identity questions in §3 (5470P vs 5271P; the two Tourbillon Souverain entries; the RM 65-01 / Tudor image mismatches; the unlisted Cartier Crash)
+- [ ] Swap in the correct plates for `richard-mille-rm-65-01` and `patek-philippe-5470p`, and decide whether the Cartier Tank and the 5271P become entries of their own (§3, Evidence)
+- [ ] Decide on the six evidenced-but-unlisted pieces, and whether Breitling and Cartier join as maisons (§3, Evidence)
+- [ ] Resolve the remaining identity questions in §3 (the two Tourbillon Souverain entries; the unlisted Cartier Crash)
 - [ ] Lighthouse pass — target ≥90 performance, ≥95 accessibility
 - [ ] Verify OG cards unfurl correctly once the site is live
 - [ ] Do **not** touch valuations without Smiley's instruction (§2)
