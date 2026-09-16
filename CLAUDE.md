@@ -1,6 +1,6 @@
 # CLAUDE.md — Sheikh Ammar Royal Horology Collection
 **Single source of truth. Read this before touching anything.**
-Last updated: 14 September 2026 · Owner: Smiley (OgSmiley1)
+Last updated: 16 September 2026 · Owner: Smiley (OgSmiley1)
 
 ---
 
@@ -44,11 +44,24 @@ Not e-commerce. Not a catalogue for sale. A private salon, in the register of an
 
 ## 3. THE NUMBERS (authoritative — fix any doc that disagrees)
 
-- **32** timepieces
-- **8** maisons: Patek Philippe, Audemars Piguet, Richard Mille, Rolex, F.P. Journe, H. Moser & Cie, Artisans de Genève, Tudor
-- **1963 – 2024** (six decades)
-- **US$ 11.7M+** combined valuation
-- **16** pieces carry the RRR (highest rarity) hallmark — verified by counting `RRR</b>` markers in `docs/watch/*.html`
+- **33** timepieces
+- **9** maisons: Patek Philippe, Audemars Piguet, Richard Mille, Rolex, F.P. Journe, H. Moser & Cie, Artisans de Genève, Tudor, Lederer
+- **1963 – 2025** (six decades)
+- **US$ 11.7M+** combined valuation (the Lederer is carried at its published CHF 152,000 — the only piece not quoted in US$)
+- **17** pieces carry the RRR (highest rarity) hallmark — verified by counting `RRR</b>` markers in `docs/watch/*.html`
+
+> **Certificates are one short.** There are 16 Certificate of Provenance PDFs for 17 RRR
+> pieces. The Lederer folio deliberately omits the download link rather than ship a
+> certificate numbered "X OF 16". Regenerating the set as 17 renumbers every existing PDF.
+
+### 33rd piece — provenance note (16 September 2026)
+**Lederer CIC 39 InVerto Titanium.** Identified from an ARABWATCHGUIDE carousel the owner
+supplied, then verified independently against the maker and watch press: Grade 5 titanium,
+39 × 10.5 mm, calibre 9019, dual detent escapement with twin constant-force remontoirs,
+3 Hz, 38 h, CHF 152,000, presented at **Dubai Watch Week, November 2025**, allocated in full
+until summer 2027. The fair setting in the supplied photograph is consistent with that launch.
+Lederer joins as the ninth maison. The watch plate was cut from the product render in the
+supplied card — the candid half was discarded, as with the other 32.
 
 ### 32nd piece — provenance note (31 July 2026)
 Rolex Daytona DiW "Motley 3S" Carbon was added from a photo Smiley uploaded directly in chat (not sourced from `client/public/watches-collection/` like the original 31). Identified by web research against watch-spotter coverage of the Sheikh's collection (IFL Watches, Superwatchman) and DiW's own published specs — not guessed. Same research pass also surfaced open questions about the identity of three *existing* pieces (`patek-philippe-5470p` may actually be a 5271P "Blue Sapphire"; the two `fp-journe-tourbillon-souverain-*` entries may both describe one real sapphire-dial piece rather than two separate blue/mint watches) — flagged to Smiley, not yet acted on. See PR history for sources.
@@ -81,8 +94,16 @@ clips were moved to `retired-assets/` (see the README there).
 1. Never render a source file from `docs/assets/*.webp|jpeg|jpg` directly — use its plate.
 2. Do not restore anything from `retired-assets/`.
 3. The only image of His Highness the site will show is one the owner supplies as
-   `docs/assets/patron-official.jpg`. Until it exists, the slot shows a monogram.
-   Do not substitute a candid, and do not generate a portrait of him.
+   `docs/assets/patron-official.jpg`. If it is ever removed, the slot falls back to a
+   ع monogram medallion on its own. Do not substitute a candid, and do not generate a
+   portrait of him.
+
+**Portrait rights.** On 16 September 2026 the owner supplied the current
+`patron-official.jpg` and stated he holds publication rights for images of His Highness,
+naming Khamis Salem Al Matrooshi, authorised through the Office of the Ruler's Court of
+Ajman. Recorded here as the owner's representation — it has not been independently
+verified from this repo. If that permission lapses, remove the file; the monogram returns
+by itself.
 
 ### Pieces whose photograph does not match their name
 
@@ -93,6 +114,18 @@ the fix might be the name, the image, or both:
 - `tudor-black-bay-chronograph-pink-dial` — the image is a **skeletonised dress watch on a brown alligator strap**. Not a Black Bay chronograph.
 - `patek-philippe-5470p` — the image is a **baguette-sapphire-set perpetual calendar chronograph, blue dial**, consistent with the **5271/11P "Blue Sapphire"** already suspected in §3, not a 5470P.
 - `patron.jpg`'s own caption names a **Cartier Crash** in the collection — a piece the ledger does not list at all.
+
+### The provenance line
+
+Every folio carries one bilingual line under the rarity hallmark, in the small-caps gold
+eyebrow style, set off by a short gold rule:
+
+> EN — *Borne on the wrist of His Highness the Crown Prince of Ajman.*
+> AR — «رُصدت على معصم سموّ ولي عهد عجمان.»
+
+It keeps the ARABWATCHGUIDE verb (رُصد) and its parallel bilingual structure, in the
+register of a maison's own catalogue rather than a spotter's headline. Class `.observed`.
+Any new piece gets the same line — do not reword it per watch.
 
 ## 4. STRUCTURE
 
@@ -122,11 +155,11 @@ the fix might be the name, the image, or both:
 │     ├─ style.css        entire design system
 │     ├─ app.js           lang, dial, video hero, filters, share, Piece of the Day, reveals,
 │     │                   exhibition hall (exhibition()), vitrine lightbox (vitrine())
-│     ├─ plates/          32 uniform 800×800 studio plates — the images the site renders
+│     ├─ plates/          33 uniform 800×800 studio plates — the images the site renders
 │     ├─ favicon.svg      ع monogram favicon (done — used on all 39 pages)
 │     ├─ og-cover.jpg     social link preview
-│     ├─ patron-official.jpg  ← DROP AN OFFICIAL PORTRAIT HERE (see §7) — not present;
-│     │                   the slot falls back to a ع monogram medallion while absent
+│     ├─ patron-official.jpg  the portrait, supplied by the owner (see §3, Portrait rights);
+│     │                   remove it and the slot falls back to a ع monogram medallion
 │     ├─ emblem.png       ← DROP OFFICIAL AJMAN EMBLEM HERE (see §7) — still not present
 │     └─ *.webp/jpeg      33 images (32 watches + patron portrait)
 └─ BLUEPRINT.md           strategy: launch plan, captions, next-level ideas
@@ -187,10 +220,9 @@ Live at: `https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/`
 
 **Remaining manual items:**
 1. Drop the official Ajman emblem into `docs/assets/emblem.png` (header + footer slots are already coded; if the file is absent the slot hides itself). Use an authentic official file — do not generate a state emblem.
-2. Drop an official portrait into `docs/assets/patron-official.jpg` (Patron + Home slots are coded; absent, they show a ع monogram medallion)
-3. Custom domain (e.g. `majlisoftime.com`) → Settings → Pages → Custom domain
-4. Rotate the `MOATH123` credential (§6) — this is the one item here with real security weight, do it before the site draws attention
-5. Compress the heaviest images in `docs/assets/` if any exceed ~250KB (spot-check; most are already reasonably sized)
+2. Custom domain (e.g. `majlisoftime.com`) → Settings → Pages → Custom domain
+3. Rotate the `MOATH123` credential (§6) — this is the one item here with real security weight, do it before the site draws attention
+4. Compress the heaviest images in `docs/assets/` if any exceed ~250KB (spot-check; most are already reasonably sized)
 
 ---
 
@@ -204,7 +236,8 @@ Live at: `https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/`
 - [x] The Exhibition Hall, the vitrine lightbox, the homepage doorway — done (§5)
 - [ ] Rotate the live `MOATH123` credential and remove the hardcoded default from `seed-database.ts` (needs Smiley — see §6)
 - [x] Replace the split-screen collage imagery with uniform studio plates — done (§3, Image provenance)
-- [ ] Supply `docs/assets/patron-official.jpg` — an official portrait, to fill the monogram slot
+- [x] Supply `docs/assets/patron-official.jpg` — done, supplied by the owner
+- [ ] Regenerate the certificate set as 17 so the Lederer can carry one (see §3)
 - [ ] Resolve the flagged piece-identity questions in §3 (5470P vs 5271P; the two Tourbillon Souverain entries; the RM 65-01 / Tudor image mismatches; the unlisted Cartier Crash)
 - [ ] Lighthouse pass — target ≥90 performance, ≥95 accessibility
 - [ ] Verify OG cards unfurl correctly once the site is live
