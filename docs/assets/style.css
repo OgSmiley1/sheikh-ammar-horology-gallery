@@ -129,7 +129,9 @@ html[dir=rtl] .seal{letter-spacing:.02em;font-size:.85rem;font-family:var(--ar)}
 html[dir=rtl] .house-plate .cnt{font-style:normal}
 
 /* filter bar */
-.filters{position:sticky;top:64px;z-index:30;background:rgba(10,14,11,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline);padding:.9rem clamp(1.2rem,4vw,3rem);display:flex;gap:.9rem;align-items:center;flex-wrap:wrap}
+.filters{position:sticky;top:64px;z-index:30;background:rgba(10,14,11,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline);padding:.9rem clamp(1.2rem,4vw,3rem);display:flex;flex-direction:column;gap:.7rem}
+.chip-row{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.filter-search{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
 .chip{border:1px solid var(--hairline);padding:.32rem .95rem;font-family:var(--disp);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,237,220,.75);transition:all .25s;white-space:nowrap}
 html[dir=rtl] .chip{letter-spacing:.02em;font-size:.9rem;font-family:var(--ar)}
 .chip.on,.chip:hover{background:var(--gold);color:var(--lacquer);border-color:var(--gold)}
