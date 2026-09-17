@@ -183,7 +183,10 @@ Any new piece gets the same line — do not reword it per watch.
 │  │                      (generator lives outside the repo; the HTML is the artifact)
 │  ├─ collection.html     All 32, grouped by maison, live filters + search
 │  ├─ masterpieces.html   6 lots, ivory catalogue paper, ambient video banner
-│  ├─ maisons.html        8 houses
+│  ├─ maisons.html        9 houses
+│  ├─ films.html         THE SCREENING ROOM — the one verified film, presented as a
+│  │                     featured editorial record, plus two honest onward routes into
+│  │                     moving image the site actually has. No fabricated entries.
 │  ├─ timeline.html       every dated piece, by decade
 │  ├─ patron.html         سيرة الشيخ عمار — royal biography timeline, ambient video banner
 │  ├─ watch/<slug>.html   32 individual folios (16 of them link a PDF certificate)
@@ -204,7 +207,14 @@ Any new piece gets the same line — do not reword it per watch.
 
 **39 HTML pages + 16 certificate PDFs.** Verified in-browser: 0 JS errors, video hero crossfades and advances chapters correctly, Arabic-first load confirmed.
 
-**Header nav carries 7 links.** The burger menu takes over below **1300px** (measured: the full 7-link nav needs ~1260px in English, ~1240px in Arabic; 1300 leaves margin for Marcellus rendering wider than the test fallback). If you add an 8th link, re-measure — don't guess.
+**Header nav carries 5 links** — Home · Exhibition · Collection · Films · Sheikh Ammar.
+Masterpieces, Maisons and Timeline were not deleted: they are lenses on the collection,
+reached from the `.lenses` row at the top of `collection.html` and from the footer, which
+still carries all eight destinations. The burger takes over below **1000px** (measured
+17 Sept 2026: with five links the nav itself fits to ~820px in both languages, but
+`.mono .nm` is now `white-space:nowrap`, so the wordmark stops shrinking and the nav
+wraps at 980px; 1000 clears that with margin). If you change the link count **or** the
+wordmark's wrapping, re-measure with `hdr2.mjs`-style row/collision checks — don't guess.
 
 ---
 

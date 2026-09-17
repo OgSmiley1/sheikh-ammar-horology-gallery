@@ -37,8 +37,27 @@ if(lb) lb.addEventListener('click',function(){
 var bg=document.getElementById('burger');
 var om=document.getElementById('omenu');
 if(bg&&om){
-  bg.addEventListener('click',function(){om.classList.add('open')});
-  om.addEventListener('click',function(e){if(e.target.tagName==='A'||e.target.classList.contains('oclose')||e.target===om)om.classList.remove('open')});
+  /* the overlay is inert until opened; aria-hidden must track that, or the
+     menu stays invisible to assistive tech while visible to everyone else */
+  var omLast=null;
+  function omOpen(){
+    om.classList.add('open');om.setAttribute('aria-hidden','false');
+    bg.setAttribute('aria-expanded','true');document.body.classList.add('vlb-open');
+    omLast=document.activeElement;
+    var f=om.querySelector('.oclose');if(f)setTimeout(function(){f.focus()},60);
+  }
+  function omClose(){
+    om.classList.remove('open');om.setAttribute('aria-hidden','true');
+    bg.setAttribute('aria-expanded','false');document.body.classList.remove('vlb-open');
+    if(omLast&&omLast.focus)omLast.focus();
+  }
+  bg.addEventListener('click',function(){om.classList.contains('open')?omClose():omOpen()});
+  om.addEventListener('click',function(e){
+    if(e.target.tagName==='A'||e.target.classList.contains('oclose')||e.target===om)omClose();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&om.classList.contains('open'))omClose();
+  });
 }
 /* cinematic veil lift */
 window.addEventListener('load',function(){setTimeout(function(){document.body.classList.add('loaded')},700)});
@@ -325,9 +344,15 @@ function filters(){
 }
 
 /* youtube facade */
-var yt=document.getElementById('yt');
-if(yt){var go=function(){var id=yt.getAttribute('data-id');yt.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="Film" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'};
-  yt.addEventListener('click',go);yt.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')go()});}
+/* every film facade on the page; the iframe is only created on intent */
+Array.prototype.forEach.call(document.querySelectorAll('.yt[data-id]'),function(yt){
+  function go(){
+    var id=yt.getAttribute('data-id');
+    yt.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="'+(lang==='ar'?'فيلم':'Film')+'" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  }
+  yt.addEventListener('click',go);
+  yt.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
+});
 /* copy link */
 Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'),function(btn){
   btn.addEventListener('click',function(){
