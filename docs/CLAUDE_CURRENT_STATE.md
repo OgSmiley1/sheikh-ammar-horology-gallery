@@ -83,6 +83,9 @@ responsive QA.
 
 - Branch: `claude/watch-website-master-plan-x2gsgo`
 - Commit at start of this pass: `3092924`
+- Commit at end of this pass: `b4fdf21` (pushed; PR #22, still draft)
+- Final matrix: 12 pages x 2 languages x 6 viewports = 144 combinations,
+  **zero** overlap / spill / horizontal-scroll / JS / HTTP / distortion.
 
 ## Exact next action
 
