@@ -1,6 +1,6 @@
 # CLAUDE.md — Sheikh Ammar Royal Horology Collection
 **Single source of truth. Read this before touching anything.**
-Last updated: 16 September 2026 (second pass) · Owner: Smiley (OgSmiley1)
+Last updated: 17 September 2026 (third pass) · Owner: Smiley (OgSmiley1)
 
 ---
 
@@ -279,7 +279,7 @@ Live at: `https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/`
 - [ ] Swap in the correct plates for `richard-mille-rm-65-01` and `patek-philippe-5470p`, and decide whether the Cartier Tank and the 5271P become entries of their own (§3, Evidence)
 - [ ] Decide on the six evidenced-but-unlisted pieces, and whether Breitling and Cartier join as maisons (§3, Evidence)
 - [ ] Resolve the remaining identity questions in §3 (the two Tourbillon Souverain entries; the unlisted Cartier Crash)
-- [ ] Lighthouse pass — target ≥90 performance, ≥95 accessibility
+- [x] Lighthouse pass — target ≥90 performance, ≥95 accessibility — done (17 Sept 2026): homepage 95/100/96/100 (perf/a11y/BP/SEO), exhibition 94/100/96/100, watch folio 97/100/96/100. Fixed two real findings along the way: `<h5>` skipping heading levels on all 33 folios (now `<h2>`), and the header logo/lang-button aria-labels not containing their visible text (WCAG 2.5.3). The one remaining Best Practices point on every page is a documented `emblem.png` 404 — deliberately absent per §7 until the owner supplies the file, and it self-hides via `onerror`.
 - [ ] Verify OG cards unfurl correctly once the site is live
 - [ ] Do **not** touch valuations without Smiley's instruction (§2)
 

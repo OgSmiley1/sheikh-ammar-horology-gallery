@@ -306,8 +306,8 @@ html[dir=rtl] #omenu a{font-family:var(--ar);letter-spacing:0;text-transform:non
 #omenu a:hover{color:var(--gold-hi)}
 #omenu .oclose{position:absolute;top:1.3rem;inset-inline-end:1.5rem;font-size:1.7rem;color:var(--gold-hi);padding:.3rem .7rem}
 .rel{border-top:1px solid rgba(35,31,22,.16);margin-top:3rem;padding-top:2rem}
-.rel h5{font-family:var(--disp);letter-spacing:.3em;text-transform:uppercase;font-size:.7rem;color:var(--ink-soft);margin-bottom:1.3rem;font-weight:400}
-html[dir=rtl] .rel h5{letter-spacing:.02em;font-size:.95rem;font-family:var(--ar)}
+.rel h2{font-family:var(--disp);letter-spacing:.3em;text-transform:uppercase;font-size:.7rem;color:var(--ink-soft);margin-bottom:1.3rem;font-weight:400}
+html[dir=rtl] .rel h2{letter-spacing:.02em;font-size:.95rem;font-family:var(--ar)}
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
 .rgrid img{aspect-ratio:1/1;object-fit:cover;border:1px solid rgba(35,31,22,.2);width:100%}
 .rgrid span{display:block;font-family:var(--disp);font-size:.82rem;margin-top:.55rem;color:var(--ink);line-height:1.4}

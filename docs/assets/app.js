@@ -12,7 +12,10 @@ function applyText(){
     if(v!=null) el.textContent=v;
   });
   var lb=document.getElementById('langBtn');
-  if(lb) lb.textContent=(lang==='ar'?'English':'العربية');
+  if(lb){
+    lb.textContent=(lang==='ar'?'English':'العربية');
+    lb.setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل إلى العربية');
+  }
   document.title=document.documentElement.getAttribute(lang==='ar'?'data-title-ar':'data-title-en')||document.title;
 }
 function decorateLinks(){
