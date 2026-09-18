@@ -1,0 +1,48 @@
+name: V1 Museum QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "museum/**"
+      - "release/**"
+      - "content/**"
+      - "scripts/**"
+      - ".github/workflows/v1-museum-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v1-museum-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  museum:
+    name: Museum V1 test suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: museum
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: museum/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Syntax gate
+        run: node --check dist/app.js
+
+      - name: Museum verification and runtime tests
+        run: npm test
