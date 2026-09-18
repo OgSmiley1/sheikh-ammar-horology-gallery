@@ -1,0 +1,15 @@
+{
+  "name": "sheikh-ammar-museum",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.js",
+    "build": "vite build --config vite.config.js --outDir ../.museum-build",
+    "test": "node scripts/verify-museum.mjs && node --test scripts/*.test.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "vite": "7.1.3",
+    "jsdom": "26.1.0"
+  }
+}
