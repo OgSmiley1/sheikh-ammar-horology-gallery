@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "release": {
+    "name": "The Majlis of Time",
+    "version": "1.0.0",
+    "channel": "production",
+    "status": "in-progress"
+  },
+  "repository": {
+    "fullName": "OgSmiley1/sheikh-ammar-horology-gallery",
+    "defaultBranch": "main",
+    "integrationBranch": "astro/v1-completion",
+    "claudeSourceBranch": "claude/watch-website-master-plan-x2gsgo",
+    "observedClaudeHead": "4c34216b6e7c1f36cb958db960d310114267beed"
+  },
+  "site": {
+    "root": "docs",
+    "defaultLanguage": "ar",
+    "supportedLanguages": [
+      "ar",
+      "en"
+    ],
+    "framework": "static-html-css-js",
+    "publicHost": "railway"
+  },
+  "railway": {
+    "projectName": "Sheikh Ammar Horology Museum",
+    "projectId": "e3a378b4-42ae-4c76-9678-5a9dde8b32e0",
+    "environmentId": "20f51a85-d825-498f-9e5a-539310cb2855",
+    "canonicalService": {
+      "name": "museum-current",
+      "id": "403da0f7-dbef-4c94-8faf-a2c5166e64da",
+      "finalBranch": "main",
+      "healthcheck": "/healthz"
+    },
+    "retireAfterVerification": [
+      {
+        "name": "museum-vision",
+        "id": "d2a5719e-cbea-4c5d-bdc2-00128da13f1b"
+      }
+    ]
+  },
+  "qualityGates": {
+    "performance": 90,
+    "accessibility": 95,
+    "seo": 95,
+    "horizontalOverflow": 0,
+    "brokenInternalLinks": 0,
+    "consoleErrors": 0,
+    "missingRequiredAssets": 0
+  },
+  "releaseRule": {
+    "allowDoneBeforeLiveVerification": false,
+    "requireArabicLiveCheck": true,
+    "requireEnglishLiveCheck": true,
+    "requireMobileLiveCheck": true
+  }
+}
