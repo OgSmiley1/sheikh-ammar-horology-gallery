@@ -1,42 +1,54 @@
 {
   "version": "1.0.0",
-  "updatedAt": null,
+  "updatedAt": "2026-09-18",
   "requirements": [
     {
       "id": "RECOVERY-001",
       "title": "Read Claude history and identify exact interrupted point",
-      "status": "pending",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "Claude remote HEAD verified at 4c34216; interrupted Timeline/Folio work reconstructed from actual Git state."
+      ]
     },
     {
       "id": "TIMELINE-001",
       "title": "Complete editorial timeline desktop and mobile",
-      "status": "pending",
-      "evidence": []
+      "status": "implemented-awaiting-visual-qa",
+      "evidence": [
+        "Timeline CSS rebuilt with visible mobile years, editorial spine and Arabic-Indic year rendering."
+      ]
     },
     {
       "id": "FOLIO-001",
       "title": "Move editorial story before technical record on all folios",
-      "status": "pending",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "33/33 watch folios verified remotely with editorial story before technical record; Quraysh keeps For the Falconer before specs."
+      ]
     },
     {
       "id": "PATRON-001",
       "title": "Complete Sheikh Ammar editorial profile",
-      "status": "pending",
-      "evidence": []
+      "status": "implemented-awaiting-visual-qa",
+      "evidence": [
+        "Official title line and refined bilingual editorial copy committed."
+      ]
     },
     {
       "id": "AR-001",
       "title": "Deep Arabic and RTL editorial QA",
-      "status": "pending",
-      "evidence": []
+      "status": "in-progress",
+      "evidence": [
+        "Arabic timeline years localised; patron terminology upgraded; full-site deep RTL pass still pending."
+      ]
     },
     {
       "id": "VIDEO-001",
       "title": "Address owner feedback visible in latest walkthrough video",
-      "status": "pending",
-      "evidence": []
+      "status": "in-progress",
+      "evidence": [
+        "Homepage now uses owner-video phrases: ثلاث قطع. ثلاث لغات للوقت. / حين تستحق اللحظة أن تطول."
+      ]
     },
     {
       "id": "MEDIA-001",
@@ -53,8 +65,10 @@
     {
       "id": "GIT-001",
       "title": "Merge canonical V1 into main",
-      "status": "pending",
-      "evidence": []
+      "status": "in-progress",
+      "evidence": [
+        "astro/v1-completion is the V1 integration branch, based on latest Claude work."
+      ]
     },
     {
       "id": "RAILWAY-001",
