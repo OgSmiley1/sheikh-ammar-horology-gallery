@@ -288,6 +288,8 @@ html[dir=rtl] .pn a{letter-spacing:.02em;font-size:.92rem;font-family:var(--ar)}
 
 /* history timeline */
 .hist{background:var(--majlis)}
+.patron-role{max-width:56rem;margin:.85rem auto 0;padding:0 1.2rem;text-align:center;font-family:var(--disp);font-size:var(--t-eyebrow);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);line-height:1.65}
+html[dir=rtl] .patron-role{font-family:var(--ar);font-size:var(--t-ar-eyebrow);letter-spacing:0;text-transform:none;line-height:1.9}
 .lead{max-width:62ch;margin:0 auto;text-align:center;color:rgba(244,237,220,.82);font-size:1.13rem;padding:0 1.2rem}
 .tl{max-width:820px;margin:3.2rem auto 0;padding:0 1.2rem 5rem;position:relative}
 .tl::before{content:"";position:absolute;top:0;bottom:0;inset-inline-start:calc(1.2rem + 62px);width:1px;background:linear-gradient(to bottom,transparent,var(--hairline) 8%,var(--hairline) 92%,transparent)}
