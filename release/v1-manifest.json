@@ -11,17 +11,26 @@
     "defaultBranch": "main",
     "integrationBranch": "astro/v1-completion",
     "claudeSourceBranch": "claude/watch-website-master-plan-x2gsgo",
-    "observedClaudeHead": "4c34216b6e7c1f36cb958db960d310114267beed"
+    "observedClaudeHead": "4c34216b6e7c1f36cb958db960d310114267beed",
+    "currentIntegrationHead": "80a3eabf2fed1c3b6869f2c5785471c982673ef3"
   },
   "site": {
-    "root": "docs",
+    "root": "museum/dist",
     "defaultLanguage": "ar",
     "supportedLanguages": [
       "ar",
       "en"
     ],
-    "framework": "static-html-css-js",
-    "publicHost": "railway"
+    "framework": "static-html-css-js-data",
+    "publicHost": "railway",
+    "referenceLegacyRoot": "docs",
+    "recordCount": 42,
+    "productionEntry": "/",
+    "routes": [
+      "/",
+      "/collection/",
+      "/his-highness/"
+    ]
   },
   "railway": {
     "projectName": "Sheikh Ammar Horology Museum",
