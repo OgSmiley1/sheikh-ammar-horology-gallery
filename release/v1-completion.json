@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "updatedAt": null,
+  "requirements": [
+    {
+      "id": "RECOVERY-001",
+      "title": "Read Claude history and identify exact interrupted point",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "TIMELINE-001",
+      "title": "Complete editorial timeline desktop and mobile",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "FOLIO-001",
+      "title": "Move editorial story before technical record on all folios",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "PATRON-001",
+      "title": "Complete Sheikh Ammar editorial profile",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "AR-001",
+      "title": "Deep Arabic and RTL editorial QA",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "VIDEO-001",
+      "title": "Address owner feedback visible in latest walkthrough video",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "MEDIA-001",
+      "title": "Responsive image and media performance pass",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "QA-001",
+      "title": "Complete bilingual viewport and interaction matrix",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "GIT-001",
+      "title": "Merge canonical V1 into main",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "RAILWAY-001",
+      "title": "Deploy main as canonical V1 on museum-current",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "RAILWAY-002",
+      "title": "Retire competing museum-vision after V1 verification",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "LIVE-001",
+      "title": "Verify actual Arabic, English, desktop and mobile production V1",
+      "status": "pending",
+      "evidence": []
+    }
+  ]
+}
