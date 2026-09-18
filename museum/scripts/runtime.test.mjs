@@ -41,6 +41,23 @@ async function mount(route='collection',lang='ar',reduce=false,fail=false){
 for(const route of ['home','collection','biography'])for(const lang of ['ar','en'])test('startup '+route+' '+lang,async()=>{const{dom,doc}=await mount(route,lang);assert.equal(doc.documentElement.lang,lang);assert.equal(doc.querySelectorAll('#grid .card').length,route==='home'?6:42);assert.equal(doc.querySelectorAll('#featured .featured-thumb').length,route==='biography'?0:3);assert.equal(doc.querySelector('#grid').getAttribute('aria-busy'),'false');dom.window.close()});
 for(const lang of ['ar','en'])test('all 42 correct details '+lang,async()=>{const{dom,doc}=await mount('collection',lang);for(const b of doc.querySelectorAll('#grid [data-watch]')){const record=data.watches.find(x=>x.slug===b.dataset.watch);b.click();assert.equal(doc.querySelector('#detailTitle').textContent,record[lang==='ar'?'nameAr':'nameEn']);assert.equal(doc.querySelector('#zoom img').getAttribute('src'),record.displayImage);doc.querySelector('#detailClose').click()}dom.window.close()});
 test('filters search empty reset zoom and RTL navigation',async()=>{const{dom,w,doc}=await mount();doc.querySelector('[data-brand="Rolex"]').click();assert.ok(doc.querySelectorAll('.card').length>0);const input=doc.querySelector('#search');input.value='zzzzz';input.dispatchEvent(new w.Event('input'));assert.equal(doc.querySelectorAll('.card').length,0);input.value='';input.dispatchEvent(new w.Event('input'));assert.ok(doc.querySelectorAll('.card').length>0);doc.querySelector('.card button').click();doc.querySelector('#zoom').click();assert.equal(doc.querySelector('#zoom').getAttribute('aria-pressed'),'true');const first=doc.querySelector('#detailTitle').textContent;doc.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowLeft'}));assert.notEqual(doc.querySelector('#detailTitle').textContent,first);doc.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(doc.querySelector('#detail').open,false);dom.window.close()});
+test('V1 editorial copy, curated three and detail hierarchy',async()=>{
+ const{dom,doc}=await mount('home','ar');
+ assert.equal(doc.querySelector('#featured h2').textContent,'ثلاث قطع. ثلاث لغات للوقت.');
+ const featured=[...doc.querySelectorAll('#featured .featured-thumb')].map(b=>b.getAttribute('aria-label'));
+ assert.match(featured[0],/التقويم|كرونوغراف|5270|دائم/);
+ doc.querySelector('.featured-open').click();
+ assert.equal(doc.querySelector('.detail-kicker').textContent,'حكاية القطعة');
+ assert.equal(doc.querySelector('.detail-tech-title').textContent,'السجل التقني');
+ const description=doc.querySelector('.detail-copy .description');
+ const technical=doc.querySelector('.detail-tech-title');
+ assert.ok(description.compareDocumentPosition(technical)&dom.window.Node.DOCUMENT_POSITION_FOLLOWING);
+ doc.querySelector('#detailClose').click();
+ doc.querySelector('#lang').click();
+ assert.equal(doc.querySelector('#featured h2').textContent,'Three Timepieces. Three Expressions of Time.');
+ assert.equal(doc.querySelector('#filmTitle').textContent,'When a Moment Deserves to Last.');
+ dom.window.close();
+});
 test('featured controls retain focus and manual selection pauses',async()=>{const{dom,doc,timers}=await mount();let b=doc.querySelector('#featuredNext');b.focus();b.click();assert.equal(doc.activeElement.id,'featuredNext');assert.equal(doc.querySelector('#featuredPause').getAttribute('aria-pressed'),'true');assert.equal(doc.querySelector('.featured-thumb.active').dataset.featuredIndex,'1');doc.querySelector('[data-featured-index="2"]').click();doc.querySelector('.featured-open').click();assert.equal(doc.querySelector('#detail').open,true);assert.ok(timers.some(t=>t.ms===7000));dom.window.close()});
 test('reduced motion and YouTube lazy embed',async()=>{const{dom,doc}=await mount('home','en',true);assert.equal(doc.querySelector('#featuredPause').getAttribute('aria-pressed'),'true');assert.equal(doc.querySelector('#slidePause').getAttribute('aria-pressed'),'true');assert.equal(doc.querySelectorAll('#youtubeStage iframe').length,0);doc.querySelector('#youtubePlay').click();assert.match(doc.querySelector('#youtubeStage iframe').src,/youtube-nocookie.com\/embed\/Air31Kly7Ys/);dom.window.close()});
 test('failure offers successful retry',async()=>{const{dom,w,doc}=await mount('collection','ar',false,true);assert.equal(doc.querySelector('#retry').hidden,false);w.fetch=async()=>({ok:true,json:async()=>structuredClone(data)});doc.querySelector('#retry').click();await new Promise(r=>setImmediate(r));assert.equal(doc.querySelectorAll('.card').length,42);assert.equal(doc.querySelector('#retry').hidden,true);dom.window.close()});
