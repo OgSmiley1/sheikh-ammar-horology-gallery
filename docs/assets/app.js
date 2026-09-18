@@ -17,6 +17,12 @@ function applyText(){
     lb.setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل إلى العربية');
   }
   document.title=document.documentElement.getAttribute(lang==='ar'?'data-title-ar':'data-title-en')||document.title;
+  /* Timeline/biography dates are part of the Arabic reading, not hidden metadata. */
+  if(lang==='ar'){
+    Array.prototype.forEach.call(document.querySelectorAll('.ry,.yr2'),function(el){
+      if(/^\s*\d{4}\s*$/.test(el.textContent)) el.textContent=arDigits(el.textContent.trim());
+    });
+  }
 }
 function decorateLinks(){
   if(lang!=='en') return; /* Arabic is default; persist English when chosen */
