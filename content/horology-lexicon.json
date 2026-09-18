@@ -1,0 +1,61 @@
+{
+  "en": {
+    "preferred": {
+      "brand_house": "Maison",
+      "watch": "timepiece",
+      "collection": "collection",
+      "reference": "reference",
+      "movement": "movement",
+      "calibre": "calibre",
+      "complications": "complications",
+      "power_reserve": "power reserve",
+      "craft": "craftsmanship",
+      "heritage": "horological heritage",
+      "rare_piece": "exceptional timepiece",
+      "discover": "Discover",
+      "explore": "Explore",
+      "provenance": "provenance",
+      "exhibition": "exhibition",
+      "archive": "archive"
+    },
+    "avoid": [
+      "product",
+      "SKU",
+      "shop now",
+      "buy now",
+      "inventory item",
+      "luxury product",
+      "add to cart"
+    ]
+  },
+  "ar": {
+    "preferred": {
+      "brand_house": "الدار",
+      "watch": "الساعة",
+      "piece": "القطعة",
+      "collection": "المجموعة",
+      "reference": "المرجع",
+      "movement": "الحركة",
+      "calibre": "العيار",
+      "complications": "التعقيدات",
+      "power_reserve": "احتياطي الطاقة",
+      "craft": "المهارة الحرفية",
+      "heritage": "إرث صناعة الساعات",
+      "high_watchmaking": "صناعة الساعات الراقية",
+      "exceptional_piece": "قطعة استثنائية",
+      "discover": "اكتشف",
+      "explore": "استكشف",
+      "provenance": "المنشأ",
+      "exhibition": "قاعة العرض",
+      "archive": "الأرشيف",
+      "masterpiece": "تحفة"
+    },
+    "avoid": [
+      "منتج",
+      "SKU",
+      "اشتر الآن",
+      "أضف إلى السلة",
+      "مخزون"
+    ]
+  }
+}
