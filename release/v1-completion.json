@@ -1,21 +1,24 @@
 {
   "version": "1.0.0",
-  "updatedAt": "2026-09-18",
+  "updatedAt": "2026-09-18T23:10:00+04:00",
   "requirements": [
     {
       "id": "RECOVERY-001",
       "title": "Read Claude history and identify exact interrupted point",
       "status": "complete",
       "evidence": [
-        "Claude remote HEAD verified at 4c34216; interrupted Timeline/Folio work reconstructed from actual Git state."
+        "Recovered Claude remote state and reconstructed interrupted work.",
+        "Imported the actual Railway museum subtree into the same V1 integration branch.",
+        "Canonical public source confirmed as museum/dist, not docs."
       ]
     },
     {
       "id": "TIMELINE-001",
       "title": "Complete editorial timeline desktop and mobile",
-      "status": "implemented-awaiting-visual-qa",
+      "status": "implemented-awaiting-rendered-qa",
       "evidence": [
-        "Timeline CSS rebuilt with visible mobile years, editorial spine and Arabic-Indic year rendering."
+        "Legacy Claude timeline mobile-year defect repaired.",
+        "Canonical His Highness route retains the leadership milestone timeline."
       ]
     },
     {
@@ -23,70 +26,120 @@
       "title": "Move editorial story before technical record on all folios",
       "status": "complete",
       "evidence": [
-        "33/33 watch folios verified remotely with editorial story before technical record; Quraysh keeps For the Falconer before specs."
+        "33/33 legacy folios verified story-before-spec.",
+        "Canonical 42-record detail runtime renders editorial description before Technical record."
       ]
     },
     {
       "id": "PATRON-001",
       "title": "Complete Sheikh Ammar editorial profile",
-      "status": "implemented-awaiting-visual-qa",
+      "status": "implemented-awaiting-rendered-qa",
       "evidence": [
-        "Official title line and refined bilingual editorial copy committed."
+        "Official title language retained in canonical His Highness route.",
+        "Profile and leadership milestones are bilingual."
       ]
     },
     {
       "id": "AR-001",
       "title": "Deep Arabic and RTL editorial QA",
-      "status": "in-progress",
+      "status": "implemented-awaiting-rendered-qa",
       "evidence": [
-        "Arabic timeline years localised; patron terminology upgraded; full-site deep RTL pass still pending."
+        "Arabic remains default.",
+        "Haute Horlogerie vocabulary updated, including صناعة الساعات الراقية / المهارة الحرفية / التعقيدات.",
+        "Rendered RTL inspection of the new branch is still blocked by Railway source pinning."
       ]
     },
     {
       "id": "VIDEO-001",
       "title": "Address owner feedback visible in latest walkthrough video",
-      "status": "in-progress",
+      "status": "implemented-awaiting-rendered-qa",
       "evidence": [
-        "Homepage now uses owner-video phrases: ثلاث قطع. ثلاث لغات للوقت. / حين تستحق اللحظة أن تطول."
+        "Featured heading fixed to ثلاث قطع. ثلاث لغات للوقت.",
+        "Film heading fixed to حين تستحق اللحظة أن تطول.",
+        "Film imagery separated from the repeated story portrait.",
+        "Mobile detail sheet changed from compressed two-column specs to editorial one-column treatment."
       ]
     },
     {
       "id": "MEDIA-001",
       "title": "Responsive image and media performance pass",
-      "status": "pending",
-      "evidence": []
+      "status": "source-audit-complete",
+      "evidence": [
+        "42/42 canonical records have local display images.",
+        "45 watch images total about 4.61 MB; largest about 395 KB.",
+        "Sheikh image set totals about 0.54 MB.",
+        "Collection film about 8.9 MB, preload none; server supports byte ranges."
+      ]
     },
     {
       "id": "QA-001",
       "title": "Complete bilingual viewport and interaction matrix",
-      "status": "pending",
-      "evidence": []
+      "status": "source-gates-pass-rendered-qa-blocked",
+      "evidence": [
+        "Remote Git tree verification: 42 records, 42 display images, 4 routes, zero source errors.",
+        "app.js and vision.js syntax compile successfully.",
+        "GitHub hosted Actions currently fail before the first step is allocated; workflow switched to manual to avoid false red runs.",
+        "Rendered QA requires a Railway build from the new source commit."
+      ]
     },
     {
       "id": "GIT-001",
       "title": "Merge canonical V1 into main",
       "status": "in-progress",
       "evidence": [
-        "astro/v1-completion is the V1 integration branch, based on latest Claude work."
+        "V1 integration branch astro/v1-completion exists.",
+        "Draft PR #26 targets main.",
+        "Exhibition feature from museum-vision was consolidated into V1 without importing its alternate skin as a separate version."
       ]
     },
     {
       "id": "RAILWAY-001",
       "title": "Deploy main as canonical V1 on museum-current",
-      "status": "pending",
-      "evidence": []
+      "status": "blocked-by-source-binding",
+      "evidence": [
+        "museum-vision and museum-current are pinned to old Railway source commit SHAs.",
+        "Direct redeploy reuses the old snapshot instead of fetching GitHub HEAD.",
+        "Railway AI agent source-change attempt is blocked by agent usage limit.",
+        "Creating a third V1 service is blocked by Free plan resource provision limit."
+      ]
     },
     {
       "id": "RAILWAY-002",
       "title": "Retire competing museum-vision after V1 verification",
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "Old Railway services must be retired only after the final V1 source can be promoted and live-verified."
+      ]
     },
     {
       "id": "LIVE-001",
       "title": "Verify actual Arabic, English, desktop and mobile production V1",
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "Production remains untouched; final V1 live verification has not been claimed."
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "RAILWAY-SOURCE-PIN",
+      "status": "open",
+      "detail": "Existing Railway services remain pinned to old source commit SHAs and the available direct connector cannot change a service source."
+    },
+    {
+      "id": "RAILWAY-AGENT-LIMIT",
+      "status": "open",
+      "detail": "Railway AI agent source-change operation is unavailable because its usage limit is reached."
+    },
+    {
+      "id": "RAILWAY-RESOURCE-LIMIT",
+      "status": "open",
+      "detail": "Creating a replacement V1 service is blocked by the current Railway Free plan resource provision limit."
+    },
+    {
+      "id": "GITHUB-RUNNER",
+      "status": "open-non-code",
+      "detail": "Hosted GitHub Actions jobs fail before allocating any workflow step; source-level gates pass independently."
     }
   ]
 }
