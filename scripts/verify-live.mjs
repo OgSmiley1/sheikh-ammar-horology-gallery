@@ -1,23 +1,25 @@
 const BASE = process.env.BASE_URL || "https://museum-current-production.up.railway.app";
-const paths = [
-  "/healthz", "/", "/index.html", "/collection.html", "/exhibition.html",
-  "/films.html", "/patron.html", "/timeline.html",
-  "/watch/rolex-daytona-6263-quraysh.html"
+
+const checks = [
+  { path: "/healthz", expect: /ok/i },
+  { path: "/", expect: /متحف الشيخ عمار|Sheikh Ammar/i },
+  { path: "/collection/", expect: /المجموعة|Collection/i },
+  { path: "/his-highness/", expect: /الشيخ عمار|Sheikh Ammar/i },
+  { path: "/watches.json", expect: /"brand"|"name"/i },
+  { path: "/app.js", expect: /data-i18n|translations|i18n/i },
+  { path: "/styles.css", expect: /detail-layout|featured/i }
 ];
 
 let failures = 0;
 
-for (const pathname of paths) {
-  const url = new URL(pathname, BASE);
+for (const check of checks) {
+  const url = new URL(check.path, BASE);
   try {
     const response = await fetch(url, { redirect: "follow" });
-    const body = pathname === "/healthz" ? "" : await response.text();
-    console.log(`${response.ok ? "PASS" : "FAIL"} ${response.status} ${url}`);
-    if (!response.ok) failures++;
-    if (body && /cannot get|not found|application error/i.test(body)) {
-      console.error(`FAIL content check: ${url}`);
-      failures++;
-    }
+    const body = await response.text();
+    const ok = response.ok && check.expect.test(body);
+    console.log(`${ok ? "PASS" : "FAIL"} ${response.status} ${url}`);
+    if (!ok) failures++;
   } catch (error) {
     console.error(`FAIL request ${url}: ${error.message}`);
     failures++;
@@ -28,4 +30,4 @@ if (failures) {
   console.error(`LIVE FAILURES: ${failures}`);
   process.exit(1);
 }
-console.log("RAILWAY HTTP V1 CHECK PASSED");
+console.log("RAILWAY V1 HTTP CHECK PASSED");
