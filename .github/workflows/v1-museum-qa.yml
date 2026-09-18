@@ -1,22 +1,13 @@
 name: V1 Museum QA
 
+# Hosted GitHub jobs on this account are currently failing before the first
+# step is allocated. Keep this workflow available for manual execution once
+# runner access is restored; Railway Docker builds also run npm test.
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - "museum/**"
-      - "release/**"
-      - "content/**"
-      - "scripts/**"
-      - ".github/workflows/v1-museum-qa.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-
-concurrency:
-  group: v1-museum-qa-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   museum:
