@@ -110,3 +110,25 @@ html[lang=en]{--title:Georgia,'Times New Roman',serif}html[lang=en] .hero h1{lin
     max-width:none;
   }
 }
+
+/* V1 five-link navigation: switch to the overlay before labels can wrap. */
+@media (max-width:1000px) and (min-width:761px){
+  .nav{grid-template-columns:1fr auto;gap:14px}
+  .nav-actions{grid-column:2}
+  .identity-sub{display:none}
+  #menu{display:block}
+  .nav nav{
+    display:none;
+    position:absolute;
+    top:100%;
+    inset-inline:0;
+    background:var(--forest);
+    padding:18px 6%;
+    border-bottom:1px solid var(--gold);
+    flex-direction:column;
+    gap:0;
+    box-shadow:0 15px 30px #0005;
+  }
+  .nav nav.open{display:flex}
+  .nav nav a{padding:14px;min-height:44px}
+}
