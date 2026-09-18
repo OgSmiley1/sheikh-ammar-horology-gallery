@@ -2,78 +2,71 @@
 
 ## Release
 Version: V1.0.0
-Status: IN PROGRESS
+Status: IN PROGRESS — SOURCE CONSOLIDATED, RAILWAY PROMOTION BLOCKED
 
 ## Canonical source
 Repository: `OgSmiley1/sheikh-ammar-horology-gallery`
 Integration branch: `astro/v1-completion`
-Current integration commit: `80a3eabf2fed1c3b6869f2c5785471c982673ef3`
+Last source head inspected before this state update: `68ae7cc514f354d2e1515df98eb36eeaaf1f6513`
 Target release branch: `main`
 Target tag: `v1.0.0`
 
 ## Canonical public application
-**Production source:** `museum/dist/`
-**Reference / Claude archive:** `docs/`
+Production source: `museum/dist/`
+Reference / Claude archive: `docs/`
+Collection: **42 bilingual records**
 
-The current Railway museum is a newer 42-record bilingual experience served from `museum/dist`.
-Claude's `docs/` museum contains important design, accessibility and editorial improvements, but it is
-not the application currently served by Railway. V1 therefore consolidates the best verified work from
-both paths into `museum/dist` rather than replacing the live experience with the older 33-record site.
+The V1 integration branch now contains both the current Railway museum and the strongest verified Claude work. Do not deploy the older 33-record `docs/` experience over the 42-record museum.
 
-## Production
-Platform: Railway
+## Implemented in canonical V1 source
+- Owner-video headline: «ثلاث قطع. ثلاث لغات للوقت.»
+- English counterpart: “Three Timepieces. Three Expressions of Time.”
+- Film chapter: «حين تستحق اللحظة أن تطول.» / “When a Moment Deserves to Last.”
+- Haute Horlogerie vocabulary pass.
+- Curated featured three made explicit rather than JSON-order dependent.
+- Mobile detail dialog rebuilt as a full-screen editorial sheet; story precedes technical record and specs collapse to one column.
+- Repeated film/story portrait usage reduced with a separate film poster.
+- Favicon added to remove the live 404.
+- Exhibition route consolidated into V1 with Quraysh / FFC / RM 65-01 McLaren W1.
+- Five-link navigation includes Exhibition, with a 1000px pre-wrap mobile-menu breakpoint.
+- Railway Dockerfile now runs `npm test` before serving the release.
+- `railway.json` restored to source control.
+
+## Verified source gates
+- 42/42 canonical records present.
+- 42/42 records have local display images.
+- 4/4 V1 route shells contain the Exhibition link and favicon.
+- `app.js` syntax valid.
+- `vision.js` syntax valid.
+- All three Exhibition slugs exist in the 42-record ledger.
+- Remote recursive Git-tree verification found zero missing V1 source requirements.
+
+## Media audit
+- 45 watch-image assets: ~4.61 MB total.
+- Largest watch image: ~395 KB.
+- Sheikh image set: ~0.54 MB total.
+- Collection film: ~8.9 MB; loaded on demand and served with byte-range support.
+
+## Railway
 Project: Sheikh Ammar Horology Museum
-Production environment: `20f51a85-d825-498f-9e5a-539310cb2855`
-Canonical target service: `museum-current`
-Current production branch binding: `release/museum-current-v2`
-Current production domain: `museum-current-production.up.railway.app`
-Current public app source: `museum/dist`
-Status: HEALTHY CURRENT RELEASE, NOT YET SYNCED TO V1
-
+Environment: production
+Current public service: `museum-current`
 Secondary service: `museum-vision`
-Current branch binding: `feat/majlis-of-time-v2`
-Policy: compare for unique useful work, then retire after V1 is live-verified.
 
-## Completed
-- Recovered the real Claude Code state from Git rather than chat claims.
-- Created V1 integration branch from Claude's latest pushed work.
-- Imported the complete current Railway `museum/` subtree into the same V1 branch.
-- Established `museum/dist` as the canonical public V1 application.
-- Preserved `docs/` as a reference/legacy design source instead of deleting Claude's work.
-- Added V1 release manifest and evidence matrix.
-- Added bilingual Haute Horlogerie terminology guidance.
-- Added static and Railway live-verification scripts.
-- Reconstructed Claude's interrupted Timeline work in `docs/`.
-- Reordered and remotely verified 33/33 legacy watch folios to editorial-first hierarchy.
-- Updated legacy homepage wording with the owner's video phrases.
-- Refined legacy Sheikh Ammar profile with official title terminology.
-- Verified Railway currently serves the newer 42-record museum and real traffic receives HTTP 200 responses.
+Production has **not** been modified.
 
-## In progress — canonical Railway V1
-- Port owner-video language and strongest Claude editorial ideas into `museum/dist`.
-- Improve the mobile timepiece-detail experience shown in the walkthrough.
-- Upgrade Arabic/English horological vocabulary consistently in `museum/dist/app.js`.
-- Fix live favicon 404.
-- Audit the 42-record `museum/dist/watches.json` rather than regressing to the older 33-record ledger.
-- Full Arabic/RTL and English visual QA.
-- Responsive media/performance pass.
-- Final metadata and production-domain cleanup.
+### Verified deployment blocker
+Both existing Railway services remain pinned to old source commit SHAs. A Railway redeploy reuses the old snapshot and does not fetch the new GitHub HEAD.
 
-## Deployment map
-- `main`: older canonical branch, not yet V1.
-- `claude/watch-website-master-plan-x2gsgo`: recovered Claude source.
-- `release/museum-current-v2`: source of the current Railway museum imported into V1.
-- `astro/v1-completion`: single active V1 integration branch containing both histories.
-- Railway `museum-current`: canonical production target after V1 gates pass.
-- Railway `museum-vision`: temporary comparison source; retire only after V1 verification.
+Attempts made:
+- Repoint through Railway AI agent: blocked by Railway agent usage limit.
+- Create a replacement `museum-v1` service from the correct branch: blocked by Free plan resource provision limit.
+- Git branch advancement + normal redeploy: Railway still reports the old pinned commit.
 
-## Release blockers
-- Do not deploy the older `docs/` site over the current 42-record Railway museum.
-- Do not merge/deploy until `museum/dist` itself includes the required video/copy/mobile-detail improvements.
-- Do not declare DONE until the final Railway V1 is verified in Arabic, English, mobile and desktop.
-- Do not maintain a second competing public production version.
+Therefore no final live V1 claim is permitted yet.
+
+## GitHub QA infrastructure
+A V1 workflow was added, but hosted jobs currently fail before any step is allocated across multiple commits. The workflow is now manual-only to avoid false failing PR noise. This is tracked as infrastructure, not as a passing test claim.
 
 ## Exact next action
-Complete the owner-video and Haute Horlogerie editorial pass directly in `museum/dist`, beginning with
-the featured-three language, film chapter and mobile detail dialog; fix favicon; then run full canonical
-Railway V1 QA before merging to `main`.
+Once Railway source editing becomes available (agent limit reset or plan/resource capacity changes), point one existing service—preferably `museum-current`—to the final V1 release commit/branch, allow its Docker build to run `npm test`, then perform live Arabic/English/mobile/desktop visual QA. Only after that: merge/tag/promote and retire competing old services.
