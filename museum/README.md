@@ -21,6 +21,7 @@ The older `docs/` site remains in the repository as a design/editorial reference
 - `/` — The Majlis / home
 - `/collection/` — full 42-piece collection
 - `/exhibition/` — curated three-stop exhibition
+- `/watchmaking/` — bilingual anatomy, complications and technical-record guide
 - `/his-highness/` — H.H. Sheikh Ammar profile and leadership timeline
 
 ## V1 editorial direction
@@ -82,3 +83,14 @@ See:
 - `/docs/PROJECT_STATE.md`
 
 Do not declare V1 complete until the final Railway source is updated to the release commit and the actual public deployment is verified in Arabic, English, mobile and desktop.
+
+
+## Watchmaking chapter
+
+The canonical V1 includes a bilingual Watchmaking chapter with the editorial lines:
+- “Timeless timepieces.”
+- “One of the few. Never one of many.”
+
+It explains 12 elements of timepiece anatomy and 9 complications, including Chronograph, Tourbillon,
+Dual Time / GMT, Perpetual Calendar, Minute Repeater, Split-seconds / Rattrapante, World Time,
+Flyback and Moon Phase. Timepiece technical records link directly into this chapter.
