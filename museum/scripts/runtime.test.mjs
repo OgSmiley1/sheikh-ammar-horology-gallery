@@ -87,3 +87,21 @@ test('watchmaking guide is bilingual, linked and preserves editorial phrases',as
  assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Dual Time / GMT'));
  dom.window.close();
 });
+
+test('detail links known complications to watchmaking definitions',async()=>{
+ const{dom,doc}=await mount('collection','en');
+ const cases=[
+  ['rolex-daytona-6263-quraysh-hawk','/watchmaking/#complication-chronograph'],
+  ['richard-mille-rm-26-02-tourbillon-evil-eye','/watchmaking/#complication-tourbillon'],
+  ['patek-philippe-perpetual-calendar-5271p-blue-sapphire','/watchmaking/#complication-perpetual-calendar'],
+  ['patek-philippe-grand-complications-minute-repeater','/watchmaking/#complication-minute-repeater'],
+  ['richard-mille-rm-65-01-automatic-split-seconds-chronograph-mclaren-w1','/watchmaking/#complication-rattrapante']
+ ];
+ for(const [slug,href] of cases){
+  const button=doc.querySelector('[data-watch="'+slug+'"]');
+  assert.ok(button,'missing watch '+slug);button.click();
+  assert.ok([...doc.querySelectorAll('.complication-guide-tags a')].some(a=>a.getAttribute('href')===href),'missing guide link '+href);
+  doc.querySelector('#detailClose').click();
+ }
+ dom.window.close();
+});
