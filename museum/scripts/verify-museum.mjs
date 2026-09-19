@@ -5,7 +5,7 @@ const root = path.resolve(new URL('..', import.meta.url).pathname);
 const fail = (message) => { throw new Error(message); };
 const read = (file) => readFileSync(path.join(root, file), 'utf8');
 
-const routes = ['dist/index.html', 'dist/collection/index.html', 'dist/his-highness/index.html'];
+const routes = ['dist/index.html', 'dist/collection/index.html', 'dist/his-highness/index.html', 'dist/watchmaking/index.html'];
 if (existsSync(path.join(root, 'dist/vision.js'))) routes.push('dist/exhibition/index.html');
 for (const route of routes) {
   const html = read(route);
@@ -23,6 +23,19 @@ for (const token of ['initAmbient', 'initWatchAmbient', 'renderFeatured', 'ensur
 if (!app.includes('prefers-reduced-motion')) fail('app.js: reduced-motion handling missing');
 if (!read('dist/styles.css').includes('.featured-stage')) fail('styles.css: featured watch stage missing');
 if (!existsSync(path.join(root, 'dist/favicon.svg'))) fail('favicon.svg missing');
+const watchmaking = read('dist/watchmaking/index.html');
+for (const token of [
+  'Timeless timepieces.',
+  'One of the few. Never one of many.',
+  'Chronograph',
+  'Tourbillon',
+  'Dual Time / GMT',
+  'Perpetual Calendar',
+  'Minute Repeater',
+  'Split-seconds / Rattrapante',
+  'World Time'
+]) if (!watchmaking.includes(token)) fail(`watchmaking guide: missing ${token}`);
+if (!existsSync(path.join(root, 'dist/watchmaking.js'))) fail('watchmaking.js missing');
 for (const token of [
   "featuredTitle:'ثلاث قطع. ثلاث لغات للوقت.'",
   "featuredTitle:'Three Timepieces. Three Expressions of Time.'",
