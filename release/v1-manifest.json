@@ -29,8 +29,16 @@
     "routes": [
       "/",
       "/collection/",
+      "/exhibition/",
+      "/watchmaking/",
       "/his-highness/"
-    ]
+    ],
+    "watchmaking": {
+      "bilingual": true,
+      "anatomyCount": 12,
+      "complicationCount": 9,
+      "ownerSuppliedImage": "/images/sheikh/watchmaking-event.webp"
+    }
   },
   "railway": {
     "projectName": "Sheikh Ammar Horology Museum",
