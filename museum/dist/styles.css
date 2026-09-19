@@ -192,3 +192,10 @@ html[dir=rtl] .detail-guide a{letter-spacing:0}
 .craft-scene figcaption>p:last-child{font:400 clamp(1.35rem,2.4vw,2.25rem)/1.55 var(--title);max-width:17ch;margin:14px 0 0}
 html[dir=rtl] .craft-scene figcaption>p:last-child{font-family:"Amiri",serif;line-height:1.75}
 @media(max-width:760px){.craft-scene{grid-template-columns:1fr}.craft-scene-image{min-height:420px}.craft-scene figcaption{padding:34px 6% 48px}}
+
+.complication-guide-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.complication-guide-tags a{display:inline-flex;align-items:center;min-height:34px;padding:6px 10px;border:1px solid var(--line);color:#80663a;text-decoration:none;font-size:.76rem;background:#f7f2e9}
+.complication-guide-tags a:hover,.complication-guide-tags a:focus-visible{border-color:#9f814b;background:#efe4d2}
+html[dir=rtl] .complication-guide-tags a{font-family:var(--ar,inherit);font-size:.86rem}
+.watchmaking-page [id^="complication-"]{scroll-margin-top:110px}
+.watchmaking-page [id^="complication-"]:target{outline:1px solid #c5ab7a;outline-offset:-1px;background:#162019}
