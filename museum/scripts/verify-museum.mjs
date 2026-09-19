@@ -33,7 +33,9 @@ for (const token of [
   'Perpetual Calendar',
   'Minute Repeater',
   'Split-seconds / Rattrapante',
-  'World Time'
+  'World Time',
+  'A turbine is not a tourbillon.',
+  'Turbine'
 ]) if (!watchmaking.includes(token)) fail(`watchmaking guide: missing ${token}`);
 if (!existsSync(path.join(root, 'dist/watchmaking.js'))) fail('watchmaking.js missing');
 for (const page of ['dist/index.html','dist/collection/index.html','dist/exhibition/index.html','dist/his-highness/index.html']) {
