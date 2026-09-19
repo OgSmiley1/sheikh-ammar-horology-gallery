@@ -63,3 +63,25 @@ test('reduced motion and YouTube lazy embed',async()=>{const{dom,doc}=await moun
 test('failure offers successful retry',async()=>{const{dom,w,doc}=await mount('collection','ar',false,true);assert.equal(doc.querySelector('#retry').hidden,false);w.fetch=async()=>({ok:true,json:async()=>structuredClone(data)});doc.querySelector('#retry').click();await new Promise(r=>setImmediate(r));assert.equal(doc.querySelectorAll('.card').length,42);assert.equal(doc.querySelector('#retry').hidden,true);dom.window.close()});
 
 if(existsSync(new URL('../dist/vision.js',import.meta.url))) for(const lang of ['ar','en'])test('exhibition chapters, details and URL '+lang,async()=>{const{dom,doc,w}=await mount('exhibition',lang);assert.match(doc.querySelector('#tourRef').textContent,/6263/);doc.querySelector('#tourNext').click();assert.match(w.location.hash,/fp-journe-ffc/);assert.match(doc.querySelector('#tourName').textContent,/FFC/);doc.querySelector('#tourDetail').click();assert.equal(doc.querySelector('#detail').open,true);doc.querySelector('#detailClose').click();doc.querySelectorAll('#tourDots button')[2].click();assert.match(w.location.hash,/mclaren/);assert.equal(doc.querySelector('#tourNext').disabled,true);doc.querySelector('#tourPlay').click();assert.equal(doc.querySelector('#tourPlay').getAttribute('aria-pressed'),'true');assert.match(doc.querySelector('#tourRef').textContent,/6263/);dom.window.close()});
+
+test('watchmaking guide is bilingual, linked and preserves editorial phrases',async()=>{
+ const html=readFileSync(new URL('../dist/watchmaking/index.html',import.meta.url),'utf8');
+ const watchmakingCode=readFileSync(new URL('../dist/watchmaking.js',import.meta.url),'utf8');
+ const dom=new JSDOM(html,{url:'https://museum.test/watchmaking/',runScripts:'outside-only',pretendToBeVisual:true});
+ const w=dom.window;w.localStorage.setItem('museum-language','ar');
+ w.eval(watchmakingCode);
+ const doc=w.document;
+ assert.equal(doc.documentElement.dir,'rtl');
+ assert.match(doc.querySelector('.craft-hero h1').textContent,/تتجاوز الزمن/);
+ assert.match(doc.querySelector('.craft-manifesto').textContent,/من القلائل/);
+ assert.equal(doc.querySelectorAll('.anatomy-grid article').length,12);
+ assert.equal(doc.querySelectorAll('.complication-list article').length,9);
+ assert.equal(doc.querySelectorAll('img[src="/images/sheikh/watchmaking-event.webp"]').length,1);
+ doc.querySelector('#lang').click();
+ assert.equal(doc.documentElement.dir,'ltr');
+ assert.equal(doc.querySelector('.craft-hero h1').textContent.trim(),'Timeless timepieces.');
+ assert.match(doc.querySelector('.craft-manifesto').textContent,/One of the few\. Never one of many\./);
+ assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Tourbillon'));
+ assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Dual Time / GMT'));
+ dom.window.close();
+});
