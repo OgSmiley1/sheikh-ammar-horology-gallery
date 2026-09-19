@@ -26,8 +26,10 @@ test('collection landmark, skip target and one current navigation link',async()=
  assert.equal(doc.querySelector('#navigation [aria-current]').hash,'');
  w.history.pushState(null,'','#film');w.dispatchEvent(new w.HashChangeEvent('hashchange'));
  assert.equal(doc.querySelectorAll('#navigation [aria-current]').length,1);
- assert.equal(doc.querySelector('#navigation [aria-current]').hash,'#film');
- assert.equal(doc.querySelector('#navigation [aria-current]').getAttribute('aria-current'),'location');
+ assert.equal(doc.querySelector('#navigation [aria-current]').pathname,'/collection/');
+ assert.equal(doc.querySelector('#navigation [aria-current]').hash,'');
+ assert.equal(doc.querySelector('#navigation [aria-current]').getAttribute('aria-current'),'page');
+ assert.equal(doc.querySelector('#navigation [data-i18n=watchmaking]').pathname,'/watchmaking/');
  w.history.replaceState(null,'','/collection/');w.dispatchEvent(new w.PopStateEvent('popstate'));
  assert.equal(doc.querySelector('#navigation [aria-current]').hash,'');dom.window.close();
 });
