@@ -47,8 +47,24 @@ function render(){
  $('#resultCount').textContent=state.ar?`${state.list.length} من ${state.all.length} قطعة`:`${state.list.length} of ${state.all.length} timepieces`;
  $('#retry').hidden=!state.error;
 }
+function complicationGuideLinks(w){
+ const raw=[w.complicationsEn,w.complicationsAr].flat().filter(Boolean).join(' ').toLowerCase();
+ const defs=[
+  {id:'chronograph',en:'Chronograph',ar:'الكرونوغراف',re:/chronograph|كرونوغراف/},
+  {id:'tourbillon',en:'Tourbillon',ar:'التوربيون',re:/tourbillon|توربيون/},
+  {id:'dual-time',en:'Dual Time / GMT',ar:'التوقيت المزدوج / GMT',re:/dual time|gmt|توقيت مزدوج|التوقيت المزدوج/},
+  {id:'perpetual-calendar',en:'Perpetual Calendar',ar:'التقويم الدائم',re:/perpetual calendar|تقويم دائم/},
+  {id:'minute-repeater',en:'Minute Repeater',ar:'مكرر الدقائق',re:/minute repeater|مكرّر دقائق|مكرر دقائق/},
+  {id:'rattrapante',en:'Split-seconds / Rattrapante',ar:'الكرونوغراف المنقسم / راترابانت',re:/split-seconds|rattrapante|أجزاء الثانية المنقسمة|راترابانت/},
+  {id:'world-time',en:'World Time',ar:'التوقيت العالمي',re:/world time|التوقيت العالمي/},
+  {id:'flyback',en:'Flyback',ar:'فلاي باك',re:/flyback|فلاي باك/},
+  {id:'moon-phase',en:'Moon Phase',ar:'أطوار القمر',re:/moon phase|أطوار القمر/}
+ ];
+ const hits=defs.filter(d=>d.re.test(raw));
+ return hits.length?'<div class="complication-guide-tags">'+hits.map(d=>'<a href="/watchmaking/#complication-'+d.id+'">'+esc(state.ar?d.ar:d.en)+'</a>').join('')+'</div>':'';
+}
 function specValue(w,k){let v=local(w,k); if(!v)return '';if(Array.isArray(v))v=v.join(' · ');if(state.ar&&typeof v==='string'){const terms={'Platinum':'بلاتين','White Gold':'ذهب أبيض','18k White Gold':'ذهب أبيض عيار 18','Stainless Steel':'فولاذ مقاوم للصدأ','Steel':'فولاذ','Titanium':'تيتانيوم','White Ceramic':'سيراميك أبيض','Blue Ceramic':'سيراميك أزرق','Sapphire':'ياقوت صناعي','Yellow Gold':'ذهب أصفر','Carbon':'كربون'};v=terms[v]||v;}return v}
-function detail(){const w=state.selected;if(!w)return;const i=state.list.indexOf(w);$('#detailContent').innerHTML=`<div class="detail-layout"><div class="detail-visual">${imageFor(w)?`<button id="zoom" aria-label="${t('zoom')}" aria-pressed="false">${visual(w,'eager')}</button><p class="zoom-label">${t('zoom')}</p>`:plate(w)}</div><div class="detail-copy"><p class="card-brand">${esc(w.brand)}</p><h2 id="detailTitle" tabindex="-1">${esc(local(w,'name'))}</h2><p class="card-ref" dir="ltr">${esc(w.referenceNumber||'')}</p><p class="detail-kicker">${esc(t('editorialRecord'))}</p><p class="description">${esc(local(w,'editorial')||local(w,'description'))}</p><h3 class="detail-tech-title">${esc(t('technicalRecord'))}</h3><dl class="specs">${['material','caseSize','movement','powerReserve','complications','yearReleased'].filter(k=>specValue(w,k)).map(k=>`<div><dt>${t(k)}</dt><dd>${esc(specValue(w,k))}</dd></div>`).join('')}</dl><p class="detail-guide"><a href="/watchmaking/#complications">${esc(t('understandCraft'))} <span aria-hidden="true">↗</span></a></p></div></div>`;
+function detail(){const w=state.selected;if(!w)return;const i=state.list.indexOf(w);$('#detailContent').innerHTML=`<div class="detail-layout"><div class="detail-visual">${imageFor(w)?`<button id="zoom" aria-label="${t('zoom')}" aria-pressed="false">${visual(w,'eager')}</button><p class="zoom-label">${t('zoom')}</p>`:plate(w)}</div><div class="detail-copy"><p class="card-brand">${esc(w.brand)}</p><h2 id="detailTitle" tabindex="-1">${esc(local(w,'name'))}</h2><p class="card-ref" dir="ltr">${esc(w.referenceNumber||'')}</p><p class="detail-kicker">${esc(t('editorialRecord'))}</p><p class="description">${esc(local(w,'editorial')||local(w,'description'))}</p><h3 class="detail-tech-title">${esc(t('technicalRecord'))}</h3><dl class="specs">${['material','caseSize','movement','powerReserve','complications','yearReleased'].filter(k=>specValue(w,k)).map(k=>`<div><dt>${t(k)}</dt><dd>${esc(specValue(w,k))}</dd></div>`).join('')}</dl>${complicationGuideLinks(w)}<p class="detail-guide"><a href="/watchmaking/#complications">${esc(t('understandCraft'))} <span aria-hidden="true">↗</span></a></p></div></div>`;
  $('#detailPosition').textContent=`${i+1} / ${state.list.length}`;$('#detailPrev').disabled=i<=0;$('#detailNext').disabled=i<0||i>=state.list.length-1;
  const zoom=$('#zoom');if(zoom)zoom.onclick=()=>{const on=$('.detail-visual').classList.toggle('zoomed');zoom.setAttribute('aria-pressed',String(on));zoom.setAttribute('aria-label',t(on?'zoomOut':'zoom'));$('.zoom-label').textContent=t(on?'zoomOut':'zoom')};
 }
