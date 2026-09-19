@@ -1,0 +1,10 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+const path = 'dist/watches.json';
+const data = JSON.parse(readFileSync(path, 'utf8'));
+const watch = data.watches.find(w => w.slug === 'rolex-daytona-diw-motley-carbon');
+if (!watch) throw new Error('Expected existing DiW record');
+watch.displayImage = '/assets/watches/rolex-daytona-diw-motley-carbon.webp';
+const pirlo = data.watches.find(w => w.slug === 'artisans-de-geneve-andrea-pirlo-rolex-submariner');
+if (!pirlo) throw new Error('Expected existing Pirlo record');
+pirlo.displayImage = '/assets/watches/andrea-pirlo-submariner.jpg';
+writeFileSync(path, JSON.stringify(data, null, 2) + '\n');
