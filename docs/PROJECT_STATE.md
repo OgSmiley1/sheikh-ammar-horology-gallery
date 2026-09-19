@@ -70,3 +70,16 @@ A V1 workflow was added, but hosted jobs currently fail before any step is alloc
 
 ## Exact next action
 Once Railway source editing becomes available (agent limit reset or plan/resource capacity changes), point one existing service—preferably `museum-current`—to the final V1 release commit/branch, allow its Docker build to run `npm test`, then perform live Arabic/English/mobile/desktop visual QA. Only after that: merge/tag/promote and retire competing old services.
+
+
+## Watchmaking guide
+- New canonical route: `/watchmaking/`
+- Bilingual Arabic/English explanation of timepiece anatomy.
+- Covers case, bezel, crystal, dial, hands, crown/pushers, calibre, escapement, balance wheel, mainspring barrel, rotor, bridges and jewels.
+- Complications chapter covers Chronograph, Tourbillon, Dual Time / GMT, Perpetual Calendar, Minute Repeater, Split-seconds / Rattrapante, World Time, Flyback and Moon Phase.
+- Technical-record chapter explains Reference, Case Material, Diameter, Calibre, Power Reserve and Complications.
+- Editorial language includes “Timeless timepieces.” and “One of the few. Never one of many.”
+- Primary navigation on Home, Collection, Exhibition and His Highness now links to the Watchmaking route.
+- Existing watch-detail label corrected from “Functions” to “Complications”.
+
+Current integration head after this work: `1336c30056293179dab577c423edb24bebc9632c`
