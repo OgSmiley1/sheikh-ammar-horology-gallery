@@ -1,0 +1,3 @@
+V1 Railway release trigger
+Integration source: 77d61bdfde42d2e5c06dace98080b4cdf1b38d90
+Includes: 42-piece museum, Watchmaking anatomy, Chronograph/Tourbillon/Dual Time guide, turbine distinction, complication deep-links, single-use owner image.
