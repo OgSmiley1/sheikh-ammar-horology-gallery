@@ -199,3 +199,10 @@ html[dir=rtl] .craft-scene figcaption>p:last-child{font-family:"Amiri",serif;lin
 html[dir=rtl] .complication-guide-tags a{font-family:var(--ar,inherit);font-size:.86rem}
 .watchmaking-page [id^="complication-"]{scroll-margin-top:110px}
 .watchmaking-page [id^="complication-"]:target{outline:1px solid #c5ab7a;outline-offset:-1px;background:#162019}
+
+.turbine-note{display:grid;grid-template-columns:minmax(150px,.32fr) minmax(200px,.5fr) minmax(0,1fr);gap:30px;align-items:start;margin-top:34px;padding:30px;border:1px solid #c5ab7a55;background:linear-gradient(135deg,#18231b,#0c120f)}
+.turbine-note>div{display:flex;align-items:center;gap:14px}.turbine-note .eyebrow{margin:0}.turbine-mark{display:grid;place-items:center;width:46px;height:46px;border:1px solid #c5ab7a;color:#d9c28f;font:600 .7rem Manrope,sans-serif;letter-spacing:.09em}
+.turbine-note h3{font:400 clamp(1.5rem,2.2vw,2.2rem)/1.35 var(--title);margin:0}
+html[dir=rtl] .turbine-note h3{font-family:"Amiri",serif;line-height:1.55}
+.turbine-note>p{margin:0;color:#bdc1b7;line-height:1.9}
+@media(max-width:760px){.turbine-note{grid-template-columns:1fr;gap:18px;padding:24px}}
