@@ -178,3 +178,8 @@ html[dir=rtl] .craft-closing h2{font-family:"Amiri",serif;line-height:1.35}.craf
 .craft-actions{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:34px}
 @media(max-width:1000px){.craft-hero{grid-template-columns:1fr;padding-top:90px}.craft-watch{min-height:400px}.craft-watch-case{width:min(70vw,390px)}.craft-section-head{grid-template-columns:1fr}.craft-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.complication-list{grid-template-columns:1fr}}
 @media(max-width:640px){.craft-hero{min-height:auto;padding:74px 6% 62px}.craft-hero h1{font-size:clamp(3rem,16vw,4.4rem)}.craft-watch{min-height:300px}.craft-watch-case{width:min(82vw,320px)}.craft-grid{grid-template-columns:1fr}.craft-grid article{min-height:0}.complication-list article{grid-template-columns:1fr;gap:16px;padding:24px}.record-guide{grid-template-columns:1fr}.record-guide>div{grid-template-columns:1fr;gap:8px}.craft-section{padding:64px 6%}}
+
+.detail-guide{margin:26px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+.detail-guide a{display:inline-flex;align-items:center;gap:10px;color:#8e7444;text-decoration:none;font-size:.84rem;letter-spacing:.04em}
+.detail-guide a:hover,.detail-guide a:focus-visible{color:#684f28;text-decoration:underline;text-underline-offset:4px}
+html[dir=rtl] .detail-guide a{letter-spacing:0}
