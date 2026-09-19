@@ -10,7 +10,8 @@ if (existsSync(path.join(root, 'dist/vision.js'))) routes.push('dist/exhibition/
 for (const route of routes) {
   const html = read(route);
   if (!html.includes('<html') || !html.includes('<body')) fail(`${route}: malformed document shell`);
-  if (!html.includes('/app.js') || !html.includes('/styles.css')) fail(`${route}: missing shared runtime assets`);
+  const runtime = route.includes('/watchmaking/') ? '/watchmaking.js' : '/app.js';
+  if (!html.includes(runtime) || !html.includes('/styles.css')) fail(`${route}: missing runtime assets`);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(([, id]) => id);
   const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
   if (duplicates.length) fail(`${route}: duplicate ids ${[...new Set(duplicates)].join(', ')}`);
@@ -36,7 +37,7 @@ for (const token of [
   'World Time',
   'A turbine is not a tourbillon.',
   'Turbine'
-]) if (!watchmaking.includes(token)) fail(`watchmaking guide: missing ${token}`);
+]) if (!watchmaking.toLowerCase().includes(token.toLowerCase())) fail(`watchmaking guide: missing ${token}`);
 if (!existsSync(path.join(root, 'dist/watchmaking.js'))) fail('watchmaking.js missing');
 for (const page of ['dist/index.html','dist/collection/index.html','dist/exhibition/index.html','dist/his-highness/index.html']) {
   if (!read(page).includes('href="/watchmaking/"')) fail(`${page}: watchmaking navigation link missing`);
@@ -66,7 +67,7 @@ for (const token of [
 if (!read('dist/styles.css').includes('V1 mobile timepiece sheet')) fail('styles.css: V1 mobile detail treatment missing');
 
 const data = JSON.parse(read('dist/watches.json'));
-if (!Array.isArray(data.watches) || data.watches.length !== 42) fail('watches.json: expected exactly 42 records');
+if (!Array.isArray(data.watches) || data.watches.length !== 43) fail('watches.json: expected exactly 43 records');
 const ids = new Set();
 for (const watch of data.watches) {
   if (ids.has(watch.id)) fail(`watches.json: duplicate id ${watch.id}`);

@@ -1,3 +1,5 @@
+> **Current V1 continuation (19 September 2026):** read `docs/PROJECT_STATE.md` first. Historical GitHub Pages, counts and completed-QA statements below are not current release evidence. Railway is the intended sole public host; no final V1 deployment is verified. The newer integration currently serves static `museum/dist/`; the owner's requested `docs/` path still needs reconciliation. Do not discard either tree.
+
 # CLAUDE.md — Sheikh Ammar Royal Horology Collection
 **Single source of truth. Read this before touching anything.**
 Last updated: 17 September 2026 (third pass) · Owner: Smiley (OgSmiley1)

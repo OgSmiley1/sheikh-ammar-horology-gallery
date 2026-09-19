@@ -18,7 +18,8 @@
       "status": "implemented-awaiting-rendered-qa",
       "evidence": [
         "Legacy Claude timeline mobile-year defect repaired.",
-        "Canonical His Highness route retains the leadership milestone timeline."
+        "Canonical His Highness route retains the leadership milestone timeline.",
+        "Canonical biography years now Arabic-Indic in AR and Gregorian in EN; toggle regression passes."
       ]
     },
     {
@@ -36,7 +37,8 @@
       "status": "implemented-awaiting-rendered-qa",
       "evidence": [
         "Official title language retained in canonical His Highness route.",
-        "Profile and leadership milestones are bilingual."
+        "Profile and leadership milestones are bilingual.",
+        "Education/heritage/horology editorial chapters added; official biography and WAM verified 2026-09-19."
       ]
     },
     {
@@ -63,12 +65,11 @@
     {
       "id": "MEDIA-001",
       "title": "Responsive image and media performance pass",
-      "status": "source-audit-complete",
+      "status": "partial-needs-media-provenance-review",
       "evidence": [
-        "42/42 canonical records have local display images.",
-        "45 watch images total about 4.61 MB; largest about 395 KB.",
-        "Sheikh image set totals about 0.54 MB.",
-        "Collection film about 8.9 MB, preload none; server supports byte ranges."
+        "29 existing studio plates restored, blue Royal Oak image corrected.",
+        "Missing Lederer restored: 43 records.",
+        "Four candid/collage assets still require review; see media-review.json."
       ]
     },
     {
@@ -85,12 +86,10 @@
     {
       "id": "QA-001",
       "title": "Complete bilingual viewport and interaction matrix",
-      "status": "source-gates-pass-rendered-qa-blocked",
+      "status": "source-runtime-pass-rendered-blocked",
       "evidence": [
-        "Remote Git tree verification: 42 records, 42 display images, 4 routes, zero source errors.",
-        "app.js and vision.js syntax compile successfully.",
-        "GitHub hosted Actions currently fail before the first step is allocated; workflow switched to manual to avoid false red runs.",
-        "Rendered QA requires a Railway build from the new source commit."
+        "23 Node/JSDOM/server tests passed locally.",
+        "Permanent rendered matrix added but not executed: browser cannot reach localhost, local Chromium absent/download failed."
       ]
     },
     {
@@ -151,6 +150,29 @@
       "id": "GITHUB-RUNNER",
       "status": "open-non-code",
       "detail": "Hosted GitHub Actions jobs fail before allocating any workflow step; source-level gates pass independently."
+    },
+    {
+      "id": "RENDERED-QA",
+      "status": "open",
+      "detail": "Cloud Browser localhost rejected; local Chromium unavailable and download timed out. Matrix not executed."
+    },
+    {
+      "id": "STATIC-PATH-RECONCILIATION",
+      "status": "open",
+      "detail": "Latest user directive names docs/, while newer integration and actual Railway server use museum/dist. Preserve both until final consolidation."
     }
-  ]
+  ],
+  "currentVerification": {
+    "date": "2026-09-19",
+    "canonicalRecords": 43,
+    "sourceRuntimeTests": {
+      "passed": 23,
+      "failed": 0
+    },
+    "engineeringGate": "source-runtime-pass; rendered-pending",
+    "museumGate": "media-provenance-pending",
+    "royalPresentationGate": "rendered-review-pending",
+    "productionChanged": false,
+    "notes": "See docs/PROJECT_STATE.md for actual failures corrected and active blockers."
+  }
 }

@@ -1,3 +1,35 @@
+# Verified continuation — 19 September 2026
+
+**V1 remains IN PROGRESS. Not deployed or accepted.**
+
+## Current evidence (supersedes older notes below)
+- Recovered remote `astro/v1-completion` at `77d61bd`, PR #26. Claude PR #22 remains draft at `4c34216`.
+- Current deployed source is the static `museum/dist/` tree, served by `museum/scripts/serve.mjs`; `docs/` retains Claude's static folios and archive. No React migration. The latest owner directive names `docs/` as public: this path discrepancy needs final reconciliation before release; do not discard either tree or silently deploy the older 33-record site.
+- Found two actual failing source gates: watchmaking incorrectly required app.js, and a case-sensitive Turbine check. Fixed both without removing the guide checks.
+- Runtime tests incorrectly injected exhibition-only vision.js into every route. Fixed mounting to match each actual page.
+- Added royal editorial chapters on education, heritage and horology, with the official biography linked. Verified biography, title and selected milestones against the official biography and WAM on this date.
+- Arabic-Indic timeline years now remain visible and preserve Gregorian datetime values across toggles.
+- Added a calmer, biography-led homepage introduction and formal museum vocabulary.
+- Reused 29 existing studio plates, replaced the blue-ceramic Royal Oak's wrong skeleton image with the existing blue Royal Oak asset, and retained original source files.
+- Recovered the omitted Lederer record from Claude's folio. Canonical ledger now has **43** bilingual records. This restores prior work; it does not independently certify ownership.
+- Film poster now uses an existing watch-only photograph, reducing portrait repetition.
+- **23/23 Node/JSDOM/server tests pass**, including both languages, all 43 detail sheets, filters, search, zoom, navigation, exhibition, media ranges, biography years and restored Lederer.
+- Added `museum/scripts/verify-rendered.mjs`: permanent 60-case route/language/viewport matrix, plus all-detail checks at mobile and desktop widths. **NOT RUN**: Cloud Browser rejects localhost (`ERR_BLOCKED_BY_CLIENT`), local Chromium is absent, and its download timed out. No visual-pass claim.
+
+## Three release gates
+1. Engineering: source/runtime checks PASS; rendered responsive matrix PENDING.
+2. Museum: editorial implementation PARTIAL; four candid/collage assets, complete model/media provenance and film rights remain NEEDS VERIFICATION. See `release/media-review.json`. Do not infer that a photo assignment proves reference or ownership.
+3. Royal presentation: PENDING visual inspection of the new candidate in Arabic/English at six viewports. Old live screenshots are not evidence for this candidate.
+
+## Railway — observed in this session
+`museum-current` source: `release/museum-current-v2`, pinned commit `284c19c`. Both museum services exist and were sleeping. Plugin source editing is not exposed by update_service. Browser settings route requires login. No production mutation, no third service, no retirement, no main merge, no v1.0.0 tag.
+
+## Next action
+Securely authenticate Railway to inspect and correct the existing service's source binding. Before a final release: reconcile public static path, resolve outstanding media/provenance, run the rendered gate, visually inspect and fix findings, then promote the verified commit to main and tag v1.0.0. Retire museum-vision only after canonical V1 verification. Do not call a local test pass a deployment.
+
+---
+Historical state follows for continuity; current evidence above takes precedence.
+
 # Sheikh Ammar Horology Museum — Project State
 
 ## Release

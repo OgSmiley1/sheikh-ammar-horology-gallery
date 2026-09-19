@@ -206,3 +206,20 @@ html[dir=rtl] .complication-guide-tags a{font-family:var(--ar,inherit);font-size
 html[dir=rtl] .turbine-note h3{font-family:"Amiri",serif;line-height:1.55}
 .turbine-note>p{margin:0;color:#bdc1b7;line-height:1.9}
 @media(max-width:760px){.turbine-note{grid-template-columns:1fr;gap:18px;padding:24px}}
+
+/* V1 royal editorial record: chronology and narrative stay visible in both languages. */
+.royal-chapters{background:var(--forest);color:var(--paper)}
+.royal-chapters .eyebrow,.royal-chapters .record-index{color:#d0b785}
+.royal-chapters h2{max-width:20ch;margin-bottom:48px}
+.royal-records{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,64px)}
+.royal-records article{border-top:1px solid #b6996455;padding-top:24px;min-width:0}
+.record-index{display:block;font-size:.85rem;margin-bottom:24px}
+.royal-records h3{font-size:2rem;margin-bottom:18px}
+.royal-records p{color:#ddd5c7;line-height:1.95}
+.royal-chapters>.text-link{margin-top:36px}
+.bio-timeline time{display:block!important;white-space:nowrap;line-height:1.5;font-variant-numeric:tabular-nums}
+.bio-timeline li{position:relative;border-inline-start:1px solid var(--line);padding-inline-start:28px;grid-template-columns:130px minmax(0,1fr)}
+.bio-timeline li:before{content:'';position:absolute;inset-inline-start:-5px;top:52px;width:9px;height:9px;background:var(--gold);border-radius:50%}
+.nav nav a{min-width:44px;min-height:44px;text-align:center}
+@media(min-width:1001px){.identity-sub{display:none}.nav nav{gap:22px}.hero-content{width:58%}.hero h1{font-size:clamp(3rem,4.6vw,5rem)}}
+@media(max-width:760px){.royal-records{grid-template-columns:1fr;gap:40px}.royal-chapters h2{margin-bottom:34px}.bio-timeline li{grid-template-columns:1fr;gap:10px;padding-inline-start:24px}.bio-timeline time{font-size:2.5rem}.bio-timeline li:before{top:51px}}
