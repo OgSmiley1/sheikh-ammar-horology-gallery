@@ -36,6 +36,11 @@ for (const token of [
   'World Time'
 ]) if (!watchmaking.includes(token)) fail(`watchmaking guide: missing ${token}`);
 if (!existsSync(path.join(root, 'dist/watchmaking.js'))) fail('watchmaking.js missing');
+if (!existsSync(path.join(root, 'dist/images/sheikh/watchmaking-event.webp'))) fail('latest owner-supplied watchmaking image missing');
+const allHtmlForMedia = routes.map(route => read(route)).join('\n');
+const watchmakingEventRefs = (allHtmlForMedia.match(/watchmaking-event\.webp/g) || []).length;
+if (watchmakingEventRefs !== 1) fail(`latest watchmaking image must appear exactly once, found ${watchmakingEventRefs}`);
+
 for (const token of [
   "featuredTitle:'ثلاث قطع. ثلاث لغات للوقت.'",
   "featuredTitle:'Three Timepieces. Three Expressions of Time.'",
