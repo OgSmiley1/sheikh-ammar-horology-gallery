@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updatedAt": "2026-09-18T23:10:00+04:00",
+  "updatedAt": "2026-09-19",
   "requirements": [
     {
       "id": "RECOVERY-001",
@@ -69,6 +69,17 @@
         "45 watch images total about 4.61 MB; largest about 395 KB.",
         "Sheikh image set totals about 0.54 MB.",
         "Collection film about 8.9 MB, preload none; server supports byte ranges."
+      ]
+    },
+    {
+      "id": "WATCHMAKING-001",
+      "title": "Bilingual watchmaking anatomy, complications and technical-record guide",
+      "status": "implemented-source-verified",
+      "evidence": [
+        "/watchmaking/ added and linked from all primary routes",
+        "12 watch anatomy concepts and 9 complications",
+        "Latest owner-supplied image referenced exactly once",
+        "Timepiece detail modal links to the complications guide"
       ]
     },
     {
