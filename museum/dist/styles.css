@@ -132,3 +132,49 @@ html[lang=en]{--title:Georgia,'Times New Roman',serif}html[lang=en] .hero h1{lin
   .nav nav.open{display:flex}
   .nav nav a{padding:14px;min-height:44px}
 }
+
+/* V1 — Watchmaking / anatomy & complications */
+.watchmaking-page{background:#0b100d;color:var(--ink)}
+.watchmaking-page .nav{position:sticky;top:0}
+.craft-hero{min-height:78svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.85fr);gap:7vw;align-items:center;padding:clamp(70px,9vw,130px) 6%;background:radial-gradient(circle at 78% 40%,#25322999,transparent 34%),linear-gradient(145deg,#0b100d,#121a15 58%,#0a0f0c)}
+.craft-hero-copy{max-width:760px}
+.craft-hero h1{font:400 clamp(3.4rem,7vw,7.4rem)/.98 var(--title);margin:.18em 0 .3em;max-width:10ch}
+html[dir=rtl] .craft-hero h1{font-family:"Amiri",serif;line-height:1.22;max-width:12ch}
+.craft-manifesto{max-width:54ch;color:#c9c4b7;font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.9;margin-bottom:30px}
+.craft-watch{display:grid;place-items:center;min-height:520px}
+.craft-watch-case{position:relative;width:min(34vw,430px);aspect-ratio:1;border:1px solid #d0b57e80;border-radius:50%;background:radial-gradient(circle,#162019 0 56%,#0b100d 57% 66%,#bba06e20 67% 68%,#0d1410 69%);box-shadow:0 40px 90px #0008,inset 0 0 0 12px #151d18}
+.craft-bezel{position:absolute;inset:6%;border:1px solid #d5be8f70;border-radius:50%}
+.craft-dial{position:absolute;inset:13%;border-radius:50%;background:radial-gradient(circle at 45% 40%,#1f2a22,#0b110d 72%);box-shadow:inset 0 0 35px #0008}
+.craft-index{position:absolute;background:#d7c08f;opacity:.9}.craft-index.i12,.craft-index.i6{width:2px;height:22px;left:50%;transform:translateX(-50%)}.craft-index.i12{top:6%}.craft-index.i6{bottom:6%}.craft-index.i3,.craft-index.i9{height:2px;width:22px;top:50%;transform:translateY(-50%)}.craft-index.i3{right:6%}.craft-index.i9{left:6%}
+.craft-hand{position:absolute;left:50%;top:50%;transform-origin:0 50%;height:2px;background:#e0c890;border-radius:4px}.craft-hand.hour{width:25%;transform:rotate(215deg)}.craft-hand.minute{width:36%;transform:rotate(300deg)}.craft-hand.seconds{width:40%;height:1px;background:#dbe3dc;transform:rotate(25deg)}
+.craft-subdial{position:absolute;width:23%;aspect-ratio:1;border:1px solid #d7c08f55;border-radius:50%}.craft-subdial.s1{left:14%;top:39%}.craft-subdial.s2{right:14%;top:39%}.craft-subdial.s3{left:38.5%;bottom:13%}
+.craft-crown{position:absolute;right:-7%;top:44%;width:8%;height:12%;border:1px solid #d0b57e90;background:#182119}.craft-pusher{position:absolute;right:-4%;width:4%;height:9%;border:1px solid #d0b57e66;background:#182119}.craft-pusher.p1{top:27%;transform:rotate(-18deg)}.craft-pusher.p2{bottom:27%;transform:rotate(18deg)}
+.craft-section{padding:clamp(72px,9vw,120px) 6%;border-top:1px solid var(--line);background:#0c120fdd}
+.craft-section-head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(260px,.7fr);gap:5vw;align-items:end;margin-bottom:48px}
+.craft-section-head .eyebrow{grid-column:1/-1}
+.craft-section-head h2{font:400 clamp(2.5rem,4.4vw,4.8rem)/1.12 var(--title);margin:0;max-width:12ch}
+html[dir=rtl] .craft-section-head h2{font-family:"Amiri",serif;line-height:1.35}
+.craft-section-head>p:last-child{color:#bfc1b8;line-height:1.85;max-width:48ch}
+.craft-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-inline-start:1px solid var(--line)}
+.craft-grid article{padding:28px;min-height:230px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);background:#11181288}
+.craft-grid article>span{font:500 .7rem/1 Manrope,sans-serif;letter-spacing:.15em;color:#bda36f}
+.craft-grid h3{font:400 1.55rem/1.35 var(--title);margin:40px 0 12px}
+html[dir=rtl] .craft-grid h3{font-family:"Amiri",serif;font-size:1.8rem}
+.craft-grid p{margin:0;color:#b9bdb4;font-size:.92rem;line-height:1.85}
+.complications-section{background:#111812}
+.complication-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.complication-list article{display:grid;grid-template-columns:minmax(170px,.45fr) minmax(0,1fr);gap:32px;align-items:start;padding:30px;background:#0d1410}
+.complication-list article>div{display:flex;gap:16px;align-items:flex-start}.complication-list span{display:grid;place-items:center;width:42px;height:42px;flex:none;border:1px solid #c5ab7a88;color:#d9c28f;font:600 .68rem Manrope,sans-serif;letter-spacing:.08em}
+.complication-list h3{font:400 1.45rem/1.35 var(--title);margin:3px 0 0}
+html[dir=rtl] .complication-list h3{font-family:"Amiri",serif;font-size:1.7rem}
+.complication-list p{margin:0;color:#bbc0b6;line-height:1.9}
+.reading-section{background:#0b100d}
+.record-guide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line);border-inline-start:1px solid var(--line)}
+.record-guide>div{display:grid;grid-template-columns:minmax(130px,.45fr) minmax(0,1fr);gap:26px;padding:24px;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line)}
+.record-guide dt{color:#d6bd88;font-size:.82rem;letter-spacing:.06em}.record-guide dd{margin:0;color:#bdc0b8;line-height:1.75}
+.craft-closing{text-align:center;padding:clamp(88px,12vw,150px) 6%;background:radial-gradient(circle at 50% 15%,#26372c66,transparent 45%),#0a0f0c}
+.craft-closing h2{font:400 clamp(2.6rem,5vw,5rem)/1.12 var(--title);max-width:16ch;margin:16px auto 24px}
+html[dir=rtl] .craft-closing h2{font-family:"Amiri",serif;line-height:1.35}.craft-closing>p:not(.eyebrow){max-width:52ch;margin:0 auto;color:#bfc1b7;line-height:1.9}
+.craft-actions{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:34px}
+@media(max-width:1000px){.craft-hero{grid-template-columns:1fr;padding-top:90px}.craft-watch{min-height:400px}.craft-watch-case{width:min(70vw,390px)}.craft-section-head{grid-template-columns:1fr}.craft-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.complication-list{grid-template-columns:1fr}}
+@media(max-width:640px){.craft-hero{min-height:auto;padding:74px 6% 62px}.craft-hero h1{font-size:clamp(3rem,16vw,4.4rem)}.craft-watch{min-height:300px}.craft-watch-case{width:min(82vw,320px)}.craft-grid{grid-template-columns:1fr}.craft-grid article{min-height:0}.complication-list article{grid-template-columns:1fr;gap:16px;padding:24px}.record-guide{grid-template-columns:1fr}.record-guide>div{grid-template-columns:1fr;gap:8px}.craft-section{padding:64px 6%}}
