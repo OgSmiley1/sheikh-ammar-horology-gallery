@@ -36,6 +36,13 @@ for (const token of [
   'World Time'
 ]) if (!watchmaking.includes(token)) fail(`watchmaking guide: missing ${token}`);
 if (!existsSync(path.join(root, 'dist/watchmaking.js'))) fail('watchmaking.js missing');
+for (const required of ['dist/robots.txt','dist/sitemap.xml','dist/site.webmanifest']) {
+  if (!existsSync(path.join(root, required))) fail(`${required} missing`);
+}
+const sitemap = read('dist/sitemap.xml');
+for (const route of ['/collection/','/exhibition/','/watchmaking/','/his-highness/']) {
+  if (!sitemap.includes(route)) fail(`sitemap missing ${route}`);
+}
 if (!existsSync(path.join(root, 'dist/images/sheikh/watchmaking-event.webp'))) fail('latest owner-supplied watchmaking image missing');
 const allHtmlForMedia = routes.map(route => read(route)).join('\n');
 const watchmakingEventRefs = (allHtmlForMedia.match(/watchmaking-event\.webp/g) || []).length;
