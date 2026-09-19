@@ -36,6 +36,9 @@ for (const token of [
   'World Time'
 ]) if (!watchmaking.includes(token)) fail(`watchmaking guide: missing ${token}`);
 if (!existsSync(path.join(root, 'dist/watchmaking.js'))) fail('watchmaking.js missing');
+for (const page of ['dist/index.html','dist/collection/index.html','dist/exhibition/index.html','dist/his-highness/index.html']) {
+  if (!read(page).includes('href="/watchmaking/"')) fail(`${page}: watchmaking navigation link missing`);
+}
 for (const required of ['dist/robots.txt','dist/sitemap.xml','dist/site.webmanifest']) {
   if (!existsSync(path.join(root, required))) fail(`${required} missing`);
 }
