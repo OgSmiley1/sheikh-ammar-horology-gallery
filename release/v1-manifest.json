@@ -13,9 +13,9 @@
     "claudeSourceBranch": "claude/watch-website-master-plan-x2gsgo",
     "observedClaudeHead": "4c34216b6e7c1f36cb958db960d310114267beed",
     "currentIntegrationHead": "80a3eabf2fed1c3b6869f2c5785471c982673ef3",
-    "releaseCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f",
+    "releaseCommit": "a24d468b50f46cf48aca12f321dafe0a861cc8d6",
     "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
-    "auditedProductionCodeCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f"
+    "auditedProductionCodeCommit": "a24d468b50f46cf48aca12f321dafe0a861cc8d6"
   },
   "site": {
     "root": "museum/dist",
@@ -52,7 +52,9 @@
       "name": "museum-current",
       "id": "403da0f7-dbef-4c94-8faf-a2c5166e64da",
       "finalBranch": "main",
-      "healthcheck": "/healthz"
+      "healthcheck": "/healthz",
+      "runtimeBootstrapCommit": "a24d468b50f46cf48aca12f321dafe0a861cc8d6",
+      "sourceMetadataNote": "Railway connector still exposes legacy source-branch snapshot metadata; runtime is pinned to the exact canonical content commit until direct source editing is available."
     },
     "retireAfterVerification": [
       {
@@ -61,7 +63,7 @@
       }
     ],
     "productionService": "museum-current",
-    "deploymentId": "68338aad-3175-458c-957b-186f91a59d9a",
+    "deploymentId": "c6dafa99-9e86-4251-86e1-4b80441040c9",
     "domain": "museum-current-production.up.railway.app",
     "healthcheck": "/healthz"
   },
