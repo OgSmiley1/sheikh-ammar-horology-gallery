@@ -84,7 +84,7 @@ The visible technical record normalises legacy raw values such as `Caliber`, `Au
 - «ثلاث قطع. ثلاث لغات للوقت.» / “Three Timepieces. Three Expressions of Time.”
 - «حين تستحق اللحظة أن تطول.» / “When a Moment Deserves to Last.”
 - «قطعٌ تتجاوز الزمن.» / “Timeless timepieces.”
-- «واحدة، لا كثير.» / “One, not many.”
+- «من القلائل.» / “One of not many”
 
 ## Watchmaking chapter
 `/watchmaking/` contains:
