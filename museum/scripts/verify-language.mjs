@@ -49,10 +49,10 @@ for(const required of [
   'العيار / الحركة','مادة العلبة','أبعاد العلبة'
 ]) if(!app.includes(required))fail(`language gate: Arabic app missing "${required}"`);
 
-if(!Array.isArray(data.watches)||data.watches.length!==43)fail('language gate: canonical collection count must be 43');
+if(!Array.isArray(data.watches)||data.watches.length!==44)fail('language gate: canonical collection count must be 44');
 const maisons=new Set(data.watches.map(w=>w.brand));
 if(maisons.size!==8)fail(`language gate: canonical Maison count must be 8, found ${maisons.size}`);
-if(manifest.site.recordCount!==43)fail('language gate: release manifest recordCount must be 43');
+if(manifest.site.recordCount!==44)fail('language gate: release manifest recordCount must be 44');
 if(exhibition.includes('<b>7</b><span data-i18n="maisons"'))fail('language gate: exhibition still shows 7 Maisons');
 
 for(const watch of data.watches){
@@ -64,4 +64,4 @@ for(const watch of data.watches){
   }
 }
 
-console.log('Language gate passed: English/Arabic terminology, 43 timepieces, 8 Maisons.');
+console.log('Language gate passed: English/Arabic terminology, 44 timepieces, 8 Maisons.');
