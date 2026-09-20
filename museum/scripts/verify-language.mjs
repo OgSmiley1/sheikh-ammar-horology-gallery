@@ -12,12 +12,12 @@ const exhibition=read('dist/exhibition/index.html');
 const manifest=JSON.parse(read('../release/v1-manifest.json'));
 const data=JSON.parse(read('dist/watches.json'));
 const exactOwnerPhrase='One of not many';
+for(const forbiddenPhrasePattern of [/One of the few\./,/One, not many/]){
+  if(forbiddenPhrasePattern.test(watchmaking))fail('language gate: deprecated owner phrase variant found');
+}
 
 for(const [bad,preferred] of [
   ['Functions','Complications'],
-  ['One, not many.','One of not many'],
-  ['One of the few. Never one of many.','One of not many'],
-  ['One of the few. Never one of the many.','One of not many'],
   ['Dual Time / GMT','Dual Time & GMT'],
   ['Split-seconds / Rattrapante','Split-seconds Chronograph / Rattrapante'],
   ["collection:'The Timepieces'","collection:'The Collection'"],
