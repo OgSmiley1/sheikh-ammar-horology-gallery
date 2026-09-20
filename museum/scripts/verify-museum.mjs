@@ -27,13 +27,13 @@ if (!existsSync(path.join(root, 'dist/favicon.svg'))) fail('favicon.svg missing'
 const watchmaking = read('dist/watchmaking/index.html');
 for (const token of [
   'Timeless timepieces.',
-  'One of the few. Never one of many.',
+  'One of the few. Never one of the many.',
   'Chronograph',
   'Tourbillon',
-  'Dual Time / GMT',
+  'Dual Time & GMT',
   'Perpetual Calendar',
   'Minute Repeater',
-  'Split-seconds / Rattrapante',
+  'Split-seconds Chronograph / Rattrapante',
   'World Time',
   'A turbine is not a tourbillon.',
   'Turbine'
@@ -51,19 +51,14 @@ for (const route of ['/collection/','/exhibition/','/watchmaking/','/his-highnes
 }
 const watchmakingImage = path.join(root, 'dist/images/sheikh/watchmaking-event.webp');
 if (!existsSync(watchmakingImage)) fail('latest owner-supplied watchmaking image missing');
-// The file committed on 19 Sep arrived corrupt: it carries no RIFF/WEBP magic and no
-// browser can decode it, so the craft scene rendered as an empty 520px panel. Tie the
-// reference requirement to whether the bytes are actually decodable, so a broken image
-// is never shipped and a valid re-supply makes the reference mandatory again by itself.
 const watchmakingBytes = readFileSync(watchmakingImage);
 const watchmakingDecodable = watchmakingBytes.length > 12
   && watchmakingBytes.subarray(0, 4).toString('latin1') === 'RIFF'
   && watchmakingBytes.subarray(8, 12).toString('latin1') === 'WEBP';
+if (!watchmakingDecodable) fail('dist/images/sheikh/watchmaking-event.webp is not a valid WebP container');
 const allHtmlForMedia = routes.map(route => read(route)).join('\n');
 const watchmakingEventRefs = (allHtmlForMedia.match(/watchmaking-event\.webp/g) || []).length;
-const watchmakingExpectedRefs = watchmakingDecodable ? 1 : 0;
-if (watchmakingEventRefs !== watchmakingExpectedRefs) fail(`latest watchmaking image must appear exactly ${watchmakingExpectedRefs} time(s) because the file ${watchmakingDecodable ? 'is' : 'is NOT'} a decodable WebP, found ${watchmakingEventRefs}`);
-if (!watchmakingDecodable) console.warn('WARNING: dist/images/sheikh/watchmaking-event.webp is not a decodable WebP (owner upload corrupt). The craft scene renders caption-only until it is re-supplied.');
+if (watchmakingEventRefs !== 1) fail(`latest owner-supplied watchmaking image must appear exactly once, found ${watchmakingEventRefs}`);
 
 for (const token of [
   "featuredTitle:'ثلاث قطع. ثلاث لغات للوقت.'",
