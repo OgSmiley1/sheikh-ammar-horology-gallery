@@ -6,14 +6,16 @@ Updated: 20 September 2026
 - Canonical public source: `museum/dist/`
 - Production platform: Railway
 - Active service: `museum-current`
-- Production deployment: `adfe054c-01e9-4518-8cfd-564be9670152` — SUCCESS
-- Audited production code commit: `21b733ffc0012dc24b78b0f3b31aff77a695ae3d`
+- Production service: `museum-current`
+- Railway direct source metadata remains pinned to a legacy branch snapshot; canonical main is therefore served through an exact-SHA runtime bootstrap until Railway source editing is available.
+- Latest pre-expansion bootstrap deployment: `68338aad-3175-458c-957b-186f91a59d9a` — SUCCESS
+- Last fully rendered/audited production lineage: `aa8527fbd1d4757059d5d83e258b61e6c39f893f`
 - Normal healthcheck: `/healthz`
 - `/watchmaking/` was used as the promotion healthcheck and passed before the normal healthcheck was restored.
 - `museum-vision` is dormant and excluded from normal auto-deploys.
 
 ## Canonical collection
-**43 timepieces across 8 Maisons.**
+**44 timepieces across 8 Maisons.**
 
 Arabic is the default language. English is the complete alternate language.
 
@@ -101,15 +103,22 @@ The visible technical record normalises legacy raw values such as `Caliber`, `Au
 - `Caliber` display without runtime normalisation;
 - obsolete tagline variants;
 - stale Dual Time / Rattrapante labels;
-- stale 42-piece or 7-Maison counts;
+- stale 42/43-piece or 7-Maison counts;
 - old English navigation/copy layers.
 
 ## QA evidence
 - Claude audit: 60/60 rendered cases passed after three defects were corrected.
 - Claude audit: 23/23 Node/JSDOM/server tests passed.
 - Final audit candidate: Railway staging deployment `f5438eb0-6b64-4271-8057-eebe0616a4f5` reached SUCCESS after `npm ci && npm test`.
-- Production promotion: deployment `adfe054c-01e9-4518-8cfd-564be9670152` reached SUCCESS after the same test gate.
+- Pre-expansion bootstrap deployment `68338aad-3175-458c-957b-186f91a59d9a` reached SUCCESS. The 44-record Rolex 6100 expansion requires a fresh production gate before it is called live-verified.
 - Production Watchmaking route passed Railway healthcheck.
 
 ## Rule going forward
-Do not reintroduce a second public version. Do not restore stale 42/7 counts. Do not bypass `verify-language.mjs`. New public English and Arabic must follow `content/horology-lexicon.json`.
+Do not reintroduce a second public version. Do not restore stale 42/43 or 7-Maison counts. Do not bypass `verify-language.mjs`. New public English and Arabic must follow `content/horology-lexicon.json`.
+
+## 20 September 2026 — Rolex 6100 expansion
+- Added Rolex ref. 6100 “Chinese Dragon” as the 44th canonical record.
+- Relationship to H.H. Sheikh Ammar is classified as a reported public appearance, not private-ownership proof.
+- Technical identity and rarity language are bounded to Christie’s catalogue; Waqt is retained as the public-appearance report.
+- A cropped owner-supplied documentary image is used provisionally without the surrounding collage/person; a higher-resolution master remains desirable.
+- The Rolex 6100 now leads the homepage three-piece curatorial selection because of its enamel craft and historical significance.
