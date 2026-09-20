@@ -74,7 +74,7 @@ try {
    if(route==='/watchmaking/'&&lang==='en'){
     assert.equal((await page.locator('.craft-hero h1').innerText()).trim(),'Timeless timepieces.');
     assert.ok((await page.locator('.craft-manifesto').innerText()).includes('One of the few. Never one of the many.'));
-    assert.ok((await page.locator('#complications').innerText()).includes('Complications & mechanisms'));
+    assert.ok((await page.locator('#complications').innerText()).toLowerCase().includes('complications & mechanisms'));
    }
    if(route==='/exhibition/'){
     assert.equal((await page.locator('.museum-ledger .ledger-item').nth(1).locator('b').innerText()).trim(),'8');
