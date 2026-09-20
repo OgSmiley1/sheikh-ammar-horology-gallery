@@ -1,7 +1,12 @@
 {
+  "schemaVersion": 2,
+  "editorialVoice": {
+    "en": "Restrained, precise, museum-led Haute Horlogerie English. Prefer horological terminology over retail language.",
+    "ar": "عربية متحفية رصينة ودقيقة، بمفردات صناعة الساعات الراقية ومن دون لغة تجارية."
+  },
   "en": {
     "preferred": {
-      "brand_house": "Maison",
+      "maison": "Maison",
       "watch": "timepiece",
       "collection": "collection",
       "reference": "reference",
@@ -9,15 +14,52 @@
       "calibre": "calibre",
       "complications": "complications",
       "power_reserve": "power reserve",
+      "self_winding": "self-winding",
+      "manual_winding": "manual-winding",
+      "chronograph": "chronograph",
+      "tourbillon": "tourbillon",
+      "dual_time": "dual time",
+      "gmt": "GMT",
+      "perpetual_calendar": "perpetual calendar",
+      "minute_repeater": "minute repeater",
+      "split_seconds": "split-seconds chronograph / rattrapante",
+      "world_time": "world time",
+      "flyback": "flyback chronograph",
+      "moon_phase": "moon-phase indication",
+      "case": "case",
+      "case_material": "case material",
+      "case_dimensions": "case dimensions",
+      "bezel": "bezel",
+      "crystal": "crystal",
+      "dial": "dial",
+      "hands": "hands",
+      "crown": "crown",
+      "pushers": "pushers",
+      "escapement": "escapement",
+      "balance": "balance and hairspring",
+      "mainspring_barrel": "mainspring barrel",
+      "rotor": "rotor",
+      "bridges": "bridges",
+      "jewels": "jewels",
       "craft": "craftsmanship",
       "heritage": "horological heritage",
-      "rare_piece": "exceptional timepiece",
-      "discover": "Discover",
-      "explore": "Explore",
+      "high_watchmaking": "Haute Horlogerie",
+      "exceptional_piece": "exceptional timepiece",
+      "technical_record": "technical record",
       "provenance": "provenance",
       "exhibition": "exhibition",
-      "archive": "archive"
+      "archive": "archive",
+      "discover": "Discover",
+      "explore": "Explore"
     },
+    "styleRules": [
+      "Use British horological spelling: calibre, not caliber.",
+      "Prefer self-winding to automatic in editorial display copy.",
+      "Prefer manual-winding to manual when describing a movement.",
+      "Use complications for additional horological functions; do not label them generically as Functions.",
+      "Use Maison for a watchmaking house when the context is editorial.",
+      "Use watch only where natural English requires it; prefer timepiece in museum copy."
+    ],
     "avoid": [
       "product",
       "SKU",
@@ -25,12 +67,13 @@
       "buy now",
       "inventory item",
       "luxury product",
-      "add to cart"
+      "add to cart",
+      "Functions"
     ]
   },
   "ar": {
     "preferred": {
-      "brand_house": "الدار",
+      "maison": "الدار",
       "watch": "الساعة",
       "piece": "القطعة",
       "collection": "المجموعة",
@@ -39,23 +82,70 @@
       "calibre": "العيار",
       "complications": "التعقيدات",
       "power_reserve": "احتياطي الطاقة",
+      "self_winding": "حركة ذاتية التعبئة",
+      "manual_winding": "حركة يدوية التعبئة",
+      "chronograph": "الكرونوغراف",
+      "tourbillon": "التوربيون",
+      "dual_time": "التوقيت المزدوج",
+      "gmt": "توقيت GMT",
+      "perpetual_calendar": "التقويم الدائم",
+      "minute_repeater": "مُكرِّر الدقائق",
+      "split_seconds": "كرونوغراف الثواني المنقسمة / راترابانت",
+      "world_time": "التوقيت العالمي",
+      "flyback": "كرونوغراف فلاي باك",
+      "moon_phase": "مؤشر أطوار القمر",
+      "case": "العلبة",
+      "case_material": "مادة العلبة",
+      "case_dimensions": "أبعاد العلبة",
+      "bezel": "الإطار",
+      "crystal": "الزجاج",
+      "dial": "الميناء",
+      "hands": "العقارب",
+      "crown": "التاج",
+      "pushers": "الأزرار",
+      "escapement": "نظام الإفلات",
+      "balance": "عجلة الاتزان والنابض الشعري",
+      "mainspring_barrel": "برميل النابض الرئيسي",
+      "rotor": "الدوّار",
+      "bridges": "الجسور",
+      "jewels": "الجواهر",
       "craft": "المهارة الحرفية",
       "heritage": "إرث صناعة الساعات",
       "high_watchmaking": "صناعة الساعات الراقية",
       "exceptional_piece": "قطعة استثنائية",
-      "discover": "اكتشف",
-      "explore": "استكشف",
-      "provenance": "المنشأ",
+      "technical_record": "السجل التقني",
+      "provenance": "توثيق المنشأ",
       "exhibition": "قاعة العرض",
       "archive": "الأرشيف",
-      "masterpiece": "تحفة"
+      "discover": "اكتشف",
+      "explore": "استكشف"
     },
+    "styleRules": [
+      "استخدم «الدار» في السياق التحريري بدل اللغة التجارية.",
+      "استخدم «التعقيدات» للوظائف الميكانيكية الإضافية.",
+      "استخدم «صناعة الساعات الراقية» و«المهارة الحرفية» بصياغة رصينة ومن دون مبالغة.",
+      "ميّز بين «التوربيون» و«التوربين» ولا تستخدم أحدهما بدل الآخر."
+    ],
     "avoid": [
       "منتج",
       "SKU",
       "اشتر الآن",
       "أضف إلى السلة",
       "مخزون"
+    ]
+  },
+  "signatureLines": {
+    "en": [
+      "Timeless timepieces.",
+      "One of the few. Never one of the many.",
+      "Three Timepieces. Three Expressions of Time.",
+      "When a Moment Deserves to Last."
+    ],
+    "ar": [
+      "قطعٌ تتجاوز الزمن.",
+      "من القلائل. لا من بين الكثير.",
+      "ثلاث قطع. ثلاث لغات للوقت.",
+      "حين تستحق اللحظة أن تطول."
     ]
   }
 }
