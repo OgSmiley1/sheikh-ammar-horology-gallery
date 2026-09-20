@@ -89,7 +89,7 @@ Do not declare V1 complete until the final Railway source is updated to the rele
 
 The canonical V1 includes a bilingual Watchmaking chapter with the editorial lines:
 - “Timeless timepieces.”
-- “One of the few. Never one of the many.”
+- “One, not many.”
 
 It explains 12 elements of timepiece anatomy and 9 complications, including Chronograph, Tourbillon,
 Dual Time & GMT, Perpetual Calendar, Minute Repeater, Split-seconds Chronograph / Rattrapante, World Time,
