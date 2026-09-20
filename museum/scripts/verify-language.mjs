@@ -16,7 +16,10 @@ for(const [bad,preferred] of [
   ['Functions','Complications'],
   ['One of the few. Never one of many.','One of the few. Never one of the many.'],
   ['Dual Time / GMT','Dual Time & GMT'],
-  ['Split-seconds / Rattrapante','Split-seconds Chronograph / Rattrapante']
+  ['Split-seconds / Rattrapante','Split-seconds Chronograph / Rattrapante'],
+  ["collection:'The Timepieces'","collection:'The Collection'"],
+  ['watch collection','horological collection'],
+  ['The art in motion · Watch','Watchmaking in Motion']
 ]){
   if(app.includes(bad)||watchmaking.includes(bad))fail(`language gate: found "${bad}", prefer "${preferred}"`);
 }
