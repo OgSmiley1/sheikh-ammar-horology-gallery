@@ -8,8 +8,8 @@ Updated: 20 September 2026
 - Active service: `museum-current`
 - Production service: `museum-current`
 - Railway direct source metadata remains pinned to a legacy branch snapshot; canonical main is therefore served through an exact-SHA runtime bootstrap until Railway source editing is available.
-- Latest pre-expansion bootstrap deployment: `68338aad-3175-458c-957b-186f91a59d9a` — SUCCESS
-- Last fully rendered/audited production lineage: `aa8527fbd1d4757059d5d83e258b61e6c39f893f`
+- Current optimized production deployment: `c6dafa99-9e86-4251-86e1-4b80441040c9` — SUCCESS
+- Served 44-record content commit: `a24d468b50f46cf48aca12f321dafe0a861cc8d6`
 - Normal healthcheck: `/healthz`
 - `/watchmaking/` was used as the promotion healthcheck and passed before the normal healthcheck was restored.
 - `museum-vision` is dormant and excluded from normal auto-deploys.
@@ -110,7 +110,7 @@ The visible technical record normalises legacy raw values such as `Caliber`, `Au
 - Claude audit: 60/60 rendered cases passed after three defects were corrected.
 - Claude audit: 23/23 Node/JSDOM/server tests passed.
 - Final audit candidate: Railway staging deployment `f5438eb0-6b64-4271-8057-eebe0616a4f5` reached SUCCESS after `npm ci && npm test`.
-- Pre-expansion bootstrap deployment `68338aad-3175-458c-957b-186f91a59d9a` reached SUCCESS. The 44-record Rolex 6100 expansion requires a fresh production gate before it is called live-verified.
+- 44-record verification bootstrap ran `npm ci && npm test` before server start and reached SUCCESS; optimized deployment `c6dafa99-9e86-4251-86e1-4b80441040c9` then reached SUCCESS on the same content commit.
 - Production Watchmaking route passed Railway healthcheck.
 
 ## Rule going forward
@@ -122,3 +122,4 @@ Do not reintroduce a second public version. Do not restore stale 42/43 or 7-Mais
 - Technical identity and rarity language are bounded to Christie’s catalogue; Waqt is retained as the public-appearance report.
 - A cropped owner-supplied documentary image is used provisionally without the surrounding collage/person; a higher-resolution master remains desirable.
 - The Rolex 6100 now leads the homepage three-piece curatorial selection because of its enamel craft and historical significance.
+- Production promotion is live-verified on content commit `a24d468b50f46cf48aca12f321dafe0a861cc8d6`.
