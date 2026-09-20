@@ -14,7 +14,8 @@ const data=JSON.parse(read('dist/watches.json'));
 
 for(const [bad,preferred] of [
   ['Functions','Complications'],
-  ['One of the few. Never one of many.','One of the few. Never one of the many.'],
+  ['One of the few. Never one of many.','One, not many.'],
+  ['One of the few. Never one of the many.','One, not many.'],
   ['Dual Time / GMT','Dual Time & GMT'],
   ['Split-seconds / Rattrapante','Split-seconds Chronograph / Rattrapante'],
   ["collection:'The Timepieces'","collection:'The Collection'"],
@@ -31,7 +32,7 @@ for(const required of [
 ]) if(!app.includes(required))fail(`language gate: app missing "${required}"`);
 
 for(const required of [
-  'Timeless timepieces.','One of the few. Never one of the many.',
+  'Timeless timepieces.','One, not many.',
   'Complications & mechanisms','Chronograph','Tourbillon','Dual Time & GMT',
   'Perpetual Calendar','Minute Repeater','Split-seconds Chronograph / Rattrapante',
   'World Time','Flyback Chronograph','Moon-phase Indication',
