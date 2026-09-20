@@ -93,7 +93,8 @@
       "evidence": [
         "Claude ran 60/60 route/language/viewport rendered checks successfully after fixing three real defects.",
         "23/23 Node/JSDOM/server tests passed in Claude's audit.",
-        "A dedicated verify-language.mjs gate now enforces canonical English/Arabic terminology and 44/8 collection counts."
+        "A dedicated verify-language.mjs gate now enforces canonical English/Arabic terminology and 44/8 collection counts.",
+        "44-record exact-SHA verification bootstrap completed successfully before Railway healthcheck; the optimized deployment of the same content commit then reached SUCCESS."
       ]
     },
     {
@@ -129,7 +130,8 @@
       "status": "complete",
       "evidence": [
         "Production deployment reached SUCCESS on the audited main commit.",
-        "Watchmaking route itself passed Railway healthcheck."
+        "Watchmaking route itself passed Railway healthcheck.",
+        "44-record deployment c6dafa99-9e86-4251-86e1-4b80441040c9 reached SUCCESS on the exact canonical content commit."
       ]
     }
   ],
@@ -161,18 +163,19 @@
     "canonicalMaisons": 8,
     "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
     "mergedAuditCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f",
-    "sourceRuntimeTests": "44-record expansion prepared; fresh Railway verification required",
-    "languageGate": "44-record gate prepared; fresh Railway verification required",
+    "sourceRuntimeTests": "passed through exact-SHA Railway verification bootstrap before server start",
+    "languageGate": "passed through exact-SHA Railway verification bootstrap",
     "renderedMatrix": "Claude: 60/60 passed under reduced motion; permanent gate expanded to 120 normal+reduced combinations for future runs",
-    "productionChanged": true
+    "productionChanged": true,
+    "servedContentCommit": "a24d468b50f46cf48aca12f321dafe0a861cc8d6"
   },
   "production": {
     "status": "live-verified",
     "platform": "Railway",
     "service": "museum-current",
     "domain": "museum-current-production.up.railway.app",
-    "releaseCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f",
-    "deploymentId": "68338aad-3175-458c-957b-186f91a59d9a",
+    "releaseCommit": "a24d468b50f46cf48aca12f321dafe0a861cc8d6",
+    "deploymentId": "c6dafa99-9e86-4251-86e1-4b80441040c9",
     "proofRoute": "/watchmaking/",
     "normalHealthcheck": "/healthz",
     "stagingDeployment": "f5438eb0-6b64-4271-8057-eebe0616a4f5"
