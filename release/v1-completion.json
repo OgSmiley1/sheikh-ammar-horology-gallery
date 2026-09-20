@@ -29,7 +29,7 @@
       "status": "complete",
       "evidence": [
         "33/33 legacy folios verified story-before-spec.",
-        "Canonical 43-record detail runtime renders editorial description before Technical record."
+        "Canonical 44-record detail runtime renders editorial description before Technical record."
       ]
     },
     {
@@ -70,7 +70,7 @@
       "evidence": [
         "29 existing studio plates restored, blue Royal Oak image corrected.",
         "Four candid/collage assets still require review; see media-review.json.",
-        "Canonical ledger contains 43 records across 8 Maisons.",
+        "Canonical ledger contains 44 records across 8 Maisons; Rolex ref. 6100 ‘Chinese Dragon’ added with bounded public-appearance provenance.",
         "Owner-supplied watchmaking-event.webp was rebuilt from the original JPEG as a valid WebP."
       ]
     },
@@ -93,7 +93,7 @@
       "evidence": [
         "Claude ran 60/60 route/language/viewport rendered checks successfully after fixing three real defects.",
         "23/23 Node/JSDOM/server tests passed in Claude's audit.",
-        "A dedicated verify-language.mjs gate now enforces canonical English/Arabic terminology and 43/8 collection counts."
+        "A dedicated verify-language.mjs gate now enforces canonical English/Arabic terminology and 44/8 collection counts."
       ]
     },
     {
@@ -157,12 +157,12 @@
   ],
   "currentVerification": {
     "date": "2026-09-20",
-    "canonicalRecords": 43,
+    "canonicalRecords": 44,
     "canonicalMaisons": 8,
     "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
-    "mergedAuditCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d",
-    "sourceRuntimeTests": "passed on staging and production bootstrap before server start",
-    "languageGate": "passed on staging and production bootstrap",
+    "mergedAuditCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f",
+    "sourceRuntimeTests": "44-record expansion prepared; fresh Railway verification required",
+    "languageGate": "44-record gate prepared; fresh Railway verification required",
     "renderedMatrix": "Claude: 60/60 passed under reduced motion; permanent gate expanded to 120 normal+reduced combinations for future runs",
     "productionChanged": true
   },
@@ -171,8 +171,8 @@
     "platform": "Railway",
     "service": "museum-current",
     "domain": "museum-current-production.up.railway.app",
-    "releaseCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d",
-    "deploymentId": "adfe054c-01e9-4518-8cfd-564be9670152",
+    "releaseCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f",
+    "deploymentId": "68338aad-3175-458c-957b-186f91a59d9a",
     "proofRoute": "/watchmaking/",
     "normalHealthcheck": "/healthz",
     "stagingDeployment": "f5438eb0-6b64-4271-8057-eebe0616a4f5"
