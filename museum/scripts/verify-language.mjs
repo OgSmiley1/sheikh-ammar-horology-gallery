@@ -11,13 +11,13 @@ const watchmaking=read('dist/watchmaking/index.html');
 const exhibition=read('dist/exhibition/index.html');
 const manifest=JSON.parse(read('../release/v1-manifest.json'));
 const data=JSON.parse(read('dist/watches.json'));
+const exactOwnerPhrase='One of not many';
 
 for(const [bad,preferred] of [
   ['Functions','Complications'],
   ['One, not many.','One of not many'],
   ['One of the few. Never one of many.','One of not many'],
   ['One of the few. Never one of the many.','One of not many'],
-  ['One of not many','One of not many'],
   ['Dual Time / GMT','Dual Time & GMT'],
   ['Split-seconds / Rattrapante','Split-seconds Chronograph / Rattrapante'],
   ["collection:'The Timepieces'","collection:'The Collection'"],
@@ -32,6 +32,9 @@ for(const required of [
   'Calibre / movement','Case material','Case dimensions','Complications',
   'Three Timepieces. Three Expressions of Time.','When a Moment Deserves to Last.'
 ]) if(!app.includes(required))fail(`language gate: app missing "${required}"`);
+
+if(!watchmaking.includes(`data-en="${exactOwnerPhrase}"`))fail('language gate: exact owner phrase must be One of not many');
+if(watchmaking.includes('One of not many.')||watchmaking.includes('One of not many '))fail('language gate: owner phrase must not be extended or punctuated');
 
 for(const required of [
   'Timeless timepieces.','One of not many',
