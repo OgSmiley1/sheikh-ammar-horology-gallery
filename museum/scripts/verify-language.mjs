@@ -9,11 +9,22 @@ const fail=message=>{throw new Error(message)};
 const app=read('dist/app.js');
 const watchmaking=read('dist/watchmaking/index.html');
 const exhibition=read('dist/exhibition/index.html');
+const primaryHtml=['dist/index.html','dist/collection/index.html','dist/his-highness/index.html','dist/exhibition/index.html'].map(read).join('\n');
 const manifest=JSON.parse(read('../release/v1-manifest.json'));
 const data=JSON.parse(read('dist/watches.json'));
 const exactOwnerPhrase='One of not many';
 for(const forbiddenPhrasePattern of [/One of the few\./,/One, not many/]){
   if(forbiddenPhrasePattern.test(watchmaking))fail('language gate: deprecated owner phrase variant found');
+}
+
+
+for(const [bad,preferred] of [
+  ['السوع','الساعات / الساعة'],
+  ['اقترب من المينا','اقترب من الميناء'],
+  ['شخصية المينا','شخصية الميناء'],
+  ['حكاية السوع','مجلس الوقت / حكاية الساعات']
+]){
+  if(app.includes(bad)||primaryHtml.includes(bad))fail(`language gate: found Arabic museum copy "${bad}", prefer "${preferred}"`);
 }
 
 for(const [bad,preferred] of [
@@ -46,7 +57,7 @@ for(const required of [
 
 for(const required of [
   'صناعة الساعات الراقية','المهارة الحرفية','إرث صناعة الساعات','التعقيدات',
-  'العيار / الحركة','مادة العلبة','أبعاد العلبة'
+  'العيار / الحركة','مادة العلبة','أبعاد العلبة','الميناء'
 ]) if(!app.includes(required))fail(`language gate: Arabic app missing "${required}"`);
 
 if(!Array.isArray(data.watches)||data.watches.length!==44)fail('language gate: canonical collection count must be 44');
@@ -64,4 +75,8 @@ for(const watch of data.watches){
   }
 }
 
+const namedChecks=new Map(data.watches.map(w=>[w.id,w]));
+if(namedChecks.get(60028)?.nameEn!=='Chronomètre à Résonance')fail('language gate: F.P. Journe Résonance spelling regressed');
+if(namedChecks.get(90006)?.nameAr!=='FFC — عيار 1300.3')fail('language gate: Arabic calibre terminology regressed');
+if([...data.watches].some(w=>w.brand==='Artisans de Geneve'))fail('language gate: Artisans de Genève accent regressed');
 console.log('Language gate passed: English/Arabic terminology, 44 timepieces, 8 Maisons.');
