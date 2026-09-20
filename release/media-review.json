@@ -173,6 +173,12 @@
       "slug": "audemars-piguet-royal-oak-perpetual-calendar-blue-ceramic-26579cs",
       "status": "wrong skeleton image replaced with existing blue-ceramic Royal Oak asset",
       "displayImage": "/assets/watches-verified/ap-royal-oak-26579cs-blue.jpg"
+    },
+    {
+      "slug": "rolex-6100-chinese-dragon-cloisonne",
+      "source": "owner-supplied documentary image crop; identity cross-checked against Christie's ref. 6100 and Waqt public-appearance report",
+      "displayImage": "/assets/watches/rolex-6100-chinese-dragon.webp",
+      "status": "documentary interim image; surrounding collage/person removed; higher-resolution master image remains desirable"
     }
   ],
   "remaining": [
