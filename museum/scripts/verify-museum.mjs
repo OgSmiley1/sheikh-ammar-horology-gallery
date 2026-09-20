@@ -68,12 +68,12 @@ for (const token of [
   "technicalRecord:'السجل التقني'",
   "patek-philippe-perpetual-calendar-5270p-green",
   "patek-philippe-nautilus-perpetual-calendar-5740",
-  "artisans-de-geneve-la-montoya-platinum-challenge"
+  "rolex-6100-chinese-dragon-cloisonne"
 ]) if (!app.includes(token)) fail(`app.js: missing V1 requirement ${token}`);
 if (!read('dist/styles.css').includes('V1 mobile timepiece sheet')) fail('styles.css: V1 mobile detail treatment missing');
 
 const data = JSON.parse(read('dist/watches.json'));
-if (!Array.isArray(data.watches) || data.watches.length !== 43) fail('watches.json: expected exactly 43 records');
+if (!Array.isArray(data.watches) || data.watches.length !== 44) fail('watches.json: expected exactly 44 records');
 const ids = new Set();
 for (const watch of data.watches) {
   if (ids.has(watch.id)) fail(`watches.json: duplicate id ${watch.id}`);
