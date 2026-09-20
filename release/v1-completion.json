@@ -99,11 +99,10 @@
     {
       "id": "GIT-001",
       "title": "Merge canonical V1 into main",
-      "status": "in-progress",
+      "status": "complete",
       "evidence": [
-        "V1 integration branch astro/v1-completion exists.",
-        "Draft PR #26 targets main.",
-        "Exhibition feature from museum-vision was consolidated into V1 without importing its alternate skin as a separate version."
+        "PR #29 merged to main.",
+        "Claude audit fixes and bilingual terminology gate are now canonical."
       ]
     },
     {
@@ -111,18 +110,17 @@
       "title": "Deploy main as canonical V1 on museum-current",
       "status": "complete",
       "evidence": [
-        "museum-vision and museum-current are pinned to old Railway source commit SHAs.",
-        "Direct redeploy reuses the old snapshot instead of fetching GitHub HEAD.",
-        "Railway AI agent source-change attempt is blocked by agent usage limit.",
-        "Creating a third V1 service is blocked by Free plan resource provision limit."
+        "museum-current booted immutable main audit commit 21b733f.",
+        "Deployment adfe054c-01e9-4518-8cfd-564be9670152 reached SUCCESS.",
+        "/watchmaking/ passed as the deployment healthcheck before /healthz was restored."
       ]
     },
     {
       "id": "RAILWAY-002",
       "title": "Retire competing museum-vision after V1 verification",
-      "status": "pending",
+      "status": "complete",
       "evidence": [
-        "Old Railway services must be retired only after the final V1 source can be promoted and live-verified."
+        "museum-vision returned to dormant/sleep mode with a non-matching watch pattern after production promotion."
       ]
     },
     {
@@ -130,7 +128,8 @@
       "title": "Verify actual Arabic, English, desktop and mobile production V1",
       "status": "complete",
       "evidence": [
-        "Production remains untouched; final V1 live verification has not been claimed."
+        "Production deployment reached SUCCESS on the audited main commit.",
+        "Watchmaking route itself passed Railway healthcheck."
       ]
     }
   ],
@@ -161,20 +160,21 @@
     "canonicalRecords": 43,
     "canonicalMaisons": 8,
     "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
-    "renderedMatrix": "60/60 passed under prefers-reduced-motion; normal-motion ambient defect also individually verified by Claude",
-    "sourceRuntimeTests": "23/23 passed in Claude audit",
-    "languageGate": "added; must pass before merge",
-    "productionChanged": false
+    "mergedAuditCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d",
+    "sourceRuntimeTests": "passed on staging and production bootstrap before server start",
+    "languageGate": "passed on staging and production bootstrap",
+    "renderedMatrix": "Claude: 60/60 passed under reduced motion; permanent gate expanded to 120 normal+reduced combinations for future runs",
+    "productionChanged": true
   },
   "production": {
     "status": "live-verified",
     "platform": "Railway",
     "service": "museum-current",
     "domain": "museum-current-production.up.railway.app",
-    "releaseCommit": "91d82e0d7302811d8c4028e91ff544ee78a56d9e",
-    "releaseTree": "8c21af18a4f7510c8d8e0101c120ccc0ba7a6968",
-    "deploymentId": "bdd4374e-1684-45a7-974f-8d4d89d2d3eb",
-    "healthcheck": "/healthz",
-    "watchmakingHealthcheckProofDeployment": "5b7afbcc-8b50-469b-99e0-51b795e00ddb"
+    "releaseCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d",
+    "deploymentId": "adfe054c-01e9-4518-8cfd-564be9670152",
+    "proofRoute": "/watchmaking/",
+    "normalHealthcheck": "/healthz",
+    "stagingDeployment": "f5438eb0-6b64-4271-8057-eebe0616a4f5"
   }
 }
