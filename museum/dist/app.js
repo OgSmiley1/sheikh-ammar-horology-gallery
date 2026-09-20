@@ -24,9 +24,9 @@ function ensureAmbientControl(){let b=$('#ambientPause');if(!b){b=document.creat
 function imageFor(w){return w.displayImage||null}
 function featuredItems(){
  const curated=[
+  'rolex-6100-chinese-dragon-cloisonne',
   'patek-philippe-perpetual-calendar-5270p-green',
-  'patek-philippe-nautilus-perpetual-calendar-5740',
-  'artisans-de-geneve-la-montoya-platinum-challenge'
+  'patek-philippe-nautilus-perpetual-calendar-5740'
  ];
  const bySlug=curated.map(slug=>state.all.find(w=>w.slug===slug&&imageFor(w))).filter(Boolean);
  if(bySlug.length===3)return bySlug;
