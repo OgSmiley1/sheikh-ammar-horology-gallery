@@ -13,9 +13,9 @@
     "claudeSourceBranch": "claude/watch-website-master-plan-x2gsgo",
     "observedClaudeHead": "4c34216b6e7c1f36cb958db960d310114267beed",
     "currentIntegrationHead": "80a3eabf2fed1c3b6869f2c5785471c982673ef3",
-    "releaseCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d",
+    "releaseCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f",
     "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
-    "auditedProductionCodeCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d"
+    "auditedProductionCodeCommit": "aa8527fbd1d4757059d5d83e258b61e6c39f893f"
   },
   "site": {
     "root": "museum/dist",
@@ -27,7 +27,7 @@
     "framework": "static-html-css-js-data",
     "publicHost": "railway",
     "referenceLegacyRoot": "docs",
-    "recordCount": 43,
+    "recordCount": 44,
     "productionEntry": "/",
     "routes": [
       "/",
@@ -61,7 +61,7 @@
       }
     ],
     "productionService": "museum-current",
-    "deploymentId": "adfe054c-01e9-4518-8cfd-564be9670152",
+    "deploymentId": "68338aad-3175-458c-957b-186f91a59d9a",
     "domain": "museum-current-production.up.railway.app",
     "healthcheck": "/healthz"
   },
