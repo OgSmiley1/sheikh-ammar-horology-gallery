@@ -12,7 +12,8 @@
     "integrationBranch": "astro/v1-completion",
     "claudeSourceBranch": "claude/watch-website-master-plan-x2gsgo",
     "observedClaudeHead": "4c34216b6e7c1f36cb958db960d310114267beed",
-    "currentIntegrationHead": "80a3eabf2fed1c3b6869f2c5785471c982673ef3"
+    "currentIntegrationHead": "80a3eabf2fed1c3b6869f2c5785471c982673ef3",
+    "releaseCommit": "91d82e0d7302811d8c4028e91ff544ee78a56d9e"
   },
   "site": {
     "root": "museum/dist",
@@ -55,7 +56,10 @@
         "name": "museum-vision",
         "id": "d2a5719e-cbea-4c5d-bdc2-00128da13f1b"
       }
-    ]
+    ],
+    "productionService": "museum-current",
+    "deploymentId": "bdd4374e-1684-45a7-974f-8d4d89d2d3eb",
+    "domain": "museum-current-production.up.railway.app"
   },
   "qualityGates": {
     "performance": 90,
@@ -71,5 +75,7 @@
     "requireArabicLiveCheck": true,
     "requireEnglishLiveCheck": true,
     "requireMobileLiveCheck": true
-  }
+  },
+  "version": "1.0.0",
+  "status": "production"
 }
