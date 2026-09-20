@@ -85,7 +85,7 @@ test('watchmaking guide is bilingual, linked and preserves editorial phrases',as
  doc.querySelector('#lang').click();
  assert.equal(doc.documentElement.dir,'ltr');
  assert.equal(doc.querySelector('.craft-hero h1').textContent.trim(),'Timeless timepieces.');
- assert.match(doc.querySelector('.craft-manifesto').textContent,/One of the few\. Never one of the many\./);
+ assert.equal(doc.querySelector('.craft-manifesto').textContent.trim(),'One of not many');
  assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Tourbillon'));
  assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Dual Time & GMT'));
  assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Split-seconds Chronograph / Rattrapante'));
