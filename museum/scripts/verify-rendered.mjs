@@ -6,7 +6,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const base = process.env.MUSEUM_URL || 'http://127.0.0.1:3000';
 const evidence = process.env.MUSEUM_QA_DIR || '/tmp/majlis-v1-qa';
 await mkdir(evidence, { recursive: true });
-const browser = await chromium.launch();
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
 const results = [];
 const routes = ['/', '/collection/', '/his-highness/', '/exhibition/', '/watchmaking/'];
 const sizes = [[390,844],[412,915],[768,1024],[1024,768],[1440,900],[1920,1080]];
@@ -29,9 +29,11 @@ try {
     const bad=[];
     if(document.documentElement.scrollWidth>innerWidth+1)bad.push('horizontal overflow');
     if(![...document.querySelectorAll('h1')].some(visible))bad.push('no visible H1');
-    for(const e of document.querySelectorAll('h1,h2,h3,.hero-description,.bio-timeline time')) {
+    for(const e of document.querySelectorAll('h1,h2,h3,.hero-description,.bio-timeline time,.card h3,.featured-copy h3,.specs dd')) {
      if(!visible(e))continue;
      if(e.scrollWidth>e.clientWidth+2)bad.push(`text overflow: ${e.textContent.slice(0,70)}`);
+     const s=getComputedStyle(e);
+     if(s.overflowY!=='visible'&&e.scrollHeight>e.clientHeight+2)bad.push(`vertical text clipping: ${e.textContent.slice(0,70)}`);
     }
     for(const e of document.querySelectorAll('button'))if(visible(e)){
      const r=e.getBoundingClientRect();if(r.width<43.5||r.height<43.5)bad.push(`small control: ${e.getAttribute('aria-label')||e.textContent}`);
@@ -64,6 +66,20 @@ try {
      }
      assert.ok(await page.locator('#detailClose').isVisible());
      if(width===390)assert.ok(await page.locator('#detail').evaluate(e=>Math.abs(e.getBoundingClientRect().width-innerWidth)<2));
+     const detailFindings=await page.locator('#detail').evaluate(dialog=>{
+      const visible=e=>{const r=e.getBoundingClientRect();const s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'};
+      const bad=[];
+      if(dialog.scrollWidth>dialog.clientWidth+2)bad.push('detail horizontal overflow');
+      const text=[...dialog.querySelectorAll('.detail-copy h2,.detail-copy .description,.detail-tech-title,.specs dt,.specs dd,.detail-guide')].filter(visible);
+      for(const e of text)if(e.scrollWidth>e.clientWidth+2)bad.push(`detail text overflow: ${e.textContent.slice(0,70)}`);
+      const blocks=[...dialog.querySelectorAll('.detail-copy > .card-brand,.detail-copy > h2,.detail-copy > .card-ref,.detail-copy > .detail-kicker,.detail-copy > .description,.detail-copy > .detail-tech-title,.detail-copy > .specs,.detail-copy > .complication-guide-tags,.detail-copy > .detail-guide')].filter(visible);
+      for(let j=1;j<blocks.length;j++){
+       const prev=blocks[j-1].getBoundingClientRect(),next=blocks[j].getBoundingClientRect();
+       if(next.top<prev.bottom-1)bad.push(`detail text collision: ${blocks[j-1].textContent.slice(0,35)} / ${blocks[j].textContent.slice(0,35)}`);
+      }
+      return bad;
+     });
+     assert.deepEqual(detailFindings,[],`detail layout ${lang} ${width} ${cards.nth(i)}`);
      await page.keyboard.press('Escape');
     }
     await page.locator('#search').fill('no-matching-timepiece-qa');
