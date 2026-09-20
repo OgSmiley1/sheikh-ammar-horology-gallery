@@ -27,7 +27,7 @@ if (!existsSync(path.join(root, 'dist/favicon.svg'))) fail('favicon.svg missing'
 const watchmaking = read('dist/watchmaking/index.html');
 for (const token of [
   'Timeless timepieces.',
-  'One of the few. Never one of the many.',
+  'One, not many.',
   'Chronograph',
   'Tourbillon',
   'Dual Time & GMT',
