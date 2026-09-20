@@ -11,8 +11,8 @@ const results = [];
 const routes = ['/', '/collection/', '/his-highness/', '/exhibition/', '/watchmaking/'];
 const sizes = [[390,844],[412,915],[768,1024],[1024,768],[1440,900],[1920,1080]];
 try {
- for (const [width,height] of sizes) for (const lang of ['ar','en']) {
-  const context = await browser.newContext({ viewport:{width,height}, reducedMotion:'reduce' });
+ for (const motion of ['no-preference','reduce']) for (const [width,height] of sizes) for (const lang of ['ar','en']) {
+  const context = await browser.newContext({ viewport:{width,height}, reducedMotion:motion });
   await context.addInitScript(lang => localStorage.setItem('museum-language',lang), lang);
   const page = await context.newPage();
   for (const route of routes) {
@@ -43,13 +43,13 @@ try {
     }
     return bad;
    });
-   assert.deepEqual([...errors,...findings],[],`${route} ${lang} ${width}`);
+   assert.deepEqual([...errors,...findings],[],`${route} ${lang} ${width} ${motion}`);
    if(route==='/his-highness/'){
     const years=await page.locator('.bio-timeline time').allTextContents();
     assert.equal(years[0],lang==='ar'?'١٩٦٩':'1969');
     for(const year of await page.locator('.bio-timeline time').all())assert.ok(await year.isVisible());
    }
-   if(width===390||width===1440)await page.screenshot({path:`${evidence}/${route.replaceAll('/','_')}-${lang}-${width}.png`,fullPage:true});
+   if(motion==='reduce'&&(width===390||width===1440))await page.screenshot({path:`${evidence}/${route.replaceAll('/','_')}-${lang}-${width}.png`,fullPage:true});
    if(route==='/collection/'&&(width===390||width===1440)){
     const cards=page.locator('#grid [data-watch]');const count=await cards.count();
     for(let i=0;i<count;i++){
@@ -57,6 +57,11 @@ try {
      await page.locator('#detail[open]').waitFor();
      const order=await page.locator('.detail-copy').evaluate(e=>Boolean(e.querySelector('.description').compareDocumentPosition(e.querySelector('.detail-tech-title'))&Node.DOCUMENT_POSITION_FOLLOWING));
      assert.ok(order,'story must precede technical record');
+     if(lang==='en'){
+      const specText=await page.locator('.specs').innerText();
+      assert.ok(!/\bCaliber\b|\bAutomatic\b/.test(specText),'English technical record must use Calibre / Self-winding terminology');
+      assert.ok(!/\bFunctions\b/.test(specText),'English technical record must use Complications');
+     }
      assert.ok(await page.locator('#detailClose').isVisible());
      if(width===390)assert.ok(await page.locator('#detail').evaluate(e=>Math.abs(e.getBoundingClientRect().width-innerWidth)<2));
      await page.keyboard.press('Escape');
@@ -66,11 +71,19 @@ try {
     await page.locator('#search').fill('');
     assert.equal(await page.locator('#grid .card').count(),count);
    }
-   results.push({route,lang,width,height,status:'passed'});
+   if(route==='/watchmaking/'&&lang==='en'){
+    assert.equal((await page.locator('.craft-hero h1').innerText()).trim(),'Timeless timepieces.');
+    assert.ok((await page.locator('.craft-manifesto').innerText()).includes('One of the few. Never one of the many.'));
+    assert.ok((await page.locator('#complications').innerText()).includes('Complications & mechanisms'));
+   }
+   if(route==='/exhibition/'){
+    assert.equal((await page.locator('.museum-ledger .ledger-item').nth(1).locator('b').innerText()).trim(),'8');
+   }
+   results.push({route,lang,width,height,motion,status:'passed'});
    page.off('pageerror',onError);page.off('response',onResponse);
   }
   await context.close();
  }
  await writeFile(`${evidence}/results.json`,JSON.stringify({base,results},null,2));
- console.log(`${results.length} rendered route/language/viewport checks passed.`);
+ console.log(`${results.length} rendered route/language/viewport/motion checks passed.`);
 } finally { await browser.close(); }
