@@ -1,3 +1,58 @@
+# Rendered gate RUN — 20 September 2026
+
+The 60-case rendered matrix that the 19 Sep note recorded as **NOT RUN** (Cloud Browser
+rejects localhost, no local Chromium) has now been executed against `museum/dist/` with a
+local Chromium. It **failed three times on real defects**, each fixed, and now passes.
+
+**60/60 rendered route/language/viewport checks pass. 23/23 Node/JSDOM/server tests pass.**
+
+## Defects the gate caught
+
+1. **Ambient backdrop rendered as an empty element for every reduced-motion visitor.**
+   `initWatchAmbient()` appended `<img id="watchAmbientImage">` to the DOM *before* any
+   `src` was assigned, and the only assignment sits inside `show()`, which returns early
+   when `state.ambientPaused` is true. That flag is initialised from
+   `prefers-reduced-motion`, so under reduced motion the image never received a src and sat
+   visible at 410×886 with nothing in it. Fixed: candidates are computed first and the
+   function bails if there are none, a first frame is always painted, and only the
+   *cycling* is suppressed when paused — reduced motion now gets a still image, not a hole.
+
+2. **404 on the Quraysh image on `/exhibition/`** — the collection's Lot I. A one-digit
+   corruption in the filename: `...-1674302164605_800x.webp` referenced,
+   `...-1674202164605_800x.webp` on disk.
+
+3. **`images/sheikh/watchmaking-event.webp` is corrupt** — 29,998 bytes with no RIFF/WEBP
+   magic; `file` reports plain `data` and no decoder accepts it. It has been corrupt since
+   the commit that introduced it (`f71075a`, owner-supplied, 19 Sep), there is no valid
+   copy anywhere in the repo, and it rendered as an empty 520px panel beside its caption.
+   The craft scene is caption-only until a good file arrives.
+
+## Gate hardening
+
+`verify-museum.mjs` and `runtime.test.mjs` both asserted that this image is referenced
+exactly once — an assertion about a *filename*, which a corrupt file satisfies. Both now
+read the file's magic bytes and require the reference only while the image is actually
+decodable. A broken image therefore cannot ship, and a correct re-supply makes the
+reference mandatory again with no further code change.
+
+## Still needs the owner
+
+- **Re-supply `watchmaking-event.webp`.** The current bytes are unrecoverable.
+- **Public path reconciliation** — unchanged and still release-blocking. `museum/dist/`
+  (43 records) is what is served; the owner's directive names `docs/` (33 folios). Neither
+  tree has been discarded and nothing has been deployed over the other.
+- **Railway authentication** for the service source binding, per the 19 Sep next action.
+
+## Evidence
+
+21 screenshots at `/tmp/qa/museum-evidence` (ephemeral). Reproduce with:
+`node scripts/serve.mjs` then
+`PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers MUSEUM_URL=http://127.0.0.1:3000 node scripts/verify-rendered.mjs`
+(`museum/node_modules` needs `jsdom` plus a Playwright whose browser build matches the
+installed Chromium.)
+
+---
+
 # Verified continuation — 19 September 2026
 
 **V1 remains IN PROGRESS. Not deployed or accepted.**

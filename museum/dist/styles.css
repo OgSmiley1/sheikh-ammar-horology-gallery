@@ -187,6 +187,7 @@ html[dir=rtl] .detail-guide a{letter-spacing:0}
 .craft-scene{margin:0;display:grid;grid-template-columns:minmax(0,.95fr) minmax(280px,.65fr);align-items:stretch;background:#e9e0d2;color:#1a211c}
 .craft-scene-image{min-height:520px;background:#d9cebd;overflow:hidden}
 .craft-scene-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.craft-scene--text{grid-template-columns:1fr}
 .craft-scene figcaption{display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(36px,6vw,84px)}
 .craft-scene figcaption .eyebrow{color:#80663a}
 .craft-scene figcaption>p:last-child{font:400 clamp(1.35rem,2.4vw,2.25rem)/1.55 var(--title);max-width:17ch;margin:14px 0 0}
