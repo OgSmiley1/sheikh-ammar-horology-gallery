@@ -34,7 +34,7 @@ Historical state follows for continuity; current evidence above takes precedence
 
 ## Release
 Version: V1.0.0
-Status: IN PROGRESS — SOURCE CONSOLIDATED, RAILWAY PROMOTION BLOCKED
+Status: V1 LIVE — PRODUCTION VERIFIED
 
 ## Canonical source
 Repository: `OgSmiley1/sheikh-ammar-horology-gallery`
@@ -115,3 +115,15 @@ Once Railway source editing becomes available (agent limit reset or plan/resourc
 - Existing watch-detail label corrected from “Functions” to “Complications”.
 
 Current integration head after this work: `1336c30056293179dab577c423edb24bebc9632c`
+
+
+## Production resolution — 2026-09-20
+- PR #26 merged to `main`.
+- Canonical V1 release commit: `91d82e0d7302811d8c4028e91ff544ee78a56d9e`.
+- Release tree: `8c21af18a4f7510c8d8e0101c120ccc0ba7a6968`.
+- Railway service: `museum-current`.
+- Verified production deployment: `bdd4374e-1684-45a7-974f-8d4d89d2d3eb` — SUCCESS.
+- A prior verification deployment used `/watchmaking/` as the Railway healthcheck and succeeded, proving the new V1 route was actually being served.
+- Normal healthcheck restored to `/healthz`.
+- Railway source pin remains stale internally, so the service temporarily bootstraps the immutable V1 release commit from GitHub at container start. This preserves one production service and avoids a duplicate Railway project/service.
+- Temporary PR #27 was closed without merge.
