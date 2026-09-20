@@ -2,28 +2,33 @@
 
 Updated: 20 September 2026
 
-## Canonical V1
-- Public application: `museum/dist/`
-- Reference / historical Claude folios: `docs/`
+## V1 production
+- Canonical public source: `museum/dist/`
 - Production platform: Railway
-- Production service: `museum-current`
-- Arabic is the default language; English is the full alternate language.
-- Canonical collection ledger: **43 timepieces across 8 Maisons**.
+- Active service: `museum-current`
+- Production deployment: `adfe054c-01e9-4518-8cfd-564be9670152` — SUCCESS
+- Audited production code commit: `21b733ffc0012dc24b78b0f3b31aff77a695ae3d`
+- Normal healthcheck: `/healthz`
+- `/watchmaking/` was used as the promotion healthcheck and passed before the normal healthcheck was restored.
+- `museum-vision` is dormant and excluded from normal auto-deploys.
 
-## Claude Code audit
-Claude's latest audit commit is `f024ceeb08bc37694db0ae289ba37756117cd1b7`, one commit ahead of the then-current main.
+## Canonical collection
+**43 timepieces across 8 Maisons.**
 
-The audit found three genuine user-visible defects:
-1. reduced-motion visitors could receive an empty ambient watch image;
-2. the Quraysh exhibition image path contained a one-digit filename error;
-3. `watchmaking-event.webp` was corrupt and could not decode.
+Arabic is the default language. English is the complete alternate language.
 
-The first two fixes are retained. The third has now been resolved properly by rebuilding the WebP from the original owner-supplied JPEG and restoring it to the Watchmaking chapter exactly once.
+## Claude Code audit retained
+Claude's latest audit commit `f024ceeb08bc37694db0ae289ba37756117cd1b7` found three genuine user-visible defects:
+1. reduced-motion ambient imagery could render as an empty panel;
+2. the Quraysh Exhibition image path contained a one-digit filename error;
+3. the owner-supplied Watchmaking image had been committed as corrupt WebP bytes.
 
-Claude's rendered gate passed **60/60** route/language/viewport combinations after its fixes. The matrix runs with `prefers-reduced-motion: reduce`; Claude separately verified the ambient behaviour in normal and reduced-motion modes.
+The first two Claude fixes are retained. The third was completed by rebuilding a valid WebP from the original owner-supplied JPEG and restoring it exactly once in the Watchmaking chapter.
 
-## Language and terminology audit
-Canonical English follows a restrained Haute Horlogerie register:
+Claude's rendered gate passed 60/60 route/language/viewport combinations after its fixes. The permanent rendered script has since been expanded to 120 combinations covering both normal and reduced motion; this expanded 120-case matrix is prepared for future runs and is not falsely recorded as already executed.
+
+## Canonical English
+Public English now follows one restrained Haute Horlogerie register:
 - Maison
 - timepiece
 - calibre
@@ -34,7 +39,7 @@ Canonical English follows a restrained Haute Horlogerie register:
 - manual-winding
 - chronograph
 - tourbillon
-- dual time / GMT
+- dual time & GMT
 - perpetual calendar
 - minute repeater
 - split-seconds chronograph / rattrapante
@@ -44,48 +49,67 @@ Canonical English follows a restrained Haute Horlogerie register:
 - craftsmanship
 - horological heritage
 - Haute Horlogerie
+- technical record
+- provenance
 
-Canonical Arabic includes:
+The visible technical record normalises legacy raw values such as `Caliber`, `Automatic`, and `Manual` into the canonical display register without changing official model names that legitimately contain words such as “Automatic”.
+
+## Canonical Arabic
 - الدار
-- القطعة / الساعة
+- الساعة / القطعة
+- المجموعة
+- المرجع
 - العيار
 - الحركة
 - التعقيدات
 - احتياطي الطاقة
 - حركة ذاتية التعبئة
 - حركة يدوية التعبئة
+- الكرونوغراف
+- التوربيون
+- التوقيت المزدوج وGMT
+- التقويم الدائم
 - مُكرِّر الدقائق
 - كرونوغراف الثواني المنقسمة / راترابانت
+- التوقيت العالمي
+- كرونوغراف فلاي باك
+- مؤشر أطوار القمر
 - صناعة الساعات الراقية
 - المهارة الحرفية
 - إرث صناعة الساعات
+- السجل التقني
+- توثيق المنشأ
 
-Editorial signature lines:
+## Signature language
 - «ثلاث قطع. ثلاث لغات للوقت.» / “Three Timepieces. Three Expressions of Time.”
 - «حين تستحق اللحظة أن تطول.» / “When a Moment Deserves to Last.”
 - «قطعٌ تتجاوز الزمن.» / “Timeless timepieces.”
 - «من القلائل. لا من بين الكثير.» / “One of the few. Never one of the many.”
 
-A dedicated `museum/scripts/verify-language.mjs` release gate now prevents regressions to inconsistent labels such as `Functions`, `Caliber`, obsolete Watchmaking headings, or stale 42-piece / 7-Maison counts.
-
 ## Watchmaking chapter
-`/watchmaking/` explains:
+`/watchmaking/` contains:
 - 12 anatomy concepts;
 - 9 complications / mechanisms;
-- the distinction between a turbine and a tourbillon;
-- how to read the technical record.
+- a clear distinction between turbine and tourbillon;
+- a guide to reading the technical record;
+- direct complication links from relevant timepiece detail sheets;
+- the restored owner-supplied image, used once only.
 
-Timepiece detail sheets link directly to the matching complication explanation.
+## Automated language gate
+`museum/scripts/verify-language.mjs` is part of `npm test` and fails on:
+- stale `Functions` terminology;
+- `Caliber` display without runtime normalisation;
+- obsolete tagline variants;
+- stale Dual Time / Rattrapante labels;
+- stale 42-piece or 7-Maison counts;
+- old English navigation/copy layers.
 
-## Current audit branch
-`audit/claude-terminology-v1`
+## QA evidence
+- Claude audit: 60/60 rendered cases passed after three defects were corrected.
+- Claude audit: 23/23 Node/JSDOM/server tests passed.
+- Final audit candidate: Railway staging deployment `f5438eb0-6b64-4271-8057-eebe0616a4f5` reached SUCCESS after `npm ci && npm test`.
+- Production promotion: deployment `adfe054c-01e9-4518-8cfd-564be9670152` reached SUCCESS after the same test gate.
+- Production Watchmaking route passed Railway healthcheck.
 
-This branch contains:
-- Claude's three audited fixes;
-- restored valid owner-supplied Watchmaking image;
-- final English and Arabic terminology pass;
-- canonical count correction to 43 timepieces / 8 Maisons;
-- automated terminology regression gate.
-
-## Release rule
-Do not promote this audit branch to production until its complete `npm test` gate passes. After merge, Railway must boot the resulting immutable `main` commit and the live routes must be health-checked.
+## Rule going forward
+Do not reintroduce a second public version. Do not restore stale 42/7 counts. Do not bypass `verify-language.mjs`. New public English and Arabic must follow `content/horology-lexicon.json`.
