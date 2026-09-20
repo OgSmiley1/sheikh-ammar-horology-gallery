@@ -12,14 +12,14 @@ This directory contains the canonical public museum deployed through Railway.
 - Health check: `/healthz`
 - Default language: Arabic
 - Alternate language: English
-- Collection ledger: 42 bilingual records in `museum/dist/watches.json`
+- Collection ledger: 43 bilingual records across 8 Maisons in `museum/dist/watches.json`
 
 The older `docs/` site remains in the repository as a design/editorial reference and as the record of substantial Claude Code work. It is **not** the production V1 application and must not be deployed over `museum/dist`.
 
 ## V1 routes
 
 - `/` — The Majlis / home
-- `/collection/` — full 42-piece collection
+- `/collection/` — full 43-piece collection
 - `/exhibition/` — curated three-stop exhibition
 - `/watchmaking/` — bilingual anatomy, complications and technical-record guide
 - `/his-highness/` — H.H. Sheikh Ammar profile and leadership timeline
@@ -59,7 +59,7 @@ npm test
 The Railway Dockerfile runs `npm test` before producing the runtime image. A failed museum test therefore blocks a V1 Railway build.
 
 Source-level V1 checks cover:
-- 42 bilingual watch records
+- 43 bilingual watch records
 - local media existence
 - duplicate IDs
 - JS syntax
@@ -89,8 +89,8 @@ Do not declare V1 complete until the final Railway source is updated to the rele
 
 The canonical V1 includes a bilingual Watchmaking chapter with the editorial lines:
 - “Timeless timepieces.”
-- “One of the few. Never one of many.”
+- “One of the few. Never one of the many.”
 
 It explains 12 elements of timepiece anatomy and 9 complications, including Chronograph, Tourbillon,
-Dual Time / GMT, Perpetual Calendar, Minute Repeater, Split-seconds / Rattrapante, World Time,
+Dual Time & GMT, Perpetual Calendar, Minute Repeater, Split-seconds Chronograph / Rattrapante, World Time,
 Flyback and Moon Phase. Timepiece technical records link directly into this chapter.
