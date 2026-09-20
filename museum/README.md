@@ -12,14 +12,14 @@ This directory contains the canonical public museum deployed through Railway.
 - Health check: `/healthz`
 - Default language: Arabic
 - Alternate language: English
-- Collection ledger: 43 bilingual records across 8 Maisons in `museum/dist/watches.json`
+- Collection ledger: 44 bilingual records across 8 Maisons in `museum/dist/watches.json`
 
 The older `docs/` site remains in the repository as a design/editorial reference and as the record of substantial Claude Code work. It is **not** the production V1 application and must not be deployed over `museum/dist`.
 
 ## V1 routes
 
 - `/` — The Majlis / home
-- `/collection/` — full 43-piece collection
+- `/collection/` — full 44-piece collection
 - `/exhibition/` — curated three-stop exhibition
 - `/watchmaking/` — bilingual anatomy, complications and technical-record guide
 - `/his-highness/` — H.H. Sheikh Ammar profile and leadership timeline
@@ -39,9 +39,9 @@ Owner-video language incorporated into V1:
 ## Featured three
 
 The opening selection is intentionally curated and no longer depends on JSON order:
-1. Patek Philippe Perpetual Calendar Chronograph 5270P Green
-2. Patek Philippe Nautilus Perpetual Calendar 5740
-3. Artisans de Genève La Montoya Platinum Challenge
+1. Rolex 6100 ‘Chinese Dragon’ Cloisonné Enamel
+2. Patek Philippe Perpetual Calendar Chronograph 5270P Green
+3. Patek Philippe Nautilus Perpetual Calendar 5740
 
 The exhibition route separately presents:
 - Rolex Daytona 6263 “Quraysh Hawk Dial”
@@ -59,7 +59,7 @@ npm test
 The Railway Dockerfile runs `npm test` before producing the runtime image. A failed museum test therefore blocks a V1 Railway build.
 
 Source-level V1 checks cover:
-- 43 bilingual watch records
+- 44 bilingual watch records
 - local media existence
 - duplicate IDs
 - JS syntax
