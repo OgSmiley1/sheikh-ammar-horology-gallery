@@ -15,7 +15,7 @@
     "currentIntegrationHead": "80a3eabf2fed1c3b6869f2c5785471c982673ef3",
     "releaseCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d",
     "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
-    "currentMainHead": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d"
+    "auditedProductionCodeCommit": "21b733ffc0012dc24b78b0f3b31aff77a695ae3d"
   },
   "site": {
     "root": "museum/dist",
