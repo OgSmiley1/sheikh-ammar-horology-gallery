@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "path": "museum/dist/images/sheikh/watchmaking-event.webp",
+      "sourceType": "owner-supplied",
+      "originalConversationFile": "1000094550.jpg",
+      "originalFileId": "file_00000000ae088211a79a7fa46b7f63df",
+      "editorialUse": "watchmaking chapter",
+      "publicOccurrencesRequired": 1,
+      "identityClaims": "none",
+      "transformations": [
+        "resize to 720x900",
+        "WebP web optimization"
+      ],
+      "notes": "Use once only; do not reuse as film poster, hero portrait, or repeated gallery image."
+    }
+  ]
+}

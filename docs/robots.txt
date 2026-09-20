@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ogsmiley1.github.io/sheikh-ammar-horology-gallery/sitemap.xml
+
+Disallow: /CLAUDE_CURRENT_STATE.md

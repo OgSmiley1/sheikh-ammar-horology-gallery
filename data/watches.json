@@ -87,6 +87,17 @@
       "country": "Switzerland",
       "websiteUrl": "https://www.artisansdegeneve.com",
       "displayOrder": 8
+    },
+    {
+      "nameEn": "Lederer",
+      "nameAr": "ليديرر",
+      "slug": "lederer",
+      "descriptionEn": "Bernhard Lederer's Neuchâtel atelier, devoted to a single pursuit: delivering energy to an escapement without the force ever wavering. His Central Impulse Chronometer pairs twin going trains, twin constant-force remontoirs and a dual detent escapement.",
+      "descriptionAr": "محترف برنارد ليديرر في نوشاتيل، المكرّس لغايةٍ واحدة: إيصال الطاقة إلى الميزان دون أن تتذبذب القوة لحظة. يجمع «كرونومتر الدفع المركزي» بين قطاري تروس متوازيين، وريمونتوارَي قوة ثابتة، وميزانَي ارتكاز.",
+      "foundedYear": 2017,
+      "country": "Switzerland",
+      "websiteUrl": "https://lederertimepieces.com",
+      "displayOrder": 9
     }
   ],
   "watches": [
@@ -1122,6 +1133,37 @@
       "rarityAr": "نادر للغاية",
       "isFeatured": false,
       "displayOrder": 32
+    },
+    {
+      "brand": "Lederer",
+      "referenceNumber": "CIC 39",
+      "nameEn": "Lederer CIC 39 InVerto Titanium",
+      "nameAr": "ليديرر سي آي سي ٣٩ إنفيرتو تيتانيوم",
+      "slug": "lederer-cic-39-inverto-titanium",
+      "descriptionEn": "The Central Impulse Chronometer turned to face the wearer: a Grade 5 titanium 39mm with no dial at all, reading the time directly off an inverted movement.",
+      "descriptionAr": "«كرونومتر الدفع المركزي» مُدارًا ليواجه صاحبه: علبة تيتانيوم من الدرجة الخامسة مقاس ٣٩ مم بلا ميناء، يُقرأ الوقت فيها من الحركة المقلوبة مباشرة.",
+      "storyEn": "Bernhard Lederer spent forty years on a single question: how to deliver energy to an escapement without ever letting the force waver. His answer is the Central Impulse Chronometer — twin going trains, twin constant-force remontoirs, and a dual detent escapement that releases its charge in perfect unison every fifteen seconds. In the InVerto he turned that mechanism to face the wearer: there is no dial, because the movement is the dial. This titanium 39 was presented at Dubai Watch Week in November 2025, and is allocated in its entirety until the summer of 2027.",
+      "storyAr": "أمضى برنارد ليديرر أربعين عامًا على سؤال واحد: كيف تُنقل الطاقة إلى الميزان دون أن تتذبذب القوة لحظةً واحدة. جوابه هو «كرونومتر الدفع المركزي» — قطارا تروس متوازيان، وريمونتوارا قوة ثابتة، وميزانا ارتكاز يُطلقان شحنتهما في تناغمٍ تامّ كل خمس عشرة ثانية. وفي طراز «إنفيرتو» أدار تلك الآلية لتواجه صاحبها: لا ميناء لها، لأن الحركة نفسها هي الميناء. قُدِّمت هذه النسخة التيتانيوم مقاس ٣٩ في أسبوع دبي للساعات في نوفمبر ٢٠٢٥، وهي محجوزة بالكامل حتى صيف ٢٠٢٧.",
+      "material": "Grade 5 Titanium",
+      "materialAr": "تيتانيوم من الدرجة الخامسة",
+      "dialColor": "None — inverted movement",
+      "dialColorAr": "بلا ميناء — حركة مقلوبة",
+      "caseSize": "39mm × 10.5mm",
+      "caseSizeAr": "٣٩ مم × ١٠٫٥ مم",
+      "movement": "Hand-wound, Calibre 9019, dual detent escapement with twin constant-force remontoirs",
+      "movementAr": "تعبئة يدوية، عيار ٩٠١٩، ميزانا ارتكاز مع ريمونتوارَي قوة ثابتة",
+      "powerReserve": "38 hours",
+      "complications": "Constant force, dual detent escapement",
+      "complicationsAr": "قوة ثابتة، ميزانا ارتكاز",
+      "frequency": "3 Hz (21,600 vph)",
+      "limitedEdition": true,
+      "yearReleased": 2025,
+      "retailPriceCHF": 152000,
+      "rarity": "Ultra Rare",
+      "rarityAr": "نادر للغاية",
+      "isFeatured": false,
+      "displayOrder": 33,
+      "provenanceNote": "Presented at Dubai Watch Week, November 2025. Observed worn by H.H. Sheikh Ammar bin Humaid Al Nuaimi."
     }
   ]
 }
