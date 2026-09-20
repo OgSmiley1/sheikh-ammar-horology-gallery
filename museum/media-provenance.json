@@ -13,7 +13,9 @@
         "resize to 720x900",
         "WebP web optimization"
       ],
-      "notes": "Use once only; do not reuse as film poster, hero portrait, or repeated gallery image."
+      "notes": "Use once only in the Watchmaking chapter; do not reuse as film poster, hero portrait, or repeated gallery image.",
+      "validation": "valid WebP container restored from original owner-supplied JPEG on 2026-09-20",
+      "dimensions": "900x1125"
     }
   ]
 }

@@ -27,13 +27,13 @@ if (!existsSync(path.join(root, 'dist/favicon.svg'))) fail('favicon.svg missing'
 const watchmaking = read('dist/watchmaking/index.html');
 for (const token of [
   'Timeless timepieces.',
-  'One of the few. Never one of many.',
+  'One of the few. Never one of the many.',
   'Chronograph',
   'Tourbillon',
-  'Dual Time / GMT',
+  'Dual Time & GMT',
   'Perpetual Calendar',
   'Minute Repeater',
-  'Split-seconds / Rattrapante',
+  'Split-seconds Chronograph / Rattrapante',
   'World Time',
   'A turbine is not a tourbillon.',
   'Turbine'
@@ -49,10 +49,16 @@ const sitemap = read('dist/sitemap.xml');
 for (const route of ['/collection/','/exhibition/','/watchmaking/','/his-highness/']) {
   if (!sitemap.includes(route)) fail(`sitemap missing ${route}`);
 }
-if (!existsSync(path.join(root, 'dist/images/sheikh/watchmaking-event.webp'))) fail('latest owner-supplied watchmaking image missing');
+const watchmakingImage = path.join(root, 'dist/images/sheikh/watchmaking-event.webp');
+if (!existsSync(watchmakingImage)) fail('latest owner-supplied watchmaking image missing');
+const watchmakingBytes = readFileSync(watchmakingImage);
+const watchmakingDecodable = watchmakingBytes.length > 12
+  && watchmakingBytes.subarray(0, 4).toString('latin1') === 'RIFF'
+  && watchmakingBytes.subarray(8, 12).toString('latin1') === 'WEBP';
+if (!watchmakingDecodable) fail('dist/images/sheikh/watchmaking-event.webp is not a valid WebP container');
 const allHtmlForMedia = routes.map(route => read(route)).join('\n');
 const watchmakingEventRefs = (allHtmlForMedia.match(/watchmaking-event\.webp/g) || []).length;
-if (watchmakingEventRefs !== 1) fail(`latest watchmaking image must appear exactly once, found ${watchmakingEventRefs}`);
+if (watchmakingEventRefs !== 1) fail(`latest owner-supplied watchmaking image must appear exactly once, found ${watchmakingEventRefs}`);
 
 for (const token of [
   "featuredTitle:'ثلاث قطع. ثلاث لغات للوقت.'",

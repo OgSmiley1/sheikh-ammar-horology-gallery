@@ -78,13 +78,17 @@ test('watchmaking guide is bilingual, linked and preserves editorial phrases',as
  assert.match(doc.querySelector('.craft-manifesto').textContent,/من القلائل/);
  assert.equal(doc.querySelectorAll('.anatomy-grid article').length,12);
  assert.equal(doc.querySelectorAll('.complication-list article').length,9);
+ const watchmakingBytes=readFileSync(new URL('../dist/images/sheikh/watchmaking-event.webp',import.meta.url));
+ assert.equal(watchmakingBytes.subarray(0,4).toString('latin1'),'RIFF');
+ assert.equal(watchmakingBytes.subarray(8,12).toString('latin1'),'WEBP');
  assert.equal(doc.querySelectorAll('img[src="/images/sheikh/watchmaking-event.webp"]').length,1);
  doc.querySelector('#lang').click();
  assert.equal(doc.documentElement.dir,'ltr');
  assert.equal(doc.querySelector('.craft-hero h1').textContent.trim(),'Timeless timepieces.');
- assert.match(doc.querySelector('.craft-manifesto').textContent,/One of the few\. Never one of many\./);
+ assert.match(doc.querySelector('.craft-manifesto').textContent,/One of the few\. Never one of the many\./);
  assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Tourbillon'));
- assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Dual Time / GMT'));
+ assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Dual Time & GMT'));
+ assert.ok([...doc.querySelectorAll('.complication-list h3')].some(x=>x.textContent==='Split-seconds Chronograph / Rattrapante'));
  dom.window.close();
 });
 
