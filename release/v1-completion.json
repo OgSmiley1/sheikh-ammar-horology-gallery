@@ -1,0 +1,178 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-09-19",
+  "requirements": [
+    {
+      "id": "RECOVERY-001",
+      "title": "Read Claude history and identify exact interrupted point",
+      "status": "complete",
+      "evidence": [
+        "Recovered Claude remote state and reconstructed interrupted work.",
+        "Imported the actual Railway museum subtree into the same V1 integration branch.",
+        "Canonical public source confirmed as museum/dist, not docs."
+      ]
+    },
+    {
+      "id": "TIMELINE-001",
+      "title": "Complete editorial timeline desktop and mobile",
+      "status": "implemented-awaiting-rendered-qa",
+      "evidence": [
+        "Legacy Claude timeline mobile-year defect repaired.",
+        "Canonical His Highness route retains the leadership milestone timeline.",
+        "Canonical biography years now Arabic-Indic in AR and Gregorian in EN; toggle regression passes."
+      ]
+    },
+    {
+      "id": "FOLIO-001",
+      "title": "Move editorial story before technical record on all folios",
+      "status": "complete",
+      "evidence": [
+        "33/33 legacy folios verified story-before-spec.",
+        "Canonical 42-record detail runtime renders editorial description before Technical record."
+      ]
+    },
+    {
+      "id": "PATRON-001",
+      "title": "Complete Sheikh Ammar editorial profile",
+      "status": "implemented-awaiting-rendered-qa",
+      "evidence": [
+        "Official title language retained in canonical His Highness route.",
+        "Profile and leadership milestones are bilingual.",
+        "Education/heritage/horology editorial chapters added; official biography and WAM verified 2026-09-19."
+      ]
+    },
+    {
+      "id": "AR-001",
+      "title": "Deep Arabic and RTL editorial QA",
+      "status": "implemented-awaiting-rendered-qa",
+      "evidence": [
+        "Arabic remains default.",
+        "Haute Horlogerie vocabulary updated, including صناعة الساعات الراقية / المهارة الحرفية / التعقيدات.",
+        "Rendered RTL inspection of the new branch is still blocked by Railway source pinning."
+      ]
+    },
+    {
+      "id": "VIDEO-001",
+      "title": "Address owner feedback visible in latest walkthrough video",
+      "status": "implemented-awaiting-rendered-qa",
+      "evidence": [
+        "Featured heading fixed to ثلاث قطع. ثلاث لغات للوقت.",
+        "Film heading fixed to حين تستحق اللحظة أن تطول.",
+        "Film imagery separated from the repeated story portrait.",
+        "Mobile detail sheet changed from compressed two-column specs to editorial one-column treatment."
+      ]
+    },
+    {
+      "id": "MEDIA-001",
+      "title": "Responsive image and media performance pass",
+      "status": "partial-needs-media-provenance-review",
+      "evidence": [
+        "29 existing studio plates restored, blue Royal Oak image corrected.",
+        "Missing Lederer restored: 43 records.",
+        "Four candid/collage assets still require review; see media-review.json."
+      ]
+    },
+    {
+      "id": "WATCHMAKING-001",
+      "title": "Bilingual watchmaking anatomy, complications and technical-record guide",
+      "status": "implemented-source-verified",
+      "evidence": [
+        "/watchmaking/ added and linked from all primary routes",
+        "12 watch anatomy concepts and 9 complications",
+        "Latest owner-supplied image referenced exactly once",
+        "Timepiece detail modal links to the complications guide"
+      ]
+    },
+    {
+      "id": "QA-001",
+      "title": "Complete bilingual viewport and interaction matrix",
+      "status": "source-runtime-pass-rendered-blocked",
+      "evidence": [
+        "23 Node/JSDOM/server tests passed locally.",
+        "Permanent rendered matrix added but not executed: browser cannot reach localhost, local Chromium absent/download failed."
+      ]
+    },
+    {
+      "id": "GIT-001",
+      "title": "Merge canonical V1 into main",
+      "status": "in-progress",
+      "evidence": [
+        "V1 integration branch astro/v1-completion exists.",
+        "Draft PR #26 targets main.",
+        "Exhibition feature from museum-vision was consolidated into V1 without importing its alternate skin as a separate version."
+      ]
+    },
+    {
+      "id": "RAILWAY-001",
+      "title": "Deploy main as canonical V1 on museum-current",
+      "status": "blocked-by-source-binding",
+      "evidence": [
+        "museum-vision and museum-current are pinned to old Railway source commit SHAs.",
+        "Direct redeploy reuses the old snapshot instead of fetching GitHub HEAD.",
+        "Railway AI agent source-change attempt is blocked by agent usage limit.",
+        "Creating a third V1 service is blocked by Free plan resource provision limit."
+      ]
+    },
+    {
+      "id": "RAILWAY-002",
+      "title": "Retire competing museum-vision after V1 verification",
+      "status": "pending",
+      "evidence": [
+        "Old Railway services must be retired only after the final V1 source can be promoted and live-verified."
+      ]
+    },
+    {
+      "id": "LIVE-001",
+      "title": "Verify actual Arabic, English, desktop and mobile production V1",
+      "status": "pending",
+      "evidence": [
+        "Production remains untouched; final V1 live verification has not been claimed."
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "RAILWAY-SOURCE-PIN",
+      "status": "open",
+      "detail": "Existing Railway services remain pinned to old source commit SHAs and the available direct connector cannot change a service source."
+    },
+    {
+      "id": "RAILWAY-AGENT-LIMIT",
+      "status": "open",
+      "detail": "Railway AI agent source-change operation is unavailable because its usage limit is reached."
+    },
+    {
+      "id": "RAILWAY-RESOURCE-LIMIT",
+      "status": "open",
+      "detail": "Creating a replacement V1 service is blocked by the current Railway Free plan resource provision limit."
+    },
+    {
+      "id": "GITHUB-RUNNER",
+      "status": "open-non-code",
+      "detail": "Hosted GitHub Actions jobs fail before allocating any workflow step; source-level gates pass independently."
+    },
+    {
+      "id": "RENDERED-QA",
+      "status": "open",
+      "detail": "Cloud Browser localhost rejected; local Chromium unavailable and download timed out. Matrix not executed."
+    },
+    {
+      "id": "STATIC-PATH-RECONCILIATION",
+      "status": "open",
+      "detail": "Latest user directive names docs/, while newer integration and actual Railway server use museum/dist. Preserve both until final consolidation."
+    }
+  ],
+  "currentVerification": {
+    "date": "2026-09-19",
+    "canonicalRecords": 43,
+    "sourceRuntimeTests": {
+      "passed": 23,
+      "failed": 0
+    },
+    "engineeringGate": "source-runtime-pass; rendered-pending",
+    "museumGate": "media-provenance-pending",
+    "royalPresentationGate": "rendered-review-pending",
+    "productionChanged": false,
+    "notes": "See docs/PROJECT_STATE.md for actual failures corrected and active blockers."
+  }
+}

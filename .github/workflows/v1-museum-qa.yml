@@ -1,0 +1,43 @@
+name: V1 Museum QA
+
+# Hosted GitHub jobs on this account are currently failing before the first
+# step is allocated. Keep this workflow available for manual execution once
+# runner access is restored; Railway Docker builds also run npm test.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  museum:
+    name: Museum V1 test suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout without marketplace actions
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init .
+          git remote add origin "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git"
+          git fetch --no-tags --depth=1 origin "${GITHUB_SHA}"
+          git checkout --detach FETCH_HEAD
+
+      - name: Runtime versions
+        run: |
+          node --version
+          npm --version
+
+      - name: Install museum dependencies
+        working-directory: museum
+        run: npm ci
+
+      - name: Syntax gate
+        working-directory: museum
+        run: node --check dist/app.js
+
+      - name: Museum verification and runtime tests
+        working-directory: museum
+        run: npm test

@@ -1,0 +1,198 @@
+{
+  "date": "2026-09-19",
+  "reviewed": [
+    {
+      "slug": "patek-philippe-perpetual-calendar-5270p-green",
+      "source": "docs/assets/plates/patek-nautilus-perpetual-calendar-green.webp",
+      "displayImage": "/assets/plates/patek-philippe-perpetual-calendar-5270p-green.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "artisans-de-geneve-la-montoya-platinum-challenge",
+      "source": "docs/assets/plates/artisans-de-geneve-la-montoya-custom.webp",
+      "displayImage": "/assets/plates/artisans-de-geneve-la-montoya-platinum-challenge.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "audemars-piguet-royal-oak-chronograph-ice-blue-26317bc",
+      "source": "docs/assets/plates/ap-royal-oak-chronograph-ice-blue.webp",
+      "displayImage": "/assets/plates/audemars-piguet-royal-oak-chronograph-ice-blue-26317bc.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce",
+      "source": "docs/assets/plates/ap-royal-oak-salmon-tourbillon.webp",
+      "displayImage": "/assets/plates/audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "fp-journe-tourbillon-souverain-red-dial",
+      "source": "docs/assets/plates/fp-journe-tourbillon-souverain-bleu.webp",
+      "displayImage": "/assets/plates/fp-journe-tourbillon-souverain-red-dial.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-day-date-18239-coral-red",
+      "source": "docs/assets/plates/patek-philippe-5959p-split-seconds.webp",
+      "displayImage": "/assets/plates/rolex-day-date-18239-coral-red.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-daytona-6263-quraysh-hawk",
+      "source": "docs/assets/plates/rolex-daytona-6263-quraysh.webp",
+      "displayImage": "/assets/plates/rolex-daytona-6263-quraysh-hawk.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "richard-mille-rm-68-01-tourbillon-cyril-kongo",
+      "source": "docs/assets/plates/richard-mille-rm-68-01-cyril-kongo.webp",
+      "displayImage": "/assets/plates/richard-mille-rm-68-01-tourbillon-cyril-kongo.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "richard-mille-rm-26-02-tourbillon-evil-eye",
+      "source": "docs/assets/plates/richard-mille-rm-26-02-evil-eye.webp",
+      "displayImage": "/assets/plates/richard-mille-rm-26-02-tourbillon-evil-eye.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-daytona-paul-newman-6239",
+      "source": "docs/assets/plates/rolex-daytona-6239-paul-newman.webp",
+      "displayImage": "/assets/plates/rolex-daytona-paul-newman-6239.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-daytona-paul-newman-6264-green-strap",
+      "source": "docs/assets/plates/rolex-daytona-6264.webp",
+      "displayImage": "/assets/plates/rolex-daytona-paul-newman-6264-green-strap.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb",
+      "source": "docs/assets/plates/ap-royal-oak-jumbo-white.webp",
+      "displayImage": "/assets/plates/audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-daytona-6241-john-player-special",
+      "source": "docs/assets/plates/rolex-daytona-6241-john-player-special.webp",
+      "displayImage": "/assets/plates/rolex-daytona-6241-john-player-special.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-cosmograph-daytona-abu-dhabi-aet-remould",
+      "source": "docs/assets/plates/rolex-daytona-aet-remould.webp",
+      "displayImage": "/assets/plates/rolex-cosmograph-daytona-abu-dhabi-aet-remould.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "patek-philippe-perpetual-calendar-5271p-blue-sapphire",
+      "source": "docs/assets/plates/patek-philippe-5470p.webp",
+      "displayImage": "/assets/plates/patek-philippe-perpetual-calendar-5271p-blue-sapphire.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "patek-philippe-nautilus-5711-1300a-olive-green",
+      "source": "docs/assets/plates/patek-nautilus-5711-olive-green-diamond.webp",
+      "displayImage": "/assets/plates/patek-philippe-nautilus-5711-1300a-olive-green.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-daytona-6265-black-dial",
+      "source": "docs/assets/plates/rolex-daytona-paul-newman-6265.webp",
+      "displayImage": "/assets/plates/rolex-daytona-6265-black-dial.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "patek-philippe-calatrava-6007a-gray-blue",
+      "source": "docs/assets/plates/patek-philippe-calatrava-6007a.webp",
+      "displayImage": "/assets/plates/patek-philippe-calatrava-6007a-gray-blue.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "h-moser-endeavour-tourbillon-vantablack-1804-0212",
+      "source": "docs/assets/plates/h-moser-perpetual-calendar-funky-blue.webp",
+      "displayImage": "/assets/plates/h-moser-endeavour-tourbillon-vantablack-1804-0212.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-gmt-master-ii-pepsi-meteorite-126719",
+      "source": "docs/assets/plates/rolex-gmt-master-ii-pepsi-meteorite.webp",
+      "displayImage": "/assets/plates/rolex-gmt-master-ii-pepsi-meteorite-126719.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-gmt-master-ii-pepsi-126710blro",
+      "source": "docs/assets/plates/rolex-gmt-master-pepsi-1675.webp",
+      "displayImage": "/assets/plates/rolex-gmt-master-ii-pepsi-126710blro.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "richard-mille-rm-67-02-alexis-pinturault",
+      "source": "docs/assets/plates/richard-mille-rm-67-02-alexis-pinturault.webp",
+      "displayImage": "/assets/plates/richard-mille-rm-67-02-alexis-pinturault.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "audemars-piguet-royal-oak-extra-thin-jumbo-15202",
+      "source": "docs/assets/plates/ap-royal-oak-jumbo-15202bc-white-gold.webp",
+      "displayImage": "/assets/plates/audemars-piguet-royal-oak-extra-thin-jumbo-15202.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "rolex-cosmograph-daytona-116509-white-gold",
+      "source": "docs/assets/plates/rolex-daytona-16519-white-gold.webp",
+      "displayImage": "/assets/plates/rolex-cosmograph-daytona-116509-white-gold.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "fp-journe-chronometre-a-resonance-platinum-grey",
+      "source": "docs/assets/plates/fp-journe-chronom-tre-r-sonance.webp",
+      "displayImage": "/assets/plates/fp-journe-chronometre-a-resonance-platinum-grey.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "patek-philippe-world-time-5230g-011-manama",
+      "source": "docs/assets/plates/patek-world-time-5527g-manama.webp",
+      "displayImage": "/assets/plates/patek-philippe-world-time-5230g-011-manama.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "patek-philippe-calatrava-5326g-001",
+      "source": "docs/assets/plates/patek-philippe-calatrava-5326g.webp",
+      "displayImage": "/assets/plates/patek-philippe-calatrava-5326g-001.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "fp-journe-tourbillon-souverain",
+      "source": "docs/assets/plates/fp-journe-tourbillon-souverain-mint.webp",
+      "displayImage": "/assets/plates/fp-journe-tourbillon-souverain.webp",
+      "status": "existing studio plate reused; source filename is legacy and not identity evidence"
+    },
+    {
+      "slug": "audemars-piguet-royal-oak-perpetual-calendar-blue-ceramic-26579cs",
+      "status": "wrong skeleton image replaced with existing blue-ceramic Royal Oak asset",
+      "displayImage": "/assets/watches-verified/ap-royal-oak-26579cs-blue.jpg"
+    }
+  ],
+  "remaining": [
+    {
+      "slug": "patek-philippe-nautilus-perpetual-calendar-5740",
+      "reason": "candid/collage source still requires publication and identity review"
+    },
+    {
+      "slug": "rolex-daytona-diw-motley-carbon",
+      "reason": "candid/collage source still requires publication and identity review"
+    },
+    {
+      "slug": "patek-philippe-calatrava",
+      "reason": "candid/collage source still requires publication and identity review"
+    },
+    {
+      "slug": "artisans-de-geneve-andrea-pirlo-rolex-submariner",
+      "reason": "candid/collage source still requires publication and identity review"
+    }
+  ],
+  "scope": "Visual asset consistency; does not establish ownership, licensing, dial originality, or full technical-reference verification.",
+  "unmergedRecord": "Resolved: existing Lederer folio restored to canonical ledger as record 43, preserving existing technical fields and plate; no new ownership claim."
+}
