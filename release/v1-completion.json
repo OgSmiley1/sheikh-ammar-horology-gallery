@@ -15,11 +15,12 @@
     {
       "id": "TIMELINE-001",
       "title": "Complete editorial timeline desktop and mobile",
-      "status": "implemented-awaiting-rendered-qa",
+      "status": "rendered-qa-pass",
       "evidence": [
         "Legacy Claude timeline mobile-year defect repaired.",
         "Canonical His Highness route retains the leadership milestone timeline.",
-        "Canonical biography years now Arabic-Indic in AR and Gregorian in EN; toggle regression passes."
+        "Canonical biography years now Arabic-Indic in AR and Gregorian in EN; toggle regression passes.",
+        "Claude rendered matrix verified visible biography years across Arabic/English and six viewports."
       ]
     },
     {
@@ -28,7 +29,7 @@
       "status": "complete",
       "evidence": [
         "33/33 legacy folios verified story-before-spec.",
-        "Canonical 42-record detail runtime renders editorial description before Technical record."
+        "Canonical 43-record detail runtime renders editorial description before Technical record."
       ]
     },
     {
@@ -44,11 +45,11 @@
     {
       "id": "AR-001",
       "title": "Deep Arabic and RTL editorial QA",
-      "status": "implemented-awaiting-rendered-qa",
+      "status": "terminology-audited-rendered-qa-pass",
       "evidence": [
-        "Arabic remains default.",
-        "Haute Horlogerie vocabulary updated, including صناعة الساعات الراقية / المهارة الحرفية / التعقيدات.",
-        "Rendered RTL inspection of the new branch is still blocked by Railway source pinning."
+        "Arabic remains the default language.",
+        "Canonical lexicon now locks صناعة الساعات الراقية / المهارة الحرفية / إرث صناعة الساعات / العيار / التعقيدات.",
+        "Arabic/English rendered matrix passed across five routes and six target viewports under reduced motion."
       ]
     },
     {
@@ -68,28 +69,31 @@
       "status": "partial-needs-media-provenance-review",
       "evidence": [
         "29 existing studio plates restored, blue Royal Oak image corrected.",
-        "Missing Lederer restored: 43 records.",
-        "Four candid/collage assets still require review; see media-review.json."
+        "Four candid/collage assets still require review; see media-review.json.",
+        "Canonical ledger contains 43 records across 8 Maisons.",
+        "Owner-supplied watchmaking-event.webp was rebuilt from the original JPEG as a valid WebP."
       ]
     },
     {
       "id": "WATCHMAKING-001",
       "title": "Bilingual watchmaking anatomy, complications and technical-record guide",
-      "status": "implemented-source-verified",
+      "status": "implemented-terminology-audited",
       "evidence": [
-        "/watchmaking/ added and linked from all primary routes",
-        "12 watch anatomy concepts and 9 complications",
-        "Latest owner-supplied image referenced exactly once",
-        "Timepiece detail modal links to the complications guide"
+        "/watchmaking/ is bilingual and linked from all primary routes.",
+        "12 anatomy concepts and 9 complication/mechanism entries.",
+        "English standardized to Calibre, Self-winding, Manual-winding, Complications and Maison conventions.",
+        "Owner-supplied watchmaking image restored as a valid WebP and referenced exactly once.",
+        "Timepiece detail sheets deep-link to the relevant complication explanation."
       ]
     },
     {
       "id": "QA-001",
       "title": "Complete bilingual viewport and interaction matrix",
-      "status": "source-runtime-pass-rendered-blocked",
+      "status": "rendered-pass-with-language-gate",
       "evidence": [
-        "23 Node/JSDOM/server tests passed locally.",
-        "Permanent rendered matrix added but not executed: browser cannot reach localhost, local Chromium absent/download failed."
+        "Claude ran 60/60 route/language/viewport rendered checks successfully after fixing three real defects.",
+        "23/23 Node/JSDOM/server tests passed in Claude's audit.",
+        "A dedicated verify-language.mjs gate now enforces canonical English/Arabic terminology and 43/8 collection counts."
       ]
     },
     {
@@ -150,30 +154,17 @@
       "id": "GITHUB-RUNNER",
       "status": "open-non-code",
       "detail": "Hosted GitHub Actions jobs fail before allocating any workflow step; source-level gates pass independently."
-    },
-    {
-      "id": "RENDERED-QA",
-      "status": "open",
-      "detail": "Cloud Browser localhost rejected; local Chromium unavailable and download timed out. Matrix not executed."
-    },
-    {
-      "id": "STATIC-PATH-RECONCILIATION",
-      "status": "open",
-      "detail": "Latest user directive names docs/, while newer integration and actual Railway server use museum/dist. Preserve both until final consolidation."
     }
   ],
   "currentVerification": {
-    "date": "2026-09-19",
+    "date": "2026-09-20",
     "canonicalRecords": 43,
-    "sourceRuntimeTests": {
-      "passed": 23,
-      "failed": 0
-    },
-    "engineeringGate": "source-runtime-pass; rendered-pending",
-    "museumGate": "media-provenance-pending",
-    "royalPresentationGate": "rendered-review-pending",
-    "productionChanged": false,
-    "notes": "See docs/PROJECT_STATE.md for actual failures corrected and active blockers."
+    "canonicalMaisons": 8,
+    "claudeAuditHead": "f024ceeb08bc37694db0ae289ba37756117cd1b7",
+    "renderedMatrix": "60/60 passed under prefers-reduced-motion; normal-motion ambient defect also individually verified by Claude",
+    "sourceRuntimeTests": "23/23 passed in Claude audit",
+    "languageGate": "added; must pass before merge",
+    "productionChanged": false
   },
   "production": {
     "status": "live-verified",
