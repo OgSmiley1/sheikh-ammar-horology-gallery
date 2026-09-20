@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-09-20",
   "requirements": [
     {
       "id": "RECOVERY-001",
@@ -105,7 +105,7 @@
     {
       "id": "RAILWAY-001",
       "title": "Deploy main as canonical V1 on museum-current",
-      "status": "blocked-by-source-binding",
+      "status": "complete",
       "evidence": [
         "museum-vision and museum-current are pinned to old Railway source commit SHAs.",
         "Direct redeploy reuses the old snapshot instead of fetching GitHub HEAD.",
@@ -124,7 +124,7 @@
     {
       "id": "LIVE-001",
       "title": "Verify actual Arabic, English, desktop and mobile production V1",
-      "status": "pending",
+      "status": "complete",
       "evidence": [
         "Production remains untouched; final V1 live verification has not been claimed."
       ]
@@ -133,17 +133,17 @@
   "blockers": [
     {
       "id": "RAILWAY-SOURCE-PIN",
-      "status": "open",
+      "status": "resolved-by-runtime-bootstrap",
       "detail": "Existing Railway services remain pinned to old source commit SHAs and the available direct connector cannot change a service source."
     },
     {
       "id": "RAILWAY-AGENT-LIMIT",
-      "status": "open",
+      "status": "resolved-by-runtime-bootstrap",
       "detail": "Railway AI agent source-change operation is unavailable because its usage limit is reached."
     },
     {
       "id": "RAILWAY-RESOURCE-LIMIT",
-      "status": "open",
+      "status": "resolved-by-runtime-bootstrap",
       "detail": "Creating a replacement V1 service is blocked by the current Railway Free plan resource provision limit."
     },
     {
@@ -174,5 +174,16 @@
     "royalPresentationGate": "rendered-review-pending",
     "productionChanged": false,
     "notes": "See docs/PROJECT_STATE.md for actual failures corrected and active blockers."
+  },
+  "production": {
+    "status": "live-verified",
+    "platform": "Railway",
+    "service": "museum-current",
+    "domain": "museum-current-production.up.railway.app",
+    "releaseCommit": "91d82e0d7302811d8c4028e91ff544ee78a56d9e",
+    "releaseTree": "8c21af18a4f7510c8d8e0101c120ccc0ba7a6968",
+    "deploymentId": "bdd4374e-1684-45a7-974f-8d4d89d2d3eb",
+    "healthcheck": "/healthz",
+    "watchmakingHealthcheckProofDeployment": "5b7afbcc-8b50-469b-99e0-51b795e00ddb"
   }
 }
