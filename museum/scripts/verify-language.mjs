@@ -24,7 +24,7 @@ for(const [bad,preferred] of [
   ['شخصية المينا','شخصية الميناء'],
   ['حكاية السوع','مجلس الوقت / حكاية الساعات']
 ]){
-  if(app.includes(bad)||primaryHtml.includes(bad))fail(`language gate: found Arabic museum copy "${bad}", prefer "${preferred}"`);
+  if(new RegExp(bad+'(?![ء-ي])','u').test(app)||new RegExp(bad+'(?![ء-ي])','u').test(primaryHtml))fail(`language gate: found Arabic museum copy "${bad}", prefer "${preferred}"`);
 }
 
 for(const [bad,preferred] of [
@@ -80,3 +80,4 @@ if(namedChecks.get(60028)?.nameEn!=='Chronomètre à Résonance')fail('language 
 if(namedChecks.get(90006)?.nameAr!=='FFC — عيار 1300.3')fail('language gate: Arabic calibre terminology regressed');
 if([...data.watches].some(w=>w.brand==='Artisans de Geneve'))fail('language gate: Artisans de Genève accent regressed');
 console.log('Language gate passed: English/Arabic terminology, 44 timepieces, 8 Maisons.');
+

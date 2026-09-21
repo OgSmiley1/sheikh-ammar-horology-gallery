@@ -22,3 +22,15 @@ $('#navigation').addEventListener('click',e=>{if(e.target.closest('a'))menu(fals
 document.addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
 document.addEventListener('click',e=>{if(!e.target.closest('.nav'))menu(false)});
 apply();
+
+
+function markReadingDestination(){
+  document.querySelectorAll('.chapter-nav a,.complication-index a').forEach(link=>{
+    if(link.hash===location.hash)link.setAttribute('aria-current','location');
+    else link.removeAttribute('aria-current');
+  });
+}
+const applyReadingLanguage=apply;
+apply=function(){applyReadingLanguage();document.querySelectorAll('[data-nav-ar]').forEach(nav=>nav.setAttribute('aria-label',nav.getAttribute(ar?'data-nav-ar':'data-nav-en')));markReadingDestination()};
+window.addEventListener('hashchange',markReadingDestination);
+apply();
