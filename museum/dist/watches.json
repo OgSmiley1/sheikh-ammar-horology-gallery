@@ -29,7 +29,7 @@
       "createdAt": "2025-11-10T17:13:49.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Patek Philippe",
-      "displayImage": "/assets/plates/patek-philippe-perpetual-calendar-5270p-green.webp",
+      "displayImage": "/assets/watches/patek-perpetual-calendar-green-1681913811529_800x.webp",
       "editorialAr": "ميناء أخضر عميق، وقراءة تجمع التقويم الدائم بالكرونوغراف. توازن بين حضور اللون ودقة الوظيفة في المرجع 5270P.",
       "editorialEn": "A deep green dial brings together a perpetual calendar and chronograph. Reference 5270P balances expressive colour with mechanical complexity.",
       "materialEn": "Platinum",
@@ -41,7 +41,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/patek-philippe-perpetual-calendar-5270p-green.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60022,
@@ -84,7 +87,9 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60029,
@@ -115,7 +120,7 @@
       "createdAt": "2025-11-10T17:13:53.000Z",
       "updatedAt": "2026-09-02T02:12:38.000Z",
       "brand": "Artisans de Genève",
-      "displayImage": "/assets/plates/artisans-de-geneve-la-montoya-platinum-challenge.webp",
+      "displayImage": "/assets/watches/artisans-de-geneve-la-montoya-1681913755711_800x.webp",
       "editorialAr": "قراءة شخصية لدايتونا تحمل توقيع أرتيزان دي جنيف. في مشروع «لا مونتويا»، تأخذ الحركة المكشوفة مكانها في صدارة المشهد.",
       "editorialEn": "An individual interpretation of the Daytona by Artisans de Genève. La Montoya places its openworked movement at the centre of the composition.",
       "materialEn": "Platinum",
@@ -127,7 +132,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/artisans-de-geneve-la-montoya-platinum-challenge.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60004,
@@ -158,7 +166,7 @@
       "createdAt": "2025-11-10T17:13:42.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Audemars Piguet",
-      "displayImage": "/assets/plates/audemars-piguet-royal-oak-chronograph-ice-blue-26317bc.webp",
+      "displayImage": "/assets/watches/royal-oak-chronograph-ice-blue-dial-1674203067787_800x.webp",
       "editorialAr": "يمنح الميناء الأزرق الفاتح هذا الكرونوغراف هدوءه البصري. ويضيف نقش تابيسري عمقًا يتغيّر مع الضوء.",
       "editorialEn": "An ice-blue dial gives this chronograph its quiet presence. The tapisserie texture adds depth as the light changes.",
       "materialEn": "White Gold",
@@ -170,7 +178,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/audemars-piguet-royal-oak-chronograph-ice-blue-26317bc.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60005,
@@ -201,7 +212,7 @@
       "createdAt": "2025-11-10T17:13:42.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Audemars Piguet",
-      "displayImage": "/assets/plates/audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce.webp",
+      "displayImage": "/assets/watches/royal-oak-salmon-dial-tourbillon-1674208549211_800x.webp",
       "editorialAr": "ميناء بلون السلمون، وأرقام عربية شرقية، وتوربيون عند السادسة. داخل الإطار الثماني لرويال أوك، تمنح هذه التفاصيل القطعة حضوراً خاصاً.",
       "editorialEn": "A salmon-toned dial, Eastern Arabic numerals and a tourbillon at six. Within the Royal Oak’s octagonal frame, these details give the timepiece its distinctive presence.",
       "materialEn": null,
@@ -213,7 +224,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60027,
@@ -244,7 +258,7 @@
       "createdAt": "2025-11-10T17:13:52.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "F.P. Journe",
-      "displayImage": "/assets/plates/fp-journe-tourbillon-souverain-red-dial.webp",
+      "displayImage": "/assets/watches/fp-journe-1681913766335_800x.webp",
       "editorialAr": "ميناء أحمر يقدّم التوربيون بحضور لافت. قطعة من إف. بي. جورن تدعو العين إلى متابعة الحركة قبل قراءة الوقت.",
       "editorialEn": "A red dial frames the tourbillon with a distinctive presence. An F.P. Journe timepiece that draws the eye to its movement.",
       "materialEn": "Platinum",
@@ -256,7 +270,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/fp-journe-tourbillon-souverain-red-dial.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60007,
@@ -287,7 +304,7 @@
       "createdAt": "2025-11-10T17:13:43.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-day-date-18239-coral-red.webp",
+      "displayImage": "/assets/watches/326048239_936601320719759_2450602950051524580_n-1674200911447_800x.webp",
       "editorialAr": "تمنح نافذتا اليوم والتاريخ داي ديت هويتها المعروفة. المرجع 18239 قراءة في تصميم ظل محتفظًا بشخصيته عبر الأجيال.",
       "editorialEn": "The day and date apertures define the Day-Date. Reference 18239 explores a design that has retained its character across generations.",
       "materialEn": "18k White Gold",
@@ -299,7 +316,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-day-date-18239-coral-red.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60008,
@@ -330,7 +350,7 @@
       "createdAt": "2025-11-10T17:13:43.000Z",
       "updatedAt": "2026-08-26T06:09:08.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-daytona-6263-quraysh-hawk.webp",
+      "displayImage": "/assets/watches/rolex-daytona-6263-quraysh-1674202164605_800x.webp",
       "editorialAr": "يحضر صقر قريش بين تفاصيل دايتونا الكلاسيكية، فيمنح الميناء لغة بصرية خاصة. تأمّل الرمز وعلاقته بالعدّادات والمساحات؛ كيف يبقى التكوين متزنًا، ويصبح حضوره مختلفًا.",
       "editorialEn": "The Quraysh hawk sits within the classical Daytona composition, giving the dial a particular visual identity. Consider the emblem’s relationship with its counters and spaces: a familiar balance, with a different presence.",
       "materialEn": "Stainless Steel",
@@ -342,7 +362,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": "Chronograph",
-      "complicationsAr": "كرونوغراف"
+      "complicationsAr": "كرونوغراف",
+      "detailImage": "/assets/plates/rolex-daytona-6263-quraysh-hawk.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60025,
@@ -373,7 +396,7 @@
       "createdAt": "2025-11-10T17:13:51.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Richard Mille",
-      "displayImage": "/assets/plates/richard-mille-rm-68-01-tourbillon-cyril-kongo.webp",
+      "displayImage": "/assets/watches/rm-cyril-kongo-1674216610713_800x.webp",
       "editorialAr": "تحوّل ألوان سيريل كونغو أجزاء الحركة إلى مساحة فنية. يجمع هذا التوربيون بين الرسم وميكانيكا ريتشارد ميل.",
       "editorialEn": "Cyril Kongo’s colours turn the movement into an artistic canvas. This tourbillon brings painting into Richard Mille’s mechanical world.",
       "materialEn": "Titanium",
@@ -385,7 +408,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/richard-mille-rm-68-01-tourbillon-cyril-kongo.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60024,
@@ -416,7 +442,7 @@
       "createdAt": "2025-11-10T17:13:51.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Richard Mille",
-      "displayImage": "/assets/plates/richard-mille-rm-26-02-tourbillon-evil-eye.webp",
+      "displayImage": "/assets/watches/rm26-02-1674211731885_800x.webp",
       "editorialAr": "عين تتوسط المشهد ولهب يحيط بها. يلتقي النحت والمينا الفنية بميكانيكا التوربيون في آر إم 26-02.",
       "editorialEn": "An eye framed by flame. Sculpture and enamel work meet tourbillon mechanics in the RM 26-02.",
       "materialEn": "White Gold with Gemstones",
@@ -428,7 +454,10 @@
       "powerReserveEn": "Circa 50 hours",
       "powerReserveAr": "نحو 50 ساعة",
       "complicationsEn": "Tourbillon; power-reserve display",
-      "complicationsAr": "توربيون; مؤشر احتياطي الطاقة"
+      "complicationsAr": "توربيون; مؤشر احتياطي الطاقة",
+      "detailImage": "/assets/plates/richard-mille-rm-26-02-tourbillon-evil-eye.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60011,
@@ -459,7 +488,7 @@
       "createdAt": "2025-11-10T17:13:45.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-daytona-paul-newman-6239.webp",
+      "displayImage": "/assets/watches/rolex-daytona-6239-paul-newman-1681913854878_800x.webp",
       "editorialAr": "تمنح عدّادات ميناء «بول نيومان» المرجع 6239 إيقاعه البصري. كرونوغراف تُقرأ شخصيته في تفاصيله المتباينة.",
       "editorialEn": "The Paul Newman dial gives reference 6239 its graphic rhythm. A chronograph defined by contrast and precise detail.",
       "materialEn": "Stainless Steel",
@@ -471,7 +500,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-daytona-paul-newman-6239.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60012,
@@ -502,7 +534,7 @@
       "createdAt": "2025-11-10T17:13:45.000Z",
       "updatedAt": "2026-09-06T13:02:27.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-daytona-paul-newman-6264-green-strap.webp",
+      "displayImage": "/assets/watches/rolex-daytona-6264-1681913860634_800x.webp",
       "editorialAr": "ميناء بول نيومان وسوار أخضر يضيفان نبرة لونية خاصة. يقدّم المرجع 6264 قراءة مختلفة في دايتونا الكلاسيكية.",
       "editorialEn": "A Paul Newman dial paired with a green strap. Reference 6264 offers an individual reading of the vintage Daytona.",
       "materialEn": "Stainless Steel",
@@ -514,7 +546,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-daytona-paul-newman-6264-green-strap.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60003,
@@ -545,7 +580,7 @@
       "createdAt": "2025-11-10T17:13:41.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Audemars Piguet",
-      "displayImage": "/assets/plates/audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb.webp",
+      "displayImage": "/assets/watches/royal-oak-white-1674201595442_800x.webp",
       "editorialAr": "سيراميك أبيض يحيط بميناء أزرق ونوافذ التقويم الدائم. خفة بصرية تقابل كثافة التفاصيل الميكانيكية.",
       "editorialEn": "White ceramic surrounds a blue perpetual-calendar dial. Visual lightness meets mechanical detail.",
       "materialEn": "White Ceramic",
@@ -557,7 +592,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60014,
@@ -588,7 +626,7 @@
       "createdAt": "2025-11-10T17:13:46.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-daytona-6241-john-player-special.webp",
+      "displayImage": "/assets/watches/rolex-daytona-john-player-special-1681913884253_800x.webp",
       "editorialAr": "من ملامح دايتونا التاريخية: إطار التاكيمتر وثلاثة عدّادات متوازنة. يحفظ المرجع 6241 لغة الكرونوغراف الرياضية.",
       "editorialEn": "A tachymeter bezel and three balanced counters express the historical Daytona. Reference 6241 preserves its sporting chronograph language.",
       "materialEn": null,
@@ -600,7 +638,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-daytona-6241-john-player-special.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60002,
@@ -631,7 +672,7 @@
       "createdAt": "2025-11-10T17:13:41.000Z",
       "updatedAt": "2026-08-31T23:31:12.000Z",
       "brand": "Audemars Piguet",
-      "displayImage": "/assets/watches-verified/ap-royal-oak-26579cs-blue.jpg",
+      "displayImage": "/assets/watches/278694984_1021506258792161_7433008742422839721_n-1681913736827_800x.webp",
       "editorialAr": "يستمر الأزرق من الميناء إلى العلبة والسوار السيراميكيين. وحدة لونية تمنح التقويم الدائم حضورًا معاصرًا.",
       "editorialEn": "Blue continues from the dial through the ceramic case and bracelet. A unified colour gives the perpetual calendar a contemporary presence.",
       "materialEn": "Blue Ceramic",
@@ -643,7 +684,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/watches-verified/ap-royal-oak-26579cs-blue.jpg",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60016,
@@ -674,7 +718,7 @@
       "createdAt": "2025-11-10T17:13:47.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-cosmograph-daytona-abu-dhabi-aet-remould.webp",
+      "displayImage": "/assets/watches/rolex-daytona-aet-remould-1681913876180_800x.webp",
       "editorialAr": "علبة شفافة من الياقوت الصناعي تكشف ما تحجبه الساعات عادةً. تفسير «أبوظبي» من إيه إي تي ريمولد يجعل الحركة جزءًا من العرض.",
       "editorialEn": "A transparent sapphire case reveals what a watch usually conceals. AET Remould’s Abu Dhabi interpretation makes the movement part of the display.",
       "materialEn": "Sapphire Crystal",
@@ -686,7 +730,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-cosmograph-daytona-abu-dhabi-aet-remould.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60017,
@@ -717,7 +764,7 @@
       "createdAt": "2025-11-10T17:13:47.000Z",
       "updatedAt": "2026-08-26T21:16:44.000Z",
       "brand": "Patek Philippe",
-      "displayImage": "/assets/plates/patek-philippe-perpetual-calendar-5271p-blue-sapphire.webp",
+      "displayImage": "/assets/watches/patek-1674210655318_800x.webp",
       "editorialAr": "يتواصل الأزرق بين الميناء والياقوت المحيط به. يجمع المرجع 5271/11P-010 الزخرفة الحجرية بالكرونوغراف والتقويم الدائم.",
       "editorialEn": "Blue connects the dial with its sapphire-set surround. Reference 5271/11P-010 pairs gem-setting with a perpetual-calendar chronograph.",
       "materialEn": "Platinum with Baguette Sapphires",
@@ -729,7 +776,10 @@
       "powerReserveEn": "65 hours",
       "powerReserveAr": "65 ساعة",
       "complicationsEn": "Chronograph; perpetual calendar",
-      "complicationsAr": "كرونوغراف; تقويم دائم"
+      "complicationsAr": "كرونوغراف; تقويم دائم",
+      "detailImage": "/assets/plates/patek-philippe-perpetual-calendar-5271p-blue-sapphire.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60020,
@@ -760,7 +810,7 @@
       "createdAt": "2025-11-10T17:13:49.000Z",
       "updatedAt": "2026-09-06T13:02:56.000Z",
       "brand": "Patek Philippe",
-      "displayImage": "/assets/plates/patek-philippe-nautilus-5711-1300a-olive-green.webp",
+      "displayImage": "/assets/watches/patek-nautilus-green-dial-diamond-1681913804026_800x.webp",
       "editorialAr": "ميناء أخضر زيتوني داخل خطوط نوتيلوس المعروفة. يتغيّر حضوره مع الضوء وتبقى نسب التصميم واضحة.",
       "editorialEn": "An olive-green dial within the familiar Nautilus lines. Its character changes with the light while the proportions remain unmistakable.",
       "materialEn": "Stainless Steel",
@@ -772,7 +822,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/patek-philippe-nautilus-5711-1300a-olive-green.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 120001,
@@ -815,7 +868,9 @@
       "powerReserveEn": "Approximately 72 hours",
       "powerReserveAr": "نحو 72 ساعة",
       "complicationsEn": "Chronograph; central seconds; 30-minute and 12-hour counters",
-      "complicationsAr": "كرونوغراف; ثوانٍ مركزية; عدادا 30 دقيقة و12 ساعة"
+      "complicationsAr": "كرونوغراف; ثوانٍ مركزية; عدادا 30 دقيقة و12 ساعة",
+      "imageWidth": 800,
+      "imageHeight": 815
     },
     {
       "id": 60013,
@@ -846,7 +901,7 @@
       "createdAt": "2025-11-10T17:13:46.000Z",
       "updatedAt": "2026-08-27T23:58:55.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-daytona-6265-black-dial.webp",
+      "displayImage": "/assets/watches/rolex-daytona-6265-1681913867168_800x.webp",
       "editorialAr": "ميناء أسود وعدّادات متباينة وأزرار ملولبة. يقدّم المرجع 6265 شخصية دايتونا الميكانيكية المباشرة.",
       "editorialEn": "A black dial, contrasting counters and screw-down pushers. Reference 6265 expresses the direct mechanical character of the Daytona.",
       "materialEn": "Stainless Steel",
@@ -858,7 +913,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-daytona-6265-black-dial.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60019,
@@ -889,7 +947,7 @@
       "createdAt": "2025-11-10T17:13:48.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Patek Philippe",
-      "displayImage": "/assets/plates/patek-philippe-calatrava-6007a-gray-blue.webp",
+      "displayImage": "/assets/watches/patek-calatrava-6007a-1681913797813_800x.webp",
       "editorialAr": "يمنح الأزرق الرمادي المرجع 6007A نبرته الهادئة. تفاصيل الميناء تضيف حيوية إلى خطوط كالاترافا المستديرة.",
       "editorialEn": "Grey-blue gives reference 6007A its restrained tone. Dial details bring energy to the round Calatrava form.",
       "materialEn": "Stainless Steel",
@@ -901,7 +959,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/patek-philippe-calatrava-6007a-gray-blue.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60001,
@@ -932,7 +993,7 @@
       "createdAt": "2025-11-10T17:13:40.000Z",
       "updatedAt": "2026-09-06T13:01:02.000Z",
       "brand": "H. Moser & Cie",
-      "displayImage": "/assets/plates/h-moser-endeavour-tourbillon-vantablack-1804-0212.webp",
+      "displayImage": "/assets/watches/h-moser-1674217667237_800x.webp",
       "editorialAr": "سطح فانتابلاك شديد العمق يترك للتوربيون مساحة الحضور. تأمل في التباين بين السكون والحركة.",
       "editorialEn": "A deeply absorbing Vantablack surface gives the tourbillon room to stand out. A study in stillness and movement.",
       "materialEn": "White Gold",
@@ -944,7 +1005,10 @@
       "powerReserveEn": "72 hours",
       "powerReserveAr": "72 ساعة",
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/h-moser-endeavour-tourbillon-vantablack-1804-0212.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 90001,
@@ -989,7 +1053,9 @@
       "complicationsEn": "Minute repeater with cathedral gongs; small seconds",
       "complicationsAr": "مكرّر دقائق بأجراس كاتدرائية; ثوانٍ صغيرة",
       "mediaNoteEn": "Patek Philippe official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 1284,
+      "imageHeight": 1800
     },
     {
       "id": 60010,
@@ -1020,7 +1086,7 @@
       "createdAt": "2025-11-10T17:13:44.000Z",
       "updatedAt": "2026-08-28T02:21:42.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-gmt-master-ii-pepsi-meteorite-126719.webp",
+      "displayImage": "/assets/watches/rolex-pepsi-meteorite-1681913907088_800x.webp",
       "editorialAr": "ميناء نيزكي يقابل إطار بيبسي الأحمر والأزرق. لكل نقش في سطحه طابع يضيف بُعدًا إلى وظيفة التوقيت الثاني.",
       "editorialEn": "A meteorite dial meets the red-and-blue Pepsi bezel. Its surface pattern adds another dimension to the second-time-zone display.",
       "materialEn": "18k White Gold",
@@ -1032,7 +1098,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-gmt-master-ii-pepsi-meteorite-126719.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60009,
@@ -1063,7 +1132,7 @@
       "createdAt": "2025-11-10T17:13:44.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-gmt-master-ii-pepsi-126710blro.webp",
+      "displayImage": "/assets/watches/rolex-pepsi-1674209935187_800x.webp",
       "editorialAr": "لونان على الإطار وقراءة واضحة للتوقيت. يحتفظ المرجع 126710BLRO بحضور جي إم تي ماستر II المألوف.",
       "editorialEn": "Two colours on the bezel and a clear time display. Reference 126710BLRO retains the familiar presence of the GMT-Master II.",
       "materialEn": "Oystersteel",
@@ -1075,7 +1144,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-gmt-master-ii-pepsi-126710blro.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60026,
@@ -1106,7 +1178,7 @@
       "createdAt": "2025-11-10T17:13:51.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Richard Mille",
-      "displayImage": "/assets/plates/richard-mille-rm-67-02-alexis-pinturault.webp",
+      "displayImage": "/assets/watches/rm67-02-alexis-pinturault-1681913841692_800x.webp",
       "editorialAr": "خطوط خفيفة وحركة مكشوفة في إصدار ألكسيس بينتورو. قراءة رياضية في التصميم الميكانيكي لريتشارد ميل.",
       "editorialEn": "Light lines and an exposed movement in the Alexis Pinturault edition. A sporting interpretation of Richard Mille’s mechanical design.",
       "materialEn": "Carbon TPT and Quartz TPT",
@@ -1118,7 +1190,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/richard-mille-rm-67-02-alexis-pinturault.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60006,
@@ -1149,7 +1224,7 @@
       "createdAt": "2025-11-10T17:13:43.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Audemars Piguet",
-      "displayImage": "/assets/plates/audemars-piguet-royal-oak-extra-thin-jumbo-15202.webp",
+      "displayImage": "/assets/watches/royal-oak-jumbo-15202bc-1681913914790_800x.webp",
       "editorialAr": "نسب جامبو الرشيقة وميناء بلون السلمون. يبرز المرجع 15202 قوة التصميم حين تُترك التفاصيل لتتكلم.",
       "editorialEn": "Slender Jumbo proportions and a salmon-toned dial. Reference 15202 lets the details speak for themselves.",
       "materialEn": "White Gold",
@@ -1161,7 +1236,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/audemars-piguet-royal-oak-extra-thin-jumbo-15202.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60015,
@@ -1192,7 +1270,7 @@
       "createdAt": "2025-11-10T17:13:47.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
-      "displayImage": "/assets/plates/rolex-cosmograph-daytona-116509-white-gold.webp",
+      "displayImage": "/assets/watches/rolex-daytona-white-gold-1681913899487_800x.webp",
       "editorialAr": "ذهب أبيض وميناء أزرق في تكوين معاصر لدايتونا. تتوازن عدّادات الكرونوغراف داخل الإطار المستدير.",
       "editorialEn": "White gold and a blue dial in a contemporary Daytona configuration. Chronograph counters sit in a balanced circular composition.",
       "materialEn": "18k White Gold",
@@ -1204,7 +1282,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/rolex-cosmograph-daytona-116509-white-gold.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60028,
@@ -1235,7 +1316,7 @@
       "createdAt": "2025-11-10T17:13:52.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "F.P. Journe",
-      "displayImage": "/assets/plates/fp-journe-chronometre-a-resonance-platinum-grey.webp",
+      "displayImage": "/assets/watches/fp-journe-resonance-1681913779906_800x.webp",
       "editorialAr": "قراءتان للوقت تتجاوران على ميناء واحد. تستكشف كرونومتر آ ريزونانس مبدأ الرنين في لغة إف. بي. جورن الخاصة.",
       "editorialEn": "Two time displays share one dial. The Chronomètre à Résonance explores resonance in F.P. Journe’s distinctive language.",
       "materialEn": "Platinum",
@@ -1247,7 +1328,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/fp-journe-chronometre-a-resonance-platinum-grey.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60023,
@@ -1278,7 +1362,7 @@
       "createdAt": "2025-11-10T17:13:50.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Patek Philippe",
-      "displayImage": "/assets/plates/patek-philippe-world-time-5230g-011-manama.webp",
+      "displayImage": "/assets/watches/patek-world-time-manama-1681913828669_800x.webp",
       "editorialAr": "تظهر المنامة ضمن حلقة مدن التوقيت العالمي. يحتفظ المرجع 5230G-011 بلمسة خليجية داخل عرض يجمع مناطق العالم.",
       "editorialEn": "Manama appears on the world-time city ring. Reference 5230G-011 brings a Gulf connection to a display spanning the globe.",
       "materialEn": "White Gold",
@@ -1290,7 +1374,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/patek-philippe-world-time-5230g-011-manama.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 60018,
@@ -1321,7 +1408,7 @@
       "createdAt": "2025-11-10T17:13:48.000Z",
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Patek Philippe",
-      "displayImage": "/assets/plates/patek-philippe-calatrava-5326g-001.webp",
+      "displayImage": "/assets/watches/patek-calatrava-5326g-1681913791211_800x.webp",
       "editorialAr": "ميناء رمادي ذو ملمس واضح داخل علبة مستديرة. يقدّم المرجع 5326G-001 الوقت والتاريخ بروح كالاترافا المعاصرة.",
       "editorialEn": "A textured grey dial within a round case. Reference 5326G-001 presents time and date in a contemporary Calatrava expression.",
       "materialEn": "White Gold",
@@ -1333,7 +1420,10 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": null,
-      "complicationsAr": null
+      "complicationsAr": null,
+      "detailImage": "/assets/plates/patek-philippe-calatrava-5326g-001.webp",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 90002,
@@ -1364,7 +1454,7 @@
       "createdAt": "2026-03-30T14:29:53.000Z",
       "updatedAt": "2026-08-26T05:50:23.000Z",
       "brand": "F.P. Journe",
-      "displayImage": "/assets/plates/fp-journe-tourbillon-souverain.webp",
+      "displayImage": "/assets/watches/fp-journe-tourbillon-souverain.webp",
       "editorialAr": "أخضر اليشم يجاور التوربيون في تكوين خاص من توربيون سوفران. عمق الخامة الطبيعية يقابل انتظام الحركة.",
       "editorialEn": "Green jade sits beside the tourbillon in a special Tourbillon Souverain configuration. Natural material meets the rhythm of the movement.",
       "materialEn": "Platinum",
@@ -1378,7 +1468,10 @@
       "complicationsEn": "Tourbillon; constant-force remontoire; power reserve; dead-beat seconds",
       "complicationsAr": "توربيون; آلية قوة ثابتة; احتياطي الطاقة; ثوانٍ قافزة",
       "mediaNoteEn": "Public appearance crop; product details remain source-reviewed",
-      "mediaNoteAr": "قصاصة من ظهور علني؛ تبقى تفاصيل الطراز موثقة بمصادرها المستقلة."
+      "mediaNoteAr": "قصاصة من ظهور علني؛ تبقى تفاصيل الطراز موثقة بمصادرها المستقلة.",
+      "detailImage": "/assets/plates/fp-journe-tourbillon-souverain.webp",
+      "imageWidth": 1040,
+      "imageHeight": 900
     },
     {
       "id": 90003,
@@ -1423,7 +1516,9 @@
       "complicationsEn": "Split-seconds chronograph; date; rapid winding; function selector",
       "complicationsAr": "كرونوغراف بأجزاء الثانية المنقسمة; التاريخ; تعبئة سريعة; محدّد الوظائف",
       "mediaNoteEn": "Richard Mille official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 749,
+      "imageHeight": 1000
     },
     {
       "id": 90004,
@@ -1468,7 +1563,9 @@
       "complicationsEn": "1/10th-of-a-second monopusher chronograph; small seconds",
       "complicationsAr": "كرونوغراف أحادي الضاغط لقياس عُشر الثانية; ثوانٍ صغيرة",
       "mediaNoteEn": "Patek Philippe official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 1284,
+      "imageHeight": 1800
     },
     {
       "id": 90005,
@@ -1513,7 +1610,9 @@
       "complicationsEn": null,
       "complicationsAr": null,
       "mediaNoteEn": "Richard Mille official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 749,
+      "imageHeight": 1000
     },
     {
       "id": 90006,
@@ -1558,7 +1657,9 @@
       "complicationsEn": null,
       "complicationsAr": null,
       "mediaNoteEn": "Waqt editorial product image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 1262,
+      "imageHeight": 835
     },
     {
       "id": 90007,
@@ -1603,7 +1704,9 @@
       "complicationsEn": null,
       "complicationsAr": null,
       "mediaNoteEn": "F.P. Journe official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 90008,
@@ -1648,7 +1751,9 @@
       "complicationsEn": "Minute repeater; cathedral gongs",
       "complicationsAr": "مكرّر دقائق; أجراس كاتدرائية",
       "mediaNoteEn": "Public appearance image; model association kept editorially bounded",
-      "mediaNoteAr": "صورة من ظهور علني؛ حُفظ الربط بالطراز ضمن حدود التحرير والمصدر."
+      "mediaNoteAr": "صورة من ظهور علني؛ حُفظ الربط بالطراز ضمن حدود التحرير والمصدر.",
+      "imageWidth": 640,
+      "imageHeight": 640
     },
     {
       "id": 90009,
@@ -1693,7 +1798,9 @@
       "complicationsEn": null,
       "complicationsAr": null,
       "mediaNoteEn": "Audemars Piguet official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 1500,
+      "imageHeight": 1800
     },
     {
       "id": 90010,
@@ -1738,7 +1845,9 @@
       "complicationsEn": null,
       "complicationsAr": null,
       "mediaNoteEn": "Patek Philippe official model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 1285,
+      "imageHeight": 1800
     },
     {
       "id": 150001,
@@ -1783,7 +1892,9 @@
       "complicationsEn": "Minute repeater; tourbillon",
       "complicationsAr": "مكرّر دقائق; توربيون",
       "mediaNoteEn": "Patek Philippe model image",
-      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع."
+      "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
+      "imageWidth": 1800,
+      "imageHeight": 1800
     },
     {
       "id": 180001,
@@ -1826,7 +1937,9 @@
       "powerReserveEn": null,
       "powerReserveAr": null,
       "complicationsEn": "Fully openworked movement; hand-bevelled and polished components; ultra-light balance bridge",
-      "complicationsAr": "حركة مفرّغة بالكامل; مكوّنات مشطوفة ومصقولة يدوياً; جسر ميزان فائق الخفة"
+      "complicationsAr": "حركة مفرّغة بالكامل; مكوّنات مشطوفة ومصقولة يدوياً; جسر ميزان فائق الخفة",
+      "imageWidth": 1080,
+      "imageHeight": 1350
     },
     {
       "id": 60043,
@@ -1849,7 +1962,9 @@
       "displayOrder": 43,
       "displayImage": "/assets/plates/lederer-cic-39-inverto-titanium.webp",
       "sourceRecord": "docs/watch/lederer-cic-39-inverto-titanium.html",
-      "recordStatus": "Recovered existing Claude record; external ownership and publication provenance not independently reverified."
+      "recordStatus": "Recovered existing Claude record; external ownership and publication provenance not independently reverified.",
+      "imageWidth": 800,
+      "imageHeight": 800
     },
     {
       "id": 190002,
@@ -1878,7 +1993,7 @@
       "isActive": true,
       "isFeatured": true,
       "brand": "Rolex",
-      "displayImage": "/assets/watches/rolex-6100-chinese-dragon.webp",
+      "displayImage": "/assets/watches/rolex-6100-sheikh-original.jpg",
       "editorialEn": "Gold wire draws the dragon before enamel gives it colour. In reference 6100, a 34 mm Rolex becomes a miniature field for grand-feu craft — a rare meeting of mechanics and decorative art.",
       "editorialAr": "ترسم أسلاك الذهب هيئة التنين أولاً، ثم تمنحه المينا ألوانه. في المرجع 6100 تتحول علبة رولكس بقطر 34 مم إلى مساحة مصغّرة لفن «غراند فو»؛ لقاء نادر بين الميكانيكا والفن الزخرفي.",
       "materialEn": "18K yellow gold",
@@ -1899,7 +2014,10 @@
       "sourceUrls": [
         "https://www.christies.com/en/lot/lot-6533541",
         "https://waqt.com/en/article/rolex-6100-with-chinese-dragon-cloisonne-enamel-dial"
-      ]
+      ],
+      "imageSourceUrl": "https://waqt.com/ar/article/rolex-6100-with-chinese-dragon-cloisonne-enamel-dial",
+      "imageWidth": 1262,
+      "imageHeight": 835
     }
   ]
 }

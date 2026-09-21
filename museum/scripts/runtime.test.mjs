@@ -47,7 +47,7 @@ test('V1 editorial copy, curated three and detail hierarchy',async()=>{
  const{dom,doc}=await mount('home','ar');
  assert.equal(doc.querySelector('#featured h2').textContent,'ثلاث قطع. ثلاث لغات للوقت.');
  const featured=[...doc.querySelectorAll('#featured .featured-thumb')].map(b=>b.getAttribute('aria-label'));
- assert.match(featured[0],/التقويم|كرونوغراف|5270|دائم/);
+ assert.equal(featured[0],data.watches.find(w=>w.slug==='rolex-6100-chinese-dragon-cloisonne').nameAr);
  doc.querySelector('.featured-open').click();
  assert.equal(doc.querySelector('.detail-kicker').textContent,'حكاية القطعة');
  assert.equal(doc.querySelector('.detail-tech-title').textContent,'السجل التقني');
@@ -134,5 +134,24 @@ test('historical Lederer record survives consolidation and appears in its maison
  doc.querySelector('#grid [data-watch]').click();
  assert.match(doc.querySelector('#detailTitle').textContent,/InVerto/);
  assert.match(doc.querySelector('.specs').textContent,/9019/);
+ dom.window.close();
+});
+
+
+// The archive photograph is primary; a crop must never replace its human context.
+test('Sheikh archive images remain primary and close-ups are supplementary',async()=>{
+ const{dom,doc}=await mount('collection','en');
+ for(const w of data.watches.filter(w=>w.detailImage)){
+  assert.ok(!w.displayImage.includes('/plates/'),w.slug);
+  doc.querySelector(`#grid [data-watch="${w.slug}"]`).click();
+  assert.equal(doc.querySelector('#zoom img').getAttribute('src'),w.displayImage);
+  assert.equal(doc.querySelector('.watch-closeup img').getAttribute('src'),w.detailImage);
+  assert.equal(doc.querySelector('.watch-closeup').open,false);
+  doc.querySelector('#detailClose').click();
+ }
+ const dragon=data.watches.find(w=>w.slug==='rolex-6100-chinese-dragon-cloisonne');
+ assert.equal(dragon.imageWidth,1262);assert.equal(dragon.imageHeight,835);
+ assert.equal(dragon.displayImage,'/assets/watches/rolex-6100-sheikh-original.jpg');
+ assert.ok(data.watches.every(w=>w.imageWidth>0&&w.imageHeight>0));
  dom.window.close();
 });
