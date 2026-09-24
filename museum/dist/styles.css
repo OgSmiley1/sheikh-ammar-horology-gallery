@@ -51,7 +51,7 @@ em{font-style:italic}
 .rule{display:block;width:48px;height:1px;background:currentColor;opacity:.45;margin:1.75rem auto}
 
 /* links: text with a hairline that draws on hover */
-.link{display:inline-flex;align-items:center;gap:.75rem;font:400 .78rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:.9rem 0;position:relative}
+.link{display:inline-flex;align-items:center;gap:.75rem;min-height:44px;font:400 .78rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:.9rem 0;position:relative}
 :root[lang=ar] .link{font-size:.98rem;letter-spacing:0;font-weight:500}
 .link::after{content:'';position:absolute;inset-inline:0;bottom:.35rem;height:1px;background:currentColor;transform-origin:inline-start;transition:transform .5s var(--ease)}
 .link:hover::after{transform:scaleX(.35)}
@@ -386,3 +386,71 @@ dialog.sheet::backdrop{background:rgba(15,15,14,.6)}
 }
 @media (forced-colors:active){.royal .lot,.filter[aria-pressed=true]{border:1px solid CanvasText}}
 .hall-controls button,.sheet-nav button,.sheet-bar button,.lang-toggle,.screen-trigger{min-width:44px}
+
+/* ————— signature: the opening veil ————— */
+.veil{position:fixed;inset:0;z-index:90;background:var(--night);color:var(--moon);display:grid;place-items:center;text-align:center;transition:opacity .9s var(--ease),visibility 0s .9s;cursor:pointer}
+.veil[hidden]{display:none}
+.veil.lift{opacity:0;visibility:hidden}
+.veil-mark{display:block;font:400 clamp(4.5rem,14vw,7.5rem)/1 'Amiri',serif;color:var(--gold);animation:engrave 1.6s var(--ease) both}
+.veil-rule{display:block;width:64px;height:1px;background:var(--gold);margin:1.5rem auto;transform-origin:center;animation:draw 1.2s .35s var(--ease) both}
+.veil-line{font:400 .78rem/1 'Jost',sans-serif;letter-spacing:.34em;text-transform:uppercase;color:var(--moon);margin:0;animation:rise 1s .6s var(--ease) both}
+:root[lang=ar] .veil-line{font:400 1.35rem/1.4 'Amiri',serif;letter-spacing:0}
+.veil-guest{margin:1.1rem 0 0;color:var(--gold);font:italic 300 1.2rem/1.4 var(--serif);animation:rise 1s .85s var(--ease) both}
+:root[lang=ar] .veil-guest{font-style:normal}
+@keyframes engrave{from{opacity:0;letter-spacing:.3em;filter:blur(6px)}to{opacity:1;letter-spacing:0;filter:none}}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ————— signature: the private invitation ————— */
+.invite{display:inline-block;margin:0 0 1.5rem;padding:.55rem 1.1rem;border:1px solid rgba(216,189,138,.55);color:var(--gold);font:italic 300 1.05rem/1.3 var(--serif)}
+:root[lang=ar] .invite{font-style:normal;font-size:1.1rem}
+.invite[hidden],.edition[hidden]{display:none}
+.edition{margin-top:.6rem!important;color:var(--bronze)!important;font:italic 400 1rem/1.4 var(--serif)!important}
+:root[lang=ar] .edition{font-style:normal!important}
+
+/* ————— signature: time in Ajman, in both calendars ————— */
+.timeband{display:grid;grid-template-columns:repeat(3,1fr);background:var(--night);color:var(--moon);border-top:1px solid rgba(243,239,231,.14);text-align:center}
+.timeband>div{padding:1.4rem .75rem 1.5rem;border-inline-start:1px solid rgba(243,239,231,.14)}
+.timeband>div:first-child{border-inline-start:0}
+.timeband .label{display:block;margin:0 0 .5rem;color:var(--gold)}
+.timeband time,.timeband span:not(.label){font:300 clamp(1rem,2.2vw,1.45rem)/1.3 var(--serif);color:var(--moon)}
+#bandTime{font-variant-numeric:tabular-nums;letter-spacing:.04em}
+@media (max-width:620px){.timeband{grid-template-columns:1fr}.timeband>div{border-inline-start:0;border-top:1px solid rgba(243,239,231,.14);padding:1rem}.timeband>div:first-child{border-top:0}}
+
+/* ————— signature: the piece of the day ————— */
+.today{background:var(--paper)}
+.today .royal-frame{margin:0}
+.today .royal-frame .royal img{aspect-ratio:1}
+.today-date{color:var(--ink-2);font-size:.95rem;margin-bottom:1.75rem}
+.today .story{font:300 1.25rem/1.65 var(--serif);color:var(--ink);max-width:36ch;margin:1.25rem 0 2rem}
+:root[lang=ar] .today .story{line-height:1.95}
+.today .fine{margin-top:1.5rem;color:var(--ink-2);font-size:.9rem}
+
+/* ————— signature: the collection on a single dial ————— */
+.dial-room{overflow:hidden}
+.dial-stage{position:relative;width:min(88vw,620px);aspect-ratio:1;margin:clamp(2.5rem,5vw,4rem) auto 0}
+.dial-face{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dial-face circle{fill:none;stroke:var(--gold);stroke-width:.8;opacity:.55}
+.dial-face .inner-ring{opacity:.22}
+.dial-face .pin{fill:var(--gold);stroke:none;opacity:1}
+.dial-face text{fill:var(--moon-2);font:300 9px 'Jost',sans-serif;letter-spacing:.08em;text-anchor:middle}
+:root[lang=ar] .dial-face text{font:400 11px 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
+#dialHand{stroke:var(--gold);stroke-width:1.2;transform-origin:200px 200px;transform-box:view-box;transition:transform .9s var(--ease)}
+.dial-marks{position:absolute;inset:0}
+.dial-mark{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;display:grid;place-items:center;border-radius:50%}
+.dial-mark i{display:block;width:2px;height:16px;background:var(--moon-2);transform:rotate(var(--a));transition:background .3s,height .3s,width .3s}
+.dial-mark:hover i,.dial-mark[aria-selected=true] i{background:var(--gold);width:3px;height:24px}
+.dial-mark:focus-visible{outline:1px solid var(--gold);outline-offset:-6px}
+.dial-centre{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(216,189,138,.6),0 0 0 10px rgba(15,15,14,.9),0 24px 60px rgba(0,0,0,.6);background:#000}
+.dial-centre img{width:100%;height:100%;object-fit:cover;animation:rise .6s var(--ease) both}
+.dial-caption{text-align:center;margin:2.25rem auto 0;max-width:36rem;min-height:9rem}
+.dial-caption .year{display:block;font:300 2.2rem/1 var(--serif);color:var(--gold);margin-bottom:.75rem}
+.dial-caption .maison{color:var(--gold)}
+.dial-caption h3{font-size:1.6rem;color:var(--moon);margin:.2rem 0 .4rem}
+.dial-caption .link{color:var(--moon)}
+@media (max-width:560px){.dial-mark i{height:11px}.dial-mark[aria-selected=true] i,.dial-mark:hover i{height:17px}.dial-face text{font-size:11px}}
+
+/* ————— signature: the loupe ————— */
+.loupe{position:absolute;left:0;top:0;width:180px;height:180px;border-radius:50%;pointer-events:none;opacity:0;background-repeat:no-repeat;box-shadow:0 0 0 1px rgba(255,255,255,.85),0 0 0 6px rgba(15,15,14,.35),0 18px 40px rgba(0,0,0,.45);transition:opacity .25s}
+.loupe.on{opacity:1}
+@media (hover:hover) and (pointer:fine){.zoom[aria-pressed=false]{cursor:crosshair}}

@@ -267,3 +267,73 @@ test('every record carries a royal image and a declared pairing', () => {
   }
   assert.ok(data.watches.filter(w => w.royalPairing === 'photograph').length >= 35);
 });
+
+test('a private invitation turns the visit into a one-of-one edition', async () => {
+  const { dom, doc } = await mount('home', 'ar', { hash: '?for=' + encodeURIComponent('ضيف المجلس<script>') });
+  assert.equal(doc.querySelector('#invite').hidden, false);
+  assert.equal(doc.querySelector('#invite').textContent, 'بدعوةٍ خاصة · ضيف المجلسscript');
+  assert.equal(doc.querySelector('#invite').children.length, 0, 'guest name is text, never markup');
+  assert.match(doc.querySelector('#edition').textContent, /نسخةٌ خاصة/);
+  doc.querySelector('#lang').click();
+  assert.match(doc.querySelector('#invite').textContent, /^A private invitation · /);
+  dom.window.close();
+  const plain = await mount('home', 'ar');
+  assert.equal(plain.doc.querySelector('#invite').hidden, true);
+  plain.dom.window.close();
+});
+
+test('the opening veil shows once and never under reduced motion', async () => {
+  const first = await mount('home', 'ar');
+  assert.equal(first.doc.querySelector('#veil').hidden, false);
+  first.doc.querySelector('#veil').click();
+  assert.ok(first.doc.querySelector('#veil').classList.contains('lift'));
+  first.dom.window.close();
+  const calm = await mount('home', 'ar', { reduce: true });
+  assert.equal(calm.doc.querySelector('#veil').hidden, true);
+  calm.dom.window.close();
+});
+
+test('time band reads Ajman time with Hijri and Gregorian dates', async () => {
+  const { dom, doc } = await mount('home', 'ar');
+  assert.match(doc.querySelector('#bandTime').textContent, /^[٠-٩]{2}:[٠-٩]{2}:[٠-٩]{2}$/);
+  assert.match(doc.querySelector('#bandHijri').textContent, /هـ/);
+  doc.querySelector('#lang').click();
+  assert.match(doc.querySelector('#bandTime').textContent, /^\d{2}:\d{2}:\d{2}$/);
+  assert.match(doc.querySelector('#bandHijri').textContent, /AH/);
+  dom.window.close();
+});
+
+test('piece of the day is a photograph of His Highness and opens its sheet', async () => {
+  const { dom, doc } = await mount('home', 'en');
+  const slug = doc.querySelector('#todayOpen').dataset.watch;
+  const w = data.watches.find(x => x.slug === slug);
+  assert.equal(w.royalPairing, 'photograph');
+  assert.equal(doc.querySelector('#todayFigure img').getAttribute('src'), w.royalImage);
+  doc.querySelector('#todayOpen').click();
+  assert.equal(doc.querySelector('#detailTitle').textContent, w.nameEn);
+  dom.window.close();
+});
+
+test('the collection dial places every dated piece in order and opens it', async () => {
+  const { dom, w, doc } = await mount('home', 'en');
+  const marks = [...doc.querySelectorAll('#dialMarks .dial-mark')];
+  const dated = data.watches.filter(x => Number(x.yearReleased) > 1900 || x.yearLabelEn);
+  assert.equal(marks.length, dated.length);
+  assert.equal(marks.filter(m => m.tabIndex === 0).length, 1);
+  assert.match(doc.querySelector('#dialCaption h3').textContent, /6100/, 'the dial opens on the oldest piece');
+  marks[0].dispatchEvent(new w.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+  assert.equal(marks[1].getAttribute('aria-selected'), 'true');
+  assert.match(doc.querySelector('#dialHand').style.transform, /rotate\(/);
+  const labels = [...doc.querySelectorAll('#dialDecades text')].map(t => t.textContent);
+  assert.ok(labels.length >= 3 && new Set(labels).size === labels.length);
+  marks[1].click();
+  assert.equal(doc.querySelector('#detail').open, true);
+  dom.window.close();
+});
+
+test('detail sheet carries a loupe over the royal image', async () => {
+  const { dom, doc } = await mount('collection', 'en');
+  doc.querySelector('.card').click();
+  assert.ok(doc.querySelector('#zoom .loupe'));
+  dom.window.close();
+});

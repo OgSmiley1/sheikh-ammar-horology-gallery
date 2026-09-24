@@ -26,7 +26,9 @@ const words = {
     open: 'افتح القائمة', close: 'أغلق القائمة', lang: 'Switch to English',
     pause: 'إيقاف مؤقت', resume: 'متابعة', tourPlay: 'جولة تلقائية', tourPause: 'إيقاف الجولة',
     craftGuide: 'تأمّل القطعة',
-    image: 'تعذّر عرض الصورة', ajman: 'الوقت في عجمان'
+    image: 'تعذّر عرض الصورة', ajman: 'الوقت في عجمان',
+    invite: n => `بدعوةٍ خاصة · ${n}`, edition: n => `نسخةٌ خاصة، أُعدّت خصيصاً · ${n}`,
+    todayOf: (h, g) => `${h} — ${g}`, dialOpen: 'اكتشف القطعة', dialYear: 'عام الطراز'
   },
   en: {
     all: 'All maisons', explore: 'Discover the timepiece', loading: 'Opening the collection…',
@@ -43,7 +45,9 @@ const words = {
     open: 'Open menu', close: 'Close menu', lang: 'التبديل إلى العربية',
     pause: 'Pause', resume: 'Resume', tourPlay: 'Guided tour', tourPause: 'Pause the tour',
     craftGuide: 'Look closer',
-    image: 'Image unavailable', ajman: 'Time in Ajman'
+    image: 'Image unavailable', ajman: 'Time in Ajman',
+    invite: n => `A private invitation · ${n}`, edition: n => `A private edition, prepared for ${n}`,
+    todayOf: (h, g) => `${h} — ${g}`, dialOpen: 'Discover the timepiece', dialYear: 'Model year'
   }
 };
 // Register reminders for editors: Haute Horlogerie, craftsmanship, horological heritage;
@@ -87,6 +91,7 @@ function applyLanguage() {
   if ($('#detail')?.open) renderDetail();
   updateScreenButtons();
   if (page === 'exhibition') showStop(tour.index, false);
+  tickClock();
 }
 function changeLanguage() {
   state.ar = !state.ar;
@@ -120,8 +125,28 @@ function ajmanNow() {
   const get = k => Number(parts.find(p => p.type === k)?.value || 0);
   return { h: get('hour') % 24, m: get('minute'), s: get('second') };
 }
+const fmt = (opts, cal = '') => new Intl.DateTimeFormat((state.ar ? 'ar-AE-u-nu-arab' : 'en-GB') + (cal ? (state.ar ? '-ca-' : '-u-ca-') + cal : ''), { timeZone: 'Asia/Dubai', ...opts });
+function datesToday() {
+  const now = new Date();
+  return {
+    hijri: fmt({ day: 'numeric', month: 'long', year: 'numeric' }, 'islamic-umalqura').format(now),
+    greg: fmt({ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(now)
+  };
+}
 function tickClock() {
   const { h, m, s } = ajmanNow();
+  const band = $('#bandTime');
+  if (band) {
+    const pad2 = n => String(n).padStart(2, '0'), text = `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+    band.textContent = state.ar ? indic(text) : text;
+    band.dateTime = text;
+    if (!band.dataset.lang || band.dataset.lang !== String(state.ar) || s === 0) {
+      const d = datesToday();
+      $('#bandHijri').textContent = d.hijri;
+      $('#bandDate').textContent = d.greg;
+      band.dataset.lang = String(state.ar);
+    }
+  }
   const pad = n => String(n).padStart(2, '0');
   const label = $('#ajmanTime');
   if (label) label.textContent = `${t('ajman')} · ${state.ar ? indic(pad(h) + ':' + pad(m)) : pad(h) + ':' + pad(m)}`;
@@ -178,7 +203,7 @@ function renderMaisons() {
   list.innerHTML = [...new Set(state.all.map(w => w.brand))].map(b => `<li>${esc(state.ar ? maisonAr[b] || b : b)}</li>`).join('');
 }
 function renderAll() {
-  renderFilters(); renderGrid(); renderFeatured(); renderMaisons(); buildFrames();
+  renderFilters(); renderGrid(); renderFeatured(); renderMaisons(); buildFrames(); renderToday(); renderDial(); renderGuest();
   observeReveals();
 }
 
@@ -243,6 +268,7 @@ ${complicationLinks(w)}
   $('#detailPrev').disabled = i <= 0;
   $('#detailNext').disabled = i < 0 || i >= state.list.length - 1;
   const zoom = $('#zoom');
+  attachLoupe(zoom);
   zoom.onclick = e => {
     const on = zoom.getAttribute('aria-pressed') !== 'true';
     if (on && e.clientX) {
@@ -418,6 +444,138 @@ function exhibitionStartIndex() {
   return i < 0 ? 0 : i;
 }
 
+// ————— a private invitation: ?for=Name makes this a one-of-one edition —————
+function guestName() {
+  let name = '';
+  try { name = new URLSearchParams(location.search).get('for') || ''; } catch {}
+  name = name.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 60);
+  try {
+    if (name) sessionStorage.setItem('majlis-guest', name);
+    else name = sessionStorage.getItem('majlis-guest') || '';
+  } catch {}
+  return name;
+}
+const guest = guestName();
+function renderGuest() {
+  if (!guest) return;
+  for (const [id, key] of [['#invite', 'invite'], ['#edition', 'edition'], ['#veilGuest', 'invite']]) {
+    const el = $(id);
+    if (el) { el.textContent = t(key)(guest); el.hidden = false; }
+  }
+}
+function initVeil() {
+  const veil = $('#veil');
+  if (!veil) return;
+  let seen = false;
+  try { seen = sessionStorage.getItem('majlis-veil') === '1'; sessionStorage.setItem('majlis-veil', '1'); } catch {}
+  if (seen || reduceMotion()) return;
+  veil.hidden = false;
+  veil.setAttribute('aria-hidden', 'true');
+  const lift = () => { veil.classList.add('lift'); setTimeout(() => { veil.hidden = true; }, 900); };
+  const timer = setTimeout(lift, 2000);
+  veil.addEventListener('click', () => { clearTimeout(timer); lift(); }, { once: true });
+  document.addEventListener('keydown', () => { clearTimeout(timer); lift(); }, { once: true });
+}
+
+// ————— the piece of the day: one photograph of His Highness per Gulf day —————
+function pieceOfTheDay() {
+  const pool = state.all.filter(w => w.royalPairing === 'photograph').sort((a, b) => a.slug.localeCompare(b.slug));
+  if (!pool.length) return null;
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Dubai' }).format(new Date());
+  const day = Math.floor(Date.parse(parts + 'T00:00:00Z') / 86400000);
+  return pool[((day % pool.length) + pool.length) % pool.length];
+}
+function renderToday() {
+  const fig = $('#todayFigure');
+  if (!fig || state.loading) return;
+  const w = pieceOfTheDay();
+  if (!w) return;
+  fig.innerHTML = royalFigure(w, { loading: 'lazy' });
+  const d = datesToday();
+  $('#todayDate').textContent = t('todayOf')(d.hijri, d.greg);
+  $('#todayMaison').textContent = maison(w);
+  $('#todayTitle').textContent = local(w, 'name');
+  $('#todayRef').textContent = reference(w);
+  $('#todayStory').textContent = local(w, 'editorial');
+  $('#todayOpen').dataset.watch = w.slug;
+}
+
+// ————— the collection on a single dial —————
+// Every dated piece becomes an index, in chronological order, clockwise from twelve.
+const dial = { pieces: [], index: 0 };
+const yearOf = w => Number(w.yearReleased) || (w.yearLabelEn ? parseInt(w.yearLabelEn, 10) + 5 : 0);
+function renderDial() {
+  const marks = $('#dialMarks');
+  if (!marks || state.loading) return;
+  dial.pieces = state.all.filter(w => yearOf(w) > 1900).sort((a, b) => yearOf(a) - yearOf(b) || a.slug.localeCompare(b.slug));
+  const n = dial.pieces.length;
+  const angle = i => i * 360 / n;
+  marks.innerHTML = dial.pieces.map((w, i) => {
+    const a = angle(i) * Math.PI / 180, r = 44;
+    return `<button type="button" role="option" class="dial-mark" data-dial="${i}" aria-selected="${i === dial.index}" tabindex="${i === dial.index ? 0 : -1}" aria-label="${esc(local(w, 'name') + ' — ' + (w.yearReleased || local(w, 'yearLabel')))}" style="left:${(50 + r * Math.sin(a)).toFixed(2)}%;top:${(50 - r * Math.cos(a)).toFixed(2)}%;--a:${angle(i).toFixed(2)}deg"><i aria-hidden="true"></i></button>`;
+  }).join('');
+  const decades = $('#dialDecades');
+  const seen = new Set();
+  let lastLabel = -Infinity;
+  decades.innerHTML = dial.pieces.map((w, i) => {
+    const dec = Math.floor(yearOf(w) / 10) * 10;
+    if (seen.has(dec)) return '';
+    seen.add(dec);
+    // numerals only where there is room: never two within 20° of each other
+    if (angle(i) - lastLabel < 20) return '';
+    lastLabel = angle(i);
+    const a = angle(i) * Math.PI / 180;
+    return `<text x="${(200 + 128 * Math.sin(a)).toFixed(1)}" y="${(200 - 128 * Math.cos(a) + 4).toFixed(1)}">${state.ar ? indic(dec) : dec}</text>`;
+  }).join('');
+  selectDial(dial.index, false);
+}
+function selectDial(i, focus = true) {
+  const n = dial.pieces.length;
+  if (!n) return;
+  dial.index = (i + n) % n;
+  const w = dial.pieces[dial.index];
+  $$('#dialMarks .dial-mark').forEach((b, k) => { b.setAttribute('aria-selected', String(k === dial.index)); b.tabIndex = k === dial.index ? 0 : -1; });
+  if (focus) $(`#dialMarks [data-dial="${dial.index}"]`)?.focus({ preventScroll: true });
+  const hand = $('#dialHand');
+  if (hand) hand.style.transform = `rotate(${(dial.index * 360 / n).toFixed(2)}deg)`;
+  $('#dialCentre').innerHTML = `<img src="${esc(royalImage(w))}" alt="" width="800" height="800" loading="lazy">`;
+  const year = w.yearReleased ? (state.ar ? indic(w.yearReleased) : w.yearReleased) : local(w, 'yearLabel');
+  $('#dialCaption').innerHTML = `<span class="year">${esc(year)}</span><span class="maison">${esc(maison(w))}</span><h3>${esc(local(w, 'name'))}</h3><button type="button" class="link" data-watch="${esc(w.slug)}"><span>${esc(t('dialOpen'))}</span><span class="arrow" aria-hidden="true">→</span></button>`;
+}
+function initDial() {
+  const marks = $('#dialMarks');
+  if (!marks) return;
+  marks.addEventListener('pointerover', e => { const b = e.target.closest('[data-dial]'); if (b) selectDial(Number(b.dataset.dial), false); });
+  marks.addEventListener('focusin', e => { const b = e.target.closest('[data-dial]'); if (b && Number(b.dataset.dial) !== dial.index) selectDial(Number(b.dataset.dial), false); });
+  marks.addEventListener('keydown', e => {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (step) { e.preventDefault(); e.stopPropagation(); selectDial(dial.index + step); }
+    if (e.key === 'Home') { e.preventDefault(); selectDial(0); }
+    if (e.key === 'End') { e.preventDefault(); selectDial(dial.pieces.length - 1); }
+  });
+  marks.addEventListener('click', e => { const b = e.target.closest('[data-dial]'); if (b) { e.stopPropagation(); openDetail(dial.pieces[Number(b.dataset.dial)]); } });
+}
+
+// ————— the loupe: a jeweller's lens over the royal image —————
+function attachLoupe(zoom) {
+  const img = zoom.querySelector('img');
+  const lens = document.createElement('span');
+  lens.className = 'loupe'; lens.setAttribute('aria-hidden', 'true');
+  zoom.append(lens);
+  const power = 2.6;
+  zoom.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse' || zoom.getAttribute('aria-pressed') === 'true') { lens.classList.remove('on'); return; }
+    const r = zoom.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, size = lens.offsetWidth || 180;
+    lens.style.left = (x - size / 2) + 'px';
+    lens.style.top = (y - size / 2) + 'px';
+    lens.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+    lens.style.backgroundSize = `${r.width * power}px ${r.height * power}px`;
+    lens.style.backgroundPosition = `${-(x * power - size / 2)}px ${-(y * power - size / 2)}px`;
+    lens.classList.add('on');
+  });
+  zoom.addEventListener('pointerleave', () => lens.classList.remove('on'));
+}
+
 // ————— scroll reveals —————
 let revealObserver;
 function observeReveals() {
@@ -487,5 +645,7 @@ initExhibition();
 applyLanguage();
 tickClock();
 setInterval(tickClock, 1000);
+initDial();
+initVeil();
 if (!$('#grid') && !$('#featuredGrid') && !$('#frames') && page !== 'exhibition') state.loading = false;
 else load();

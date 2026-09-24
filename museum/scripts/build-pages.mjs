@@ -63,6 +63,7 @@ ${b('a', 'انتقل إلى المحتوى', 'Skip to content', 'class="skip" hr
 <figure class="menu-figure"><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="" width="891" height="768" loading="lazy"></figure>
 <div class="menu-foot">${b('span', 'عجمان · الإمارات العربية المتحدة', 'Ajman · United Arab Emirates')}<span id="ajmanTime" dir="ltr"></span></div>
 </div>
+${page === 'home' ? `<div class="veil" id="veil" hidden><div class="veil-inner"><span class="veil-mark" aria-hidden="true">ع</span><span class="veil-rule" aria-hidden="true"></span><p class="veil-line" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</p><p class="veil-guest" id="veilGuest" hidden></p></div></div>` : ''}
 <main id="main" tabindex="-1">
 ${main}
 </main>
@@ -71,6 +72,7 @@ ${main}
 ${b('span', 'مجلس الوقت · عجمان', 'The Majlis of Time · Ajman', 'class="sub"')}
 <nav aria-label="روابط التذييل" data-label-ar="روابط التذييل" data-label-en="Footer links">${foot}</nav>
 ${b('p', 'مجموعة خاصة تُعرض للتأمّل، لا للبيع.', 'A private collection, shown for contemplation — never for sale.')}
+<p class="edition" id="edition" hidden></p>
 </footer>
 ${sheet ? `<dialog class="sheet" id="detail" aria-labelledby="detailTitle">
 <div class="sheet-bar">${b('p', 'من المجموعة', 'From the collection', 'class="label"')}<div class="actions"><button id="detailLang" lang="en" aria-label="Switch to English">EN</button><button id="detailClose" class="close" aria-label="إغلاق" data-label-ar="إغلاق" data-label-en="Close">×</button></div></div>
@@ -92,12 +94,19 @@ const home = shell({
   main: `<section class="hero" aria-labelledby="heroTitle">
 <figure class="hero-media"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-ar="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-en="His Highness Sheikh Ammar bin Humaid Al Nuaimi" width="840" height="1280" fetchpriority="high"></figure>
 <div class="hero-copy">
+<p class="invite" id="invite" hidden></p>
 ${b('p', 'عجمان · الإمارات العربية المتحدة', 'Ajman · United Arab Emirates', 'class="label"')}
 ${b('h1', 'للوقت قدر.<em>وللساعات حكاية.</em>', 'Time has its measure.<em>Every timepiece, its story.</em>', 'class="display" id="heroTitle"')}
 ${b('p', 'مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان — في مجلسٍ يُحتفى فيه بالصنعة، ويُحفظ فيه الوقت.', 'The horological collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman — a majlis where craft is honoured and time is kept.', 'class="standfirst"')}
 <a class="button" href="/collection/">${b('span', 'اكتشف المجموعة', 'Discover the collection')}</a>
 <span class="scroll-cue" aria-hidden="true"></span>
 </div>
+</section>
+
+<section class="timeband" aria-label="الوقت في عجمان" data-label-ar="الوقت في عجمان" data-label-en="Time in Ajman">
+<div>${b('span', 'الوقت في عجمان', 'Time in Ajman', 'class="label"')}<time id="bandTime" dir="ltr"></time></div>
+<div>${b('span', 'التاريخ الهجري', 'Hijri date', 'class="label"')}<span id="bandHijri"></span></div>
+<div>${b('span', 'التاريخ الميلادي', 'Gregorian date', 'class="label"')}<span id="bandDate"></span></div>
 </section>
 
 <section class="section center" aria-labelledby="introTitle">
@@ -107,6 +116,22 @@ ${b('p', 'ليست المجموعة عرضاً للاقتناء، بل سجلٌ�
 <a class="link" href="/his-highness/">${b('span', 'سيرة سموّه', 'His Highness')}${arrow}</a>
 </section>
 
+<section class="section today" id="today" aria-labelledby="todayTitle">
+<div class="split">
+<figure class="royal-frame" id="todayFigure"></figure>
+<div class="words">
+${b('p', 'قطعة اليوم', 'The piece of the day', 'class="label"')}
+<p class="today-date" id="todayDate"></p>
+<span class="maison" id="todayMaison"></span>
+<h2 class="title" id="todayTitle"></h2>
+<span class="ref" id="todayRef" dir="ltr"></span>
+<p class="story" id="todayStory"></p>
+<button type="button" class="button" id="todayOpen">${b('span', 'اكتشف القطعة', 'Discover the timepiece')}</button>
+${b('p', 'تتبدّل كل يوم مع شروق الشمس على عجمان.', 'It changes every day with the sunrise over Ajman.', 'class="fine"')}
+</div>
+</div>
+</section>
+
 <section class="section white" id="featured" aria-labelledby="featuredTitle">
 <div class="inner center">
 ${b('p', 'مختارات المجلس', 'Selected by the Majlis', 'class="label"')}
@@ -114,6 +139,20 @@ ${b('h2', 'ثلاث قطع. ثلاث لغات للوقت.', 'Three Timepieces. T
 ${b('p', 'شخصية الميناء، وذكاء الحركة، وحضور التصميم — ثلاث قراءات في المهارة الحرفية وإرث صناعة الساعات.', 'Dial character, mechanical ingenuity and presence of design — three readings of craftsmanship and horological heritage.', 'class="body-2" style="margin-inline:auto"')}
 </div>
 <div class="featured-grid" id="featuredGrid" aria-busy="true"></div>
+</section>
+
+<section class="section night dial-room" id="dialRoom" aria-labelledby="dialTitle">
+<div class="inner center">
+${b('p', 'المجموعة على ميناءٍ واحد', 'The collection on a single dial', 'class="label"')}
+${b('h2', 'سبعة عقود، تدور حول سموّه.', 'Seven decades, turning around His Highness.', 'class="title" id="dialTitle"')}
+${b('p', 'كل مؤشرٍ على هذا الميناء قطعةٌ من المجموعة، في موضع عام طرازها. مرّر أو تنقّل بالأسهم، واختر ما يستوقفك.', 'Every index on this dial is a timepiece from the collection, set at the year of its model. Hover or use the arrow keys, and choose what holds your eye.', 'class="body-2" style="margin-inline:auto"')}
+</div>
+<div class="dial-stage" dir="ltr">
+<svg class="dial-face" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="196" /><circle cx="200" cy="200" r="150" class="inner-ring"/><g id="dialDecades"></g><line id="dialHand" x1="200" y1="200" x2="200" y2="30"/><circle cx="200" cy="200" r="3.5" class="pin"/></svg>
+<div class="dial-marks" id="dialMarks" role="listbox" aria-orientation="horizontal" aria-label="المجموعة على الميناء" data-label-ar="المجموعة على الميناء" data-label-en="The collection on the dial"></div>
+<div class="dial-centre" id="dialCentre"></div>
+</div>
+<div class="dial-caption" id="dialCaption" aria-live="polite"></div>
 </section>
 
 <section class="screening" id="film" aria-labelledby="filmTitle">

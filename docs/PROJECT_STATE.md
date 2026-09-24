@@ -23,6 +23,16 @@ photography). Owner directive, now enforced by the test gates:
    of text is checked in the browser by `verify-rendered.mjs`.
 5. **Text never crosses His Highness's portrait** (checked in the rendered gate).
 
+Signature features (home):
+- **Private invitation** — `/?for=<name>` turns the visit into a one-of-one edition: the
+  name appears in the opening veil, the hero and the colophon (kept for the session, text only).
+- **Opening veil** — the ع monogram engraves itself once per session; never under reduced motion.
+- **Time in Ajman** — live, with the Umm al-Qura Hijri date and the Gregorian date.
+- **Piece of the day** — rotates each Gulf day through the pieces photographed with H.H.
+- **The collection on a single dial** — every dated piece is an index in chronological order;
+  the hand follows hover/arrow keys; the centre shows His Highness with the piece.
+- **The loupe** — a jeweller's lens over the royal image in the detail sheet (fine pointers).
+
 Pages are generated from one template: edit `museum/scripts/build-pages.mjs`, then
 `node scripts/build-pages.mjs`. Runtime is one file, `museum/dist/app.js`.
 Retired: `vision.js`, `vision.css`, `reading.css`, `watchmaking.js`.

@@ -30,16 +30,24 @@
 <figure class="menu-figure"><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="" width="891" height="768" loading="lazy"></figure>
 <div class="menu-foot"><span data-ar="عجمان · الإمارات العربية المتحدة" data-en="Ajman · United Arab Emirates">عجمان · الإمارات العربية المتحدة</span><span id="ajmanTime" dir="ltr"></span></div>
 </div>
+<div class="veil" id="veil" hidden><div class="veil-inner"><span class="veil-mark" aria-hidden="true">ع</span><span class="veil-rule" aria-hidden="true"></span><p class="veil-line" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</p><p class="veil-guest" id="veilGuest" hidden></p></div></div>
 <main id="main" tabindex="-1">
 <section class="hero" aria-labelledby="heroTitle">
 <figure class="hero-media"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-ar="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-en="His Highness Sheikh Ammar bin Humaid Al Nuaimi" width="840" height="1280" fetchpriority="high"></figure>
 <div class="hero-copy">
+<p class="invite" id="invite" hidden></p>
 <p class="label" data-ar="عجمان · الإمارات العربية المتحدة" data-en="Ajman · United Arab Emirates">عجمان · الإمارات العربية المتحدة</p>
 <h1 class="display" id="heroTitle" data-ar="للوقت قدر.&lt;em>وللساعات حكاية.&lt;/em>" data-en="Time has its measure.&lt;em>Every timepiece, its story.&lt;/em>" data-html>للوقت قدر.<em>وللساعات حكاية.</em></h1>
 <p class="standfirst" data-ar="مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان — في مجلسٍ يُحتفى فيه بالصنعة، ويُحفظ فيه الوقت." data-en="The horological collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman — a majlis where craft is honoured and time is kept.">مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان — في مجلسٍ يُحتفى فيه بالصنعة، ويُحفظ فيه الوقت.</p>
 <a class="button" href="/collection/"><span data-ar="اكتشف المجموعة" data-en="Discover the collection">اكتشف المجموعة</span></a>
 <span class="scroll-cue" aria-hidden="true"></span>
 </div>
+</section>
+
+<section class="timeband" aria-label="الوقت في عجمان" data-label-ar="الوقت في عجمان" data-label-en="Time in Ajman">
+<div><span class="label" data-ar="الوقت في عجمان" data-en="Time in Ajman">الوقت في عجمان</span><time id="bandTime" dir="ltr"></time></div>
+<div><span class="label" data-ar="التاريخ الهجري" data-en="Hijri date">التاريخ الهجري</span><span id="bandHijri"></span></div>
+<div><span class="label" data-ar="التاريخ الميلادي" data-en="Gregorian date">التاريخ الميلادي</span><span id="bandDate"></span></div>
 </section>
 
 <section class="section center" aria-labelledby="introTitle">
@@ -49,6 +57,22 @@
 <a class="link" href="/his-highness/"><span data-ar="سيرة سموّه" data-en="His Highness">سيرة سموّه</span><span class="arrow" aria-hidden="true">→</span></a>
 </section>
 
+<section class="section today" id="today" aria-labelledby="todayTitle">
+<div class="split">
+<figure class="royal-frame" id="todayFigure"></figure>
+<div class="words">
+<p class="label" data-ar="قطعة اليوم" data-en="The piece of the day">قطعة اليوم</p>
+<p class="today-date" id="todayDate"></p>
+<span class="maison" id="todayMaison"></span>
+<h2 class="title" id="todayTitle"></h2>
+<span class="ref" id="todayRef" dir="ltr"></span>
+<p class="story" id="todayStory"></p>
+<button type="button" class="button" id="todayOpen"><span data-ar="اكتشف القطعة" data-en="Discover the timepiece">اكتشف القطعة</span></button>
+<p class="fine" data-ar="تتبدّل كل يوم مع شروق الشمس على عجمان." data-en="It changes every day with the sunrise over Ajman.">تتبدّل كل يوم مع شروق الشمس على عجمان.</p>
+</div>
+</div>
+</section>
+
 <section class="section white" id="featured" aria-labelledby="featuredTitle">
 <div class="inner center">
 <p class="label" data-ar="مختارات المجلس" data-en="Selected by the Majlis">مختارات المجلس</p>
@@ -56,6 +80,20 @@
 <p class="body-2" style="margin-inline:auto" data-ar="شخصية الميناء، وذكاء الحركة، وحضور التصميم — ثلاث قراءات في المهارة الحرفية وإرث صناعة الساعات." data-en="Dial character, mechanical ingenuity and presence of design — three readings of craftsmanship and horological heritage.">شخصية الميناء، وذكاء الحركة، وحضور التصميم — ثلاث قراءات في المهارة الحرفية وإرث صناعة الساعات.</p>
 </div>
 <div class="featured-grid" id="featuredGrid" aria-busy="true"></div>
+</section>
+
+<section class="section night dial-room" id="dialRoom" aria-labelledby="dialTitle">
+<div class="inner center">
+<p class="label" data-ar="المجموعة على ميناءٍ واحد" data-en="The collection on a single dial">المجموعة على ميناءٍ واحد</p>
+<h2 class="title" id="dialTitle" data-ar="سبعة عقود، تدور حول سموّه." data-en="Seven decades, turning around His Highness.">سبعة عقود، تدور حول سموّه.</h2>
+<p class="body-2" style="margin-inline:auto" data-ar="كل مؤشرٍ على هذا الميناء قطعةٌ من المجموعة، في موضع عام طرازها. مرّر أو تنقّل بالأسهم، واختر ما يستوقفك." data-en="Every index on this dial is a timepiece from the collection, set at the year of its model. Hover or use the arrow keys, and choose what holds your eye.">كل مؤشرٍ على هذا الميناء قطعةٌ من المجموعة، في موضع عام طرازها. مرّر أو تنقّل بالأسهم، واختر ما يستوقفك.</p>
+</div>
+<div class="dial-stage" dir="ltr">
+<svg class="dial-face" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="196" /><circle cx="200" cy="200" r="150" class="inner-ring"/><g id="dialDecades"></g><line id="dialHand" x1="200" y1="200" x2="200" y2="30"/><circle cx="200" cy="200" r="3.5" class="pin"/></svg>
+<div class="dial-marks" id="dialMarks" role="listbox" aria-orientation="horizontal" aria-label="المجموعة على الميناء" data-label-ar="المجموعة على الميناء" data-label-en="The collection on the dial"></div>
+<div class="dial-centre" id="dialCentre"></div>
+</div>
+<div class="dial-caption" id="dialCaption" aria-live="polite"></div>
 </section>
 
 <section class="screening" id="film" aria-labelledby="filmTitle">
@@ -105,6 +143,7 @@
 <span class="sub" data-ar="مجلس الوقت · عجمان" data-en="The Majlis of Time · Ajman">مجلس الوقت · عجمان</span>
 <nav aria-label="روابط التذييل" data-label-ar="روابط التذييل" data-label-en="Footer links"><a href="/" data-ar="المجلس" data-en="The Majlis">المجلس</a><a href="/collection/" data-ar="المجموعة" data-en="The Collection">المجموعة</a><a href="/exhibition/" data-ar="قاعة العرض" data-en="The Exhibition">قاعة العرض</a><a href="/his-highness/" data-ar="صاحب السمو" data-en="His Highness">صاحب السمو</a><a href="/watchmaking/" data-ar="فن صناعة الساعات" data-en="Watchmaking">فن صناعة الساعات</a></nav>
 <p data-ar="مجموعة خاصة تُعرض للتأمّل، لا للبيع." data-en="A private collection, shown for contemplation — never for sale.">مجموعة خاصة تُعرض للتأمّل، لا للبيع.</p>
+<p class="edition" id="edition" hidden></p>
 </footer>
 <dialog class="sheet" id="detail" aria-labelledby="detailTitle">
 <div class="sheet-bar"><p class="label" data-ar="من المجموعة" data-en="From the collection">من المجموعة</p><div class="actions"><button id="detailLang" lang="en" aria-label="Switch to English">EN</button><button id="detailClose" class="close" aria-label="إغلاق" data-label-ar="إغلاق" data-label-en="Close">×</button></div></div>
