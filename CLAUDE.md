@@ -1,3 +1,5 @@
+> **Royal redesign (24 September 2026):** the owner now requires every timepiece to be shown *with* His Highness — this supersedes §3's "only image of His Highness" rule. See `docs/PROJECT_STATE.md` for the rules the test gates enforce.
+>
 > **Current V1 continuation (19 September 2026):** read `docs/PROJECT_STATE.md` first. Historical GitHub Pages, counts and completed-QA statements below are not current release evidence. Railway is the intended sole public host; no final V1 deployment is verified. The newer integration currently serves static `museum/dist/`; the owner's requested `docs/` path still needs reconciliation. Do not discard either tree.
 
 # CLAUDE.md — Sheikh Ammar Royal Horology Collection
