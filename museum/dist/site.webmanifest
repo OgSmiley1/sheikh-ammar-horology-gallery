@@ -1,11 +1,11 @@
 {
   "name": "Sheikh Ammar Horology Museum",
   "short_name": "Majlis of Time",
-  "description": "A bilingual horology museum in Ajman exploring exceptional timepieces, craftsmanship and watchmaking.",
+  "description": "The horological collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman — a bilingual private museum.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b100d",
-  "theme_color": "#111712",
+  "background_color": "#f6f3ee",
+  "theme_color": "#f6f3ee",
   "lang": "ar",
   "icons": [
     {

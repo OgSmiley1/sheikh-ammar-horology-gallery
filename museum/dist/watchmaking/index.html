@@ -1,159 +1,145 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#111712">
-  <meta name="description" content="فن صناعة الساعات — دليل ثنائي اللغة إلى أجزاء الساعة والتعقيدات في متحف الشيخ عمار للساعات.">
-  <title>فن صناعة الساعات | متحف الشيخ عمار</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://museum-current-production.up.railway.app/watchmaking/">
-  <link rel="stylesheet" href="/styles.css">
-  <script defer src="/watchmaking.js"></script>
-<link rel="stylesheet" href="/reading.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f3ee">
+<meta name="description" content="فن صناعة الساعات — دليل ثنائي اللغة إلى تشريح الساعة والتعقيدات وقراءة السجل التقني.">
+<title data-ar="فن صناعة الساعات | مجلس الوقت" data-en="Watchmaking | The Majlis of Time">فن صناعة الساعات | مجلس الوقت</title>
+<link rel="canonical" href="https://museum-current-production.up.railway.app/watchmaking/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:title" content="فن صناعة الساعات | مجلس الوقت">
+<meta property="og:description" content="فن صناعة الساعات — دليل ثنائي اللغة إلى تشريح الساعة والتعقيدات وقراءة السجل التقني.">
+<meta property="og:image" content="https://museum-current-production.up.railway.app/images/sheikh/sheikh-portrait-1.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script defer src="/app.js"></script>
 </head>
-<body class="watchmaking-page">
-<a class="skip" href="#watchmakingMain" data-ar="انتقل إلى المحتوى" data-en="Skip to content">انتقل إلى المحتوى</a>
-
-<header class="nav">
-  <a class="identity" href="/">
-    <span class="wordmark" data-ar="الشيخ عمار" data-en="Sheikh Ammar">الشيخ عمار</span>
-    <span class="identity-sub" data-ar="متحف الساعات" data-en="Horology Museum">متحف الساعات</span>
-  </a>
-  <nav id="navigation" aria-label="التنقل الرئيسي">
-    <a href="/" data-ar="المجلس" data-en="The Majlis">المجلس</a>
-    <a href="/collection/" data-ar="المجموعة" data-en="The Collection">المجموعة</a>
-    <a href="/exhibition/" data-ar="قاعة العرض" data-en="Exhibition">قاعة العرض</a>
-    <a href="/watchmaking/" aria-current="page" data-ar="فن صناعة الساعات" data-en="Watchmaking">فن صناعة الساعات</a>
-    <a href="/his-highness/" data-ar="صاحب السمو" data-en="His Highness">صاحب السمو</a>
-  </nav>
-  <div class="nav-actions">
-    <button id="lang" lang="en" aria-label="Switch to English">EN</button>
-    <button id="menu" aria-expanded="false" aria-controls="navigation" aria-label="فتح القائمة"><span aria-hidden="true">☰</span></button>
-  </div>
+<body data-page="watchmaking">
+<a class="skip" href="#main" data-ar="انتقل إلى المحتوى" data-en="Skip to content">انتقل إلى المحتوى</a>
+<header class="masthead" id="masthead">
+<button class="menu-toggle" id="menu" aria-expanded="false" aria-controls="siteMenu"><span class="lines" aria-hidden="true"></span><span data-ar="القائمة" data-en="Menu">القائمة</span></button>
+<a class="wordmark" href="/" aria-label="مجلس الوقت — الصفحة الرئيسية" data-label-ar="مجلس الوقت — الصفحة الرئيسية" data-label-en="The Majlis of Time — home"><span class="mark" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</span><span class="sub" data-ar="مجموعة الشيخ عمّار بن حميد النعيمي" data-en="Sheikh Ammar bin Humaid Al Nuaimi">مجموعة الشيخ عمّار بن حميد النعيمي</span></a>
+<button class="lang-toggle" id="lang" lang="en" aria-label="Switch to English">EN</button>
 </header>
-
-<main id="watchmakingMain">
-  <section class="craft-hero">
-    <div class="craft-hero-copy">
-      <p class="eyebrow" data-ar="فن صناعة الساعات" data-en="The Art of Watchmaking">فن صناعة الساعات</p>
-      <h1><span data-ar="قطعٌ تتجاوز الزمن." data-en="Timeless timepieces.">قطعٌ تتجاوز الزمن.</span></h1>
-      <p class="craft-manifesto" data-ar="من القلائل" data-en="One of not many">من القلائل</p>
-      <a class="text-link light" href="#anatomy"><span data-ar="اكتشف تشريح القطعة" data-en="Discover the anatomy">اكتشف تشريح القطعة</span><span aria-hidden="true">↓</span></a>
-    </div>
-    <div class="craft-watch" aria-hidden="true">
-      <div class="craft-watch-case">
-        <div class="craft-bezel"></div>
-        <div class="craft-dial">
-          <span class="craft-index i12"></span><span class="craft-index i3"></span><span class="craft-index i6"></span><span class="craft-index i9"></span>
-          <span class="craft-hand hour"></span><span class="craft-hand minute"></span><span class="craft-hand seconds"></span>
-          <span class="craft-subdial s1"></span><span class="craft-subdial s2"></span><span class="craft-subdial s3"></span>
-        </div>
-        <span class="craft-crown"></span><span class="craft-pusher p1"></span><span class="craft-pusher p2"></span>
-      </div>
-    </div>
-  </section>
-
-<nav class="chapter-nav" aria-label="فصول فن صناعة الساعات" data-nav-ar="فصول فن صناعة الساعات" data-nav-en="Watchmaking chapters">
-<a href="#anatomy"><span aria-hidden="true">01</span><span data-ar="تشريح الساعة" data-en="Anatomy">تشريح الساعة</span></a>
-<a href="#complications"><span aria-hidden="true">02</span><span data-ar="التعقيدات والآليات" data-en="Complications">التعقيدات والآليات</span></a>
-<a href="#technical-record"><span aria-hidden="true">03</span><span data-ar="قراءة المواصفات" data-en="Reading the record">قراءة المواصفات</span></a>
+<div class="menu" id="siteMenu">
+<nav id="navigation" aria-label="التنقل الرئيسي" data-label-ar="التنقل الرئيسي" data-label-en="Main navigation"><a href="/"><span aria-hidden="true">01</span><b data-ar="المجلس" data-en="The Majlis">المجلس</b></a><a href="/collection/"><span aria-hidden="true">02</span><b data-ar="المجموعة" data-en="The Collection">المجموعة</b></a><a href="/exhibition/"><span aria-hidden="true">03</span><b data-ar="قاعة العرض" data-en="The Exhibition">قاعة العرض</b></a><a href="/his-highness/"><span aria-hidden="true">04</span><b data-ar="صاحب السمو" data-en="His Highness">صاحب السمو</b></a><a href="/watchmaking/" aria-current="page"><span aria-hidden="true">05</span><b data-ar="فن صناعة الساعات" data-en="Watchmaking">فن صناعة الساعات</b></a></nav>
+<figure class="menu-figure"><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="" width="891" height="768" loading="lazy"></figure>
+<div class="menu-foot"><span data-ar="عجمان · الإمارات العربية المتحدة" data-en="Ajman · United Arab Emirates">عجمان · الإمارات العربية المتحدة</span><span id="ajmanTime" dir="ltr"></span></div>
+</div>
+<main id="main" tabindex="-1">
+<section class="craft-hero on-night" aria-labelledby="craftTitle">
+<div>
+<p class="label" data-ar="فن صناعة الساعات" data-en="The Art of Watchmaking">فن صناعة الساعات</p>
+<h1 class="display" id="craftTitle" data-ar="قطعٌ تتجاوز الزمن." data-en="Timeless timepieces.">قطعٌ تتجاوز الزمن.</h1>
+<p class="craft-manifesto" data-ar="واحدةٌ من قِلّة." data-en="One of not many">واحدةٌ من قِلّة.</p>
+<p class="body-2" data-ar="من الميناء إلى نظام الإفلات، ومن التوربيون إلى مُكرِّر الدقائق: دليلٌ يعيدك إلى كل قطعة بعينٍ أدقّ." data-en="From dial to escapement, from tourbillon to minute repeater: a guide that returns you to each timepiece with a keener eye.">من الميناء إلى نظام الإفلات، ومن التوربيون إلى مُكرِّر الدقائق: دليلٌ يعيدك إلى كل قطعة بعينٍ أدقّ.</p>
+<a class="link" href="#anatomy"><span data-ar="اكتشف تشريح القطعة" data-en="Discover the anatomy">اكتشف تشريح القطعة</span><span aria-hidden="true">↓</span></a>
+</div>
+<div class="dial" aria-hidden="true"><svg viewBox="0 0 400 400" fill="none" stroke="#d8bd8a">
+<circle cx="200" cy="200" r="190" stroke-width=".8" opacity=".55"/><circle cx="200" cy="200" r="178" stroke-width="1.2"/>
+<g opacity=".9"><line x1="200.0" y1="44.0" x2="200.0" y2="28.0" stroke-width="1.6"/><line x1="217.4" y1="34.9" x2="218.0" y2="28.9" stroke-width="0.6"/><line x1="234.5" y1="37.6" x2="235.8" y2="31.8" stroke-width="0.6"/><line x1="251.3" y1="42.1" x2="253.2" y2="36.4" stroke-width="0.6"/><line x1="267.5" y1="48.4" x2="270.0" y2="42.9" stroke-width="0.6"/><line x1="278.0" y1="64.9" x2="286.0" y2="51.0" stroke-width="1.6"/><line x1="297.6" y1="65.7" x2="301.1" y2="60.8" stroke-width="0.6"/><line x1="311.1" y1="76.6" x2="315.1" y2="72.2" stroke-width="0.6"/><line x1="323.4" y1="88.9" x2="327.8" y2="84.9" stroke-width="0.6"/><line x1="334.3" y1="102.4" x2="339.2" y2="98.9" stroke-width="0.6"/><line x1="335.1" y1="122.0" x2="349.0" y2="114.0" stroke-width="1.6"/><line x1="351.6" y1="132.5" x2="357.1" y2="130.0" stroke-width="0.6"/><line x1="357.9" y1="148.7" x2="363.6" y2="146.8" stroke-width="0.6"/><line x1="362.4" y1="165.5" x2="368.2" y2="164.2" stroke-width="0.6"/><line x1="365.1" y1="182.6" x2="371.1" y2="182.0" stroke-width="0.6"/><line x1="356.0" y1="200.0" x2="372.0" y2="200.0" stroke-width="1.6"/><line x1="365.1" y1="217.4" x2="371.1" y2="218.0" stroke-width="0.6"/><line x1="362.4" y1="234.5" x2="368.2" y2="235.8" stroke-width="0.6"/><line x1="357.9" y1="251.3" x2="363.6" y2="253.2" stroke-width="0.6"/><line x1="351.6" y1="267.5" x2="357.1" y2="270.0" stroke-width="0.6"/><line x1="335.1" y1="278.0" x2="349.0" y2="286.0" stroke-width="1.6"/><line x1="334.3" y1="297.6" x2="339.2" y2="301.1" stroke-width="0.6"/><line x1="323.4" y1="311.1" x2="327.8" y2="315.1" stroke-width="0.6"/><line x1="311.1" y1="323.4" x2="315.1" y2="327.8" stroke-width="0.6"/><line x1="297.6" y1="334.3" x2="301.1" y2="339.2" stroke-width="0.6"/><line x1="278.0" y1="335.1" x2="286.0" y2="349.0" stroke-width="1.6"/><line x1="267.5" y1="351.6" x2="270.0" y2="357.1" stroke-width="0.6"/><line x1="251.3" y1="357.9" x2="253.2" y2="363.6" stroke-width="0.6"/><line x1="234.5" y1="362.4" x2="235.8" y2="368.2" stroke-width="0.6"/><line x1="217.4" y1="365.1" x2="218.0" y2="371.1" stroke-width="0.6"/><line x1="200.0" y1="356.0" x2="200.0" y2="372.0" stroke-width="1.6"/><line x1="182.6" y1="365.1" x2="182.0" y2="371.1" stroke-width="0.6"/><line x1="165.5" y1="362.4" x2="164.2" y2="368.2" stroke-width="0.6"/><line x1="148.7" y1="357.9" x2="146.8" y2="363.6" stroke-width="0.6"/><line x1="132.5" y1="351.6" x2="130.0" y2="357.1" stroke-width="0.6"/><line x1="122.0" y1="335.1" x2="114.0" y2="349.0" stroke-width="1.6"/><line x1="102.4" y1="334.3" x2="98.9" y2="339.2" stroke-width="0.6"/><line x1="88.9" y1="323.4" x2="84.9" y2="327.8" stroke-width="0.6"/><line x1="76.6" y1="311.1" x2="72.2" y2="315.1" stroke-width="0.6"/><line x1="65.7" y1="297.6" x2="60.8" y2="301.1" stroke-width="0.6"/><line x1="64.9" y1="278.0" x2="51.0" y2="286.0" stroke-width="1.6"/><line x1="48.4" y1="267.5" x2="42.9" y2="270.0" stroke-width="0.6"/><line x1="42.1" y1="251.3" x2="36.4" y2="253.2" stroke-width="0.6"/><line x1="37.6" y1="234.5" x2="31.8" y2="235.8" stroke-width="0.6"/><line x1="34.9" y1="217.4" x2="28.9" y2="218.0" stroke-width="0.6"/><line x1="44.0" y1="200.0" x2="28.0" y2="200.0" stroke-width="1.6"/><line x1="34.9" y1="182.6" x2="28.9" y2="182.0" stroke-width="0.6"/><line x1="37.6" y1="165.5" x2="31.8" y2="164.2" stroke-width="0.6"/><line x1="42.1" y1="148.7" x2="36.4" y2="146.8" stroke-width="0.6"/><line x1="48.4" y1="132.5" x2="42.9" y2="130.0" stroke-width="0.6"/><line x1="64.9" y1="122.0" x2="51.0" y2="114.0" stroke-width="1.6"/><line x1="65.7" y1="102.4" x2="60.8" y2="98.9" stroke-width="0.6"/><line x1="76.6" y1="88.9" x2="72.2" y2="84.9" stroke-width="0.6"/><line x1="88.9" y1="76.6" x2="84.9" y2="72.2" stroke-width="0.6"/><line x1="102.4" y1="65.7" x2="98.9" y2="60.8" stroke-width="0.6"/><line x1="122.0" y1="64.9" x2="114.0" y2="51.0" stroke-width="1.6"/><line x1="132.5" y1="48.4" x2="130.0" y2="42.9" stroke-width="0.6"/><line x1="148.7" y1="42.1" x2="146.8" y2="36.4" stroke-width="0.6"/><line x1="165.5" y1="37.6" x2="164.2" y2="31.8" stroke-width="0.6"/><line x1="182.6" y1="34.9" x2="182.0" y2="28.9" stroke-width="0.6"/></g>
+<circle cx="200" cy="262" r="34" stroke-width=".7" opacity=".7"/><circle cx="142" cy="200" r="30" stroke-width=".7" opacity=".7"/><circle cx="258" cy="200" r="30" stroke-width=".7" opacity=".7"/>
+<line class="hand" id="hourHand" x1="200" y1="210" x2="200" y2="112" stroke-width="3" stroke-linecap="round"/>
+<line class="hand" id="minuteHand" x1="200" y1="214" x2="200" y2="62" stroke-width="2" stroke-linecap="round"/>
+<line class="hand" id="secondHand" x1="200" y1="226" x2="200" y2="48" stroke="#f3efe7" stroke-width=".8"/>
+<circle cx="200" cy="200" r="4" fill="#d8bd8a"/></svg></div>
+</section>
+<nav class="chapters" aria-label="فصول فن صناعة الساعات" data-label-ar="فصول فن صناعة الساعات" data-label-en="Watchmaking chapters">
+<a href="#anatomy"><span aria-hidden="true">01</span><b data-ar="تشريح الساعة" data-en="Anatomy">تشريح الساعة</b></a>
+<a href="#complications"><span aria-hidden="true">02</span><b data-ar="التعقيدات" data-en="Complications">التعقيدات</b></a>
+<a href="#technical-record"><span aria-hidden="true">03</span><b data-ar="السجل التقني" data-en="The technical record">السجل التقني</b></a>
 </nav>
-  <figure class="craft-scene">
-    <div class="craft-scene-image"><img src="/images/sheikh/watchmaking-event.webp" alt="" width="900" height="1125" loading="lazy" decoding="async"></div>
-    <figcaption>
-      <p class="eyebrow" data-ar="لحظة في عالم صناعة الساعات" data-en="A moment in watchmaking">لحظة في عالم صناعة الساعات</p>
-      <p data-ar="حين تنتقل صناعة الساعات من منضدة الحرفي إلى المعصم، تصبح النِّسب والتشطيبات والشخصية الميكانيكية جزءاً من الحضور." data-en="When watchmaking moves from the workbench to the wrist, proportion, finishing and mechanical character become part of its presence.">حين تنتقل صناعة الساعات من الرسم والحركة إلى المعصم، تصبح التفاصيل جزءاً من الحضور.</p>
-    </figcaption>
-  </figure>
-
-  <section id="anatomy" class="craft-section">
-    <div class="craft-section-head">
-      <p class="eyebrow" data-ar="01 — تشريح القطعة" data-en="01 — Anatomy of a timepiece">01 — تشريح القطعة</p>
-      <h2 data-ar="ما تراه. وما يعمل في الداخل." data-en="What you see. What works within.">ما تراه. وما يعمل في الداخل.</h2>
-      <p data-ar="من الميناء والعقارب إلى العيار ونظام الإفلات، لكل جزء وظيفة وحضور في شخصية الساعة." data-en="From dial and hands to calibre and escapement, every component has a function and a place in the character of a timepiece.">من الميناء والعقارب إلى العيار ونظام الإفلات، لكل جزء وظيفة وحضور في شخصية الساعة.</p>
-    </div>
-    <div class="craft-grid anatomy-grid">
-      <article><span>01</span><h3 data-ar="العلبة" data-en="Case">العلبة</h3><p data-ar="الهيكل الذي يحمي الحركة ويحدد حضور الساعة على المعصم؛ قد يُصنع من الفولاذ أو الذهب أو التيتانيوم أو السيراميك أو الياقوت الصناعي." data-en="The structure that protects the movement and defines the watch on the wrist; crafted in materials such as steel, gold, titanium, ceramic or sapphire.">الهيكل الذي يحمي الحركة ويحدد حضور الساعة على المعصم.</p></article>
-      <article><span>02</span><h3 data-ar="الإطار" data-en="Bezel">الإطار</h3><p data-ar="الحلقة المحيطة بالزجاج؛ قد تكون ثابتة، دوّارة، أو تحمل مقياساً مثل التاكيمتر." data-en="The ring surrounding the crystal; it may be fixed, rotating, or carry a scale such as a tachymeter.">الحلقة المحيطة بالزجاج.</p></article>
-      <article><span>03</span><h3 data-ar="الزجاج" data-en="Crystal">الزجاج</h3><p data-ar="السطح الشفاف الذي يحمي الميناء؛ الياقوت الصناعي هو الاختيار الشائع في صناعة الساعات الراقية." data-en="The transparent surface protecting the dial; sapphire crystal is widely used in Haute Horlogerie.">السطح الشفاف الذي يحمي الميناء.</p></article>
-      <article><span>04</span><h3 data-ar="الميناء" data-en="Dial">الميناء</h3><p data-ar="الوجه البصري للقطعة: المؤشرات، الأرقام، العدّادات والفتحات التي تنظم قراءة الوقت والتعقيدات." data-en="The visual face of the timepiece: markers, numerals, counters and apertures that organise time and complications.">الوجه البصري للقطعة.</p></article>
-      <article><span>05</span><h3 data-ar="العقارب" data-en="Hands">العقارب</h3><p data-ar="تنقل قراءة الساعات والدقائق والثواني، وقد تحمل وظائف إضافية مثل توقيت الكرونوغراف أو المنطقة الزمنية الثانية." data-en="They indicate hours, minutes and seconds, and may carry additional functions such as chronograph timing or a second time zone.">تنقل قراءة الوقت والوظائف.</p></article>
-      <article><span>06</span><h3 data-ar="التاج والأزرار" data-en="Crown & pushers">التاج والأزرار</h3><p data-ar="التاج لضبط الوقت والتعبئة؛ والأزرار تتحكم بوظائف مثل بدء الكرونوغراف وإيقافه وإعادته للصفر." data-en="The crown sets and winds the watch; pushers operate functions such as starting, stopping and resetting a chronograph.">التاج لضبط الوقت والتعبئة، والأزرار للتحكم بالوظائف.</p></article>
-      <article><span>07</span><h3 data-ar="العيار" data-en="Calibre">العيار</h3><p data-ar="الهوية الميكانيكية للحركة: هندستها، بنيتها، ترددها، طريقة تعبئتها وتعقيداتها." data-en="The mechanical identity of the movement: its architecture, frequency, winding system and complications.">الهوية الميكانيكية للحركة.</p></article>
-      <article><span>08</span><h3 data-ar="نظام الإفلات" data-en="Escapement">نظام الإفلات</h3><p data-ar="ينظم انتقال الطاقة إلى عجلة الاتزان على دفعات دقيقة، وهو من أساسيات ضبط الوقت الميكانيكي." data-en="It meters energy to the balance in controlled impulses and is fundamental to mechanical timekeeping.">ينظم انتقال الطاقة داخل الحركة.</p></article>
-      <article><span>09</span><h3 data-ar="عجلة الاتزان والنابض الشعري" data-en="Balance & hairspring">عجلة الاتزان والنابض الشعري</h3><p data-ar="منظومة تنظيم الحركة؛ تتذبذب بإيقاع منتظم يحدد معدل سير الساعة ودقتها." data-en="The regulating oscillator of the movement, whose controlled oscillation governs the rate of the timepiece.">القلب النابض للحركة.</p></article>
-      <article><span>10</span><h3 data-ar="برميل النابض" data-en="Mainspring barrel">برميل النابض</h3><p data-ar="يخزن الطاقة في النابض الرئيسي ويطلقها تدريجياً لتشغيل الحركة." data-en="It stores energy in the mainspring and releases it progressively to power the movement.">يخزن الطاقة ويطلقها تدريجياً.</p></article>
-      <article><span>11</span><h3 data-ar="الدوّار" data-en="Rotor">الدوّار</h3><p data-ar="وزن متحرك في الحركة الأوتوماتيكية يدور مع حركة المعصم ليساهم في تعبئة النابض الرئيسي." data-en="A weighted mass in an automatic movement that rotates with wrist motion to wind the mainspring.">وزن متحرك يعبئ الحركة الأوتوماتيكية.</p></article>
-      <article><span>12</span><h3 data-ar="الجسور والجواهر" data-en="Bridges & jewels">الجسور والجواهر</h3><p data-ar="تثبت مكونات الحركة وتدعم محاورها؛ وتقلل الجواهر الاصطناعية الاحتكاك في نقاط الحركة الدقيقة." data-en="Bridges support the movement architecture, while synthetic jewels reduce friction at critical pivots.">تدعم بنية الحركة وتقلل الاحتكاك.</p></article>
-    </div>
-  </section>
-
-  <section id="complications" class="craft-section complications-section">
-    <div class="craft-section-head">
-      <p class="eyebrow" data-ar="02 — التعقيدات والآليات" data-en="02 — Complications & mechanisms">02 — التعقيدات والآليات</p>
-      <h2 data-ar="حين يتجاوز العيار عرض الوقت." data-en="Beyond the indication of time.">حين يتجاوز العيار عرض الوقت.</h2>
-      <p data-ar="في صناعة الساعات، التعقيد وظيفةٌ أو بيانٌ يتجاوز عرض الساعات والدقائق والثواني. ويضم هذا الفصل أيضاً آليات تنظيمية، مثل التوربيون، تُناقش عادةً ضمن عالم صناعة الساعات الراقية." data-en="In watchmaking, a complication is a function or indication beyond the basic display of hours, minutes and seconds. This chapter also includes regulating mechanisms, such as the tourbillon, commonly discussed within Haute Horlogerie.">في صناعة الساعات، التعقيد وظيفةٌ أو بيانٌ يتجاوز عرض الوقت الأساسي، ويضم هذا الفصل أيضاً آليات تنظيمية تُناقش ضمن عالم صناعة الساعات الراقية.</p>
-    </div>
-<nav class="complication-index" aria-label="اختر تعقيداً" data-nav-ar="اختر تعقيداً" data-nav-en="Explore a complication"><a href="#complication-chronograph" data-ar="الكرونوغراف" data-en="Chronograph">الكرونوغراف</a><a href="#complication-tourbillon" data-ar="التوربيون" data-en="Tourbillon">التوربيون</a><a href="#complication-dual-time" data-ar="التوقيت المزدوج" data-en="Dual Time & GMT">التوقيت المزدوج</a><a href="#complication-perpetual-calendar" data-ar="التقويم الدائم" data-en="Perpetual Calendar">التقويم الدائم</a><a href="#complication-minute-repeater" data-ar="مُكرِّر الدقائق" data-en="Minute Repeater">مُكرِّر الدقائق</a><a href="#complication-rattrapante" data-ar="الثواني المنقسمة" data-en="Rattrapante">الثواني المنقسمة</a><a href="#complication-world-time" data-ar="التوقيت العالمي" data-en="World Time">التوقيت العالمي</a><a href="#complication-flyback" data-ar="فلاي باك" data-en="Flyback">فلاي باك</a><a href="#complication-moon-phase" data-ar="أطوار القمر" data-en="Moon phase">أطوار القمر</a></nav>
-    <div class="complication-list">
-      <article id="complication-chronograph"><div><span>CH</span><h3 data-ar="الكرونوغراف" data-en="Chronograph">الكرونوغراف</h3></div><p data-ar="آلية مستقلة لقياس فترات زمنية قصيرة. تبدأ وتتوقف وتُصفّر عبر الأزرار، وغالباً تظهر ثواني الكرونوغراف في عقرب مركزي مع عدّادات فرعية للدقائق أو الساعات." data-en="An independent mechanism for timing elapsed intervals. It starts, stops and resets by pushers, typically using a central chronograph seconds hand with subsidiary minute or hour counters.">آلية مستقلة لقياس فترات زمنية قصيرة.</p></article>
-      <article id="complication-tourbillon"><div><span>TB</span><h3 data-ar="التوربيون" data-en="Tourbillon">التوربيون</h3></div><p data-ar="قفص دوّار يحمل عجلة الاتزان ونظام الإفلات. ابتُكر تاريخياً لتقليل تأثير أخطاء الوضعية عبر تدوير المنظومة المنظمة باستمرار." data-en="A rotating cage carrying the balance and escapement. Historically conceived to average positional rate errors by continually rotating the regulating organ.">قفص دوّار يحمل عجلة الاتزان ونظام الإفلات.</p></article>
-      <article id="complication-dual-time"><div><span>DT</span><h3 data-ar="التوقيت المزدوج وGMT" data-en="Dual Time & GMT">التوقيت المزدوج وGMT</h3></div><p data-ar="يعرض التوقيت المزدوج منطقة زمنية ثانية، غالباً عبر عقرب أو ميناء فرعي مستقل؛ أما GMT فيستخدم عادةً عقرباً ومقياساً من 24 ساعة لقراءة توقيت إضافي." data-en="Dual Time displays a second time zone, often through an independent hand or subdial. GMT typically uses a 24-hour hand and scale to read an additional time zone.">يعرض توقيت منطقة زمنية ثانية.</p><aside class="reading-example"><strong data-ar="على المعصم" data-en="On the wrist">على المعصم</strong><p data-ar="أثناء السفر، اقرأ التوقيت المحلي والتوقيت في عجمان معاً، من دون إعادة ضبط الساعة كلما أردت معرفة الوقت في الديار." data-en="While travelling, read local time and the time in Ajman together, without resetting the watch whenever you want to check the hour at home.">أثناء السفر، اقرأ التوقيت المحلي والتوقيت في عجمان معاً.</p></aside></article>
-      <article id="complication-perpetual-calendar"><div><span>PC</span><h3 data-ar="التقويم الدائم" data-en="Perpetual Calendar">التقويم الدائم</h3></div><p data-ar="يتابع اختلاف أطوال الشهور والسنوات الكبيسة ميكانيكياً، ليحافظ على التاريخ الصحيح ما دامت الساعة مضبوطة وتعمل ضمن تصميمها." data-en="Mechanically accounts for differing month lengths and leap years, maintaining the correct calendar while the watch remains properly set and running.">يتابع الشهور والسنوات الكبيسة ميكانيكياً.</p></article>
-      <article id="complication-minute-repeater"><div><span>MR</span><h3 data-ar="مُكرِّر الدقائق" data-en="Minute Repeater">مُكرِّر الدقائق</h3></div><p data-ar="تعقيد صوتي يقرع الساعات وأرباع الساعة والدقائق عند الطلب، عبر مطارق صغيرة تضرب نغمات داخل العلبة." data-en="An acoustic complication that chimes the hours, quarter-hours and minutes on demand through miniature hammers and gongs.">تعقيد صوتي يقرع الوقت عند الطلب.</p></article>
-      <article id="complication-rattrapante"><div><span>RT</span><h3 data-ar="كرونوغراف الثواني المنقسمة / راترابانت" data-en="Split-seconds Chronograph / Rattrapante">كرونوغراف الثواني المنقسمة / راترابانت</h3></div><p data-ar="عقربا ثوانٍ متراكبان يسمحان بقياس زمنين متزامنين أو زمن وسيط، بينما يواصل أحد العقربين القياس." data-en="Two superimposed chronograph seconds hands allow simultaneous or intermediate timing while one hand continues to run.">عقربان لقياس زمنين متزامنين أو زمناً وسيطاً.</p></article>
-      <article id="complication-world-time"><div><span>WT</span><h3 data-ar="التوقيت العالمي" data-en="World Time">التوقيت العالمي</h3></div><p data-ar="يجمع عادةً حلقة 24 ساعة بأسماء مدن أو مناطق لقراءة عدة مناطق زمنية في نظرة واحدة." data-en="Typically combines a 24-hour ring with city or zone indications to read multiple time zones at a glance.">قراءة عدة مناطق زمنية في نظرة واحدة.</p></article>
-      <article id="complication-flyback"><div><span>FB</span><h3 data-ar="كرونوغراف فلاي باك" data-en="Flyback Chronograph">كرونوغراف فلاي باك</h3></div><p data-ar="في بعض الكرونوغرافات، يسمح بإعادة العقرب إلى الصفر وبدء توقيت جديد فوراً بضغطة واحدة أثناء عمل الكرونوغراف." data-en="On certain chronographs, a single press resets the running chronograph to zero and immediately starts a new interval.">إعادة وبدء توقيت جديد فوراً بضغطة واحدة.</p></article>
-      <article id="complication-moon-phase"><div><span>MP</span><h3 data-ar="مؤشر أطوار القمر" data-en="Moon-phase Indication">مؤشر أطوار القمر</h3></div><p data-ar="عرض فلكي يتتبع الدورة القمرية بصرياً، غالباً عبر قرص يدور خلف فتحة في الميناء." data-en="An astronomical indication that tracks the lunar cycle, often through a rotating disc beneath an aperture.">عرض فلكي يتتبع الدورة القمرية.</p></article>
-    </div>
-    <aside class="turbine-note" id="turbine">
-      <div><span class="turbine-mark">TU</span><p class="eyebrow" data-ar="مصطلح معاصر" data-en="A contemporary term">مصطلح معاصر</p></div>
-      <h3 data-ar="التوربين ليس توربيوناً." data-en="A turbine is not a tourbillon.">التوربين ليس توربيوناً.</h3>
-      <p data-ar="في بعض الساعات المعاصرة، يشير «التوربين» إلى عنصر دوّار بصري أو معماري يتحرك فوق الميناء أو ضمنه. قد يكون جزءاً من هوية التصميم أو آلية العرض، لكنه ليس اسماً عاماً لتعقيد ميكانيكي كلاسيكي. أما التوربيون فهو قفص دوّار يحمل عجلة الاتزان ونظام الإفلات." data-en="In some contemporary watches, “turbine” describes a rotating visual or architectural element above or within the dial. It can be central to the design or display mechanism, but it is not a generic classical complication. A tourbillon, by contrast, is a rotating cage carrying the balance and escapement.">في بعض الساعات المعاصرة، يشير «التوربين» إلى عنصر دوّار بصري أو معماري.</p>
-    </aside>
-  </section>
-
-
-    <aside class="turbine-note model-note" id="submariner">
-      <p class="eyebrow" data-ar="اسم الطراز ومعناه" data-en="Understanding model names">اسم الطراز ومعناه</p>
-      <h3 data-ar="سابمارينر — ساعة الغوص من رولكس" data-en="Submariner — the Rolex diving watch">سابمارينر — ساعة الغوص من رولكس</h3>
-      <p data-ar="سابمارينر اسم مجموعة ساعات من رولكس صُممت للغوص، وليس اسم تعقيد ميكانيكي. يساعد إطارها الدوّار المدرّج على قراءة الزمن المنقضي؛ أما التوقيت المزدوج فيعرض توقيت منطقتين زمنيتين." data-en="Submariner is the name of a Rolex collection designed for diving, rather than a mechanical complication. Its graduated rotating bezel helps read elapsed time; Dual Time displays the time in two time zones.">سابمارينر اسم مجموعة ساعات من رولكس صُممت للغوص، وليس اسم تعقيد ميكانيكي.</p>
-      <a class="text-link" href="https://www.rolex.com/watches/submariner" target="_blank" rel="noopener" data-ar="عن سابمارينر لدى رولكس ↗" data-en="Discover Submariner at Rolex ↗">عن سابمارينر لدى رولكس ↗</a>
-    </aside>
-
-  <section id="technical-record" class="craft-section reading-section">
-    <div class="craft-section-head">
-      <p class="eyebrow" data-ar="03 — قراءة السجل التقني" data-en="03 — Reading the technical record">03 — قراءة السجل التقني</p>
-      <h2 data-ar="من المرجع إلى احتياطي الطاقة." data-en="From reference to power reserve.">من المرجع إلى احتياطي الطاقة.</h2>
-    </div>
-    <dl class="record-guide">
-      <div><dt data-ar="المرجع" data-en="Reference">المرجع</dt><dd data-ar="الرمز الذي يحدد النسخة أو التكوين المحدد للساعة داخل مجموعة الدار." data-en="The code that identifies a specific version or configuration within a Maison’s collection.">الرمز الذي يحدد النسخة المحددة.</dd></div>
-      <div><dt data-ar="مادة العلبة" data-en="Case material">مادة العلبة</dt><dd data-ar="المعدن أو المادة التي صُنعت منها العلبة، وتؤثر في الوزن والملمس والحضور." data-en="The metal or material of the case, influencing weight, tactility and visual presence.">المعدن أو المادة التي صُنعت منها العلبة.</dd></div>
-      <div><dt data-ar="القطر" data-en="Diameter">القطر</dt><dd data-ar="قياس العلبة بالملليمتر، وهو أحد أهم عناصر التناسب على المعصم." data-en="The case width in millimetres, one of the key measures of wrist proportion.">قياس العلبة بالملليمتر.</dd></div>
-      <div><dt data-ar="العيار" data-en="Calibre / movement">العيار</dt><dd data-ar="اسم أو رقم الحركة الميكانيكية التي تقود الساعة وتعقيداتها." data-en="The designation of the mechanical movement driving the watch and its complications.">اسم أو رقم الحركة الميكانيكية.</dd></div>
-      <div><dt data-ar="احتياطي الطاقة" data-en="Power reserve">احتياطي الطاقة</dt><dd data-ar="المدة التقريبية التي تستمر فيها الحركة بالعمل بعد التعبئة الكاملة من دون طاقة إضافية." data-en="The approximate autonomy of a fully wound movement before additional energy is required.">مدة عمل الحركة بعد التعبئة الكاملة.</dd></div>
-      <div><dt data-ar="التعقيدات" data-en="Complications">التعقيدات</dt><dd data-ar="الوظائف الميكانيكية الإضافية التي تتجاوز عرض الوقت الأساسي." data-en="Mechanical functions beyond the basic indication of time.">الوظائف الميكانيكية الإضافية.</dd></div>
-    </dl>
-  </section>
-
-  <section class="craft-closing">
-    <p class="eyebrow" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</p>
-    <h2 data-ar="افهم الصنعة. ثم ارجع إلى القطعة." data-en="Understand the craft. Then return to the timepiece.">افهم الصنعة. ثم ارجع إلى القطعة.</h2>
-    <p data-ar="المعرفة لا تقلل الغموض؛ بل تجعل التفاصيل الصغيرة أكثر وضوحاً وقيمة." data-en="Knowledge does not diminish the mystery. It makes the smallest details easier to see — and harder to overlook.">المعرفة تجعل التفاصيل الصغيرة أكثر وضوحاً وقيمة.</p>
-    <div class="craft-actions">
-      <a class="text-link" href="/collection/"><span data-ar="اكتشف المجموعة" data-en="Discover the collection">اكتشف المجموعة</span><span aria-hidden="true">↗</span></a>
-      <a class="text-link" href="/exhibition/"><span data-ar="ادخل قاعة العرض" data-en="Enter the exhibition">ادخل قاعة العرض</span><span aria-hidden="true">↗</span></a>
-    </div>
-  </section>
+<section class="section" id="anatomy" aria-labelledby="anatomyTitle">
+<div class="inner center">
+<p class="label" data-ar="01 — تشريح القطعة" data-en="01 — Anatomy of a timepiece">01 — تشريح القطعة</p>
+<h2 class="title" id="anatomyTitle" data-ar="ما تراه. وما يعمل في الداخل." data-en="What you see. What works within.">ما تراه. وما يعمل في الداخل.</h2>
+<p class="body-2" style="margin-inline:auto" data-ar="من الميناء والعقارب إلى العيار ونظام الإفلات، لكل جزء وظيفته وحضوره في شخصية الساعة." data-en="From dial and hands to calibre and escapement, every component has a function and a place in the character of a timepiece.">من الميناء والعقارب إلى العيار ونظام الإفلات، لكل جزء وظيفته وحضوره في شخصية الساعة.</p>
+</div>
+<div class="anatomy anatomy-grid">
+<article><span class="num" aria-hidden="true">01</span><h3 data-ar="العلبة" data-en="Case">العلبة</h3><p data-ar="الهيكل الذي يحمي الحركة ويحدد حضور الساعة على المعصم؛ قد يُصنع من الفولاذ أو الذهب أو التيتانيوم أو السيراميك أو الياقوت الصناعي." data-en="The structure that protects the movement and defines the watch on the wrist; crafted in steel, gold, titanium, ceramic or sapphire.">الهيكل الذي يحمي الحركة ويحدد حضور الساعة على المعصم؛ قد يُصنع من الفولاذ أو الذهب أو التيتانيوم أو السيراميك أو الياقوت الصناعي.</p></article>
+<article><span class="num" aria-hidden="true">02</span><h3 data-ar="الإطار" data-en="Bezel">الإطار</h3><p data-ar="الحلقة المحيطة بالزجاج؛ قد تكون ثابتة أو دوّارة، أو تحمل مقياساً مثل التاكيمتر." data-en="The ring surrounding the crystal; fixed or rotating, or carrying a scale such as a tachymeter.">الحلقة المحيطة بالزجاج؛ قد تكون ثابتة أو دوّارة، أو تحمل مقياساً مثل التاكيمتر.</p></article>
+<article><span class="num" aria-hidden="true">03</span><h3 data-ar="الزجاج" data-en="Crystal">الزجاج</h3><p data-ar="السطح الشفاف الذي يحمي الميناء؛ والياقوت الصناعي هو الاختيار الشائع في صناعة الساعات الراقية." data-en="The transparent surface protecting the dial; sapphire crystal is the standard of Haute Horlogerie.">السطح الشفاف الذي يحمي الميناء؛ والياقوت الصناعي هو الاختيار الشائع في صناعة الساعات الراقية.</p></article>
+<article><span class="num" aria-hidden="true">04</span><h3 data-ar="الميناء" data-en="Dial">الميناء</h3><p data-ar="الوجه البصري للقطعة: المؤشرات والأرقام والعدّادات والفتحات التي تنظّم قراءة الوقت والتعقيدات." data-en="The visual face of the timepiece: markers, numerals, counters and apertures that organise time and complications.">الوجه البصري للقطعة: المؤشرات والأرقام والعدّادات والفتحات التي تنظّم قراءة الوقت والتعقيدات.</p></article>
+<article><span class="num" aria-hidden="true">05</span><h3 data-ar="العقارب" data-en="Hands">العقارب</h3><p data-ar="تنقل قراءة الساعات والدقائق والثواني، وقد تحمل وظائف إضافية مثل توقيت الكرونوغراف أو المنطقة الزمنية الثانية." data-en="They indicate hours, minutes and seconds, and may carry further functions such as chronograph timing or a second time zone.">تنقل قراءة الساعات والدقائق والثواني، وقد تحمل وظائف إضافية مثل توقيت الكرونوغراف أو المنطقة الزمنية الثانية.</p></article>
+<article><span class="num" aria-hidden="true">06</span><h3 data-ar="التاج والأزرار" data-en="Crown &amp; pushers">التاج والأزرار</h3><p data-ar="التاج لضبط الوقت والتعبئة؛ والأزرار تتحكم بوظائف مثل بدء الكرونوغراف وإيقافه وإعادته إلى الصفر." data-en="The crown sets and winds the watch; pushers start, stop and reset functions such as the chronograph.">التاج لضبط الوقت والتعبئة؛ والأزرار تتحكم بوظائف مثل بدء الكرونوغراف وإيقافه وإعادته إلى الصفر.</p></article>
+<article><span class="num" aria-hidden="true">07</span><h3 data-ar="العيار" data-en="Calibre">العيار</h3><p data-ar="الهوية الميكانيكية للحركة: هندستها وبنيتها وترددها وطريقة تعبئتها وتعقيداتها." data-en="The mechanical identity of the movement: its architecture, frequency, winding system and complications.">الهوية الميكانيكية للحركة: هندستها وبنيتها وترددها وطريقة تعبئتها وتعقيداتها.</p></article>
+<article><span class="num" aria-hidden="true">08</span><h3 data-ar="نظام الإفلات" data-en="Escapement">نظام الإفلات</h3><p data-ar="ينظّم انتقال الطاقة إلى عجلة الاتزان على دفعات دقيقة، وهو من أساسيات ضبط الوقت الميكانيكي." data-en="It meters energy to the balance in controlled impulses — the foundation of mechanical timekeeping.">ينظّم انتقال الطاقة إلى عجلة الاتزان على دفعات دقيقة، وهو من أساسيات ضبط الوقت الميكانيكي.</p></article>
+<article><span class="num" aria-hidden="true">09</span><h3 data-ar="عجلة الاتزان والنابض الشعري" data-en="Balance &amp; hairspring">عجلة الاتزان والنابض الشعري</h3><p data-ar="منظومة تنظيم الحركة؛ تتذبذب بإيقاع منتظم يحدد معدّل سير الساعة ودقتها." data-en="The regulating oscillator, whose steady oscillation governs the rate of the timepiece.">منظومة تنظيم الحركة؛ تتذبذب بإيقاع منتظم يحدد معدّل سير الساعة ودقتها.</p></article>
+<article><span class="num" aria-hidden="true">10</span><h3 data-ar="برميل النابض" data-en="Mainspring barrel">برميل النابض</h3><p data-ar="يخزّن الطاقة في النابض الرئيسي ويطلقها تدريجياً لتشغيل الحركة." data-en="It stores energy in the mainspring and releases it progressively to power the movement.">يخزّن الطاقة في النابض الرئيسي ويطلقها تدريجياً لتشغيل الحركة.</p></article>
+<article><span class="num" aria-hidden="true">11</span><h3 data-ar="الدوّار" data-en="Rotor">الدوّار</h3><p data-ar="كتلة متحركة في الحركة ذاتية التعبئة تدور مع حركة المعصم لتعبئة النابض الرئيسي." data-en="A weighted mass in a self-winding movement that turns with the wrist to wind the mainspring.">كتلة متحركة في الحركة ذاتية التعبئة تدور مع حركة المعصم لتعبئة النابض الرئيسي.</p></article>
+<article><span class="num" aria-hidden="true">12</span><h3 data-ar="الجسور والجواهر" data-en="Bridges &amp; jewels">الجسور والجواهر</h3><p data-ar="تثبّت مكونات الحركة وتدعم محاورها؛ وتقلل الجواهر الاصطناعية الاحتكاك في النقاط الدقيقة." data-en="Bridges support the movement’s architecture, while synthetic jewels reduce friction at critical pivots.">تثبّت مكونات الحركة وتدعم محاورها؛ وتقلل الجواهر الاصطناعية الاحتكاك في النقاط الدقيقة.</p></article>
+</div>
+</section>
+<section class="section night" id="complications" aria-labelledby="complicationsTitle">
+<div class="inner center">
+<p class="label" data-ar="02 — التعقيدات والآليات" data-en="02 — Complications &amp; mechanisms">02 — التعقيدات والآليات</p>
+<h2 class="title" id="complicationsTitle" data-ar="حين يتجاوز العيار عرض الوقت." data-en="Beyond the indication of time.">حين يتجاوز العيار عرض الوقت.</h2>
+<p class="body-2" style="margin-inline:auto" data-ar="التعقيد في صناعة الساعات وظيفةٌ تتجاوز عرض الساعات والدقائق والثواني. ويضم هذا الفصل أيضاً آلياتٍ تنظيمية، كالتوربيون، تُناقش عادةً في عالم صناعة الساعات الراقية." data-en="In watchmaking, a complication is any function beyond hours, minutes and seconds. This chapter also includes regulating mechanisms, such as the tourbillon, that belong to the conversation of Haute Horlogerie.">التعقيد في صناعة الساعات وظيفةٌ تتجاوز عرض الساعات والدقائق والثواني. ويضم هذا الفصل أيضاً آلياتٍ تنظيمية، كالتوربيون، تُناقش عادةً في عالم صناعة الساعات الراقية.</p>
+</div>
+<nav class="complication-index" aria-label="اختر تعقيداً" data-label-ar="اختر تعقيداً" data-label-en="Choose a complication">
+<a href="#complication-chronograph" data-ar="الكرونوغراف" data-en="Chronograph">الكرونوغراف</a><a href="#complication-tourbillon" data-ar="التوربيون" data-en="Tourbillon">التوربيون</a><a href="#complication-dual-time" data-ar="التوقيت المزدوج وGMT" data-en="Dual Time &amp; GMT">التوقيت المزدوج وGMT</a><a href="#complication-perpetual-calendar" data-ar="التقويم الدائم" data-en="Perpetual Calendar">التقويم الدائم</a><a href="#complication-minute-repeater" data-ar="مُكرِّر الدقائق" data-en="Minute Repeater">مُكرِّر الدقائق</a><a href="#complication-rattrapante" data-ar="كرونوغراف الثواني المنقسمة / راترابانت" data-en="Split-seconds Chronograph / Rattrapante">كرونوغراف الثواني المنقسمة / راترابانت</a><a href="#complication-world-time" data-ar="التوقيت العالمي" data-en="World Time">التوقيت العالمي</a><a href="#complication-flyback" data-ar="كرونوغراف فلاي باك" data-en="Flyback Chronograph">كرونوغراف فلاي باك</a><a href="#complication-moon-phase" data-ar="مؤشر أطوار القمر" data-en="Moon-phase Indication">مؤشر أطوار القمر</a>
+</nav>
+<div class="complication-list">
+<article id="complication-chronograph"><div><span class="code" aria-hidden="true">CH</span><h3 data-ar="الكرونوغراف" data-en="Chronograph">الكرونوغراف</h3></div><p data-ar="آلية مستقلة لقياس فترات زمنية قصيرة؛ تبدأ وتتوقف وتُصفَّر عبر الأزرار، وغالباً تظهر ثوانيها في عقرب مركزي مع عدّادات فرعية للدقائق أو الساعات." data-en="An independent mechanism for timing elapsed intervals. It starts, stops and resets by pushers, typically with a central seconds hand and sub-counters for minutes or hours.">آلية مستقلة لقياس فترات زمنية قصيرة؛ تبدأ وتتوقف وتُصفَّر عبر الأزرار، وغالباً تظهر ثوانيها في عقرب مركزي مع عدّادات فرعية للدقائق أو الساعات.</p></article>
+<article id="complication-tourbillon"><div><span class="code" aria-hidden="true">TB</span><h3 data-ar="التوربيون" data-en="Tourbillon">التوربيون</h3></div><p data-ar="قفصٌ دوّار يحمل عجلة الاتزان ونظام الإفلات، ابتُكر تاريخياً لتقليل أثر أخطاء الوضعية عبر تدوير المنظومة المنظِّمة باستمرار." data-en="A rotating cage carrying the balance and escapement, historically conceived to average positional errors by continually turning the regulating organ.">قفصٌ دوّار يحمل عجلة الاتزان ونظام الإفلات، ابتُكر تاريخياً لتقليل أثر أخطاء الوضعية عبر تدوير المنظومة المنظِّمة باستمرار.</p></article>
+<article id="complication-dual-time"><div><span class="code" aria-hidden="true">DT</span><h3 data-ar="التوقيت المزدوج وGMT" data-en="Dual Time &amp; GMT">التوقيت المزدوج وGMT</h3></div><p data-ar="يعرض التوقيت المزدوج منطقة زمنية ثانية، غالباً بعقرب أو ميناء فرعي مستقل؛ أما GMT فيعتمد عادةً عقرباً ومقياساً من أربع وعشرين ساعة." data-en="Dual Time displays a second time zone, often by an independent hand or subdial; GMT typically uses a 24-hour hand and scale.">يعرض التوقيت المزدوج منطقة زمنية ثانية، غالباً بعقرب أو ميناء فرعي مستقل؛ أما GMT فيعتمد عادةً عقرباً ومقياساً من أربع وعشرين ساعة.</p><aside><strong data-ar="على المعصم" data-en="On the wrist">على المعصم</strong><p data-ar="أثناء السفر، اقرأ التوقيت المحلي والتوقيت في عجمان معاً، دون إعادة ضبط الساعة." data-en="While travelling, read local time and the time in Ajman together, without resetting the watch.">أثناء السفر، اقرأ التوقيت المحلي والتوقيت في عجمان معاً، دون إعادة ضبط الساعة.</p></aside></article>
+<article id="complication-perpetual-calendar"><div><span class="code" aria-hidden="true">PC</span><h3 data-ar="التقويم الدائم" data-en="Perpetual Calendar">التقويم الدائم</h3></div><p data-ar="يتابع اختلاف أطوال الشهور والسنوات الكبيسة ميكانيكياً، ليحافظ على التاريخ الصحيح ما دامت الساعة تعمل." data-en="Mechanically accounts for the differing lengths of months and for leap years, keeping the correct date while the watch runs.">يتابع اختلاف أطوال الشهور والسنوات الكبيسة ميكانيكياً، ليحافظ على التاريخ الصحيح ما دامت الساعة تعمل.</p></article>
+<article id="complication-minute-repeater"><div><span class="code" aria-hidden="true">MR</span><h3 data-ar="مُكرِّر الدقائق" data-en="Minute Repeater">مُكرِّر الدقائق</h3></div><p data-ar="تعقيدٌ صوتي يقرع الساعات وأرباعها والدقائق عند الطلب، عبر مطارق صغيرة تضرب أجراساً داخل العلبة." data-en="An acoustic complication that chimes the hours, quarter-hours and minutes on demand through miniature hammers and gongs.">تعقيدٌ صوتي يقرع الساعات وأرباعها والدقائق عند الطلب، عبر مطارق صغيرة تضرب أجراساً داخل العلبة.</p></article>
+<article id="complication-rattrapante"><div><span class="code" aria-hidden="true">RT</span><h3 data-ar="كرونوغراف الثواني المنقسمة / راترابانت" data-en="Split-seconds Chronograph / Rattrapante">كرونوغراف الثواني المنقسمة / راترابانت</h3></div><p data-ar="عقربا ثوانٍ متراكبان يتيحان قياس زمنين متزامنين أو زمنٍ وسيط، بينما يواصل أحدهما القياس." data-en="Two superimposed chronograph hands allow simultaneous or intermediate timing while one continues to run.">عقربا ثوانٍ متراكبان يتيحان قياس زمنين متزامنين أو زمنٍ وسيط، بينما يواصل أحدهما القياس.</p></article>
+<article id="complication-world-time"><div><span class="code" aria-hidden="true">WT</span><h3 data-ar="التوقيت العالمي" data-en="World Time">التوقيت العالمي</h3></div><p data-ar="يجمع عادةً حلقة من أربع وعشرين ساعة بأسماء المدن، لقراءة مناطق العالم الزمنية في نظرة واحدة." data-en="Typically combines a 24-hour ring with city names to read the world’s time zones at a glance.">يجمع عادةً حلقة من أربع وعشرين ساعة بأسماء المدن، لقراءة مناطق العالم الزمنية في نظرة واحدة.</p></article>
+<article id="complication-flyback"><div><span class="code" aria-hidden="true">FB</span><h3 data-ar="كرونوغراف فلاي باك" data-en="Flyback Chronograph">كرونوغراف فلاي باك</h3></div><p data-ar="ضغطة واحدة أثناء عمل الكرونوغراف تعيد العقرب إلى الصفر وتبدأ قياساً جديداً فوراً." data-en="A single press resets the running chronograph to zero and immediately starts a new interval.">ضغطة واحدة أثناء عمل الكرونوغراف تعيد العقرب إلى الصفر وتبدأ قياساً جديداً فوراً.</p></article>
+<article id="complication-moon-phase"><div><span class="code" aria-hidden="true">MP</span><h3 data-ar="مؤشر أطوار القمر" data-en="Moon-phase Indication">مؤشر أطوار القمر</h3></div><p data-ar="عرضٌ فلكي يتتبّع الدورة القمرية بصرياً، غالباً عبر قرصٍ يدور خلف فتحة في الميناء." data-en="An astronomical indication that follows the lunar cycle, often by a disc turning beneath an aperture.">عرضٌ فلكي يتتبّع الدورة القمرية بصرياً، غالباً عبر قرصٍ يدور خلف فتحة في الميناء.</p></article>
+</div>
+<aside class="note" id="turbine">
+<p class="label" data-ar="مصطلح معاصر" data-en="A contemporary term">مصطلح معاصر</p>
+<h3 data-ar="التوربين ليس توربيوناً." data-en="A turbine is not a tourbillon.">التوربين ليس توربيوناً.</h3>
+<p data-ar="في بعض الساعات المعاصرة، يشير «التوربين» إلى عنصرٍ دوّار بصري أو معماري فوق الميناء أو ضمنه؛ قد يكون جزءاً من هوية التصميم، لكنه ليس تعقيداً ميكانيكياً كلاسيكياً. أما التوربيون فقفصٌ دوّار يحمل عجلة الاتزان ونظام الإفلات." data-en="In some contemporary watches, a “Turbine” is a rotating visual or architectural element on or within the dial. It may define the design, but it is not a classical complication. A tourbillon is a rotating cage carrying the balance and escapement.">في بعض الساعات المعاصرة، يشير «التوربين» إلى عنصرٍ دوّار بصري أو معماري فوق الميناء أو ضمنه؛ قد يكون جزءاً من هوية التصميم، لكنه ليس تعقيداً ميكانيكياً كلاسيكياً. أما التوربيون فقفصٌ دوّار يحمل عجلة الاتزان ونظام الإفلات.</p>
+</aside>
+<aside class="note" id="submariner">
+<p class="label" data-ar="اسم الطراز ومعناه" data-en="Understanding model names">اسم الطراز ومعناه</p>
+<h3 data-ar="سابمارينر — ساعة الغوص من رولكس" data-en="Submariner — the Rolex diving watch">سابمارينر — ساعة الغوص من رولكس</h3>
+<p data-ar="سابمارينر اسم مجموعة ساعات من رولكس صُممت للغوص، وليس اسم تعقيد. يساعد إطارها الدوّار المدرّج على قراءة الزمن المنقضي تحت الماء." data-en="Submariner is the name of a Rolex collection designed for diving, not a complication. Its graduated rotating bezel reads elapsed time underwater.">سابمارينر اسم مجموعة ساعات من رولكس صُممت للغوص، وليس اسم تعقيد. يساعد إطارها الدوّار المدرّج على قراءة الزمن المنقضي تحت الماء.</p>
+<a class="link" href="https://www.rolex.com/watches/submariner" target="_blank" rel="noopener"><span data-ar="عن سابمارينر لدى رولكس" data-en="Submariner at Rolex">عن سابمارينر لدى رولكس</span><span aria-hidden="true">↗</span></a>
+</aside>
+</section>
+<section class="section" id="technical-record" aria-labelledby="recordTitle">
+<div class="inner center">
+<p class="label" data-ar="03 — قراءة السجل التقني" data-en="03 — Reading the technical record">03 — قراءة السجل التقني</p>
+<h2 class="title" id="recordTitle" data-ar="من المرجع إلى احتياطي الطاقة." data-en="From reference to power reserve.">من المرجع إلى احتياطي الطاقة.</h2>
+</div>
+<dl class="record-guide">
+<div><dt data-ar="المرجع" data-en="Reference">المرجع</dt><dd data-ar="الرمز الذي يحدد النسخة أو التكوين المحدد للساعة داخل مجموعة الدار." data-en="The code identifying a specific version or configuration within a maison’s collection.">الرمز الذي يحدد النسخة أو التكوين المحدد للساعة داخل مجموعة الدار.</dd></div>
+<div><dt data-ar="مادة العلبة" data-en="Case material">مادة العلبة</dt><dd data-ar="المعدن أو المادة التي صُنعت منها العلبة، وتؤثر في الوزن والملمس والحضور." data-en="The metal or material of the case, shaping weight, touch and presence.">المعدن أو المادة التي صُنعت منها العلبة، وتؤثر في الوزن والملمس والحضور.</dd></div>
+<div><dt data-ar="أبعاد العلبة" data-en="Case dimensions">أبعاد العلبة</dt><dd data-ar="قياس العلبة بالمليمتر، وهو من أهم عناصر التناسب على المعصم." data-en="The case width in millimetres — a key measure of proportion on the wrist.">قياس العلبة بالمليمتر، وهو من أهم عناصر التناسب على المعصم.</dd></div>
+<div><dt data-ar="العيار / الحركة" data-en="Calibre / movement">العيار / الحركة</dt><dd data-ar="اسم الحركة الميكانيكية أو رقمها، وهي التي تقود الساعة وتعقيداتها." data-en="The designation of the mechanical movement driving the watch and its complications.">اسم الحركة الميكانيكية أو رقمها، وهي التي تقود الساعة وتعقيداتها.</dd></div>
+<div><dt data-ar="احتياطي الطاقة" data-en="Power reserve">احتياطي الطاقة</dt><dd data-ar="المدة التقريبية التي تعمل فيها الحركة بعد التعبئة الكاملة." data-en="How long a fully wound movement runs before it needs more energy.">المدة التقريبية التي تعمل فيها الحركة بعد التعبئة الكاملة.</dd></div>
+<div><dt data-ar="التعقيدات" data-en="Complications">التعقيدات</dt><dd data-ar="الوظائف الميكانيكية الإضافية التي تتجاوز عرض الوقت الأساسي." data-en="Mechanical functions beyond the basic indication of time.">الوظائف الميكانيكية الإضافية التي تتجاوز عرض الوقت الأساسي.</dd></div>
+</dl>
+</section>
+<section class="section night" aria-labelledby="closingTitle">
+<div class="split">
+<figure><img src="/images/sheikh-examining-watches.webp" alt="صاحب السمو يتأمّل كتاب ساعات" data-alt-ar="صاحب السمو يتأمّل كتاب ساعات" data-alt-en="His Highness studying a book of timepieces" width="1179" height="1607" loading="lazy"></figure>
+<div class="words">
+<p class="label" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</p>
+<h2 class="title" id="closingTitle" data-ar="افهم الصنعة. ثم عُد إلى القطعة." data-en="Understand the craft. Then return to the timepiece.">افهم الصنعة. ثم عُد إلى القطعة.</h2>
+<p class="body-2" data-ar="المعرفة لا تُذهب الدهشة؛ بل تجعل التفاصيل الصغيرة أوضح، وأعلى قيمة." data-en="Knowledge does not diminish the wonder. It makes the smallest details easier to see — and harder to overlook.">المعرفة لا تُذهب الدهشة؛ بل تجعل التفاصيل الصغيرة أوضح، وأعلى قيمة.</p>
+<p><a class="link" href="/collection/"><span data-ar="اكتشف المجموعة" data-en="Discover the collection">اكتشف المجموعة</span><span class="arrow" aria-hidden="true">→</span></a></p>
+<p><a class="link" href="/exhibition/"><span data-ar="ادخل قاعة العرض" data-en="Enter the exhibition">ادخل قاعة العرض</span><span class="arrow" aria-hidden="true">→</span></a></p>
+</div>
+</div>
+</section>
 </main>
-
-<footer>
-  <a href="/" class="wordmark" data-ar="الشيخ عمار" data-en="Sheikh Ammar">الشيخ عمار</a>
-  <p data-ar="مجلسٌ للذوق، ومتحفٌ للصنعة · عجمان، الإمارات العربية المتحدة" data-en="A majlis for the discerning. A museum of craft. · Ajman, United Arab Emirates">مجلسٌ للذوق، ومتحفٌ للصنعة · عجمان، الإمارات العربية المتحدة</p>
-  <a href="#watchmakingMain" data-ar="إلى أعلى الصفحة ↑" data-en="Back to top ↑">إلى أعلى الصفحة ↑</a>
+<footer class="colophon">
+<span class="monogram" aria-hidden="true">ع</span>
+<span class="sub" data-ar="مجلس الوقت · عجمان" data-en="The Majlis of Time · Ajman">مجلس الوقت · عجمان</span>
+<nav aria-label="روابط التذييل" data-label-ar="روابط التذييل" data-label-en="Footer links"><a href="/" data-ar="المجلس" data-en="The Majlis">المجلس</a><a href="/collection/" data-ar="المجموعة" data-en="The Collection">المجموعة</a><a href="/exhibition/" data-ar="قاعة العرض" data-en="The Exhibition">قاعة العرض</a><a href="/his-highness/" data-ar="صاحب السمو" data-en="His Highness">صاحب السمو</a><a href="/watchmaking/" data-ar="فن صناعة الساعات" data-en="Watchmaking">فن صناعة الساعات</a></nav>
+<p data-ar="مجموعة خاصة تُعرض للتأمّل، لا للبيع." data-en="A private collection, shown for contemplation — never for sale.">مجموعة خاصة تُعرض للتأمّل، لا للبيع.</p>
 </footer>
+
+<noscript><p style="padding:2rem;text-align:center">يرجى تفعيل JavaScript لتصفّح المجموعة · Please enable JavaScript to explore the collection.</p></noscript>
 </body>
 </html>
