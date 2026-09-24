@@ -16,6 +16,13 @@ This directory contains the canonical public museum deployed through Railway.
 
 The older `docs/` site remains in the repository as a design/editorial reference and as the record of substantial Claude Code work. It is **not** the production V1 application and must not be deployed over `museum/dist`.
 
+## Royal rules (enforced by `npm test` and `npm run test:rendered`)
+
+- Every timepiece is shown with His Highness — pages render only `/assets/royal/` and `/images/sheikh*`.
+- No play icon in the header; no YouTube or native video player.
+- Arabic view carries no English words; palette and rendered text meet WCAG AAA.
+- Pages come from `scripts/build-pages.mjs`; royal images from `scripts/build_royal_media.py`.
+
 ## V1 routes
 
 - `/` — The Majlis / home
@@ -30,7 +37,7 @@ The museum is not ecommerce. Public copy uses a restrained Haute Horlogerie regi
 Maison / الدار, timepiece / الساعة or القطعة, craftsmanship / المهارة الحرفية,
 Haute Horlogerie / صناعة الساعات الراقية, calibre / العيار, complications / التعقيدات.
 
-Owner-video language incorporated into V1:
+Signature language:
 - «ثلاث قطع. ثلاث لغات للوقت.»
 - “Three Timepieces. Three Expressions of Time.”
 - «حين تستحق اللحظة أن تطول.»
@@ -68,7 +75,7 @@ Source-level V1 checks cover:
 - exhibition route
 - mobile editorial detail treatment
 - favicon
-- server routes, health check and byte-range video serving
+- server routes, health check and byte-range media serving
 
 ## Current release workflow
 

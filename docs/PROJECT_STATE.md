@@ -1,6 +1,51 @@
 # Sheikh Ammar Horology Museum — Current Project State
 
-Updated: 20 September 2026
+Updated: 24 September 2026
+
+## 24 September 2026 — Royal redesign (supersedes the design notes below)
+The public site in `museum/dist/` was redesigned end to end in a Haute Horlogerie
+maison register (ivory paper, ink type, hairlines, spaced small capitals, full-bleed
+photography). Owner directive, now enforced by the test gates:
+
+1. **Every timepiece is shown with His Highness.** `museum/dist/assets/royal/<slug>.webp`
+   (built by `museum/scripts/build_royal_media.py`) is the only image of a timepiece any
+   page renders. 35 are real photographs of H.H. with the piece; 9 pair an official
+   portrait with the maker's image and are labelled as such (`royalPairing: "portrait"`).
+   `/assets/watches`, `/assets/plates` and `/assets/watches-verified` are source material
+   and must never be rendered directly. His face is never retouched.
+2. **No player chrome.** No play icon in the header, no YouTube embed, no native video
+   controls. The home "screening room" is a projection of photographs of His Highness.
+   The old `collection-film.mp4` (a third-party reel with watermark, captions and prices)
+   was moved to `museum/source-media/` and is not public.
+3. **Arabic first, and pure.** Arabic is default; the Arabic view shows no English words
+   (reference codes excepted). Hero: «للوقت قدر. وللساعات حكاية.»
+4. **AAA contrast.** Palette ratios are checked in `verify-museum.mjs`; every visible line
+   of text is checked in the browser by `verify-rendered.mjs`.
+5. **Text never crosses His Highness's portrait** (checked in the rendered gate).
+
+Signature features (home):
+- **Private invitation** — `/?for=<name>` turns the visit into a one-of-one edition: the
+  name appears in the opening veil, the hero and the colophon (kept for the session, text only).
+- **Opening veil** — the ع monogram engraves itself once per session; never under reduced motion.
+- **Time in Ajman** — live, with the Umm al-Qura Hijri date and the Gregorian date.
+- **Piece of the day** — rotates each Gulf day through the pieces photographed with H.H.
+- **The collection on a single dial** — every dated piece is an index in chronological order;
+  the hand follows hover/arrow keys; the centre shows His Highness with the piece.
+- **The loupe** — a jeweller's lens over the royal image in the detail sheet (fine pointers).
+
+Pages are generated from one template: edit `museum/scripts/build-pages.mjs`, then
+`node scripts/build-pages.mjs`. Runtime is one file, `museum/dist/app.js`.
+Retired: `vision.js`, `vision.css`, `reading.css`, `watchmaking.js`.
+
+Open items for the owner:
+- Resend the clean original of the Lederer photograph (a publisher "W" sits over the headdress).
+- Resend the watchmaking-event photograph — the committed WebP is truncated and was rendering broken.
+- Wrist photographs for the 9 portrait-paired pieces, when available.
+- "One of not many" is Vacheron Constantin's own brand line; confirm you want to keep it.
+
+QA on this change: `npm test` 31/31; `verify-rendered.mjs` 120/120 (5 routes × 6 viewports ×
+AR/EN × normal/reduced motion, all 44 detail sheets opened at 390 and 1440).
+
 
 ## V1 production
 - Canonical public source: `museum/dist/`

@@ -35,7 +35,7 @@
       "materialEn": "Platinum",
       "materialAr": "بلاتين",
       "movementEn": "Caliber CH 29-535 PS Q, Manual Chronograph Perpetual Calendar",
-      "movementAr": "عيار CH 29-535 PS Q, كرونوغراف يدوي التعبئة تقويم دائم",
+      "movementAr": "عيار CH 29-535 PS Q، كرونوغراف بحركة يدوية التعبئة وتقويم دائم",
       "caseSizeEn": "41mm",
       "caseSizeAr": "41مم",
       "powerReserveEn": null,
@@ -44,7 +44,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/patek-philippe-perpetual-calendar-5270p-green.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-perpetual-calendar-5270p-green.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60022,
@@ -81,7 +83,7 @@
       "materialEn": "White Gold",
       "materialAr": "ذهب أبيض",
       "movementEn": "Caliber 240 Q, Ultra-Thin Perpetual Calendar",
-      "movementAr": "عيار 240 Q, فائقة النحافة تقويم دائم",
+      "movementAr": "عيار 240 Q، حركة فائقة النحافة بتقويم دائم",
       "caseSizeEn": "40mm",
       "caseSizeAr": "40مم",
       "powerReserveEn": null,
@@ -89,14 +91,16 @@
       "complicationsEn": null,
       "complicationsAr": null,
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-nautilus-perpetual-calendar-5740.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60029,
       "brandId": 8,
       "referenceNumber": "Custom",
       "nameEn": "La Montoya Platinum Challenge",
-      "nameAr": "لا مونتويا",
+      "nameAr": "لا مونتويا — تحدّي البلاتين",
       "slug": "artisans-de-geneve-la-montoya-platinum-challenge",
       "descriptionEn": "Artisans De Geneve La Montoya Platinum Challenge - a custom-created masterpiece based on the Rolex Daytona, transformed into a unique work of art.",
       "descriptionAr": "Artisans De Geneve La Montoya Platinum Challenge — تحفة مُنفَّذة خصيصًا ومستندة إلى Rolex Daytona، مُحوَّلة إلى عمل فني فريد.",
@@ -135,7 +139,11 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/artisans-de-geneve-la-montoya-platinum-challenge.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/artisans-de-geneve-la-montoya-platinum-challenge.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "Bespoke",
+      "referenceAr": "قطعة مخصّصة"
     },
     {
       "id": 60004,
@@ -181,7 +189,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/audemars-piguet-royal-oak-chronograph-ice-blue-26317bc.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/audemars-piguet-royal-oak-chronograph-ice-blue-26317bc.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60005,
@@ -227,14 +237,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60027,
       "brandId": 5,
       "referenceNumber": "Tourbillon Souverain",
       "nameEn": "Tourbillon Souverain",
-      "nameAr": "توربيون سوفيرين",
+      "nameAr": "توربيون سوفران",
       "slug": "fp-journe-tourbillon-souverain-red-dial",
       "descriptionEn": "The F.P. Journe Tourbillon Souverain with a rare red dial, representing one of the most coveted configurations from the independent watchmaker.",
       "descriptionAr": "تأتي F.P. Journe Tourbillon Souverain بميناء أحمر نادر، وتمثل إحدى التكوينات الأكثر طلبًا لدى جامعي ساعات العلامة المستقلة.",
@@ -273,7 +285,11 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/fp-journe-tourbillon-souverain-red-dial.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/fp-journe-tourbillon-souverain-red-dial.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "Red dial",
+      "referenceAr": "الميناء الأحمر"
     },
     {
       "id": 60007,
@@ -319,7 +335,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-day-date-18239-coral-red.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-day-date-18239-coral-red.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60008,
@@ -365,14 +383,16 @@
       "complicationsAr": "كرونوغراف",
       "detailImage": "/assets/plates/rolex-daytona-6263-quraysh-hawk.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-daytona-6263-quraysh-hawk.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60025,
       "brandId": 2,
       "referenceNumber": "RM 68-01",
       "nameEn": "RM 68-01 Tourbillon Cyril Kongo",
-      "nameAr": "آر إم ٦٨-٠١ توربيون سيريل كونغو",
+      "nameAr": "توربيون سيريل كونغو",
       "slug": "richard-mille-rm-68-01-tourbillon-cyril-kongo",
       "descriptionEn": "Richard Mille identifies the RM 68-01 Tourbillon Cyril Kongo as a 2016 historical model with a manual-winding tourbillon calibre. An attributed public source is required before this archive can describe a public appearance or any private ownership.",
       "descriptionAr": "تعرّف ريتشارد ميل طراز RM 68-01 توربيون سيريل كونغو بوصفه طرازاً تاريخياً من عام 2016، مزوّداً بحركة توربيون تعبأ يدوياً. ويتطلب وصف أي ظهور علني أو ملكية خاصة مصدراً علنياً منسوباً.",
@@ -411,14 +431,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/richard-mille-rm-68-01-tourbillon-cyril-kongo.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/richard-mille-rm-68-01-tourbillon-cyril-kongo.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60024,
       "brandId": 2,
       "referenceNumber": "RM 26-02",
       "nameEn": "RM 26-02 Tourbillon Evil Eye",
-      "nameAr": "آر إم ٢٦-٠٢ توربيون عين الشر",
+      "nameAr": "توربيون «عين الشرّ»",
       "slug": "richard-mille-rm-26-02-tourbillon-evil-eye",
       "descriptionEn": "Richard Mille identifies the RM 26-02 Tourbillon Evil Eye as a manual-winding tourbillon with hours, minutes, and power-reserve display. Its hand-carved and grand-feu enamelled eye-and-flame motif is realised in a 25-piece series. This entry records manufacturer-confirmed model context only and does not assert a public appearance or private ownership.",
       "descriptionAr": "تعرّف Richard Mille طراز RM 26-02 Tourbillon Evil Eye بوصفه توربيونًا يدوي التعبئة يعرض الساعات والدقائق واحتياطي الطاقة. ويُنفذ شعار العين واللهب فيه بالنحت اليدوي ومينا Grand Feu ضمن إصدار من 25 قطعة. يوثق هذا السجل سياق الطراز المؤكد من الدار فقط، ولا يثبت ظهورًا عامًا أو ملكية خاصة.",
@@ -443,7 +465,7 @@
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Richard Mille",
       "displayImage": "/assets/watches/rm26-02-1674211731885_800x.webp",
-      "editorialAr": "عين تتوسط المشهد ولهب يحيط بها. يلتقي النحت والمينا الفنية بميكانيكا التوربيون في آر إم 26-02.",
+      "editorialAr": "عينٌ تتوسّط المشهد ولهبٌ يحيط بها. يلتقي النحت والمينا الفنية بميكانيكا التوربيون في المرجع RM 26-02.",
       "editorialEn": "An eye framed by flame. Sculpture and enamel work meet tourbillon mechanics in the RM 26-02.",
       "materialEn": "White Gold with Gemstones",
       "materialAr": "ذهب أبيض وأحجار كريمة",
@@ -457,7 +479,9 @@
       "complicationsAr": "توربيون; مؤشر احتياطي الطاقة",
       "detailImage": "/assets/plates/richard-mille-rm-26-02-tourbillon-evil-eye.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/richard-mille-rm-26-02-tourbillon-evil-eye.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60011,
@@ -503,7 +527,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-daytona-paul-newman-6239.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-daytona-paul-newman-6239.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60012,
@@ -549,7 +575,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-daytona-paul-newman-6264-green-strap.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-daytona-paul-newman-6264-green-strap.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60003,
@@ -595,7 +623,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60014,
@@ -632,7 +662,7 @@
       "materialEn": null,
       "materialAr": null,
       "movementEn": "Manual chronograph, calibre 722 family",
-      "movementAr": "يدوية التعبئة كرونوغراف, عيار 722 family",
+      "movementAr": "كرونوغراف بحركة يدوية التعبئة، من عائلة العيار 722",
       "caseSizeEn": "37mm",
       "caseSizeAr": "37مم",
       "powerReserveEn": null,
@@ -641,7 +671,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-daytona-6241-john-player-special.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-daytona-6241-john-player-special.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60002,
@@ -687,14 +719,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/watches-verified/ap-royal-oak-26579cs-blue.jpg",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/audemars-piguet-royal-oak-perpetual-calendar-blue-ceramic-26579cs.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60016,
       "brandId": 4,
       "referenceNumber": "Custom",
       "nameEn": "Cosmograph Daytona 'Abu Dhabi'",
-      "nameAr": "كوزموغراف دايتونا أبوظبي",
+      "nameAr": "كوزموغراف دايتونا «أبوظبي»",
       "slug": "rolex-cosmograph-daytona-abu-dhabi-aet-remould",
       "descriptionEn": "Rolex Cosmograph Daytona 'Abu Dhabi' in sapphire made by AET Remould. This extraordinary custom creation features a fully transparent sapphire case, allowing a complete view of the movement.",
       "descriptionAr": "Rolex Cosmograph Daytona 'Abu Dhabi' من الياقوت، مصنوعة بواسطة AET Remould. هذه التحفة المخصصة الاستثنائية تتميز بعلبة من الياقوت شفافة بالكامل تتيح رؤية كاملة للحركة.",
@@ -733,7 +767,11 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-cosmograph-daytona-abu-dhabi-aet-remould.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-cosmograph-daytona-abu-dhabi-aet-remould.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "Bespoke · AET Remould",
+      "referenceAr": "قطعة مخصّصة"
     },
     {
       "id": 60017,
@@ -779,7 +817,9 @@
       "complicationsAr": "كرونوغراف; تقويم دائم",
       "detailImage": "/assets/plates/patek-philippe-perpetual-calendar-5271p-blue-sapphire.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-perpetual-calendar-5271p-blue-sapphire.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60020,
@@ -825,14 +865,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/patek-philippe-nautilus-5711-1300a-olive-green.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-nautilus-5711-1300a-olive-green.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 120001,
       "brandId": 4,
       "referenceNumber": "DIW Motley 3S / bespoke",
       "nameEn": "DIW Motley Carbon Daytona",
-      "nameAr": "رولكس دايتونا DIW موتلي كاربون",
+      "nameAr": "دايتونا «موتلي» من الكربون",
       "slug": "rolex-daytona-diw-motley-carbon",
       "descriptionEn": "A bespoke DIW / Designa Individual interpretation based on a Rolex Daytona. The 40 mm carbon-fibre case frames a black paint-splash dial with vivid green, yellow and red chronograph counters, creating a daring contemporary expression of a motorsport icon.",
       "descriptionAr": "تجسيدٌ خاص من DIW / ديزاينا إنديفيدوال مبني على رولكس دايتونا. تؤطر العلبة المصنوعة من ألياف الكربون بقياس 40 مم مينا أسود بتأثيرات لونية فنية، مع عدادات كرونوغراف نابضة بالأخضر والأصفر والأحمر، في قراءة معاصرة جريئة لأيقونة رياضية.",
@@ -870,7 +912,11 @@
       "complicationsEn": "Chronograph; central seconds; 30-minute and 12-hour counters",
       "complicationsAr": "كرونوغراف; ثوانٍ مركزية; عدادا 30 دقيقة و12 ساعة",
       "imageWidth": 800,
-      "imageHeight": 815
+      "imageHeight": 815,
+      "royalImage": "/assets/royal/rolex-daytona-diw-motley-carbon.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "DiW Motley 3S · bespoke",
+      "referenceAr": "قطعة مخصّصة"
     },
     {
       "id": 60013,
@@ -892,7 +938,7 @@
       "powerReserve": null,
       "limitedEdition": false,
       "productionQuantity": null,
-      "yearReleased": 19701980,
+      "yearReleased": null,
       "rarity": "Rare",
       "mainImageUrl": "/watches/rolex-daytona-6265-1681913867168_800x.webp",
       "displayOrder": 0,
@@ -916,7 +962,11 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-daytona-6265-black-dial.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-daytona-6265-black-dial.webp",
+      "royalPairing": "photograph",
+      "yearLabelEn": "1970s",
+      "yearLabelAr": "سبعينيات القرن العشرين"
     },
     {
       "id": 60019,
@@ -962,14 +1012,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/patek-philippe-calatrava-6007a-gray-blue.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-calatrava-6007a-gray-blue.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60001,
       "brandId": 6,
       "referenceNumber": "1804-0212",
       "nameEn": "Endeavour Tourbillon Concept Vantablack",
-      "nameAr": "إنديفر توربيون كونسبت فانتابلَاك",
+      "nameAr": "إنديفر توربيون كونسبت · فانتابلاك",
       "slug": "h-moser-endeavour-tourbillon-vantablack-1804-0212",
       "descriptionEn": "A source-linked public-appearance lead for the Endeavour Tourbillon Concept Vantablack ref. 1804-0212. Specialist model data identifies a 42 mm white-gold automatic tourbillon with a Vantablack dial, HMC 804 calibre, and 72-hour power reserve. This record documents model context, not a private-collection ownership claim.",
       "descriptionAr": "سجل مرتبط بمصدر يشير إلى ظهور عام لطراز Endeavour Tourbillon Concept Vantablack مرجع 1804-0212. تحدد بيانات مرجعية متخصصة طرازًا بعلبة من الذهب الأبيض قطرها 42 مم، وتوربيون أوتوماتيكي، ومينا Vantablack، وعيار HMC 804، واحتياطي طاقة مدته 72 ساعة. يوثق هذا السجل سياق الطراز ولا يمثل ادعاء ملكية خاصة.",
@@ -1008,7 +1060,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/h-moser-endeavour-tourbillon-vantablack-1804-0212.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/h-moser-endeavour-tourbillon-vantablack-1804-0212.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 90001,
@@ -1055,14 +1109,16 @@
       "mediaNoteEn": "Patek Philippe official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 1284,
-      "imageHeight": 1800
+      "imageHeight": 1800,
+      "royalImage": "/assets/royal/patek-philippe-grand-complications-minute-repeater.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 60010,
       "brandId": 4,
       "referenceNumber": "126719BLRO",
       "nameEn": "GMT-Master II 'Pepsi' Meteorite",
-      "nameAr": "جي إم تي ماستر ٢ بيبسي نيزكي",
+      "nameAr": "جي إم تي-ماستر ٢ «بيبسي» بميناء نيزكي",
       "slug": "rolex-gmt-master-ii-pepsi-meteorite-126719",
       "descriptionEn": "The GMT-Master II 'Pepsi' with a rare meteorite dial in white gold, combining the iconic red and blue bezel with an otherworldly dial made from genuine meteorite.",
       "descriptionAr": "ساعة GMT‑Master II «Pepsi» بمينا نيزكي نادر في علبة من الذهب الأبيض، تجمع الإطار الأحمر والأزرق الأيقوني مع ميناء يبدو غير دنيوي ومصنوعًا من نيزك حقيقي.",
@@ -1101,14 +1157,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-gmt-master-ii-pepsi-meteorite-126719.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-gmt-master-ii-pepsi-meteorite-126719.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60009,
       "brandId": 4,
       "referenceNumber": "126710BLRO",
       "nameEn": "GMT-Master II 'Pepsi'",
-      "nameAr": "جي إم تي ماستر ٢ بيبسي",
+      "nameAr": "جي إم تي-ماستر ٢ «بيبسي»",
       "slug": "rolex-gmt-master-ii-pepsi-126710blro",
       "descriptionEn": "Model context for the Rolex GMT-Master II, ref. 126710BLRO: an Oystersteel GMT-Master II with a black dial and a red-and-blue Cerachrom bezel. Any reported public appearance requires an attributed source and does not establish private ownership.",
       "descriptionAr": "سياق الطراز لساعة رولكس جي إم تي ماستر 2، المرجع 126710BLRO: ساعة من فولاذ أويستر ستيل بمينا أسود وإطار سيراكروم بالأحمر والأزرق. يتطلب أي ظهور علني مُبلّغ عنه مصدراً منسوباً بوضوح، ولا يثبت ملكية خاصة.",
@@ -1133,7 +1191,7 @@
       "updatedAt": "2026-08-27T23:58:33.000Z",
       "brand": "Rolex",
       "displayImage": "/assets/watches/rolex-pepsi-1674209935187_800x.webp",
-      "editorialAr": "لونان على الإطار وقراءة واضحة للتوقيت. يحتفظ المرجع 126710BLRO بحضور جي إم تي ماستر II المألوف.",
+      "editorialAr": "لونان على الإطار وقراءة واضحة للتوقيت. يحتفظ المرجع 126710BLRO بحضور جي إم تي-ماستر ٢ المألوف.",
       "editorialEn": "Two colours on the bezel and a clear time display. Reference 126710BLRO retains the familiar presence of the GMT-Master II.",
       "materialEn": "Oystersteel",
       "materialAr": "أويستر ستيل",
@@ -1147,14 +1205,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-gmt-master-ii-pepsi-126710blro.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-gmt-master-ii-pepsi-126710blro.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60026,
       "brandId": 2,
       "referenceNumber": "RM 67-02",
       "nameEn": "RM 67-02 Automatic",
-      "nameAr": "آر إم ٦٧-٠٢ أوتوماتيكي",
+      "nameAr": "إصدار ألكسيس بانتورو",
       "slug": "richard-mille-rm-67-02-alexis-pinturault",
       "descriptionEn": "The Richard Mille RM 67-02 Automatic Alexis Pinturault Edition, designed for the French alpine ski racer and built to withstand the extreme conditions of professional skiing.",
       "descriptionAr": "تُعدّ Richard Mille RM 67-02 Automatic Alexis Pinturault Edition نسخة مصمَّمة للمتسابق الفرنسي في التزلج الألبي Alexis Pinturault، وبُنيت لتحمُّل ظروف التزلج الاحترافية القاسية.",
@@ -1193,14 +1253,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/richard-mille-rm-67-02-alexis-pinturault.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/richard-mille-rm-67-02-alexis-pinturault.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60006,
       "brandId": 3,
       "referenceNumber": "15202",
       "nameEn": "Royal Oak Extra-Thin 'Jumbo'",
-      "nameAr": "رويال أوك فائق النحافة جامبو",
+      "nameAr": "رويال أوك «جامبو» فائقة النحافة",
       "slug": "audemars-piguet-royal-oak-extra-thin-jumbo-15202",
       "descriptionEn": "The iconic Royal Oak 'Jumbo' Extra-Thin in its most elegant form, featuring a rare salmon dial that has become one of the most sought-after configurations among collectors.",
       "descriptionAr": "الـ Royal Oak 'Jumbo' Extra‑Thin الأيقوني في أكثر أشكاله أناقة، يضم الميناء بلون السلمون النادر الذي أصبح من بين أكثر التكوينات طلبًا لدى جامعي الساعات.",
@@ -1239,7 +1301,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/audemars-piguet-royal-oak-extra-thin-jumbo-15202.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/audemars-piguet-royal-oak-extra-thin-jumbo-15202.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60015,
@@ -1285,14 +1349,16 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/rolex-cosmograph-daytona-116509-white-gold.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/rolex-cosmograph-daytona-116509-white-gold.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60028,
       "brandId": 5,
       "referenceNumber": "Résonance",
       "nameEn": "Chronomètre à Résonance",
-      "nameAr": "كرونومتر برنين",
+      "nameAr": "كرونومتر الرنين",
       "slug": "fp-journe-chronometre-a-resonance-platinum-grey",
       "descriptionEn": "The F.P. Journe Chronomètre à Résonance in Platinum With a Grey Dial - one of the most technically sophisticated watches ever created, utilizing the principle of resonance.",
       "descriptionAr": "ساعة F.P. Journe Chronomètre à Résonance من البلاتين بمينا رمادي — واحدة من أكثر الساعات تعقيدًا تقنيًا على الإطلاق، تعتمد مبدأ الرنين.",
@@ -1331,7 +1397,11 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/fp-journe-chronometre-a-resonance-platinum-grey.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/fp-journe-chronometre-a-resonance-platinum-grey.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "Platinum · grey dial",
+      "referenceAr": "بلاتين · ميناء رمادي"
     },
     {
       "id": 60023,
@@ -1377,7 +1447,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/patek-philippe-world-time-5230g-011-manama.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-world-time-5230g-011-manama.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 60018,
@@ -1423,7 +1495,9 @@
       "complicationsAr": null,
       "detailImage": "/assets/plates/patek-philippe-calatrava-5326g-001.webp",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/patek-philippe-calatrava-5326g-001.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 90002,
@@ -1471,14 +1545,18 @@
       "mediaNoteAr": "قصاصة من ظهور علني؛ تبقى تفاصيل الطراز موثقة بمصادرها المستقلة.",
       "detailImage": "/assets/plates/fp-journe-tourbillon-souverain.webp",
       "imageWidth": 1040,
-      "imageHeight": 900
+      "imageHeight": 900,
+      "royalImage": "/assets/royal/fp-journe-tourbillon-souverain.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "Jade dial",
+      "referenceAr": "ميناء اليشم"
     },
     {
       "id": 90003,
       "brandId": 2,
       "referenceNumber": "RM65-01",
       "nameEn": "RM 65-01 Automatic Split-Seconds Chronograph McLaren W1",
-      "nameAr": "RM 65-01 كرونوغراف الثواني المنقسمة — ماكلارين W1",
+      "nameAr": "كرونوغراف الثواني المنقسمة — ماكلارين W1",
       "slug": "richard-mille-rm-65-01-automatic-split-seconds-chronograph-mclaren-w1",
       "descriptionEn": "Richard Mille officially describes the RM 65-01 McLaren W1 as an automatic split-seconds chronograph inspired by the McLaren W1, with RMAC4 calibre and a 500-piece edition. This entry records verified model context; any public appearance remains separately source-linked.",
       "descriptionAr": "تصف Richard Mille رسمياً ساعة RM 65-01 McLaren W1 بأنها كرونوغراف أوتوماتيكي بثوانٍ منقسمة مستوحًى من McLaren W1، مزوَّد بعيار RMAC4 وإصدار من 500 قطعة. يسجل هذا الإدخال سياق الطراز الموثق؛ بينما يبقى أي ظهور عام منسوب مرتبطاً بمصدر مستقل.",
@@ -1518,14 +1596,16 @@
       "mediaNoteEn": "Richard Mille official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 749,
-      "imageHeight": 1000
+      "imageHeight": 1000,
+      "royalImage": "/assets/royal/richard-mille-rm-65-01-automatic-split-seconds-chronograph-mclaren-w1.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 90004,
       "brandId": 1,
       "referenceNumber": "5470P-001",
       "nameEn": "Grand Complications 1/10th Second Monopusher Chronograph",
-      "nameAr": "التعقيدات الكبرى — كرونوغراف أحادي الضاغط 1/10 ثانية",
+      "nameAr": "كرونوغراف أحادي الزر بدقة عُشر الثانية",
       "slug": "patek-philippe-grand-complications-110th-second-monopusher-chronograph",
       "descriptionEn": "Patek Philippe officially lists ref. 5470P-001 as a 41 mm platinum 1/10th-of-a-second monopusher chronograph with manually wound CH 29-535 PS 1/10 calibre. This entry records official model context; any public appearance remains separately source-linked.",
       "descriptionAr": "تسرد باتيك فيليب رسمياً المرجع 5470P-001 ككرونوغراف أحادي الضاغط بدقة عُشر الثانية من البلاتين قطره 41 مم، بعيار يدوي CH 29-535 PS 1/10. يوثق هذا السجل سياق الطراز الرسمي، بينما يبقى أي ظهور عام منسوب مرتبطاً بمصدر مستقل.",
@@ -1565,14 +1645,16 @@
       "mediaNoteEn": "Patek Philippe official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 1284,
-      "imageHeight": 1800
+      "imageHeight": 1800,
+      "royalImage": "/assets/royal/patek-philippe-grand-complications-110th-second-monopusher-chronograph.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 90005,
       "brandId": 2,
       "referenceNumber": "RM35-03",
       "nameEn": "RM 35-03 Automatic Rafael Nadal",
-      "nameAr": "RM 35-03 آلي رافائيل نادال",
+      "nameAr": "إصدار رافائيل نادال",
       "slug": "richard-mille-rm-35-03-automatic-rafael-nadal",
       "descriptionEn": "Developed in collaboration with tennis legend Rafael Nadal, the RM 35-03 combines extreme durability with sophisticated watchmaking. The dual winding modes allow for optimal efficiency in both daily wear and sport modes. This is a watch built for champions.",
       "descriptionAr": "ساعة ريتشارد ميل RM 35-03 طورت بالتعاون مع أسطورة التنس رافائيل نادال. تجمع بين المتانة الشديدة والحرفية المتطورة. أوضاع الملء المزدوجة تسمح بالكفاءة المثلى.",
@@ -1597,7 +1679,7 @@
       "updatedAt": "2026-08-26T05:50:23.000Z",
       "brand": "Richard Mille",
       "displayImage": "/assets/watches/richard-mille-rm-35-03-automatic-rafael-nadal.webp",
-      "editorialAr": "حركة مكشوفة وشخصية رياضية. في آر إم 35-03 رافائيل نادال، يتيح الدوّار الفراشي التحكم في تعبئة الساعة، وتكشف الجسور عن طبقات الصنعة.",
+      "editorialAr": "حركةٌ مكشوفة وشخصيةٌ رياضية. في إصدار رافائيل نادال، يتيح الدوّار الفراشي التحكم في تعبئة الساعة، وتكشف الجسور طبقات الصنعة.",
       "editorialEn": "An open movement with a sporting character. In the RM 35-03 Rafael Nadal, the butterfly rotor gives the wearer control over winding, while the bridges reveal the craft in layers.",
       "materialEn": "Carbon/Quartz TPT",
       "materialAr": "كربون وكوارتز TPT",
@@ -1612,7 +1694,9 @@
       "mediaNoteEn": "Richard Mille official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 749,
-      "imageHeight": 1000
+      "imageHeight": 1000,
+      "royalImage": "/assets/royal/richard-mille-rm-35-03-automatic-rafael-nadal.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 90006,
@@ -1659,14 +1743,16 @@
       "mediaNoteEn": "Waqt editorial product image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 1262,
-      "imageHeight": 835
+      "imageHeight": 835,
+      "royalImage": "/assets/royal/fp-journe-ffc-francis-ford-coppola-calibre-13003.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 90007,
       "brandId": 5,
       "referenceNumber": "Calibre 1518",
       "nameEn": "lineSport Chronographe Rattrapante",
-      "nameAr": "لينسبورت كرونوغراف راترابانت",
+      "nameAr": "لاينسبورت — كرونوغراف راترابانت",
       "slug": "fp-journe-linesport-chronographe-rattrapante",
       "descriptionEn": "The F.P. Journe Chronographe Rattrapante represents the pinnacle of split-seconds chronograph design. The Calibre 1518 features exceptional steelwork and the sophisticated rattrapante mechanism. The model is documented in titanium, red gold, and platinum executions, each reflecting Journe's technical language of haute horlogerie.",
       "descriptionAr": "تمثل ساعة F.P. Journe Chronographe Rattrapante ذروة تصميم كرونوغراف الثواني المنفصلة (rattrapante). تتميز حركة Calibre 1518 بتشطيب فولاذي استثنائي وآلية rattrapante متطورة. يوثّق الطراز بتنفيذات من التيتانيوم والذهب الأحمر والبلاتين، وتعكس كل نسخة لغة Journe التقنية في صناعة الساعات الراقية.",
@@ -1706,7 +1792,11 @@
       "mediaNoteEn": "F.P. Journe official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/fp-journe-linesport-chronographe-rattrapante.webp",
+      "royalPairing": "portrait",
+      "referenceEn": "Calibre 1518",
+      "referenceAr": "العيار 1518"
     },
     {
       "id": 90008,
@@ -1753,14 +1843,16 @@
       "mediaNoteEn": "Public appearance image; model association kept editorially bounded",
       "mediaNoteAr": "صورة من ظهور علني؛ حُفظ الربط بالطراز ضمن حدود التحرير والمصدر.",
       "imageWidth": 640,
-      "imageHeight": 640
+      "imageHeight": 640,
+      "royalImage": "/assets/royal/patek-philippe-calatrava.webp",
+      "royalPairing": "photograph"
     },
     {
       "id": 90009,
       "brandId": 3,
       "referenceNumber": "26586XT",
       "nameEn": "Royal Oak Perpetual Calendar RD2 Ultra-Thin",
-      "nameAr": "رويال أوك بالتقويم الدائم RD2 فائق النحافة",
+      "nameAr": "رويال أوك بالتقويم الدائم فائقة النحافة",
       "slug": "audemars-piguet-royal-oak-perpetual-calendar-rd2-ultra-thin",
       "descriptionEn": "The Audemars Piguet Royal Oak 26586XT is a masterpiece of modern watchmaking. Limited to just 35 pieces, this Middle East Edition combines the iconic Royal Oak design with the world's thinnest automatic perpetual calendar movement. The titanium and bulk metallic glass case is both innovative and visually stunning.",
       "descriptionAr": "ساعة أوديمار بيجيه Royal Oak 26586XT تحفة من الساعات الحديثة. محدودة بـ 35 قطعة فقط، تجمع بين تصميم Royal Oak الأيقوني مع أرق حركة تقويم أبدي آلية في العالم. علبة التيتانيوم والزجاج المعدني السائب مبتكرة وجميلة بصرياً.",
@@ -1800,7 +1892,9 @@
       "mediaNoteEn": "Audemars Piguet official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 1500,
-      "imageHeight": 1800
+      "imageHeight": 1800,
+      "royalImage": "/assets/royal/audemars-piguet-royal-oak-perpetual-calendar-rd2-ultra-thin.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 90010,
@@ -1847,14 +1941,16 @@
       "mediaNoteEn": "Patek Philippe official model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 1285,
-      "imageHeight": 1800
+      "imageHeight": 1800,
+      "royalImage": "/assets/royal/patek-philippe-aquanaut.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 150001,
       "brandId": 1,
       "referenceNumber": "3939HP-001",
       "nameEn": "Minute Repeater Tourbillon 3939HP",
-      "nameAr": "مُكرِّر الدقائق وتوربيون 3939HP",
+      "nameAr": "مُكرِّر الدقائق مع التوربيون",
       "slug": "patek-philippe-minute-repeater-tourbillon-3939hp",
       "descriptionEn": "Christie's auction catalogue identifies ref. 3939HP-001 as a 33.5 mm platinum, manual-wind minute-repeating tourbillon with a white enamel dial and Breguet numerals; its lot essay records the reference as introduced in 1993 and produced until 2009. A public 15 November 2025 post by watchleaderskw reports that Sheikh Ammar was wearing a Patek Philippe 3939HP. This is a reported public appearance, not proof of private ownership; post and auction media are not reproduced.",
       "descriptionAr": "يحدد كتالوج مزاد كريستيز المرجع 3939HP-001 كساعَة من البلاتين بقطر 33.5 مم، ذات تعبئة يدوية ومكرر دقائق وتوربيون، بمينا من المينا الأبيض وأرقام بريجيه؛ ويذكر مقال الكتالوج أن المرجع طُرح عام 1993 واستمر إنتاجه حتى 2009. وتذكر تدوينة عامة بتاريخ 15 نوفمبر من حساب watchleaderskw أن الشيخ عمار كان يرتدي ساعة Patek Philippe 3939HP. يورد السجل ظهوراً معلناً فقط ولا يثبت ملكية خاصة، ولا يعيد نشر وسائط التدوينة أو المزاد.",
@@ -1894,7 +1990,9 @@
       "mediaNoteEn": "Patek Philippe model image",
       "mediaNoteAr": "صورة مرجعية للطراز من مصدر مراجَع.",
       "imageWidth": 1800,
-      "imageHeight": 1800
+      "imageHeight": 1800,
+      "royalImage": "/assets/royal/patek-philippe-minute-repeater-tourbillon-3939hp.webp",
+      "royalPairing": "portrait"
     },
     {
       "id": 180001,
@@ -1939,14 +2037,18 @@
       "complicationsEn": "Fully openworked movement; hand-bevelled and polished components; ultra-light balance bridge",
       "complicationsAr": "حركة مفرّغة بالكامل; مكوّنات مشطوفة ومصقولة يدوياً; جسر ميزان فائق الخفة",
       "imageWidth": 1080,
-      "imageHeight": 1350
+      "imageHeight": 1350,
+      "royalImage": "/assets/royal/artisans-de-geneve-andrea-pirlo-rolex-submariner.webp",
+      "royalPairing": "photograph",
+      "referenceEn": "Andrea Pirlo project · Calibre 3130",
+      "referenceAr": "مشروع أندريا بيرلو · العيار 3130"
     },
     {
       "id": 60043,
       "brand": "Lederer",
       "slug": "lederer-cic-39-inverto-titanium",
       "nameEn": "CIC 39 InVerto Titanium",
-      "nameAr": "سي آي سي ٣٩ إنفيرتو تيتانيوم",
+      "nameAr": "إنفيرتو ٣٩ — علبة من التيتانيوم",
       "referenceNumber": "CIC 39 InVerto",
       "editorialEn": "The movement faces the visitor. In this InVerto, the mechanical architecture becomes the face of the timepiece: a different way to encounter the craft of independent watchmaking.",
       "editorialAr": "تواجه الحركة عين الزائر. في إنفيرتو، تصبح البنية الميكانيكية وجه القطعة؛ قراءة مختلفة للمهارة الحرفية في صناعة الساعات المستقلة.",
@@ -1964,14 +2066,17 @@
       "sourceRecord": "docs/watch/lederer-cic-39-inverto-titanium.html",
       "recordStatus": "Recovered existing Claude record; external ownership and publication provenance not independently reverified.",
       "imageWidth": 800,
-      "imageHeight": 800
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/lederer-cic-39-inverto-titanium.webp",
+      "royalPairing": "photograph",
+      "referenceAr": "CIC 39"
     },
     {
       "id": 190002,
       "brandId": 4,
       "referenceNumber": "6100",
       "nameEn": "Rolex 6100 ‘Chinese Dragon’ Cloisonné Enamel",
-      "nameAr": "رولكس 6100 «التنين الصيني» بميناء كلوازونيه",
+      "nameAr": "رولكس 6100 «التنين الصيني» بميناء من المينا الزجاجية",
       "slug": "rolex-6100-chinese-dragon-cloisonne",
       "descriptionEn": "A reported public appearance links H.H. Sheikh Ammar bin Humaid Al Nuaimi with Rolex reference 6100, one of the maison’s exceptionally rare mid-century cloisonné-enamel wristwatches. Christie’s identifies the reference as an 18K-gold automatic watch from circa 1954 with a 34 mm case and a dragon dial made in gold by Stern Frères, with the enamelling attributed to Nelly Richard. The museum records the appearance as reported evidence, not proof of private ownership.",
       "descriptionAr": "يوثّق هذا السجل ظهورًا علنيًا منسوبًا لسمو الشيخ عمّار بن حميد النعيمي مع رولكس المرجع 6100، وهي من أندر ساعات الدار ذات ميناء من المينا الزجاجية بطريقة الكلوازونيه من منتصف القرن العشرين. وتعرّف كريستيز المرجع بوصفه ساعة ذاتية التعبئة من ذهب عيار 18 قيراطًا، تعود تقريبًا إلى عام 1954 بعلبة 34 مم، وميناء تنين من الذهب صنعته Stern Frères ونُسب تنفيذ المينا فيه إلى Nelly Richard. يُعرض الظهور هنا كتوثيق منشور، لا كإثبات لملكية خاصة.",
@@ -2017,7 +2122,9 @@
       ],
       "imageSourceUrl": "https://waqt.com/ar/article/rolex-6100-with-chinese-dragon-cloisonne-enamel-dial",
       "imageWidth": 1262,
-      "imageHeight": 835
+      "imageHeight": 835,
+      "royalImage": "/assets/royal/rolex-6100-chinese-dragon-cloisonne.webp",
+      "royalPairing": "photograph"
     }
   ]
 }
