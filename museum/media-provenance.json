@@ -1,21 +1,86 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "updated": "2026-09-24",
+  "rule": "Every timepiece is shown with H.H. Sheikh Ammar. No watch-only image is rendered anywhere on the public site. His face is never retouched.",
+  "royalImages": {
+    "builder": "museum/scripts/build_royal_media.py",
+    "output": "museum/dist/assets/royal/<slug>.webp (800x800)",
+    "photograph": [
+      "patek-philippe-perpetual-calendar-5270p-green",
+      "patek-philippe-nautilus-perpetual-calendar-5740",
+      "artisans-de-geneve-la-montoya-platinum-challenge",
+      "audemars-piguet-royal-oak-chronograph-ice-blue-26317bc",
+      "audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce",
+      "fp-journe-tourbillon-souverain-red-dial",
+      "rolex-day-date-18239-coral-red",
+      "rolex-daytona-6263-quraysh-hawk",
+      "richard-mille-rm-68-01-tourbillon-cyril-kongo",
+      "richard-mille-rm-26-02-tourbillon-evil-eye",
+      "rolex-daytona-paul-newman-6239",
+      "rolex-daytona-paul-newman-6264-green-strap",
+      "audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb",
+      "rolex-daytona-6241-john-player-special",
+      "audemars-piguet-royal-oak-perpetual-calendar-blue-ceramic-26579cs",
+      "rolex-cosmograph-daytona-abu-dhabi-aet-remould",
+      "patek-philippe-perpetual-calendar-5271p-blue-sapphire",
+      "patek-philippe-nautilus-5711-1300a-olive-green",
+      "rolex-daytona-diw-motley-carbon",
+      "rolex-daytona-6265-black-dial",
+      "patek-philippe-calatrava-6007a-gray-blue",
+      "h-moser-endeavour-tourbillon-vantablack-1804-0212",
+      "rolex-gmt-master-ii-pepsi-meteorite-126719",
+      "rolex-gmt-master-ii-pepsi-126710blro",
+      "richard-mille-rm-67-02-alexis-pinturault",
+      "audemars-piguet-royal-oak-extra-thin-jumbo-15202",
+      "rolex-cosmograph-daytona-116509-white-gold",
+      "fp-journe-chronometre-a-resonance-platinum-grey",
+      "patek-philippe-world-time-5230g-011-manama",
+      "patek-philippe-calatrava-5326g-001",
+      "fp-journe-tourbillon-souverain",
+      "patek-philippe-calatrava",
+      "artisans-de-geneve-andrea-pirlo-rolex-submariner",
+      "lederer-cic-39-inverto-titanium",
+      "rolex-6100-chinese-dragon-cloisonne"
+    ],
+    "portrait": [
+      "patek-philippe-grand-complications-minute-repeater",
+      "richard-mille-rm-65-01-automatic-split-seconds-chronograph-mclaren-w1",
+      "patek-philippe-grand-complications-110th-second-monopusher-chronograph",
+      "richard-mille-rm-35-03-automatic-rafael-nadal",
+      "fp-journe-ffc-francis-ford-coppola-calibre-13003",
+      "fp-journe-linesport-chronographe-rattrapante",
+      "audemars-piguet-royal-oak-perpetual-calendar-rd2-ultra-thin",
+      "patek-philippe-aquanaut",
+      "patek-philippe-minute-repeater-tourbillon-3939hp"
+    ],
+    "portraitNote": "No photograph of His Highness with these pieces exists in the archive at usable resolution. An official portrait is set beside the maker's image and the site labels it as such. Replace with a wrist photograph when the owner supplies one.",
+    "cleaning": [
+      "archive collages re-cut at the seam: the IFL Watches badge that straddled it is dropped",
+      "patek-philippe-world-time-5230g-011-manama: an identifiable child cropped out",
+      "richard-mille-rm-67-02-alexis-pinturault: a second man cropped out",
+      "artisans-de-geneve-andrea-pirlo-rolex-submariner: publisher mark cropped out",
+      "sheikh-with-watches.jpg not used: it carries an arabianbusiness.com watermark"
+    ]
+  },
   "assets": [
+    {
+      "path": "museum/source-media/lederer-cic-39-sheikh-ammar.jpg",
+      "sourceType": "owner-supplied",
+      "supplied": "2026-09-24",
+      "editorialUse": "lederer-cic-39-inverto-titanium royal image",
+      "notes": "A publisher 'W' mark sits over His Highness's headdress. Retouching it distorted his face, so it is left intact. Ask the owner for the clean original."
+    },
+    {
+      "path": "museum/source-media/collection-film-third-party-reel.mp4",
+      "sourceType": "third-party social reel",
+      "editorialUse": "none — retired from the public site 2026-09-24",
+      "notes": "Horolia watermark, burned-in captions, on-screen CHF prices, a watch not in the collection (MB&F) and another royal figure. Replaced by the screening room built from photographs of His Highness."
+    },
     {
       "path": "museum/dist/images/sheikh/watchmaking-event.webp",
       "sourceType": "owner-supplied",
-      "originalConversationFile": "1000094550.jpg",
-      "originalFileId": "file_00000000ae088211a79a7fa46b7f63df",
-      "editorialUse": "watchmaking chapter",
-      "publicOccurrencesRequired": 1,
-      "identityClaims": "none",
-      "transformations": [
-        "resize to 720x900",
-        "WebP web optimization"
-      ],
-      "notes": "Use once only in the Watchmaking chapter; do not reuse as film poster, hero portrait, or repeated gallery image.",
-      "validation": "valid WebP container restored from original owner-supplied JPEG on 2026-09-20",
-      "dimensions": "900x1125"
+      "editorialUse": "none until re-supplied",
+      "notes": "Truncated: RIFF header declares 89,836 bytes, the file holds 15,009. It was rendering broken. The original JPEG (1000094550.jpg) is not in the repository."
     }
   ]
 }
