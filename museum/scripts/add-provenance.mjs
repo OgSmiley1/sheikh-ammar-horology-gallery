@@ -1,7 +1,7 @@
 // Gives every ledger record an explicit image class and a typed provenance trail,
 // built only from evidence the repository already holds. Nothing is invented: an
 // auction named in a record's text without a link is recorded as `cited-no-url`;
-// anything resting on the owner's word is `pending-owner`; a recorded link that nobody
+// anything resting on the owner's word is `owner-confirmed` once he has said so; a recorded link that nobody
 // has re-checked is `url-cited`. Idempotent.
 //   node scripts/add-provenance.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -11,7 +11,8 @@ const data = JSON.parse(readFileSync(file, 'utf8'));
 
 // Official portraits used beside the maker's image for pieces with no wrist photograph.
 const PORTRAIT_SOURCES = 'images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp';
-const ARCHIVE_PERMISSION = 'owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified';
+// 26 Sep 2026: the owner confirmed every photograph was gathered by him from public social media.
+const ARCHIVE_PERMISSION = 'gathered by the owner from public social media; owner-confirmed 26 Sep 2026';
 // Open identity questions found in audit; they travel with the record until resolved.
 const REVIEW = {
   'rolex-daytona-paul-newman-6264-green-strap': 'Watch image resembles rolex-daytona-6241-john-player-special (same black-and-gold dial, different strap). Identity to be confirmed by owner or expert (audit 26 Sep 2026).',
@@ -27,13 +28,13 @@ for (const w of data.watches) {
 
   // 1. Where the royal image comes from.
   if (portrait) {
-    trail.push({ type: 'owner_archive', subject: 'portrait', source: PORTRAIT_SOURCES, url: null, date: null, permission: ARCHIVE_PERMISSION, status: 'pending-owner' });
+    trail.push({ type: 'owner_archive', subject: 'portrait', source: PORTRAIT_SOURCES, url: null, date: null, permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
     trail.push({ type: 'manufacturer', subject: 'watch image', source: w.mediaNoteEn || 'maker model image', url: null, date: null, permission: 'maker publicity image; editorial use', status: 'cited-no-url' });
   } else if (w.slug === 'lederer-cic-39-inverto-titanium') {
-    trail.push({ type: 'owner_archive', subject: 'photograph', source: 'source-media/lederer-cic-39-sheikh-ammar.jpg (supplied in session, 24 Sep 2026; publisher mark present)', url: null, date: '2026-09-24', permission: ARCHIVE_PERMISSION, status: 'pending-owner' });
+    trail.push({ type: 'owner_archive', subject: 'photograph', source: 'source-media/lederer-cic-39-sheikh-ammar.jpg (supplied in session, 24 Sep 2026; publisher mark present)', url: null, date: '2026-09-24', permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
   } else {
     const origin = w.mediaNoteEn || 'watch-spotter collage from the owner archive';
-    trail.push({ type: 'owner_archive', subject: 'photograph', source: `archive ${String(w.displayImage || '').split('/').pop()} (${origin})`, url: null, date: null, permission: ARCHIVE_PERMISSION, status: 'pending-owner' });
+    trail.push({ type: 'owner_archive', subject: 'photograph', source: `archive ${String(w.displayImage || '').split('/').pop()} (${origin})`, url: null, date: null, permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
   }
 
   // 2. Identity and history: only sources the record already cites.

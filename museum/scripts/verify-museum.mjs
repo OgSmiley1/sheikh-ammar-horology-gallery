@@ -73,8 +73,8 @@ for (const watch of data.watches) {
 }
 // Provenance: every record states how His Highness appears and what the image rests on.
 const TYPES = new Set(['owner_archive', 'manufacturer', 'auction', 'sighting_report']);
-const STATUSES = new Set(['url-cited', 'cited-no-url', 'pending-owner']);
-const pending = { 'pending-owner': 0, 'cited-no-url': 0, 'url-cited': 0 };
+const STATUSES = new Set(['url-cited', 'cited-no-url', 'pending-owner', 'owner-confirmed']);
+const pending = { 'pending-owner': 0, 'owner-confirmed': 0, 'cited-no-url': 0, 'url-cited': 0 };
 for (const watch of data.watches) {
   const expected = watch.royalPairing === 'portrait' ? 'portrait_pair' : 'wrist';
   if (watch.imageClass !== expected) fail(`watches.json: ${watch.slug} imageClass must be ${expected}`);
@@ -93,4 +93,4 @@ if (royalFiles.length !== 44) fail(`assets/royal: expected 44 images, found ${ro
 if (statSync(path.join(root, 'dist/images/sheikh/sheikh-portrait-1.webp')).size < 10000) fail('hero portrait missing');
 
 console.log(`Museum verification passed: ${routes.length} routes, ${data.watches.length} records, each shown with His Highness (${data.watches.filter(w => w.royalPairing === 'photograph').length} photographs, ${data.watches.filter(w => w.royalPairing === 'portrait').length} portrait pairings).`);
-console.log(`Provenance open: ${pending['pending-owner']} owner confirmations, ${pending['cited-no-url']} citations without links, ${pending['url-cited']} links not re-checked; ${data.watches.filter(w => w.identityReview).length} identity reviews.`);
+console.log(`Provenance: ${pending['owner-confirmed']} confirmed by the owner, ${pending['pending-owner']} awaiting the owner, ${pending['cited-no-url']} citations without links, ${pending['url-cited']} links not re-checked; ${data.watches.filter(w => w.identityReview).length} identity reviews.`);
