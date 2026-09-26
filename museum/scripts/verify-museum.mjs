@@ -71,8 +71,26 @@ for (const watch of data.watches) {
   const asset = path.join(root, 'dist', watch.royalImage.slice(1));
   if (!existsSync(asset) || !isWebp(asset)) fail(`watches.json: royal image for ${watch.slug} is missing or not a complete WebP`);
 }
+// Provenance: every record states how His Highness appears and what the image rests on.
+const TYPES = new Set(['owner_archive', 'manufacturer', 'auction', 'sighting_report']);
+const STATUSES = new Set(['url-cited', 'cited-no-url', 'pending-owner']);
+const pending = { 'pending-owner': 0, 'cited-no-url': 0, 'url-cited': 0 };
+for (const watch of data.watches) {
+  const expected = watch.royalPairing === 'portrait' ? 'portrait_pair' : 'wrist';
+  if (watch.imageClass !== expected) fail(`watches.json: ${watch.slug} imageClass must be ${expected}`);
+  if (watch.wornClaim !== (expected === 'wrist')) fail(`watches.json: ${watch.slug} wornClaim contradicts its image class — a portrait pairing never claims wear`);
+  if (!Array.isArray(watch.provenance) || !watch.provenance.length) fail(`watches.json: ${watch.slug} has no provenance trail`);
+  if (!watch.provenance.some(p => p.type === 'owner_archive')) fail(`watches.json: ${watch.slug} does not say where its image of His Highness comes from`);
+  for (const p of watch.provenance) {
+    if (!TYPES.has(p.type) || !STATUSES.has(p.status) || !p.source || !p.permission) fail(`watches.json: ${watch.slug} malformed provenance entry`);
+    if (p.status === 'url-cited' && !/^https:\/\//.test(p.url || '')) fail(`watches.json: ${watch.slug} url-cited entry without an https URL`);
+    pending[p.status]++;
+  }
+}
+
 const royalFiles = readdirSync(path.join(root, 'dist/assets/royal'));
 if (royalFiles.length !== 44) fail(`assets/royal: expected 44 images, found ${royalFiles.length}`);
 if (statSync(path.join(root, 'dist/images/sheikh/sheikh-portrait-1.webp')).size < 10000) fail('hero portrait missing');
 
 console.log(`Museum verification passed: ${routes.length} routes, ${data.watches.length} records, each shown with His Highness (${data.watches.filter(w => w.royalPairing === 'photograph').length} photographs, ${data.watches.filter(w => w.royalPairing === 'portrait').length} portrait pairings).`);
+console.log(`Provenance open: ${pending['pending-owner']} owner confirmations, ${pending['cited-no-url']} citations without links, ${pending['url-cited']} links not re-checked; ${data.watches.filter(w => w.identityReview).length} identity reviews.`);

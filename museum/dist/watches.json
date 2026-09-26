@@ -46,7 +46,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-perpetual-calendar-5270p-green.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-perpetual-calendar-green-1681913811529_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60022,
@@ -93,7 +106,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-nautilus-perpetual-calendar-5740.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-philippe-nautilus-perpetual-calendar-1681913819958_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60029,
@@ -143,7 +169,20 @@
       "royalImage": "/assets/royal/artisans-de-geneve-la-montoya-platinum-challenge.webp",
       "royalPairing": "photograph",
       "referenceEn": "Bespoke",
-      "referenceAr": "قطعة مخصّصة"
+      "referenceAr": "قطعة مخصّصة",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive artisans-de-geneve-la-montoya-1681913755711_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60004,
@@ -191,7 +230,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/audemars-piguet-royal-oak-chronograph-ice-blue-26317bc.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive royal-oak-chronograph-ice-blue-dial-1674203067787_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60005,
@@ -239,7 +291,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive royal-oak-salmon-dial-tourbillon-1674208549211_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60027,
@@ -289,7 +354,20 @@
       "royalImage": "/assets/royal/fp-journe-tourbillon-souverain-red-dial.webp",
       "royalPairing": "photograph",
       "referenceEn": "Red dial",
-      "referenceAr": "الميناء الأحمر"
+      "referenceAr": "الميناء الأحمر",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive fp-journe-1681913766335_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60007,
@@ -337,7 +415,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-day-date-18239-coral-red.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive 326048239_936601320719759_2450602950051524580_n-1674200911447_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60008,
@@ -385,7 +476,29 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-daytona-6263-quraysh-hawk.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-6263-quraysh-1674202164605_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "auction",
+          "subject": "identity",
+          "source": "Sotheby's catalogue (cited in record text)",
+          "url": null,
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 60025,
@@ -433,7 +546,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/richard-mille-rm-68-01-tourbillon-cyril-kongo.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rm-cyril-kongo-1674216610713_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60024,
@@ -481,7 +607,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/richard-mille-rm-26-02-tourbillon-evil-eye.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rm26-02-1674211731885_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60011,
@@ -529,7 +668,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-daytona-paul-newman-6239.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-6239-paul-newman-1681913854878_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60012,
@@ -577,7 +729,21 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-daytona-paul-newman-6264-green-strap.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-6264-1681913860634_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ],
+      "identityReview": "Watch image resembles rolex-daytona-6241-john-player-special (same black-and-gold dial, different strap). Identity to be confirmed by owner or expert (audit 26 Sep 2026)."
     },
     {
       "id": 60003,
@@ -625,7 +791,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/audemars-piguet-royal-oak-perpetual-calendar-white-ceramic-26579cb.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive royal-oak-white-1674201595442_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60014,
@@ -673,7 +852,30 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-daytona-6241-john-player-special.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-john-player-special-1681913884253_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "auction",
+          "subject": "identity",
+          "source": "Sotheby's catalogue (cited in record text)",
+          "url": null,
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "cited-no-url"
+        }
+      ],
+      "identityReview": "Watch image resembles rolex-daytona-paul-newman-6264-green-strap (same black-and-gold dial, different strap). Identity to be confirmed by owner or expert (audit 26 Sep 2026)."
     },
     {
       "id": 60002,
@@ -721,7 +923,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/audemars-piguet-royal-oak-perpetual-calendar-blue-ceramic-26579cs.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive 278694984_1021506258792161_7433008742422839721_n-1681913736827_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60016,
@@ -771,7 +986,20 @@
       "royalImage": "/assets/royal/rolex-cosmograph-daytona-abu-dhabi-aet-remould.webp",
       "royalPairing": "photograph",
       "referenceEn": "Bespoke · AET Remould",
-      "referenceAr": "قطعة مخصّصة"
+      "referenceAr": "قطعة مخصّصة",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-aet-remould-1681913876180_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60017,
@@ -819,7 +1047,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-perpetual-calendar-5271p-blue-sapphire.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-1674210655318_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60020,
@@ -867,7 +1108,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-nautilus-5711-1300a-olive-green.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-nautilus-green-dial-diamond-1681913804026_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 120001,
@@ -916,7 +1170,20 @@
       "royalImage": "/assets/royal/rolex-daytona-diw-motley-carbon.webp",
       "royalPairing": "photograph",
       "referenceEn": "DiW Motley 3S · bespoke",
-      "referenceAr": "قطعة مخصّصة"
+      "referenceAr": "قطعة مخصّصة",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-diw-motley-carbon.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60013,
@@ -966,7 +1233,20 @@
       "royalImage": "/assets/royal/rolex-daytona-6265-black-dial.webp",
       "royalPairing": "photograph",
       "yearLabelEn": "1970s",
-      "yearLabelAr": "سبعينيات القرن العشرين"
+      "yearLabelAr": "سبعينيات القرن العشرين",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-6265-1681913867168_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60019,
@@ -1014,7 +1294,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-calatrava-6007a-gray-blue.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-calatrava-6007a-1681913797813_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60001,
@@ -1062,7 +1355,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/h-moser-endeavour-tourbillon-vantablack-1804-0212.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive h-moser-1674217667237_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 90001,
@@ -1111,7 +1417,29 @@
       "imageWidth": 1284,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/patek-philippe-grand-complications-minute-repeater.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Patek Philippe official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 60010,
@@ -1159,7 +1487,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-gmt-master-ii-pepsi-meteorite-126719.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-pepsi-meteorite-1681913907088_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60009,
@@ -1207,7 +1548,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-gmt-master-ii-pepsi-126710blro.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-pepsi-1674209935187_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60026,
@@ -1255,7 +1609,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/richard-mille-rm-67-02-alexis-pinturault.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rm67-02-alexis-pinturault-1681913841692_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60006,
@@ -1303,7 +1670,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/audemars-piguet-royal-oak-extra-thin-jumbo-15202.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive royal-oak-jumbo-15202bc-1681913914790_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60015,
@@ -1351,7 +1731,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/rolex-cosmograph-daytona-116509-white-gold.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-daytona-white-gold-1681913899487_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60028,
@@ -1401,7 +1794,20 @@
       "royalImage": "/assets/royal/fp-journe-chronometre-a-resonance-platinum-grey.webp",
       "royalPairing": "photograph",
       "referenceEn": "Platinum · grey dial",
-      "referenceAr": "بلاتين · ميناء رمادي"
+      "referenceAr": "بلاتين · ميناء رمادي",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive fp-journe-resonance-1681913779906_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60023,
@@ -1449,7 +1855,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-world-time-5230g-011-manama.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-world-time-manama-1681913828669_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60018,
@@ -1497,7 +1916,20 @@
       "imageWidth": 800,
       "imageHeight": 800,
       "royalImage": "/assets/royal/patek-philippe-calatrava-5326g-001.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-calatrava-5326g-1681913791211_800x.webp (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 90002,
@@ -1549,7 +1981,29 @@
       "royalImage": "/assets/royal/fp-journe-tourbillon-souverain.webp",
       "royalPairing": "photograph",
       "referenceEn": "Jade dial",
-      "referenceAr": "ميناء اليشم"
+      "referenceAr": "ميناء اليشم",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive fp-journe-tourbillon-souverain.webp (Public appearance crop; product details remain source-reviewed)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "auction",
+          "subject": "identity",
+          "source": "Phillips catalogue (cited in record text)",
+          "url": null,
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90003,
@@ -1598,7 +2052,29 @@
       "imageWidth": 749,
       "imageHeight": 1000,
       "royalImage": "/assets/royal/richard-mille-rm-65-01-automatic-split-seconds-chronograph-mclaren-w1.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Richard Mille official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90004,
@@ -1647,7 +2123,29 @@
       "imageWidth": 1284,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/patek-philippe-grand-complications-110th-second-monopusher-chronograph.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Patek Philippe official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90005,
@@ -1696,7 +2194,29 @@
       "imageWidth": 749,
       "imageHeight": 1000,
       "royalImage": "/assets/royal/richard-mille-rm-35-03-automatic-rafael-nadal.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Richard Mille official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90006,
@@ -1745,7 +2265,29 @@
       "imageWidth": 1262,
       "imageHeight": 835,
       "royalImage": "/assets/royal/fp-journe-ffc-francis-ford-coppola-calibre-13003.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Waqt editorial product image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90007,
@@ -1796,7 +2338,29 @@
       "royalImage": "/assets/royal/fp-journe-linesport-chronographe-rattrapante.webp",
       "royalPairing": "portrait",
       "referenceEn": "Calibre 1518",
-      "referenceAr": "العيار 1518"
+      "referenceAr": "العيار 1518",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "F.P. Journe official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90008,
@@ -1845,7 +2409,20 @@
       "imageWidth": 640,
       "imageHeight": 640,
       "royalImage": "/assets/royal/patek-philippe-calatrava.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive patek-philippe-calatrava.webp (Public appearance image; model association kept editorially bounded)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 90009,
@@ -1894,7 +2471,29 @@
       "imageWidth": 1500,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/audemars-piguet-royal-oak-perpetual-calendar-rd2-ultra-thin.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Audemars Piguet official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 90010,
@@ -1943,7 +2542,29 @@
       "imageWidth": 1285,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/patek-philippe-aquanaut.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Patek Philippe official model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 150001,
@@ -1992,7 +2613,38 @@
       "imageWidth": 1800,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/patek-philippe-minute-repeater-tourbillon-3939hp.webp",
-      "royalPairing": "portrait"
+      "royalPairing": "portrait",
+      "imageClass": "portrait_pair",
+      "wornClaim": false,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "portrait",
+          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "watch image",
+          "source": "Patek Philippe model image",
+          "url": null,
+          "date": null,
+          "permission": "maker publicity image; editorial use",
+          "status": "cited-no-url"
+        },
+        {
+          "type": "auction",
+          "subject": "identity",
+          "source": "Christie's catalogue (cited in record text)",
+          "url": null,
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "cited-no-url"
+        }
+      ]
     },
     {
       "id": 180001,
@@ -2041,7 +2693,20 @@
       "royalImage": "/assets/royal/artisans-de-geneve-andrea-pirlo-rolex-submariner.webp",
       "royalPairing": "photograph",
       "referenceEn": "Andrea Pirlo project · Calibre 3130",
-      "referenceAr": "مشروع أندريا بيرلو · العيار 3130"
+      "referenceAr": "مشروع أندريا بيرلو · العيار 3130",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive andrea-pirlo-submariner.jpg (watch-spotter collage from the owner archive)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 60043,
@@ -2069,7 +2734,20 @@
       "imageHeight": 800,
       "royalImage": "/assets/royal/lederer-cic-39-inverto-titanium.webp",
       "royalPairing": "photograph",
-      "referenceAr": "CIC 39"
+      "referenceAr": "CIC 39",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "source-media/lederer-cic-39-sheikh-ammar.jpg (supplied in session, 24 Sep 2026; publisher mark present)",
+          "url": null,
+          "date": "2026-09-24",
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        }
+      ]
     },
     {
       "id": 190002,
@@ -2124,7 +2802,38 @@
       "imageWidth": 1262,
       "imageHeight": 835,
       "royalImage": "/assets/royal/rolex-6100-chinese-dragon-cloisonne.webp",
-      "royalPairing": "photograph"
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "archive rolex-6100-sheikh-original.jpg (Documentary crop derived from owner-supplied reference imagery; higher-resolution master imagery remains desirable.)",
+          "url": null,
+          "date": null,
+          "permission": "owner-supplied archive; owner states publication rights (16 Sep 2026), not independently verified",
+          "status": "pending-owner"
+        },
+        {
+          "type": "auction",
+          "subject": "identity",
+          "source": "christies.com",
+          "url": "https://www.christies.com/en/lot/lot-6533541",
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "url-cited"
+        },
+        {
+          "type": "sighting_report",
+          "subject": "identity",
+          "source": "waqt.com",
+          "url": "https://waqt.com/en/article/rolex-6100-with-chinese-dragon-cloisonne-enamel-dial",
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "url-cited"
+        }
+      ]
     }
   ]
 }
