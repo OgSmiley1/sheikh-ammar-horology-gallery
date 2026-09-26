@@ -55,8 +55,9 @@ PHOTOGRAPHS = {
     'lederer-cic-39-inverto-titanium': ('museum/source-media/lederer-cic-39-sheikh-ammar.jpg', 'cover-top'),
 }
 
-# (source, pre-crop box as fractions or None, cover focus). Nine distinct framings so
-# no two neighbouring records repeat the same picture of His Highness.
+# (source, pre-crop box as fractions or None, cover focus). Nine distinct framings of
+# three official photographs; main() refuses to build if any two come out alike.
+# sheikh-portrait-2 is head-and-shoulders, so it yields only one framing. Never mirror.
 PORTRAITS = [
     ('museum/dist/images/sheikh/sheikh-portrait-1.webp', None, (0.5, 0.35)),
     ('museum/dist/images/sheikh-examining-watches.webp', None, (0.5, 0.5)),
@@ -64,9 +65,9 @@ PORTRAITS = [
     ('museum/dist/images/sheikh/sheikh-portrait-1.webp', (0.0, 0.05, 0.78, 0.8), (0.55, 0.3)),
     ('museum/dist/images/sheikh/sheikh-portrait-1.webp', (0.1, 0.0, 0.95, 0.6), (0.5, 0.2)),
     ('museum/dist/images/sheikh-examining-watches.webp', (0.22, 0.04, 0.82, 0.72), (0.5, 0.35)),
-    ('museum/dist/images/sheikh/sheikh-portrait-2.jpg', (0.2, 0.0, 0.75, 1.0), (0.5, 0.5)),
+    ('museum/dist/images/sheikh-examining-watches.webp', (0.3, 0.02, 0.78, 0.46), (0.5, 0.4)),
     ('museum/dist/images/sheikh/sheikh-portrait-1.webp', (0.0, 0.25, 1.0, 1.0), (0.5, 0.2)),
-    ('museum/dist/images/sheikh/sheikh-portrait-2.jpg', (0.3, 0.05, 0.62, 0.95), (0.5, 0.4)),
+    ('museum/dist/images/sheikh-examining-watches.webp', (0.0, 0.3, 1.0, 1.0), (0.45, 0.25)),
 ]
 
 
@@ -134,11 +135,21 @@ def diptych(slug, src):
     return canvas
 
 
+def dhash(im):
+    g = im.convert('L').resize((9, 8), Image.LANCZOS)
+    px = list(g.tobytes())
+    return [px[r * 9 + c] > px[r * 9 + c + 1] for r in range(8) for c in range(8)]
+
+
+MIN_PORTRAIT_DISTANCE = 12  # of 64 bits; the pair that looked identical measured 2
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     data_path = DIST / 'watches.json'
     data = json.loads(data_path.read_text())
     portrait_i = 0
+    portrait_panels = []
     for w in data['watches']:
         slug = w['slug']
         display = DIST / w['displayImage'].lstrip('/')
@@ -168,6 +179,7 @@ def main():
             if box:
                 source = source.crop((round(box[0] * source.width), round(box[1] * source.height), round(box[2] * source.width), round(box[3] * source.height)))
             person = cover(source, HALF, SIZE, focus)
+            portrait_panels.append((slug, dhash(person)))
             out = Image.new('RGB', (SIZE, SIZE))
             out.paste(person, (0, 0))
             out.paste(watch_panel(slug, display), (HALF, 0))
@@ -175,6 +187,11 @@ def main():
         out.save(OUT / f'{slug}.webp', 'WEBP', quality=84, method=6)
         w['royalImage'] = f'/assets/royal/{slug}.webp'
         w['royalPairing'] = pairing
+    for i, (a, ha) in enumerate(portrait_panels):
+        for b, hb in portrait_panels[i + 1:]:
+            d = sum(x != y for x, y in zip(ha, hb))
+            if d < MIN_PORTRAIT_DISTANCE:
+                raise SystemExit(f'portrait framings too alike ({d}/64): {a} / {b}')
     data_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
     counts = {}
     for w in data['watches']:

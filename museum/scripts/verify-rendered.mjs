@@ -10,7 +10,9 @@ const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PAT
 const contextOptions = { ignoreHTTPSErrors: process.env.QA_IGNORE_TLS === '1' };
 const results = [];
 const routes = ['/', '/collection/', '/his-highness/', '/exhibition/', '/watchmaking/'];
-const sizes = [[390,844],[412,915],[768,1024],[1024,768],[1440,900],[1920,1080]];
+// Phones 375-430 (iPhone mini/SE to Pro Max), tablet, laptop, desktop, majlis display.
+const sizes = [[375,812],[390,844],[412,915],[430,932],[768,1024],[1024,768],[1440,900],[1920,1080]];
+const sheetWidths = [375,390,1440]; // every one of the 44 detail sheets is opened at these
 try {
  for (const motion of ['no-preference','reduce']) for (const [width,height] of sizes) for (const lang of ['ar','en']) {
   const context = await browser.newContext({ ...contextOptions, viewport:{width,height}, reducedMotion:motion });
@@ -70,8 +72,8 @@ try {
     assert.equal(years[0],lang==='ar'?'١٩٦٩':'1969');
     for(const year of await page.locator('.bio-timeline time').all())assert.ok(await year.isVisible());
    }
-   if(motion==='reduce'&&(width===390||width===1440))await page.screenshot({path:`${evidence}/${route.replaceAll('/','_')}-${lang}-${width}.png`,fullPage:true});
-   if(route==='/collection/'&&(width===390||width===1440)){
+   if(motion==='reduce'&&sheetWidths.includes(width))await page.screenshot({path:`${evidence}/${route.replaceAll('/','_')}-${lang}-${width}.png`,fullPage:true});
+   if(route==='/collection/'&&sheetWidths.includes(width)){
     const cards=page.locator('#grid [data-watch]');const count=await cards.count();
     for(let i=0;i<count;i++){
      await cards.nth(i).click();
@@ -84,7 +86,7 @@ try {
       assert.ok(!/\bFunctions\b/.test(specText),'English technical record must use Complications');
      }
      assert.ok(await page.locator('#detailClose').isVisible());
-     if(width===390)assert.ok(await page.locator('#detail').evaluate(e=>Math.abs(e.getBoundingClientRect().width-innerWidth)<2));
+     if(width<500)assert.ok(await page.locator('#detail').evaluate(e=>Math.abs(e.getBoundingClientRect().width-innerWidth)<2));
      const detailFindings=await page.locator('#detail').evaluate(dialog=>{
       const visible=e=>{const r=e.getBoundingClientRect();const s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'};
       const bad=[];

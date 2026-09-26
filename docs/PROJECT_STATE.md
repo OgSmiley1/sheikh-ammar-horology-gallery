@@ -2,6 +2,27 @@
 
 Updated: 24 September 2026
 
+## 26 September 2026 — audit follow-up (owner authorised A1, A2, A6 and the recommended set)
+- **A1** Two portrait pairings (5470P, RD#2) had near-identical crops of one portrait. Both now use
+  distinct framings, and `build_royal_media.py` refuses to build if any two portrait panels are
+  perceptually alike (dHash distance < 12 of 64; the defect measured 0).
+- **A2** `verify-rendered.mjs` now covers 375, 390, 412, 430, 768, 1024, 1440 and 1920 px
+  (160 route/language/viewport/motion checks) and opens all 44 detail sheets at 375, 390 and 1440.
+- **A3/A4** Every record carries `imageClass` (wrist | portrait_pair), `wornClaim` (false for every
+  pairing) and a typed `provenance` trail built only from evidence already in the repo
+  (`scripts/add-provenance.mjs`). Nothing is invented: statuses are `pending-owner`,
+  `cited-no-url` or `url-cited` (link recorded, not re-checked — egress to the sources was blocked
+  where this ran). `verify-museum.mjs` enforces the structure and prints what is still open.
+  Open today: 44 owner confirmations, 13 citations without links, 2 unchecked links.
+- **Identity review** 6264 (green strap) and 6241 (JPS) appear to show the same black-and-gold
+  dial on different straps. Both records carry `identityReview` until the owner or an expert rules.
+- **A5/A6** Deploy hardening — see the Railway section of the PR that carries this change.
+
+Railway facts at audit time: running deployment `7b1c39e2` (SUCCESS) serves `dbf552c` through a
+start command that downloads the GitHub archive at boot; its Docker image (and so its `npm test`
+gate) was built from the older `0a37206` on `release/museum-current-v2`. Staged patch `18db2ead`
+still deletes both services — **only the owner can discard it, in the dashboard; never deploy it.**
+
 ## 24 September 2026 — Royal redesign (supersedes the design notes below)
 The public site in `museum/dist/` was redesigned end to end in a Haute Horlogerie
 maison register (ivory paper, ink type, hairlines, spaced small capitals, full-bleed
@@ -43,7 +64,7 @@ Open items for the owner:
 - Wrist photographs for the 9 portrait-paired pieces, when available.
 - "One of not many" is Vacheron Constantin's own brand line; confirm you want to keep it.
 
-QA on this change: `npm test` 31/31; `verify-rendered.mjs` 120/120 (5 routes × 6 viewports ×
+QA on the 24 Sept change: `npm test` 31/31 (later 37/37); `verify-rendered.mjs` 120/120 (5 routes × 6 viewports ×
 AR/EN × normal/reduced motion, all 44 detail sheets opened at 390 and 1440).
 
 
