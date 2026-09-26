@@ -27,14 +27,21 @@ Updated: 24 September 2026
   To release a later commit the same way: update the SHA inside the service start command, then
   change `MUSEUM_RELEASE_SHA` to the same SHA — and confirm the `Serving canonical V1` log line.
   Rollback: Railway rollback to `665e1fcf` (serves `ab7b82f`, the pre-redesign site).
-- **A5 (self-contained image) is blocked.** Railway's GitHub integration has no access to this repo
-  ("User does not have access to the repo"), and no Railway CLI token exists in the build
-  environment, so no new image can be built from `main`. Until it is, the site still downloads its
-  code from public `codeload.github.com` at boot, so **the repo must stay public**. Owner step: in
-  Railway → Account → Integrations → GitHub, grant access to `OgSmiley1/sheikh-ammar-horology-gallery`;
-  then connect the service to `main` pinned to a commit and set the start command to
-  `node scripts/serve.mjs` (rehearsed: the image contents boot and serve every route with egress
-  blocked; 11 MB instead of a 155 MB download per boot).
+- **A5 done (26 Sep 2026, 11:16 UTC).** The owner granted Railway's GitHub app access to the repo.
+  `museum-current` is now connected to `main`, **pinned to commit `1cb1867`**, built by
+  `museum/Dockerfile`, and started with `node scripts/serve.mjs`. The build runs `npm test` on the
+  exact code it serves (37/37 in deployment `f411e160`'s build log), the image carries `dist/`
+  (no download at boot), and the healthcheck passed. The repo no longer needs to be public for the
+  site to run.
+- **Incident, 26 Sep 11:12 UTC.** All `museum-current` deployments were removed and its domain
+  detached (the staged deletion patch disappeared at the same time), and `museum-vision` was
+  connected to `feat/majlis-of-time-v2`, whose build failed (19 tests, 1 failing — that branch's
+  older suite). The A5 build above restored the service, and the domain
+  `museum-current-production.up.railway.app` was regenerated on port 3000.
+- **How to release from now on:** merge to `main`, then reconnect the service source to the new
+  commit (Railway → museum-current → Settings → Source, or `connect-service-source` with
+  `commitSha`). The build refuses to ship if `npm test` fails. Rollback: redeploy the previous
+  deployment in Railway, or reconnect the previous commit.
 - **Live visual check** could not be done from the build environment (its egress policy refuses
   `railway.app`). The owner must look at the site.
 
@@ -42,7 +49,7 @@ Railway facts at audit time: running deployment `7b1c39e2` (SUCCESS) serves `dbf
 start command that downloads the GitHub archive at boot; its Docker image (and so its `npm test`
 gate) was built from the older `0a37206` on `release/museum-current-v2`. Staged patch `18db2ead`
 still deletes both services — **only the owner can discard it, in the dashboard; never deploy it.**
-It was still staged (untouched) after the 26 Sep deployment.
+It was still staged after the 26 Sep 11:08 deployment and was gone by 11:15 (see the incident note).
 
 ## 24 September 2026 — Royal redesign (supersedes the design notes below)
 The public site in `museum/dist/` was redesigned end to end in a Haute Horlogerie
