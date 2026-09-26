@@ -16,12 +16,33 @@ Updated: 24 September 2026
   Open today: 44 owner confirmations, 13 citations without links, 2 unchecked links.
 - **Identity review** 6264 (green strap) and 6241 (JPS) appear to show the same black-and-gold
   dial on different straps. Both records carry `identityReview` until the owner or an expert rules.
-- **A5/A6** Deploy hardening — see the Railway section of the PR that carries this change.
+- **Correction (important).** Deployment `7b1c39e2` (24 Sep), reported as serving `dbf552c`, actually
+  logged `Serving canonical V1 ab7b82f…` — the pre-redesign site. Railway's `redeploy` replays the
+  previous deployment's snapshot *including its frozen start command*; editing the service's start
+  command does not reach a redeploy. The redesign was therefore **not live until 26 Sep**.
+- **Live since 26 Sep 2026, 11:08 UTC:** deployment `d3eb375e`, log line
+  `Serving canonical V1 5c67ebe5c920c55a5b3fb1b44fabaac952eccb0b` (main after PR #34), healthcheck
+  SUCCESS. A variable change (`MUSEUM_RELEASE_SHA` = that commit, A6) creates a genuinely new
+  deployment that picks up the current service settings; `redeploy` does not.
+  To release a later commit the same way: update the SHA inside the service start command, then
+  change `MUSEUM_RELEASE_SHA` to the same SHA — and confirm the `Serving canonical V1` log line.
+  Rollback: Railway rollback to `665e1fcf` (serves `ab7b82f`, the pre-redesign site).
+- **A5 (self-contained image) is blocked.** Railway's GitHub integration has no access to this repo
+  ("User does not have access to the repo"), and no Railway CLI token exists in the build
+  environment, so no new image can be built from `main`. Until it is, the site still downloads its
+  code from public `codeload.github.com` at boot, so **the repo must stay public**. Owner step: in
+  Railway → Account → Integrations → GitHub, grant access to `OgSmiley1/sheikh-ammar-horology-gallery`;
+  then connect the service to `main` pinned to a commit and set the start command to
+  `node scripts/serve.mjs` (rehearsed: the image contents boot and serve every route with egress
+  blocked; 11 MB instead of a 155 MB download per boot).
+- **Live visual check** could not be done from the build environment (its egress policy refuses
+  `railway.app`). The owner must look at the site.
 
 Railway facts at audit time: running deployment `7b1c39e2` (SUCCESS) serves `dbf552c` through a
 start command that downloads the GitHub archive at boot; its Docker image (and so its `npm test`
 gate) was built from the older `0a37206` on `release/museum-current-v2`. Staged patch `18db2ead`
 still deletes both services — **only the owner can discard it, in the dashboard; never deploy it.**
+It was still staged (untouched) after the 26 Sep deployment.
 
 ## 24 September 2026 — Royal redesign (supersedes the design notes below)
 The public site in `museum/dist/` was redesigned end to end in a Haute Horlogerie
