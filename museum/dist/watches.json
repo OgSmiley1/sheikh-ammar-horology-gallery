@@ -2741,9 +2741,9 @@
         {
           "type": "owner_archive",
           "subject": "photograph",
-          "source": "source-media/lederer-cic-39-sheikh-ammar.jpg (supplied in session, 24 Sep 2026; publisher mark present)",
+          "source": "source-media/lederer-cic-39-sheikh-ammar-clean.jpg (clean original supplied in session, 26 Sep 2026; no publisher mark)",
           "url": null,
-          "date": "2026-09-24",
+          "date": "2026-09-26",
           "permission": "gathered by the owner from public social media; owner-confirmed 26 Sep 2026",
           "status": "owner-confirmed"
         }
@@ -2829,6 +2829,63 @@
           "subject": "identity",
           "source": "waqt.com",
           "url": "https://waqt.com/en/article/rolex-6100-with-chinese-dragon-cloisonne-enamel-dial",
+          "date": null,
+          "permission": "public editorial reference",
+          "status": "url-cited"
+        }
+      ]
+    },
+    {
+      "id": 60045,
+      "brand": "F.P. Journe",
+      "slug": "fp-journe-chronographe-monopoussoir-rattrapante-titanium",
+      "nameEn": "Chronographe Monopoussoir Rattrapante",
+      "nameAr": "كرونوغراف أحادي الزر بعقرب منقسم",
+      "referenceNumber": "Calibre 1518",
+      "referenceEn": "Titanium · slate-grey dial",
+      "referenceAr": "تيتانيوم · ميناء رمادي داكن",
+      "editorialEn": "One pusher governs the whole chronograph, and a second hand splits away to hold a moment while the first runs on. Titanium, a slate-grey dial, red-gold numerals: F.P. Journe’s split-seconds, worn by His Highness.",
+      "editorialAr": "زرٌّ واحد يدير الكرونوغراف كله، وعقربٌ ثانٍ ينفصل ليُمسك لحظةً بينما يمضي الأول. علبة من التيتانيوم، وميناء رمادي داكن، وأرقام من الذهب الأحمر: الثواني المنقسمة بلغة إف. بي. جورن، على معصم سموّه.",
+      "materialEn": "Titanium, red-gold crown",
+      "materialAr": "تيتانيوم، مع تاج من الذهب الأحمر",
+      "caseSizeEn": "44 mm × 12.1 mm",
+      "caseSizeAr": "٤٤ مم × ١٢٫١ مم",
+      "movementEn": "Manual-winding, calibre 1518, 3 Hz",
+      "movementAr": "حركة يدوية التعبئة، العيار ١٥١٨، بتردد ٣ هرتز",
+      "powerReserveEn": "80 hours",
+      "powerReserveAr": "٨٠ ساعة",
+      "complicationsEn": "Monopusher split-seconds chronograph, large date",
+      "complicationsAr": "كرونوغراف أحادي الزر بعقرب منقسم، وتاريخ كبير",
+      "yearReleased": 2017,
+      "displayOrder": 45,
+      "displayImage": "/assets/plates/fp-journe-chronographe-monopoussoir-rattrapante-titanium.webp",
+      "mediaNoteEn": "Owner-supplied photograph from a watch-spotter post; price badge and publisher mark cropped out",
+      "mediaNoteAr": "صورة قدّمها المالك من منشور لرصد الساعات، مع استبعاد شارة السعر وعلامة الناشر.",
+      "sourceUrls": [
+        "https://www.fpjourne.com/en/inside/timepieces/fpjourne-chronographe-rattrapante"
+      ],
+      "identityNote": "Identified 26 Sep 2026 from the maker's render in the owner's post: round titanium case, slate-grey dial, red-gold numerals, two sapphire counters, large date, 5-minute tachymeter — the F.P. Journe Chronographe Monopoussoir Rattrapante in titanium (distinct from the lineSport record).",
+      "imageWidth": 800,
+      "imageHeight": 800,
+      "royalImage": "/assets/royal/fp-journe-chronographe-monopoussoir-rattrapante-titanium.webp",
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
+      "provenance": [
+        {
+          "type": "owner_archive",
+          "subject": "photograph",
+          "source": "source-media/fp-journe-chronographe-rattrapante-sheikh-ammar.jpg (supplied in session, 26 Sep 2026; price badge and publisher mark cropped out of the published image)",
+          "url": null,
+          "date": "2026-09-26",
+          "permission": "gathered by the owner from public social media; owner-confirmed 26 Sep 2026",
+          "status": "owner-confirmed"
+        },
+        {
+          "type": "manufacturer",
+          "subject": "identity",
+          "source": "fpjourne.com",
+          "url": "https://www.fpjourne.com/en/inside/timepieces/fpjourne-chronographe-rattrapante",
           "date": null,
           "permission": "public editorial reference",
           "status": "url-cited"

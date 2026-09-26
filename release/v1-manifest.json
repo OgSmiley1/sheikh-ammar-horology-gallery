@@ -27,7 +27,7 @@
     "framework": "static-html-css-js-data",
     "publicHost": "railway",
     "referenceLegacyRoot": "docs",
-    "recordCount": 44,
+    "recordCount": 45,
     "productionEntry": "/",
     "routes": [
       "/",

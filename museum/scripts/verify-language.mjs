@@ -59,10 +59,10 @@ for (const m of pages.matchAll(/data-ar="([^"]*)"/g)) {
 }
 
 // Counts.
-if (!Array.isArray(data.watches) || data.watches.length !== 44) fail('language gate: canonical collection count must be 44');
+if (!Array.isArray(data.watches) || data.watches.length !== 45) fail('language gate: canonical collection count must be 45');
 const maisons = new Set(data.watches.map(w => w.brand));
 if (maisons.size !== 8) fail(`language gate: canonical Maison count must be 8, found ${maisons.size}`);
-if (manifest && manifest.site.recordCount !== 44) fail('language gate: release manifest recordCount must be 44');
+if (manifest && manifest.site.recordCount !== 45) fail('language gate: release manifest recordCount must be 45');
 if (!app.includes("replace(/\\bCaliber\\b/g, 'Calibre')")) fail('language gate: Caliber source values need runtime normalisation');
 
 const named = new Map(data.watches.map(w => [w.id, w]));
@@ -70,4 +70,4 @@ if (named.get(60028)?.nameEn !== 'Chronomètre à Résonance') fail('language ga
 if (named.get(90006)?.nameAr !== 'FFC — عيار 1300.3') fail('language gate: Arabic calibre terminology regressed');
 if (data.watches.some(w => w.brand === 'Artisans de Geneve')) fail('language gate: Artisans de Genève accent regressed');
 if (data.watches.some(w => /^\d{8}$/.test(String(w.yearReleased)))) fail('language gate: malformed year in ledger');
-console.log('Language gate passed: Arabic-first purity, English register, 44 timepieces, 8 Maisons.');
+console.log('Language gate passed: Arabic-first purity, English register, 45 timepieces, 8 Maisons.');

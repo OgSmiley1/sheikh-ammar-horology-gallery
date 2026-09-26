@@ -1,6 +1,21 @@
 # Sheikh Ammar Horology Museum — Current Project State
 
-Updated: 24 September 2026
+Updated: 26 September 2026
+
+## 26 September 2026 — owner photographs: 45th piece, clean Lederer, new portrait
+- **45th timepiece: F.P. Journe Chronographe Monopoussoir Rattrapante, titanium** (calibre 1518,
+  44 × 12.1 mm, 80 h, slate-grey dial, large date). From an owner-supplied watch-spotter post showing
+  it on His Highness's wrist; identified from the maker's render in the same post (round case,
+  tachymeter, two sapphire counters, large date). It is distinct from the existing lineSport record.
+  The published image is cropped so that the **price badge and publisher mark are excluded**
+  (valuations stay unpublished). Maisons stay at 8. The count gates now require 45.
+- **Lederer:** the owner supplied the clean original, with no W mark and no pasted render. The royal image is
+  rebuilt from it, and the watermarked source is removed.
+- **New portrait source:** His Highness reading a watch book (`source-media/sheikh-ammar-reading-watch-book.jpg`)
+  replaces the fourth framing of `sheikh-examining-watches` in the portrait pairings. The dHash guard passed.
+- Leads from the same batch, **not added** (thumbnails only, too small to publish): Greubel Forsey
+  GMT Sport, Rolex Day-Date "Puzzle", Patek 5178G, a red-dial F.P. Journe, and a Cartier Tank on
+  a bracelet (would be a 9th maison). Send full-size originals to add them.
 
 ## 26 September 2026 — audit follow-up (owner authorised A1, A2, A6 and the recommended set)
 - **A1** Two portrait pairings (5470P, RD#2) had near-identical crops of one portrait. Both now use

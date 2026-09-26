@@ -31,7 +31,7 @@ for (const route of ['home', 'collection', 'biography', 'exhibition', 'watchmaki
     assert.equal(doc.documentElement.lang, lang);
     assert.equal(doc.documentElement.dir, lang === 'ar' ? 'rtl' : 'ltr');
     if (route === 'home') { assert.equal(doc.querySelectorAll('#grid .card').length, 6); assert.equal(doc.querySelectorAll('#featuredGrid .card').length, 3); }
-    if (route === 'collection') assert.equal(doc.querySelectorAll('#grid .card').length, 44);
+    if (route === 'collection') assert.equal(doc.querySelectorAll('#grid .card').length, 45);
     assert.equal(doc.querySelector('#menu').getAttribute('aria-expanded'), 'false');
     dom.window.close();
   });
@@ -70,7 +70,7 @@ test('every rendered timepiece image shows His Highness', async () => {
 });
 
 for (const lang of ['ar', 'en'])
-  test('all 44 details open with the royal image ' + lang, async () => {
+  test('all 45 details open with the royal image ' + lang, async () => {
     const { dom, doc } = await mount('collection', lang);
     for (const b of doc.querySelectorAll('#grid [data-watch]')) {
       const record = data.watches.find(x => x.slug === b.dataset.watch);
@@ -119,7 +119,7 @@ test('filters, search, empty state, zoom and RTL keyboard navigation', async () 
   assert.ok(doc.querySelector('.empty'));
   input.value = ''; input.dispatchEvent(new w.Event('input'));
   doc.querySelector('[data-brand="all"]').click();
-  assert.equal(doc.querySelectorAll('.card').length, 44);
+  assert.equal(doc.querySelectorAll('.card').length, 45);
   doc.querySelector('.card').click();
   doc.querySelector('#zoom').click();
   assert.equal(doc.querySelector('#zoom').getAttribute('aria-pressed'), 'true');
@@ -163,7 +163,7 @@ test('failure offers a working retry', async () => {
   w.fetch = async () => ({ ok: true, json: async () => structuredClone(data) });
   doc.querySelector('#retry').click();
   await new Promise(r => setImmediate(r));
-  assert.equal(doc.querySelectorAll('.card').length, 44);
+  assert.equal(doc.querySelectorAll('.card').length, 45);
   assert.equal(doc.querySelector('#retry').hidden, true);
   dom.window.close();
 });
@@ -260,7 +260,7 @@ test('menu opens, labels itself and closes on Escape', async () => {
 });
 
 test('every record carries a royal image and a declared pairing', () => {
-  assert.equal(data.watches.length, 44);
+  assert.equal(data.watches.length, 45);
   for (const w of data.watches) {
     assert.match(w.royalImage, /^\/assets\/royal\/.+\.webp$/, w.slug);
     assert.ok(['photograph', 'portrait'].includes(w.royalPairing), w.slug);
