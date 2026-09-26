@@ -31,7 +31,9 @@ for (const w of data.watches) {
     trail.push({ type: 'owner_archive', subject: 'portrait', source: PORTRAIT_SOURCES, url: null, date: null, permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
     trail.push({ type: 'manufacturer', subject: 'watch image', source: w.mediaNoteEn || 'maker model image', url: null, date: null, permission: 'maker publicity image; editorial use', status: 'cited-no-url' });
   } else if (w.slug === 'lederer-cic-39-inverto-titanium') {
-    trail.push({ type: 'owner_archive', subject: 'photograph', source: 'source-media/lederer-cic-39-sheikh-ammar.jpg (supplied in session, 24 Sep 2026; publisher mark present)', url: null, date: '2026-09-24', permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
+    trail.push({ type: 'owner_archive', subject: 'photograph', source: 'source-media/lederer-cic-39-sheikh-ammar-clean.jpg (clean original supplied in session, 26 Sep 2026; no publisher mark)', url: null, date: '2026-09-26', permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
+  } else if (w.slug === 'fp-journe-chronographe-monopoussoir-rattrapante-titanium') {
+    trail.push({ type: 'owner_archive', subject: 'photograph', source: 'source-media/fp-journe-chronographe-rattrapante-sheikh-ammar.jpg (supplied in session, 26 Sep 2026; price badge and publisher mark cropped out of the published image)', url: null, date: '2026-09-26', permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
   } else {
     const origin = w.mediaNoteEn || 'watch-spotter collage from the owner archive';
     trail.push({ type: 'owner_archive', subject: 'photograph', source: `archive ${String(w.displayImage || '').split('/').pop()} (${origin})`, url: null, date: null, permission: ARCHIVE_PERMISSION, status: 'owner-confirmed' });
@@ -39,7 +41,7 @@ for (const w of data.watches) {
 
   // 2. Identity and history: only sources the record already cites.
   for (const url of [].concat(w.sourceUrls || [])) {
-    const type = /christies|sothebys|phillips/.test(url) ? 'auction' : 'sighting_report';
+    const type = /christies|sothebys|phillips/.test(url) ? 'auction' : /fpjourne\.com/.test(url) ? 'manufacturer' : 'sighting_report';
     trail.push({ type, subject: 'identity', source: new URL(url).hostname.replace(/^www\./, ''), url, date: null, permission: 'public editorial reference', status: 'url-cited' }); // link recorded; not fetched (egress blocked where this ran)
   }
   const text = [w.descriptionEn, w.storyEn].filter(Boolean).join(' ');

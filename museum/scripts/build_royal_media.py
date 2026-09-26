@@ -51,12 +51,15 @@ PHOTOGRAPHS = {
     'artisans-de-geneve-andrea-pirlo-rolex-submariner': ('museum/dist/assets/watches/andrea-pirlo-submariner.jpg', (0, 0, 1020, 1020)),
     # one photograph, re-cut as a diptych: His Highness (right of frame) | the dragon dial (left)
     'rolex-6100-chinese-dragon-cloisonne': ('museum/dist/assets/watches/rolex-6100-sheikh-original.jpg', ('split', (480, 0, 1262, 835), (0.62, 0.3), (40, 0, 480, 835))),
-    # owner-supplied 24 Sept 2026; publisher mark left intact rather than retouch his face
-    'lederer-cic-39-inverto-titanium': ('museum/source-media/lederer-cic-39-sheikh-ammar.jpg', 'cover-top'),
+    # owner-supplied clean original, 26 Sept 2026: no publisher mark, no pasted render
+    'lederer-cic-39-inverto-titanium': ('museum/source-media/lederer-cic-39-sheikh-ammar-clean.jpg', (0, 420, 960, 1380)),
+    # owner-supplied 26 Sept 2026. His Highness with the piece on his wrist | the maker's
+    # render from the same post. Both boxes stop short of the price badge and publisher mark.
+    'fp-journe-chronographe-monopoussoir-rattrapante-titanium': ('museum/source-media/fp-journe-chronographe-rattrapante-sheikh-ammar.jpg', ('split', (372, 160, 882, 1180), (0.5, 0.5), (60, 590, 366, 1015), 'contain')),
 }
 
 # (source, pre-crop box as fractions or None, cover focus). Nine distinct framings of
-# three official photographs; main() refuses to build if any two come out alike.
+# four photographs; main() refuses to build if any two come out alike.
 # sheikh-portrait-2 is head-and-shoulders, so it yields only one framing. Never mirror.
 PORTRAITS = [
     ('museum/dist/images/sheikh/sheikh-portrait-1.webp', None, (0.5, 0.35)),
@@ -67,7 +70,8 @@ PORTRAITS = [
     ('museum/dist/images/sheikh-examining-watches.webp', (0.22, 0.04, 0.82, 0.72), (0.5, 0.35)),
     ('museum/dist/images/sheikh-examining-watches.webp', (0.3, 0.02, 0.78, 0.46), (0.5, 0.4)),
     ('museum/dist/images/sheikh/sheikh-portrait-1.webp', (0.0, 0.25, 1.0, 1.0), (0.5, 0.2)),
-    ('museum/dist/images/sheikh-examining-watches.webp', (0.0, 0.3, 1.0, 1.0), (0.45, 0.25)),
+    # owner-supplied 26 Sept 2026: His Highness reading a watch book
+    ('museum/source-media/sheikh-ammar-reading-watch-book.jpg', (0.4, 0.12, 0.95, 0.85), (0.5, 0.3)),
 ]
 
 
@@ -157,10 +161,11 @@ def main():
             src, mode = PHOTOGRAPHS[slug]
             im = Image.open(ROOT / src).convert('RGB')
             if isinstance(mode, tuple) and mode[0] == 'split':
-                _, person_box, focus, watch_box = mode
+                _, person_box, focus, watch_box, *fit = mode
                 out = Image.new('RGB', (SIZE, SIZE))
                 out.paste(cover(im.crop(person_box), HALF, SIZE, focus), (0, 0))
-                panel = cover(im.crop(watch_box), HALF, SIZE)
+                fit_panel = contain_on_blur if fit == ['contain'] else cover
+                panel = fit_panel(im.crop(watch_box), HALF, SIZE)
                 out.paste(panel, (HALF, 0))
             elif isinstance(mode, tuple):
                 out = im.crop(mode).resize((SIZE, SIZE), Image.LANCZOS)

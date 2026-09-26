@@ -58,7 +58,7 @@ for (const route of ['/collection/', '/exhibition/', '/watchmaking/', '/his-high
   if (!sitemap.includes(route)) fail(`sitemap missing ${route}`);
 
 const data = JSON.parse(read('dist/watches.json'));
-if (!Array.isArray(data.watches) || data.watches.length !== 44) fail('watches.json: expected exactly 44 records');
+if (!Array.isArray(data.watches) || data.watches.length !== 45) fail('watches.json: expected exactly 45 records');
 const ids = new Set();
 const isWebp = file => { const b = readFileSync(file); return b.length > 1000 && b.subarray(0, 4).toString('latin1') === 'RIFF' && b.subarray(8, 12).toString('latin1') === 'WEBP' && b.readUInt32LE(4) + 8 === b.length; };
 for (const watch of data.watches) {
@@ -89,7 +89,7 @@ for (const watch of data.watches) {
 }
 
 const royalFiles = readdirSync(path.join(root, 'dist/assets/royal'));
-if (royalFiles.length !== 44) fail(`assets/royal: expected 44 images, found ${royalFiles.length}`);
+if (royalFiles.length !== 45) fail(`assets/royal: expected 45 images, found ${royalFiles.length}`);
 if (statSync(path.join(root, 'dist/images/sheikh/sheikh-portrait-1.webp')).size < 10000) fail('hero portrait missing');
 
 console.log(`Museum verification passed: ${routes.length} routes, ${data.watches.length} records, each shown with His Highness (${data.watches.filter(w => w.royalPairing === 'photograph').length} photographs, ${data.watches.filter(w => w.royalPairing === 'portrait').length} portrait pairings).`);

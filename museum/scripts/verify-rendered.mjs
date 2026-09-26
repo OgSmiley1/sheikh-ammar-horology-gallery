@@ -12,7 +12,7 @@ const results = [];
 const routes = ['/', '/collection/', '/his-highness/', '/exhibition/', '/watchmaking/'];
 // Phones 375-430 (iPhone mini/SE to Pro Max), tablet, laptop, desktop, majlis display.
 const sizes = [[375,812],[390,844],[412,915],[430,932],[768,1024],[1024,768],[1440,900],[1920,1080]];
-const sheetWidths = [375,390,1440]; // every one of the 44 detail sheets is opened at these
+const sheetWidths = [375,390,1440]; // every one of the 45 detail sheets is opened at these
 try {
  for (const motion of ['no-preference','reduce']) for (const [width,height] of sizes) for (const lang of ['ar','en']) {
   const context = await browser.newContext({ ...contextOptions, viewport:{width,height}, reducedMotion:motion });
