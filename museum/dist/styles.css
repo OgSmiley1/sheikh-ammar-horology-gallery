@@ -324,6 +324,13 @@ dialog.sheet::backdrop{background:rgba(15,15,14,.6)}
 .portrait-hero .role{color:var(--gold);margin-bottom:2rem}
 .portrait-hero .body-2{color:var(--moon-2)}
 .portrait-hero .link{color:var(--moon);align-self:flex-start}
+/* the epigraph: the Arabic verse never swaps away in English view — a small
+   rendering sits beneath it instead, the way a translated line of poetry
+   is set under the original in print. */
+blockquote.epigraph{margin:2rem auto 0;padding:0;border:none;max-width:640px}
+.epigraph .verse{font:400 1.55rem/2 'Amiri','Cormorant Garamond',serif;color:var(--ink);margin:0 0 .4rem}
+.epigraph .verse-rendering{font:italic 300 .95rem/1.6 var(--serif);color:var(--ink-2);margin:0 0 2.1rem}
+.epigraph .verse-rendering:last-child{margin-bottom:0}
 .records{display:grid;gap:0;max-width:var(--max);margin:3rem auto 0;border-top:1px solid var(--hair)}
 @media (min-width:900px){.records{grid-template-columns:repeat(3,1fr)}}
 .records article{padding:2rem clamp(0rem,2vw,2rem) 2rem 0;border-bottom:1px solid var(--hair)}
@@ -352,13 +359,38 @@ dialog.sheet::backdrop{background:rgba(15,15,14,.6)}
 .chapters a{font:400 .72rem/1 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:.6rem;color:var(--ink)}
 :root[lang=ar] .chapters a{font:500 .95rem/1 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
 .chapters a span{color:var(--bronze)}
-.anatomy{display:grid;gap:0;max-width:var(--max);margin:3rem auto 0;border-top:1px solid var(--hair)}
-@media (min-width:620px){.anatomy{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1040px){.anatomy{grid-template-columns:repeat(3,1fr)}}
-.anatomy article{padding:2rem 1.75rem 2.25rem 0;border-bottom:1px solid var(--hair)}
-:root[dir=rtl] .anatomy article{padding:2rem 0 2.25rem 1.75rem}
+.anatomy-layout{display:grid;gap:2.75rem;max-width:var(--max);margin:3rem auto 0}
+@media (min-width:980px){.anatomy-layout{grid-template-columns:min(320px,34%) 1fr;align-items:start;gap:4vw}}
+/* offset clears the sticky chapters nav above it (measured: ~137px tall on
+   narrow screens where its links wrap, ~85px on one line past 980px). Full
+   width below 980px — cards stack in one column there, so the sticky bar must
+   fully cover the row or their text shows through at its sides — narrower
+   only once the stage has its own dedicated grid column. */
+.stage-col{width:100%;position:sticky;top:calc(var(--header) + 150px);z-index:2;background:var(--paper);padding:.5rem 0 1rem}
+@media (min-width:980px){.stage-col{top:calc(var(--header) + 95px);padding:0}}
+/* the stage: two SVG faces on a 3D flip card, no library, no engine */
+.stage{width:100%;max-width:220px;margin:0 auto;aspect-ratio:1;perspective:1400px}
+@media (min-width:980px){.stage{max-width:none}}
+.stage-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s var(--ease)}
+.stage-inner.flipped{transform:rotateY(180deg)}
+.stage .face{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;color:var(--bronze)}
+.stage .face.back{transform:rotateY(180deg)}
+.stage .part{transition:opacity .4s,filter .4s;opacity:1}
+.stage.picked .part{opacity:.38}
+.stage.picked .part.hl{opacity:1;filter:drop-shadow(0 0 7px rgba(216,189,138,.85))}
+.stage.picked .part.hl{stroke-width:2.6px}
+.stage-caption{text-align:center;margin:1.5rem 0 0;color:var(--bronze);font:400 .82rem/1.6 var(--sans);min-height:1.4em}
+@media (prefers-reduced-motion:reduce){.stage-inner{transition:none}}
+.anatomy{display:grid;gap:0;border-top:1px solid var(--hair)}
+@media (min-width:620px){.anatomy-layout .anatomy{grid-template-columns:repeat(2,1fr)}}
+.anatomy article{border-bottom:1px solid var(--hair)}
+.anatomy-card{display:block;width:100%;padding:2rem 1.75rem 2.25rem 0;background:none;border:0;border-inline-start:2px solid transparent;text-align:start;font:inherit;color:inherit;cursor:pointer}
+:root[dir=rtl] .anatomy-card{padding:2rem 0 2.25rem 1.75rem}
+.anatomy-card:hover,.anatomy-card:focus-visible{border-inline-start-color:var(--hair)}
+.anatomy-card[aria-pressed=true]{border-inline-start-color:var(--bronze)}
+.anatomy-card[aria-pressed=true] h3{color:var(--bronze)}
 .anatomy .num{font:400 .72rem/1 'Jost',sans-serif;letter-spacing:.2em;color:var(--bronze);display:block;margin-bottom:1rem}
-.anatomy h3{font-size:1.6rem;color:var(--ink);margin-bottom:.6rem}
+.anatomy h3{font-size:1.6rem;color:var(--ink);margin-bottom:.6rem;transition:color .3s}
 .anatomy p{color:var(--ink-2);margin:0}
 .complication-index{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;max-width:980px;margin:2.5rem auto 0}
 .complication-index a{text-decoration:none;border:1px solid rgba(243,239,231,.3);padding:.6rem 1rem;font-size:.95rem;color:var(--moon);transition:border-color .3s}
