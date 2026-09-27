@@ -203,7 +203,7 @@ function renderMaisons() {
   list.innerHTML = [...new Set(state.all.map(w => w.brand))].map(b => `<li>${esc(state.ar ? maisonAr[b] || b : b)}</li>`).join('');
 }
 function renderAll() {
-  renderFilters(); renderGrid(); renderFeatured(); renderMaisons(); buildFrames(); renderToday(); renderDial(); renderGuest();
+  renderFilters(); renderGrid(); renderFeatured(); renderMaisons(); buildFrames(); buildReel(); renderToday(); renderDial(); renderGuest();
   observeReveals();
 }
 
@@ -385,6 +385,44 @@ function initScreen() {
     updateScreenButtons();
   };
   $('#screenStop').onclick = endScreen;
+}
+
+// ————— collection reel: photography in motion, ambient, no controls —————
+// Plain images only, crossfading on their own above the collection — the royal
+// photographs already on the page, nothing streamed and no player chrome.
+// Freezes on its first frame under prefers-reduced-motion, like every other
+// autoplay on this site.
+const REEL_FRAMES = [
+  { slug: 'rolex-daytona-6263-quraysh-hawk', ar: 'قطعةٌ يتحدّث عنها هواة الساعات حيث اجتمعوا — صقر قريش، نادرًا ما يُرى خارج صالات المزادات.', en: 'A piece collectors speak of wherever they gather — the Hawk of Quraysh, rarely seen outside an auction room.' },
+  { slug: 'fp-journe-chronometre-a-resonance-platinum-grey', ar: 'من الساعات التي يعرفها الهواة بالاسم قبل أن يروها — والآن، على معصم سموّه.', en: 'A watch connoisseurs know by name before they ever see one — and here, on His Highness’s wrist.' },
+  { slug: 'richard-mille-rm-68-01-tourbillon-cyril-kongo', ar: 'عملٌ فنيٌّ بقدر ما هو آلة، اختاره سموّه لأن الصنعة عنده لا تقلّ عن الفن.', en: 'As much artwork as mechanism — chosen because, to His Highness, craft and art ask the same standard.' },
+  { slug: 'audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce', ar: 'توربيونٌ طائر يتابعه الهواة بإعجاب — واحدةٌ من قِلّة حول العالم.', en: 'A flying tourbillon collectors follow with real admiration — one of very few in the world.' },
+  { slug: 'fp-journe-chronographe-monopoussoir-rattrapante-titanium', ar: 'إضافةٌ حديثة إلى المجلس، توثّق ذائقةً لا تتوقف عن الاكتشاف.', en: 'A recent addition to the majlis — proof that this eye for craft never stops looking.' },
+  { slug: 'rolex-6100-chinese-dragon-cloisonne', ar: 'من أندر ما صنعت رولكس على الإطلاق — قطعةٌ يحلم بها كثيرون، وامتلكها القليل.', en: 'Among the rarest pieces Rolex ever made — a piece many dream of, and very few have owned.' }
+];
+const reel = { i: 0, timer: null };
+function showReelFrame(i) {
+  reel.i = i;
+  $$('#reelFrames .frame').forEach((f, n) => f.classList.toggle('on', n === i));
+  const cap = $('#reelCaption'), f = REEL_FRAMES[i];
+  if (cap) { cap.textContent = state.ar ? f.ar : f.en; cap.dataset.ar = f.ar; cap.dataset.en = f.en; }
+}
+function runReel() {
+  clearInterval(reel.timer);
+  reel.timer = setInterval(() => {
+    if (document.hidden) return;
+    showReelFrame((reel.i + 1) % REEL_FRAMES.length);
+  }, 6500);
+}
+function buildReel() {
+  const box = $('#reelFrames');
+  if (!box || box.childElementCount || state.loading || !state.all.length) return;
+  box.innerHTML = REEL_FRAMES.map((f, i) => {
+    const src = royalImage(bySlug(f.slug) || {}) || '';
+    return `<div class="frame${i === 0 ? ' on' : ''}"><img src="${esc(src)}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}" width="800" height="800"></div>`;
+  }).join('');
+  showReelFrame(0);
+  if (!reduceMotion()) runReel();
 }
 
 // ————— exhibition —————
