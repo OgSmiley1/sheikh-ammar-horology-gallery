@@ -2,6 +2,27 @@
 
 Updated: 27 September 2026
 
+## 27 September 2026 — an engraved background texture (first piece of a wider pass)
+The owner asked for the whole site to be reviewed again: wording, a page background with
+more life in it, new tab names, a Gulf poetic touch, and a possible 3D interactive watch
+diagram on the Watchmaking page. This entry covers the one piece shipped so far; the rest
+(nav names, the poetry, the 3D feature) are proposals awaiting the owner's direction —
+see the session record, not this file, for the options put to him.
+- **`body::before`, `museum/dist/styles.css`:** a fixed, centred, radially-masked
+  `repeating-radial-gradient` — a faint engraved-ring medallion in the site's own bronze
+  tone, echoing the guilloché already used on the live dial. Not a photograph, so it
+  carries none of the risk a photograph would (never near his face, never a contrast
+  question). Confirmed visually behind the home page's ivory sections.
+- **Regression caught before shipping:** the first attempt also set `body{position:relative}`
+  so the fixed pseudo-element would have an explicit stacking context. That was unnecessary
+  (`position:fixed` doesn't need one) and it changed the containing block for other
+  absolutely-positioned elements on the page — `verify-rendered.mjs` caught a new
+  text-over-his-portrait failure on the home hero as a result. Removed the property; the
+  gate returned to 160/160 with the texture still fully in place.
+- A literal use of his photography as ambient background was considered and set aside for
+  now — put to the owner as an option rather than shipped blind, since it runs closer to
+  the "nothing distracting near his face" rule than an abstract motif does.
+
 ## 27 September 2026 — the Collection reel, and an appreciation pass
 The owner asked for motion at the top of the Collection page — "the video that has to be
 played" — and for copy that shows how craft lovers admire the collection. No rights-cleared
