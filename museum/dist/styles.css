@@ -31,6 +31,13 @@
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:var(--header)}
 body{margin:0;background:var(--paper);color:var(--ink);font:300 1.0625rem/1.75 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+/* An engraved medallion, quietly there behind every page — never a photograph, so it can
+   never cross his face or compete with his portrait; the same guilloché language as the
+   live dial, just fixed and almost too faint to notice until you look for it. */
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-radial-gradient(circle at 50% 38%,transparent 0 4px,rgba(95,69,36,.05) 4px 5px);
+  -webkit-mask-image:radial-gradient(circle at 50% 38%,#000 0%,#000 30%,transparent 68%);
+  mask-image:radial-gradient(circle at 50% 38%,#000 0%,#000 30%,transparent 68%)}
 :root[lang=ar] body{font-size:1.125rem;line-height:1.95}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
