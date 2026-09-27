@@ -1,6 +1,32 @@
 # Sheikh Ammar Horology Museum — Current Project State
 
-Updated: 26 September 2026
+Updated: 27 September 2026
+
+## 27 September 2026 — the Collection reel, and an appreciation pass
+The owner asked for motion at the top of the Collection page — "the video that has to be
+played" — and for copy that shows how craft lovers admire the collection. No rights-cleared
+video exists (the one film in the repo, `collection-film-third-party-reel.mp4`, was retired
+precisely because it carries a watermark, captions and prices — see §2 below), so this was
+built as **plain photography crossfading on its own**, the same technique the home Screening
+Room already uses, just autoplaying instead of click-triggered. No `<video>`, no iframe, no
+YouTube, no player controls — `verify-museum.mjs`'s existing gates pass unmodified.
+- **The reel** (`#reelFrames`/`#reelCaption`, `museum/dist/app.js`, `museum/dist/styles.css`):
+  6 royal photographs crossfade every 6.5s above the Collection page's own title, each under
+  a one-line admiring caption (bilingual) about how collectors and connoisseurs regard the
+  piece. Freezes on frame one under `prefers-reduced-motion` (verified: same caption before
+  and after a 7s wait); advances normally otherwise (verified: caption text changes).
+- **Appreciation copy**, added in three places (not the whole site — see the owner's answer
+  recorded here): a line on the home page after the existing "record of discernment" lede;
+  the six reel captions on Collection; one added sentence in the "An eye for craft" article
+  on the His Highness page. All written in the established maison register, not hype — and
+  checked against the language gate's banned-phrase list (avoid "من القلائل" literal, use
+  "قلّة" instead, per that list's own preferred style).
+- **Bug fixed in the same pass:** the Collection page's meta description and on-page lede
+  still read "Forty-four" / "أربعٌ وأربعون" after the 45th piece was added on 26 Sep — missed
+  because it's prose, not a gated count. Now reads 45 throughout.
+- Verified: `npm test` 37/37, `verify-rendered.mjs` 160/160 (including AAA contrast and the
+  no-text-over-his-portrait check, unaffected since the caption sits below the photography,
+  never on top of it — same layout the Screening Room already uses).
 
 ## 26 September 2026 — owner photographs: 45th piece, clean Lederer, new portrait
 - **45th timepiece: F.P. Journe Chronographe Monopoussoir Rattrapante, titanium** (calibre 1518,

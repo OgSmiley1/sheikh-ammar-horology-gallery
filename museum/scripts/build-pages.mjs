@@ -113,6 +113,7 @@ ${b('p', 'مجموعة ساعات صاحب السمو الشيخ عمّار بن
 ${b('p', 'مجلس الوقت', 'The Majlis of Time', 'class="label"')}
 ${b('h2', 'ليست عرضاً للاقتناء، بل سجلٌّ لذوقٍ يعرف قدر التفاصيل.', 'Not a display of acquisition — a record of discernment.', 'class="sr-only" id="introTitle"')}
 ${b('p', 'ليست المجموعة عرضاً للاقتناء، بل سجلٌّ لذوقٍ يعرف قدر التفاصيل: ميناءٌ يستوقف النظر، وحركةٌ تستحق الإصغاء، وقطعةٌ رافقت سموّه في لحظاتٍ من حياته.', 'Not a display of acquisition, but a record of discernment: a dial that holds the eye, a movement worth listening to, a timepiece that accompanied His Highness through moments of his life.', 'class="lede reveal"')}
+${b('p', 'يتحدّث عنها هواة الساعات في المزادات والمحافل — مجموعةٌ نادراً ما تجتمع عناصرها كاملةً عند شخصٍ واحد.', 'Collectors speak of it at auctions and in horological circles — a collection whose full range rarely comes together under one name.', 'class="body-2 reveal"')}
 <a class="link" href="/his-highness/">${b('span', 'سيرة سموّه', 'His Highness')}${arrow}</a>
 </section>
 
@@ -202,12 +203,16 @@ ${b('h2', 'ثماني دور، وسبعة عقود من صناعة الساعا�
 const collection = shell({
   page: 'collection', route: '/collection/',
   titleAr: 'المجموعة | مجلس الوقت', titleEn: 'The Collection | The Majlis of Time',
-  descAr: 'أربعٌ وأربعون قطعة من ثماني دور، تُعرض كلٌّ منها إلى جانب صاحب السمو الشيخ عمّار بن حميد النعيمي.',
-  main: `<section class="page-hero">
+  descAr: 'خمسٌ وأربعون قطعة من ثماني دور، تُعرض كلٌّ منها إلى جانب صاحب السمو الشيخ عمّار بن حميد النعيمي.',
+  main: `<section class="reel">
+<div class="reel-frames" id="reelFrames"></div>
+<p class="reel-caption" id="reelCaption"></p>
+</section>
+<section class="page-hero">
 ${b('p', 'المجموعة', 'The Collection', 'class="label"')}
 ${b('h1', 'للنفائس تفاصيلها.', 'Distinction is in the details.', 'class="display" id="collectionTitle"')}
 <span class="rule" aria-hidden="true"></span>
-${b('p', 'أربعٌ وأربعون قطعة من ثماني دور، تُعرض كلٌّ منها إلى جانب صاحب السمو.', 'Forty-four timepieces from eight maisons, each presented with His Highness.', 'class="lede"')}
+${b('p', 'خمسٌ وأربعون قطعة من ثماني دور، امتدّت عبر سبعة عقود — كلٌّ منها إلى جانب صاحب السمو، وكلٌّ منها حكايةٌ يعرفها هواة الصنعة.', 'Forty-five timepieces from eight maisons, spanning seven decades — each shown with His Highness, each a story the connoisseurs of the craft already know.', 'class="lede"')}
 </section>
 <section class="section" id="collection" aria-labelledby="collectionTitle" style="padding-top:0">
 <div class="tools">
@@ -284,7 +289,7 @@ ${b('h2', 'من المكان، إلى ما يبقى.', 'A place. A life. A lasti
 <div class="records">
 <article><span class="index" aria-hidden="true">01</span>${b('h3', 'التعلّم والخدمة', 'Learning and service')}${b('p', 'من مدارس عجمان إلى الدفعة الأولى من كلية الشرطة، ثم التدريب المتخصص في المملكة المتحدة؛ محطاتٌ تسبق مسيرة سموّه في الخدمة العامة.', 'Schools in Ajman, the inaugural Police College cohort, then specialist training in the United Kingdom: an education preceding a life of public service.')}</article>
 <article><span class="index" aria-hidden="true">02</span>${b('h3', 'إرثٌ حيّ', 'A living heritage')}${b('p', 'تُوثّق السيرة الرسمية اهتمام سموّه بالفروسية والصقارة؛ حضورٌ للتراث الإماراتي في الممارسة، إلى جانب اهتمامه بالرياضة المعاصرة.', 'The official biography records his devotion to horsemanship and falconry: Emirati heritage in practice, alongside contemporary sport.')}</article>
-<article><span class="index" aria-hidden="true">03</span>${b('h3', 'عينٌ على الحِرفة', 'An eye for craft')}${b('p', 'وتسجّل السيرة ذاتها اهتمامه بصناعة الساعات والمهارة الحرفية. من هنا تعبر الزيارة إلى الميناء والحركة، والتفاصيل التي تمنح كل قطعة هويتها.', 'The same biography records an interest in horology and craftsmanship. From here the visit continues through dials, movements and the details that give each timepiece its identity.')}</article>
+<article><span class="index" aria-hidden="true">03</span>${b('h3', 'عينٌ على الحِرفة', 'An eye for craft')}${b('p', 'وتسجّل السيرة ذاتها اهتمامه بصناعة الساعات والمهارة الحرفية. من هنا تعبر الزيارة إلى الميناء والحركة، والتفاصيل التي تمنح كل قطعة هويتها. ذائقةٌ يعرفها هواة الصنعة ويقدّرونها، ومجموعةٌ تضع اسمه بين قلّةٍ جمعوا مثلها.', 'The same biography records an interest in horology and craftsmanship. From here the visit continues through dials, movements and the details that give each timepiece its identity. A discernment the craft’s connoisseurs recognise and admire — a collection that places his name among the very few who have assembled one like it.')}</article>
 </div>
 </section>
 <section class="section white" aria-labelledby="milestonesTitle">
