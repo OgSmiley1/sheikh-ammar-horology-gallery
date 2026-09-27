@@ -425,6 +425,30 @@ function buildReel() {
   if (!reduceMotion()) runReel();
 }
 
+// ————— watchmaking: the anatomy stage —————
+// A still illustration that turns to its caseback for the six parts only visible
+// there. Not any one maison's watch — plain SVG line art, the same technique as
+// the live dial above it. No 3D engine, no new dependency.
+const STAGE_BACK_PARTS = new Set(['calibre', 'escapement', 'balance', 'barrel', 'rotor', 'bridges']);
+function initAnatomyStage() {
+  const stage = $('#watchStage'), grid = $('#anatomyGrid'), inner = $('#stageInner'), caption = $('#stageCaption');
+  if (!stage || !grid || !inner) return;
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.anatomy-card');
+    if (!btn) return;
+    const part = btn.dataset.part;
+    $$('.anatomy-card').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    stage.classList.add('picked');
+    stage.querySelectorAll('.part').forEach(g => g.classList.toggle('hl', g.dataset.part === part));
+    inner.classList.toggle('flipped', STAGE_BACK_PARTS.has(part));
+    const h3 = btn.querySelector('h3');
+    if (caption && h3) {
+      caption.dataset.ar = h3.dataset.ar; caption.dataset.en = h3.dataset.en;
+      caption.textContent = state.ar ? h3.dataset.ar : h3.dataset.en;
+    }
+  });
+}
+
 // ————— exhibition —————
 const STOPS = [
   { slug: 'rolex-daytona-6263-quraysh-hawk', chapterAr: 'أثر التاريخ', chapterEn: 'The imprint of history',
@@ -680,6 +704,7 @@ initMasthead();
 initDetail();
 initScreen();
 initExhibition();
+initAnatomyStage();
 applyLanguage();
 tickClock();
 setInterval(tickClock, 1000);

@@ -2,6 +2,48 @@
 
 Updated: 27 September 2026
 
+## 27 September 2026 — nav names, a verse, and the anatomy stage (rest of the wider pass)
+The owner chose the recommended option on all four questions this pass raised (see the
+session record for the options put to him). This closes it out.
+- **Nav names** (`NAV` in `build-pages.mjs`, site-wide): المجموعة → **الديوان** (Diwan —
+  a ruler's register, and historically a poet's collected verse too), قاعة العرض →
+  **الرواق** (a palace portico), فن صناعة الساعات → **الصنعة** (Craft). Home and His
+  Highness unchanged. Only the nav/footer label changed; each page's own `<h1>` and
+  meta description keep their fuller original wording.
+- **The verse**, His Highness page, new section between the portrait-hero and "Life and
+  heritage": two original couplets, «ديوان الوقت» (From the Diwan of Time). Not a lifted
+  poem — no verifiably-authored Nabati poem about time or watches turned up in search, and
+  reusing an unverified one under his name was the wrong kind of risk for this project. The
+  Arabic verse never swaps away in English view (no `data-ar`/`data-en` on it); a small
+  italic rendering sits beneath it instead, the way translated verse is set under the
+  original in print. Caught a real bug: the English rendering needs `dir="ltr"` explicitly,
+  or its em dash lands on the wrong side under the page's default RTL bidi context.
+- **The anatomy stage** (`#watchStage`, `museum/dist/app.js` + `styles.css`), Watchmaking
+  page, phase one of two (complications are phase two, not started): a still illustration —
+  not any one maison's watch, hand-drawn SVG line art in the site's own gold-on-paper
+  language — that turns to its caseback on a CSS 3D flip (`perspective` + `rotateY`, two
+  `backface-visibility:hidden` faces; no library, no engine) for the six parts only visible
+  there. Clicking one of the 12 anatomy cards highlights that part with a soft glow and
+  dims the rest; the caption below the stage updates via the site's existing bilingual
+  `data-ar`/`data-en` swap, so it tracks a language switch correctly even after selection.
+  `<article>` stays a bare tag (the `<article>` count gate matches the literal substring
+  with no attributes) — the click target is a `<button class="anatomy-card">` inside it.
+  Two real layout bugs caught before shipping:
+  1. `.stage-col{margin:0 auto}` with no explicit width overrode the grid item's default
+     stretch-to-fill behaviour, collapsing the stage to 0×0 on desktop. Fixed with an
+     explicit `width:100%` (mobile) / `margin-inline:0` (desktop).
+  2. On mobile the stage sits above the anatomy cards in a single stacked column; making it
+     `position:sticky` without full row width let the scrolling cards' text show through at
+     its sides as they passed underneath. Fixed by keeping the *sticky bar* full width with
+     an opaque `background:var(--paper)`, and capping only the *watch illustration inside it*
+     to a small centred size. Also had to offset the sticky `top` past the page's own sticky
+     chapters nav (measured: ~137px tall where its links wrap below 980px, ~85px on one
+     line above it) or the two sticky elements overlapped.
+- Verified: `npm test` 37/37, `verify-rendered.mjs` 160/160, plus manual clicks confirming
+  the flip fires only for caseback parts, the highlight and caption are correct per part,
+  keyboard activation works (native `<button>`, Enter fires `aria-pressed`), and the mobile
+  sticky bar fully occludes the scrolling list behind it.
+
 ## 27 September 2026 — an engraved background texture (first piece of a wider pass)
 The owner asked for the whole site to be reviewed again: wording, a page background with
 more life in it, new tab names, a Gulf poetic touch, and a possible 3D interactive watch

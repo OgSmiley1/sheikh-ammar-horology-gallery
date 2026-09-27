@@ -19,10 +19,10 @@ const arrow = '<span class="arrow" aria-hidden="true">→</span>';
 
 const NAV = [
   ['/', 'المجلس', 'The Majlis'],
-  ['/collection/', 'المجموعة', 'The Collection'],
-  ['/exhibition/', 'قاعة العرض', 'The Exhibition'],
+  ['/collection/', 'الديوان', 'The Diwan'],
+  ['/exhibition/', 'الرواق', 'The Gallery'],
   ['/his-highness/', 'صاحب السمو', 'His Highness'],
-  ['/watchmaking/', 'فن صناعة الساعات', 'Watchmaking']
+  ['/watchmaking/', 'الصنعة', 'The Craft']
 ];
 const arabicDigits = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 
@@ -281,6 +281,17 @@ ${b('p', 'وُلد في عجمان في 31 مارس 1969. تلقّى تعليم�
 <a class="link" href="https://www.ammarbinhumaid.ae/en/biography/" target="_blank" rel="noopener">${b('span', 'السيرة الرسمية', 'Official biography')}<span aria-hidden="true">↗</span></a>
 </div>
 </section>
+<section class="section stone center" aria-label="ديوان الوقت" data-label-ar="ديوان الوقت" data-label-en="From the Diwan of Time">
+<div class="inner center">
+${b('p', 'ديوان الوقت', 'From the Diwan of Time', 'class="label"')}
+<blockquote class="epigraph">
+<p class="verse" lang="ar" dir="rtl">الوقتُ سِرٌّ ما يُقاسُ بعقربٍ<br>لكنّه في كفِّ عمّارٍ يُصان</p>
+<p class="verse-rendering" dir="ltr">Time is a secret no hand can measure —<br>kept safe within the palm of Ammar.</p>
+<p class="verse" lang="ar" dir="rtl">ساعاتُ مجدٍ لا تُقلَّدُ صَنعةً<br>فيها وفاءُ الأصلِ رغم الزمان</p>
+<p class="verse-rendering" dir="ltr">Watches of glory, whose craft none can copy —<br>in them, the loyalty of origin outlasts time.</p>
+</blockquote>
+</div>
+</section>
 <section class="section" aria-labelledby="royalChaptersTitle">
 <div class="inner center">
 ${b('p', 'السيرة والإرث', 'Life and heritage', 'class="label"')}
@@ -306,19 +317,21 @@ ${timeline.map(([year, tAr, tEn, pAr, pEn, src]) => `<li><time datetime="${year}
 
 // ————— Watchmaking —————
 const anatomy = [
-  ['العلبة', 'Case', 'الهيكل الذي يحمي الحركة ويحدد حضور الساعة على المعصم؛ قد يُصنع من الفولاذ أو الذهب أو التيتانيوم أو السيراميك أو الياقوت الصناعي.', 'The structure that protects the movement and defines the watch on the wrist; crafted in steel, gold, titanium, ceramic or sapphire.'],
-  ['الإطار', 'Bezel', 'الحلقة المحيطة بالزجاج؛ قد تكون ثابتة أو دوّارة، أو تحمل مقياساً مثل التاكيمتر.', 'The ring surrounding the crystal; fixed or rotating, or carrying a scale such as a tachymeter.'],
-  ['الزجاج', 'Crystal', 'السطح الشفاف الذي يحمي الميناء؛ والياقوت الصناعي هو الاختيار الشائع في صناعة الساعات الراقية.', 'The transparent surface protecting the dial; sapphire crystal is the standard of Haute Horlogerie.'],
-  ['الميناء', 'Dial', 'الوجه البصري للقطعة: المؤشرات والأرقام والعدّادات والفتحات التي تنظّم قراءة الوقت والتعقيدات.', 'The visual face of the timepiece: markers, numerals, counters and apertures that organise time and complications.'],
-  ['العقارب', 'Hands', 'تنقل قراءة الساعات والدقائق والثواني، وقد تحمل وظائف إضافية مثل توقيت الكرونوغراف أو المنطقة الزمنية الثانية.', 'They indicate hours, minutes and seconds, and may carry further functions such as chronograph timing or a second time zone.'],
-  ['التاج والأزرار', 'Crown & pushers', 'التاج لضبط الوقت والتعبئة؛ والأزرار تتحكم بوظائف مثل بدء الكرونوغراف وإيقافه وإعادته إلى الصفر.', 'The crown sets and winds the watch; pushers start, stop and reset functions such as the chronograph.'],
-  ['العيار', 'Calibre', 'الهوية الميكانيكية للحركة: هندستها وبنيتها وترددها وطريقة تعبئتها وتعقيداتها.', 'The mechanical identity of the movement: its architecture, frequency, winding system and complications.'],
-  ['نظام الإفلات', 'Escapement', 'ينظّم انتقال الطاقة إلى عجلة الاتزان على دفعات دقيقة، وهو من أساسيات ضبط الوقت الميكانيكي.', 'It meters energy to the balance in controlled impulses — the foundation of mechanical timekeeping.'],
-  ['عجلة الاتزان والنابض الشعري', 'Balance & hairspring', 'منظومة تنظيم الحركة؛ تتذبذب بإيقاع منتظم يحدد معدّل سير الساعة ودقتها.', 'The regulating oscillator, whose steady oscillation governs the rate of the timepiece.'],
-  ['برميل النابض', 'Mainspring barrel', 'يخزّن الطاقة في النابض الرئيسي ويطلقها تدريجياً لتشغيل الحركة.', 'It stores energy in the mainspring and releases it progressively to power the movement.'],
-  ['الدوّار', 'Rotor', 'كتلة متحركة في الحركة ذاتية التعبئة تدور مع حركة المعصم لتعبئة النابض الرئيسي.', 'A weighted mass in a self-winding movement that turns with the wrist to wind the mainspring.'],
-  ['الجسور والجواهر', 'Bridges & jewels', 'تثبّت مكونات الحركة وتدعم محاورها؛ وتقلل الجواهر الاصطناعية الاحتكاك في النقاط الدقيقة.', 'Bridges support the movement’s architecture, while synthetic jewels reduce friction at critical pivots.']
+  ['العلبة', 'Case', 'الهيكل الذي يحمي الحركة ويحدد حضور الساعة على المعصم؛ قد يُصنع من الفولاذ أو الذهب أو التيتانيوم أو السيراميك أو الياقوت الصناعي.', 'The structure that protects the movement and defines the watch on the wrist; crafted in steel, gold, titanium, ceramic or sapphire.', 'case'],
+  ['الإطار', 'Bezel', 'الحلقة المحيطة بالزجاج؛ قد تكون ثابتة أو دوّارة، أو تحمل مقياساً مثل التاكيمتر.', 'The ring surrounding the crystal; fixed or rotating, or carrying a scale such as a tachymeter.', 'bezel'],
+  ['الزجاج', 'Crystal', 'السطح الشفاف الذي يحمي الميناء؛ والياقوت الصناعي هو الاختيار الشائع في صناعة الساعات الراقية.', 'The transparent surface protecting the dial; sapphire crystal is the standard of Haute Horlogerie.', 'crystal'],
+  ['الميناء', 'Dial', 'الوجه البصري للقطعة: المؤشرات والأرقام والعدّادات والفتحات التي تنظّم قراءة الوقت والتعقيدات.', 'The visual face of the timepiece: markers, numerals, counters and apertures that organise time and complications.', 'dial'],
+  ['العقارب', 'Hands', 'تنقل قراءة الساعات والدقائق والثواني، وقد تحمل وظائف إضافية مثل توقيت الكرونوغراف أو المنطقة الزمنية الثانية.', 'They indicate hours, minutes and seconds, and may carry further functions such as chronograph timing or a second time zone.', 'hands'],
+  ['التاج والأزرار', 'Crown & pushers', 'التاج لضبط الوقت والتعبئة؛ والأزرار تتحكم بوظائف مثل بدء الكرونوغراف وإيقافه وإعادته إلى الصفر.', 'The crown sets and winds the watch; pushers start, stop and reset functions such as the chronograph.', 'crown'],
+  ['العيار', 'Calibre', 'الهوية الميكانيكية للحركة: هندستها وبنيتها وترددها وطريقة تعبئتها وتعقيداتها.', 'The mechanical identity of the movement: its architecture, frequency, winding system and complications.', 'calibre'],
+  ['نظام الإفلات', 'Escapement', 'ينظّم انتقال الطاقة إلى عجلة الاتزان على دفعات دقيقة، وهو من أساسيات ضبط الوقت الميكانيكي.', 'It meters energy to the balance in controlled impulses — the foundation of mechanical timekeeping.', 'escapement'],
+  ['عجلة الاتزان والنابض الشعري', 'Balance & hairspring', 'منظومة تنظيم الحركة؛ تتذبذب بإيقاع منتظم يحدد معدّل سير الساعة ودقتها.', 'The regulating oscillator, whose steady oscillation governs the rate of the timepiece.', 'balance'],
+  ['برميل النابض', 'Mainspring barrel', 'يخزّن الطاقة في النابض الرئيسي ويطلقها تدريجياً لتشغيل الحركة.', 'It stores energy in the mainspring and releases it progressively to power the movement.', 'barrel'],
+  ['الدوّار', 'Rotor', 'كتلة متحركة في الحركة ذاتية التعبئة تدور مع حركة المعصم لتعبئة النابض الرئيسي.', 'A weighted mass in a self-winding movement that turns with the wrist to wind the mainspring.', 'rotor'],
+  ['الجسور والجواهر', 'Bridges & jewels', 'تثبّت مكونات الحركة وتدعم محاورها؛ وتقلل الجواهر الاصطناعية الاحتكاك في النقاط الدقيقة.', 'Bridges support the movement’s architecture, while synthetic jewels reduce friction at critical pivots.', 'bridges']
 ];
+// Parts visible only from the caseback; clicking one of these flips the stage.
+const BACK_PARTS = new Set(['calibre', 'escapement', 'balance', 'barrel', 'rotor', 'bridges']);
 const complications = [
   ['chronograph', 'CH', 'الكرونوغراف', 'Chronograph', 'آلية مستقلة لقياس فترات زمنية قصيرة؛ تبدأ وتتوقف وتُصفَّر عبر الأزرار، وغالباً تظهر ثوانيها في عقرب مركزي مع عدّادات فرعية للدقائق أو الساعات.', 'An independent mechanism for timing elapsed intervals. It starts, stops and resets by pushers, typically with a central seconds hand and sub-counters for minutes or hours.'],
   ['tourbillon', 'TB', 'التوربيون', 'Tourbillon', 'قفصٌ دوّار يحمل عجلة الاتزان ونظام الإفلات، ابتُكر تاريخياً لتقليل أثر أخطاء الوضعية عبر تدوير المنظومة المنظِّمة باستمرار.', 'A rotating cage carrying the balance and escapement, historically conceived to average positional errors by continually turning the regulating organ.'],
@@ -343,6 +356,59 @@ const ticks = Array.from({ length: 60 }, (_, i) => {
   const p = (r) => `${(200 + r * Math.sin(a)).toFixed(1)} ${(200 - r * Math.cos(a)).toFixed(1)}`;
   return `<line x1="${p(r1).split(' ')[0]}" y1="${p(r1).split(' ')[1]}" x2="${p(r2).split(' ')[0]}" y2="${p(r2).split(' ')[1]}" stroke-width="${i % 5 ? .6 : 1.6}"/>`;
 }).join('');
+
+// ————— the anatomy stage: a still illustration, not any one maison's watch, that
+// turns to its caseback for the six parts you can only see there. Pure line art —
+// no library, no engine, the same technique as the live dial above it. —————
+const polar = (cx, cy, r, deg) => { const a = (deg - 90) * Math.PI / 180; return [(cx + r * Math.cos(a)).toFixed(1), (cy + r * Math.sin(a)).toFixed(1)]; };
+const dialTicks = Array.from({ length: 12 }, (_, i) => {
+  const [x1, y1] = polar(200, 200, 138, i * 30), [x2, y2] = polar(200, 200, i % 3 === 0 ? 122 : 128, i * 30);
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${i % 3 === 0 ? 2 : 1}"/>`;
+}).join('');
+const bezelTicks = Array.from({ length: 60 }, (_, i) => {
+  const [x1, y1] = polar(200, 200, 176, i * 6), [x2, y2] = polar(200, 200, i % 5 ? 182 : 186, i * 6);
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${i % 5 ? .5 : 1.3}"/>`;
+}).join('');
+const stageFace = (side) => {
+  const front = side === 'front';
+  const body = front ? `
+<g class="part" data-part="crystal"><circle cx="200" cy="200" r="150" fill="url(#sheen)" stroke="none"/></g>
+<g class="part" data-part="bezel"><circle cx="200" cy="200" r="179" stroke-width="1" opacity=".8"/>${bezelTicks}</g>
+<g class="part" data-part="dial"><circle cx="200" cy="200" r="150" fill="var(--night)" stroke-width="1"/>${dialTicks}</g>
+<g class="part" data-part="hands">
+  <line x1="200" y1="200" x2="163" y2="150" stroke-width="4" stroke-linecap="round"/>
+  <line x1="200" y1="200" x2="237" y2="118" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="200" cy="200" r="4" fill="currentColor" stroke="none"/>
+</g>
+<g class="part" data-part="crown">
+  <rect x="345" y="188" width="20" height="24" rx="3"/>
+  <rect x="336" y="150" width="14" height="20" rx="2.5"/>
+  <rect x="336" y="230" width="14" height="20" rx="2.5"/>
+</g>` : `
+<g class="part" data-part="calibre"><circle cx="200" cy="200" r="150" fill="var(--night-2)" stroke-width="1"/></g>
+<g class="part" data-part="bridges">
+  <path d="M96 150 A150 150 0 0 1 232 92" fill="none" stroke-width="10" opacity=".85"/>
+  <path d="M120 292 A150 150 0 0 0 300 230" fill="none" stroke-width="10" opacity=".85"/>
+  <circle cx="118" cy="146" r="4" fill="#b5493f" stroke="none"/><circle cx="200" cy="96" r="4" fill="#b5493f" stroke="none"/>
+  <circle cx="145" cy="284" r="4" fill="#b5493f" stroke="none"/><circle cx="288" cy="236" r="4" fill="#b5493f" stroke="none"/>
+</g>
+<g class="part" data-part="rotor"><path d="M200 200 L200 62 A138 138 0 0 1 319 268 Z" opacity=".55"/><circle cx="200" cy="200" r="6" fill="currentColor" stroke="none"/></g>
+<g class="part" data-part="balance">
+  <circle cx="140" cy="260" r="30" stroke-width="1.4"/>
+  <line x1="140" y1="230" x2="140" y2="290" stroke-width="1"/><line x1="110" y1="260" x2="170" y2="260" stroke-width="1"/>
+  <path d="M140 260 m-16 0 a16 16 0 1 1 32 0" fill="none" stroke-width=".8" opacity=".7"/>
+</g>
+<g class="part" data-part="escapement"><path d="M182 232 q-10 14 2 26 q16 8 24 -6 q-14 4 -20 -6 q-6 -10 -6 -14z" opacity=".85"/></g>
+<g class="part" data-part="barrel">
+  <circle cx="262" cy="146" r="28" stroke-width="1.2"/>
+  <circle cx="262" cy="146" r="19" stroke-width=".7" opacity=".7"/><circle cx="262" cy="146" r="10" stroke-width=".7" opacity=".7"/>
+</g>`;
+  return `<svg class="face ${front ? 'front' : 'back'}" viewBox="0 0 400 400" fill="none" stroke="#d8bd8a" aria-hidden="true">${front ? '<defs><radialGradient id="sheen" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#3a362d" stop-opacity=".35"/><stop offset="60%" stop-color="#3a362d" stop-opacity="0"/></radialGradient></defs>' : ''}
+<circle class="part" data-part="case" cx="200" cy="200" r="192" stroke-width="6"/>
+${body}
+</svg>`;
+};
+const watchStage = `<div class="stage" id="watchStage"><div class="stage-inner" id="stageInner">${stageFace('front')}${stageFace('back')}</div></div>`;
 const watchmaking = shell({
   page: 'watchmaking', route: '/watchmaking/',
   titleAr: 'فن صناعة الساعات | مجلس الوقت', titleEn: 'Watchmaking | The Majlis of Time',
@@ -374,10 +440,16 @@ ${b('p', 'من الميناء إلى نظام الإفلات، ومن التور
 <div class="inner center">
 ${b('p', '01 — تشريح القطعة', '01 — Anatomy of a timepiece', 'class="label"')}
 ${b('h2', 'ما تراه. وما يعمل في الداخل.', 'What you see. What works within.', 'class="title" id="anatomyTitle"')}
-${b('p', 'من الميناء والعقارب إلى العيار ونظام الإفلات، لكل جزء وظيفته وحضوره في شخصية الساعة.', 'From dial and hands to calibre and escapement, every component has a function and a place in the character of a timepiece.', 'class="body-2" style="margin-inline:auto"')}
+${b('p', 'من الميناء والعقارب إلى العيار ونظام الإفلات، لكل جزء وظيفته وحضوره في شخصية الساعة. اختر جزءاً لتراه في موضعه.', 'From dial and hands to calibre and escapement, every component has a function and a place in the character of a timepiece. Choose a part to see it in place.', 'class="body-2" style="margin-inline:auto"')}
 </div>
-<div class="anatomy anatomy-grid">
-${anatomy.map(([ar, en, pAr, pEn], i) => `<article><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>${b('h3', ar, en)}${b('p', pAr, pEn)}</article>`).join('\n')}
+<div class="anatomy-layout">
+<div class="stage-col">
+${watchStage}
+<p class="stage-caption" id="stageCaption" aria-live="polite"></p>
+</div>
+<div class="anatomy anatomy-grid" id="anatomyGrid">
+${anatomy.map(([ar, en, pAr, pEn, part], i) => `<article><button type="button" class="anatomy-card" data-part="${part}" aria-pressed="false" aria-describedby="stageCaption"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>${b('h3', ar, en)}${b('p', pAr, pEn)}</button></article>`).join('\n')}
+</div>
 </div>
 </section>
 <section class="section night" id="complications" aria-labelledby="complicationsTitle">
