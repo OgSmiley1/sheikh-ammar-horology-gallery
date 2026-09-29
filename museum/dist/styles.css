@@ -89,7 +89,11 @@ em{font-style:italic}
 .wordmark .sub{font:400 .58rem/1 'Jost',var(--sans);letter-spacing:.34em;text-transform:uppercase;opacity:.85}
 :root[lang=ar] .wordmark .sub{font-family:'IBM Plex Sans Arabic',sans-serif;font-size:.72rem;letter-spacing:.02em}
 .wordmark .sub{white-space:nowrap}
+/* the wordmark is his full name: one line always, scaled to the phone rather than wrapped */
+.wordmark .mark{white-space:nowrap;font-size:clamp(.98rem,4vw,1.45rem)}
+:root[lang=ar] .wordmark .mark{font-size:clamp(1.08rem,4.4vw,1.55rem)}
 @media (max-width:560px){.wordmark .sub{font-size:.5rem;letter-spacing:.14em}:root[lang=ar] .wordmark .sub{font-size:.66rem}.menu-toggle>span:last-child{display:none}}
+@media (max-width:480px){.wordmark .sub{display:none}}
 .lang-toggle{justify-self:end;min-height:44px;min-width:44px;font:400 .74rem/1 'Jost',sans-serif;letter-spacing:.22em}
 .lang-toggle[lang=ar]{font:500 .98rem/1 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
 

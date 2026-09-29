@@ -18,11 +18,11 @@ const b = (tag, ar, en, attrs = '') => {
 const arrow = '<span class="arrow" aria-hidden="true">→</span>';
 
 const NAV = [
-  ['/', 'المجلس', 'The Majlis'],
-  ['/collection/', 'الديوان', 'The Diwan'],
-  ['/exhibition/', 'الرواق', 'The Gallery'],
+  ['/', 'الرئيسية', 'Home'],
+  ['/collection/', 'المجموعة', 'The Collection'],
+  ['/exhibition/', 'المعرض', 'The Exhibition'],
   ['/his-highness/', 'صاحب السمو', 'His Highness'],
-  ['/watchmaking/', 'الصنعة', 'The Craft']
+  ['/watchmaking/', 'صناعة الساعات', 'Watchmaking']
 ];
 const arabicDigits = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 
@@ -55,7 +55,7 @@ function shell({ page, route, titleAr, titleEn, descAr, main, sheet = true }) {
 ${b('a', 'انتقل إلى المحتوى', 'Skip to content', 'class="skip" href="#main"')}
 <header class="masthead${['home'].includes(page) ? ' over' : ''}" id="masthead">
 <button class="menu-toggle" id="menu" aria-expanded="false" aria-controls="siteMenu"><span class="lines" aria-hidden="true"></span>${b('span', 'القائمة', 'Menu')}</button>
-<a class="wordmark" href="/" aria-label="مجلس الوقت — الصفحة الرئيسية" data-label-ar="مجلس الوقت — الصفحة الرئيسية" data-label-en="The Majlis of Time — home"><span class="mark" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</span><span class="sub" data-ar="مجموعة الشيخ عمّار بن حميد النعيمي" data-en="Sheikh Ammar bin Humaid Al Nuaimi">مجموعة الشيخ عمّار بن حميد النعيمي</span></a>
+<a class="wordmark" href="/" aria-label="الشيخ عمّار بن حميد النعيمي — الصفحة الرئيسية" data-label-ar="الشيخ عمّار بن حميد النعيمي — الصفحة الرئيسية" data-label-en="Sheikh Ammar bin Humaid Al Nuaimi — home"><span class="mark" data-ar="الشيخ عمّار بن حميد النعيمي" data-en="Sheikh Ammar bin Humaid Al Nuaimi">الشيخ عمّار بن حميد النعيمي</span><span class="sub" data-ar="مجموعة الساعات · ولي عهد عجمان" data-en="The Horological Collection · Crown Prince of Ajman">مجموعة الساعات · ولي عهد عجمان</span></a>
 <button class="lang-toggle" id="lang" lang="en" aria-label="Switch to English">EN</button>
 </header>
 <div class="menu" id="siteMenu">
@@ -63,13 +63,13 @@ ${b('a', 'انتقل إلى المحتوى', 'Skip to content', 'class="skip" hr
 <figure class="menu-figure"><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="" width="891" height="768" loading="lazy"></figure>
 <div class="menu-foot">${b('span', 'عجمان · الإمارات العربية المتحدة', 'Ajman · United Arab Emirates')}<span id="ajmanTime" dir="ltr"></span></div>
 </div>
-${page === 'home' ? `<div class="veil" id="veil" hidden><div class="veil-inner"><span class="veil-mark" aria-hidden="true">ع</span><span class="veil-rule" aria-hidden="true"></span><p class="veil-line" data-ar="مجلس الوقت" data-en="The Majlis of Time">مجلس الوقت</p><p class="veil-guest" id="veilGuest" hidden></p></div></div>` : ''}
+${page === 'home' ? `<div class="veil" id="veil" hidden><div class="veil-inner"><span class="veil-mark" aria-hidden="true">ع</span><span class="veil-rule" aria-hidden="true"></span><p class="veil-line" data-ar="الشيخ عمّار بن حميد النعيمي" data-en="Sheikh Ammar bin Humaid Al Nuaimi">الشيخ عمّار بن حميد النعيمي</p><p class="veil-guest" id="veilGuest" hidden></p></div></div>` : ''}
 <main id="main" tabindex="-1">
 ${main}
 </main>
 <footer class="colophon">
 <span class="monogram" aria-hidden="true">ع</span>
-${b('span', 'مجلس الوقت · عجمان', 'The Majlis of Time · Ajman', 'class="sub"')}
+${b('span', 'الشيخ عمّار بن حميد النعيمي · عجمان', 'Sheikh Ammar bin Humaid Al Nuaimi · Ajman', 'class="sub"')}
 <nav aria-label="روابط التذييل" data-label-ar="روابط التذييل" data-label-en="Footer links">${foot}</nav>
 ${b('p', 'مجموعة خاصة تُعرض للتأمّل، لا للبيع.', 'A private collection, shown for contemplation — never for sale.')}
 <p class="edition" id="edition" hidden></p>
@@ -88,16 +88,16 @@ ${sheet ? `<dialog class="sheet" id="detail" aria-labelledby="detailTitle">
 // ————— Home —————
 const home = shell({
   page: 'home', route: '/',
-  titleAr: 'مجلس الوقت | مجموعة الشيخ عمّار بن حميد النعيمي للساعات',
-  titleEn: 'The Majlis of Time | The Horological Collection of Sheikh Ammar bin Humaid Al Nuaimi',
-  descAr: 'مجلس الوقت — مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان.',
+  titleAr: 'الشيخ عمّار بن حميد النعيمي | مجموعة الساعات',
+  titleEn: 'Sheikh Ammar bin Humaid Al Nuaimi | The Horological Collection',
+  descAr: 'مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان.',
   main: `<section class="hero" aria-labelledby="heroTitle">
 <figure class="hero-media"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-ar="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-en="His Highness Sheikh Ammar bin Humaid Al Nuaimi" width="840" height="1280" fetchpriority="high"></figure>
 <div class="hero-copy">
 <p class="invite" id="invite" hidden></p>
 ${b('p', 'عجمان · الإمارات العربية المتحدة', 'Ajman · United Arab Emirates', 'class="label"')}
 ${b('h1', 'للوقت قدر.<em>وللساعات حكاية.</em>', 'Time has its measure.<em>Every timepiece, its story.</em>', 'class="display" id="heroTitle"')}
-${b('p', 'مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان — في مجلسٍ يُحتفى فيه بالصنعة، ويُحفظ فيه الوقت.', 'The horological collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman — a majlis where craft is honoured and time is kept.', 'class="standfirst"')}
+${b('p', 'مجموعة ساعات صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان — حيث يُحتفى بالصنعة، ويُحفظ الوقت.', 'The horological collection of His Highness Sheikh Ammar bin Humaid Al Nuaimi, Crown Prince of Ajman — where craft is honoured and time is kept.', 'class="standfirst"')}
 <a class="button" href="/collection/">${b('span', 'اكتشف المجموعة', 'Discover the collection')}</a>
 <span class="scroll-cue" aria-hidden="true"></span>
 </div>
@@ -110,7 +110,7 @@ ${b('p', 'مجموعة ساعات صاحب السمو الشيخ عمّار بن
 </section>
 
 <section class="section center" aria-labelledby="introTitle">
-${b('p', 'مجلس الوقت', 'The Majlis of Time', 'class="label"')}
+${b('p', 'روح المجموعة', 'The spirit of the collection', 'class="label"')}
 ${b('h2', 'ليست عرضاً للاقتناء، بل سجلٌّ لذوقٍ يعرف قدر التفاصيل.', 'Not a display of acquisition — a record of discernment.', 'class="sr-only" id="introTitle"')}
 ${b('p', 'ليست المجموعة عرضاً للاقتناء، بل سجلٌّ لذوقٍ يعرف قدر التفاصيل: ميناءٌ يستوقف النظر، وحركةٌ تستحق الإصغاء، وقطعةٌ رافقت سموّه في لحظاتٍ من حياته.', 'Not a display of acquisition, but a record of discernment: a dial that holds the eye, a movement worth listening to, a timepiece that accompanied His Highness through moments of his life.', 'class="lede reveal"')}
 ${b('p', 'يتحدّث عنها هواة الساعات في المزادات والمحافل — مجموعةٌ نادراً ما تجتمع عناصرها كاملةً عند شخصٍ واحد.', 'Collectors speak of it at auctions and in horological circles — a collection whose full range rarely comes together under one name.', 'class="body-2 reveal"')}
@@ -135,7 +135,7 @@ ${b('p', 'تتبدّل كل يوم مع شروق الشمس على عجمان.',
 
 <section class="section white" id="featured" aria-labelledby="featuredTitle">
 <div class="inner center">
-${b('p', 'مختارات المجلس', 'Selected by the Majlis', 'class="label"')}
+${b('p', 'مختاراتٌ من المجموعة', 'Selected from the collection', 'class="label"')}
 ${b('h2', 'ثلاث قطع. ثلاث لغات للوقت.', 'Three Timepieces. Three Expressions of Time.', 'class="title" id="featuredTitle"')}
 ${b('p', 'شخصية الميناء، وذكاء الحركة، وحضور التصميم — ثلاث قراءات في المهارة الحرفية وإرث صناعة الساعات.', 'Dial character, mechanical ingenuity and presence of design — three readings of craftsmanship and horological heritage.', 'class="body-2" style="margin-inline:auto"')}
 </div>
@@ -202,7 +202,7 @@ ${b('h2', 'ثماني دور، وسبعة عقود من صناعة الساعا�
 // ————— Collection —————
 const collection = shell({
   page: 'collection', route: '/collection/',
-  titleAr: 'المجموعة | مجلس الوقت', titleEn: 'The Collection | The Majlis of Time',
+  titleAr: 'المجموعة | الشيخ عمّار بن حميد النعيمي', titleEn: 'The Collection | Sheikh Ammar bin Humaid Al Nuaimi',
   descAr: 'خمسٌ وأربعون قطعة من ثماني دور، تُعرض كلٌّ منها إلى جانب صاحب السمو الشيخ عمّار بن حميد النعيمي.',
   main: `<section class="reel">
 <div class="reel-frames" id="reelFrames"></div>
@@ -228,7 +228,7 @@ ${b('p', 'خمسٌ وأربعون قطعة من ثماني دور، امتدّت
 // ————— Exhibition —————
 const exhibition = shell({
   page: 'exhibition', route: '/exhibition/',
-  titleAr: 'قاعة العرض | مجلس الوقت', titleEn: 'The Exhibition | The Majlis of Time',
+  titleAr: 'المعرض | الشيخ عمّار بن حميد النعيمي', titleEn: 'The Exhibition | Sheikh Ammar bin Humaid Al Nuaimi',
   descAr: 'قاعة العرض — ثلاث محطات مختارة من مجموعة صاحب السمو الشيخ عمّار بن حميد النعيمي.',
   main: `<section class="hall on-night" id="exhibition" aria-labelledby="tourTitle">
 <div class="hall-head">
@@ -259,6 +259,8 @@ ${b('p', 'ثلاث محطات، من شخصية الميناء إلى جرأة �
 });
 
 // ————— His Highness —————
+// Each row keeps its public source as provenance in this file; by the owner's direction
+// (29 Sep 2026) no outbound link is rendered on the page.
 const timeline = [
   [1969, 'النشأة في عجمان', 'Born in Ajman', '31 مارس — مولد سموّه في إمارة عجمان.', '31 March — His Highness was born in the Emirate of Ajman.', null],
   [1993, 'ولاية العهد', 'Crown Prince', '9 أكتوبر — تولّي منصب ولي عهد إمارة عجمان.', '9 October — appointed Crown Prince of Ajman.', null],
@@ -269,7 +271,7 @@ const timeline = [
 ];
 const highness = shell({
   page: 'biography', route: '/his-highness/',
-  titleAr: 'صاحب السمو | مجلس الوقت', titleEn: 'His Highness | The Majlis of Time',
+  titleAr: 'صاحب السمو | الشيخ عمّار بن حميد النعيمي', titleEn: 'His Highness | Sheikh Ammar bin Humaid Al Nuaimi',
   descAr: 'سيرة صاحب السمو الشيخ عمّار بن حميد النعيمي، ولي عهد عجمان ورئيس المجلس التنفيذي.',
   main: `<section class="portrait-hero" id="biography" aria-labelledby="bioTitle">
 <figure><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-ar="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-en="His Highness Sheikh Ammar bin Humaid Al Nuaimi" width="891" height="768" fetchpriority="high"></figure>
@@ -278,17 +280,14 @@ ${b('p', 'صاحب السمو', 'His Highness', 'class="label"')}
 ${b('h1', 'سمو الشيخ عمّار<br>بن حميد النعيمي', 'His Highness Sheikh Ammar<br>bin Humaid Al Nuaimi', 'class="display" id="bioTitle"')}
 ${b('p', 'ولي عهد عجمان · رئيس المجلس التنفيذي', 'Crown Prince of Ajman · Chairman of the Executive Council', 'class="role"')}
 ${b('p', 'وُلد في عجمان في 31 مارس 1969. تلقّى تعليمه في مدارس الإمارة، والتحق بالدفعة الأولى من كلية الشرطة، ثم واصل التدريب المتخصص في المملكة المتحدة.', 'Born in Ajman on 31 March 1969. Educated in the emirate, he joined the first cohort of the Police College and later undertook specialist training in the United Kingdom.', 'class="body-2"')}
-<a class="link" href="https://www.ammarbinhumaid.ae/en/biography/" target="_blank" rel="noopener">${b('span', 'السيرة الرسمية', 'Official biography')}<span aria-hidden="true">↗</span></a>
 </div>
 </section>
-<section class="section stone center" aria-label="ديوان الوقت" data-label-ar="ديوان الوقت" data-label-en="From the Diwan of Time">
+<section class="section stone center" aria-label="الوقت والقيادة" data-label-ar="الوقت والقيادة" data-label-en="Time and leadership">
 <div class="inner center">
-${b('p', 'ديوان الوقت', 'From the Diwan of Time', 'class="label"')}
+${b('p', 'الوقت والقيادة', 'Time and leadership', 'class="label"')}
 <blockquote class="epigraph">
-<p class="verse" lang="ar" dir="rtl">الوقتُ سِرٌّ ما يُقاسُ بعقربٍ<br>لكنّه في كفِّ عمّارٍ يُصان</p>
-<p class="verse-rendering" dir="ltr">Time is a secret no hand can measure —<br>kept safe within the palm of Ammar.</p>
-<p class="verse" lang="ar" dir="rtl">ساعاتُ مجدٍ لا تُقلَّدُ صَنعةً<br>فيها وفاءُ الأصلِ رغم الزمان</p>
-<p class="verse-rendering" dir="ltr">Watches of glory, whose craft none can copy —<br>in them, the loyalty of origin outlasts time.</p>
+<p class="verse" lang="ar" dir="rtl">الوقتُ انعكاسٌ للقيادة<br>والانضباط والوعي الراقي.</p>
+<p class="verse-rendering" dir="ltr">Time is a reflection of leadership,<br>of discipline, and of a refined awareness.</p>
 </blockquote>
 </div>
 </section>
@@ -309,7 +308,7 @@ ${b('p', 'محطات في المسيرة', 'Milestones', 'class="label"')}
 ${b('h2', 'من الجذور، إلى المستقبل.', 'Rooted in heritage. Looking ahead.', 'class="title" id="milestonesTitle"')}
 </div>
 <ol class="timeline bio-timeline">
-${timeline.map(([year, tAr, tEn, pAr, pEn, src]) => `<li><time datetime="${year}" data-year="${year}">${arabicDigits(year)}</time><div>${b('h3', tAr, tEn)}${b('p', pAr, pEn)}${src ? `<a href="${src[0]}" target="_blank" rel="noopener">${b('span', src[1], src[2])} <span aria-hidden="true">↗</span></a>` : ''}</div></li>`).join('\n')}
+${timeline.map(([year, tAr, tEn, pAr, pEn, src]) => `<li><time datetime="${year}" data-year="${year}">${arabicDigits(year)}</time><div>${b('h3', tAr, tEn)}${b('p', pAr, pEn)}</div></li>`).join('\n')}
 </ol>
 <p class="center" style="margin-top:3.5rem"><a class="button" href="/collection/">${b('span', 'اكتشف المجموعة', 'Discover the collection')}</a></p>
 </section>`
@@ -411,7 +410,7 @@ ${body}
 const watchStage = `<div class="stage" id="watchStage"><div class="stage-inner" id="stageInner">${stageFace('front')}${stageFace('back')}</div></div>`;
 const watchmaking = shell({
   page: 'watchmaking', route: '/watchmaking/',
-  titleAr: 'فن صناعة الساعات | مجلس الوقت', titleEn: 'Watchmaking | The Majlis of Time',
+  titleAr: 'صناعة الساعات | الشيخ عمّار بن حميد النعيمي', titleEn: 'Watchmaking | Sheikh Ammar bin Humaid Al Nuaimi',
   descAr: 'فن صناعة الساعات — دليل ثنائي اللغة إلى تشريح الساعة والتعقيدات وقراءة السجل التقني.',
   sheet: false,
   main: `<section class="craft-hero on-night" aria-labelledby="craftTitle">
@@ -473,7 +472,6 @@ ${b('p', 'في بعض الساعات المعاصرة، يشير «التورب�
 ${b('p', 'اسم الطراز ومعناه', 'Understanding model names', 'class="label"')}
 ${b('h3', 'سابمارينر — ساعة الغوص من رولكس', 'Submariner — the Rolex diving watch')}
 ${b('p', 'سابمارينر اسم مجموعة ساعات من رولكس صُممت للغوص، وليس اسم تعقيد. يساعد إطارها الدوّار المدرّج على قراءة الزمن المنقضي تحت الماء.', 'Submariner is the name of a Rolex collection designed for diving, not a complication. Its graduated rotating bezel reads elapsed time underwater.')}
-<a class="link" href="https://www.rolex.com/watches/submariner" target="_blank" rel="noopener">${b('span', 'عن سابمارينر لدى رولكس', 'Submariner at Rolex')}<span aria-hidden="true">↗</span></a>
 </aside>
 </section>
 <section class="section" id="technical-record" aria-labelledby="recordTitle">
@@ -489,7 +487,7 @@ ${records.map(([ar, en, dAr, dEn]) => `<div>${b('dt', ar, en)}${b('dd', dAr, dEn
 <div class="split">
 <figure><img src="/images/sheikh-examining-watches.webp" alt="صاحب السمو يتأمّل كتاب ساعات" data-alt-ar="صاحب السمو يتأمّل كتاب ساعات" data-alt-en="His Highness studying a book of timepieces" width="1179" height="1607" loading="lazy"></figure>
 <div class="words">
-${b('p', 'مجلس الوقت', 'The Majlis of Time', 'class="label"')}
+${b('p', 'صاحب السمو', 'His Highness', 'class="label"')}
 ${b('h2', 'افهم الصنعة. ثم عُد إلى القطعة.', 'Understand the craft. Then return to the timepiece.', 'class="title" id="closingTitle"')}
 ${b('p', 'المعرفة لا تُذهب الدهشة؛ بل تجعل التفاصيل الصغيرة أوضح، وأعلى قيمة.', 'Knowledge does not diminish the wonder. It makes the smallest details easier to see — and harder to overlook.', 'class="body-2"')}
 <p><a class="link" href="/collection/">${b('span', 'اكتشف المجموعة', 'Discover the collection')}${arrow}</a></p>

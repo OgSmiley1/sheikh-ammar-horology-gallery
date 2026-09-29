@@ -1,5 +1,5 @@
 'use strict';
-// The Majlis of Time — one runtime for every page.
+// Sheikh Ammar bin Humaid Al Nuaimi — the horological collection. One runtime for every page.
 // Static copy is bilingual in the markup (data-ar / data-en); this file swaps it,
 // renders the collection from /watches.json, and runs the detail sheet, the
 // screening room and the exhibition. Arabic is the default language.
@@ -397,7 +397,7 @@ const REEL_FRAMES = [
   { slug: 'fp-journe-chronometre-a-resonance-platinum-grey', ar: 'من الساعات التي يعرفها الهواة بالاسم قبل أن يروها — والآن، على معصم سموّه.', en: 'A watch connoisseurs know by name before they ever see one — and here, on His Highness’s wrist.' },
   { slug: 'richard-mille-rm-68-01-tourbillon-cyril-kongo', ar: 'عملٌ فنيٌّ بقدر ما هو آلة، اختاره سموّه لأن الصنعة عنده لا تقلّ عن الفن.', en: 'As much artwork as mechanism — chosen because, to His Highness, craft and art ask the same standard.' },
   { slug: 'audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce', ar: 'توربيونٌ طائر يتابعه الهواة بإعجاب — واحدةٌ من قِلّة حول العالم.', en: 'A flying tourbillon collectors follow with real admiration — one of very few in the world.' },
-  { slug: 'fp-journe-chronographe-monopoussoir-rattrapante-titanium', ar: 'إضافةٌ حديثة إلى المجلس، توثّق ذائقةً لا تتوقف عن الاكتشاف.', en: 'A recent addition to the majlis — proof that this eye for craft never stops looking.' },
+  { slug: 'fp-journe-chronographe-monopoussoir-rattrapante-titanium', ar: 'إضافةٌ حديثة إلى المجموعة، توثّق ذائقةً لا تتوقف عن الاكتشاف.', en: 'A recent addition to the collection — proof that this eye for craft never stops looking.' },
   { slug: 'rolex-6100-chinese-dragon-cloisonne', ar: 'من أندر ما صنعت رولكس على الإطلاق — قطعةٌ يحلم بها كثيرون، وامتلكها القليل.', en: 'Among the rarest pieces Rolex ever made — a piece many dream of, and very few have owned.' }
 ];
 const reel = { i: 0, timer: null };
@@ -512,8 +512,8 @@ function guestName() {
   try { name = new URLSearchParams(location.search).get('for') || ''; } catch {}
   name = name.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 60);
   try {
-    if (name) sessionStorage.setItem('majlis-guest', name);
-    else name = sessionStorage.getItem('majlis-guest') || '';
+    if (name) sessionStorage.setItem('ammar-guest', name);
+    else name = sessionStorage.getItem('ammar-guest') || '';
   } catch {}
   return name;
 }
@@ -529,7 +529,7 @@ function initVeil() {
   const veil = $('#veil');
   if (!veil) return;
   let seen = false;
-  try { seen = sessionStorage.getItem('majlis-veil') === '1'; sessionStorage.setItem('majlis-veil', '1'); } catch {}
+  try { seen = sessionStorage.getItem('ammar-veil') === '1'; sessionStorage.setItem('ammar-veil', '1'); } catch {}
   if (seen || reduceMotion()) return;
   veil.hidden = false;
   veil.setAttribute('aria-hidden', 'true');
