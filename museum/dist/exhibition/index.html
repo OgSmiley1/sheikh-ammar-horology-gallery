@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 <script defer src="/app.js"></script>
+<script defer src="/royal.js"></script>
 </head>
 <body data-page="exhibition">
 <a class="skip" href="#main" data-ar="انتقل إلى المحتوى" data-en="Skip to content">انتقل إلى المحتوى</a>
@@ -25,7 +26,7 @@
 <a class="wordmark" href="/" aria-label="الشيخ عمّار بن حميد النعيمي — الصفحة الرئيسية" data-label-ar="الشيخ عمّار بن حميد النعيمي — الصفحة الرئيسية" data-label-en="Sheikh Ammar bin Humaid Al Nuaimi — home"><span class="mark" data-ar="الشيخ عمّار بن حميد النعيمي" data-en="Sheikh Ammar bin Humaid Al Nuaimi">الشيخ عمّار بن حميد النعيمي</span><span class="sub" data-ar="مجموعة الساعات · ولي عهد عجمان" data-en="The Horological Collection · Crown Prince of Ajman">مجموعة الساعات · ولي عهد عجمان</span></a>
 <button class="lang-toggle" id="lang" lang="en" aria-label="Switch to English">EN</button>
 </header>
-<div class="menu" id="siteMenu">
+<div class="menu" id="siteMenu" data-lenis-prevent>
 <nav id="navigation" aria-label="التنقل الرئيسي" data-label-ar="التنقل الرئيسي" data-label-en="Main navigation"><a href="/"><span aria-hidden="true">01</span><b data-ar="الرئيسية" data-en="Home">الرئيسية</b></a><a href="/collection/"><span aria-hidden="true">02</span><b data-ar="المجموعة" data-en="The Collection">المجموعة</b></a><a href="/exhibition/" aria-current="page"><span aria-hidden="true">03</span><b data-ar="المعرض" data-en="The Exhibition">المعرض</b></a><a href="/his-highness/"><span aria-hidden="true">04</span><b data-ar="صاحب السمو" data-en="His Highness">صاحب السمو</b></a><a href="/watchmaking/"><span aria-hidden="true">05</span><b data-ar="صناعة الساعات" data-en="Watchmaking">صناعة الساعات</b></a></nav>
 <figure class="menu-figure"><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="" width="891" height="768" loading="lazy"></figure>
 <div class="menu-foot"><span data-ar="عجمان · الإمارات العربية المتحدة" data-en="Ajman · United Arab Emirates">عجمان · الإمارات العربية المتحدة</span><span id="ajmanTime" dir="ltr"></span></div>
@@ -68,7 +69,7 @@
 </footer>
 <dialog class="sheet" id="detail" aria-labelledby="detailTitle">
 <div class="sheet-bar"><p class="label" data-ar="من المجموعة" data-en="From the collection">من المجموعة</p><div class="actions"><button id="detailLang" lang="en" aria-label="Switch to English">EN</button><button id="detailClose" class="close" aria-label="إغلاق" data-label-ar="إغلاق" data-label-en="Close">×</button></div></div>
-<div class="sheet-body" id="detailBody"><div id="detailContent"></div></div>
+<div class="sheet-body" id="detailBody" data-lenis-prevent><div id="detailContent"></div></div>
 <div class="sheet-nav"><button id="detailPrev"><span data-ar="القطعة السابقة" data-en="Previous">القطعة السابقة</span></button><p id="detailPosition" dir="ltr" aria-live="polite"></p><button id="detailNext"><span data-ar="القطعة التالية" data-en="Next">القطعة التالية</span></button></div>
 </dialog>
 <noscript><p style="padding:2rem;text-align:center">يرجى تفعيل JavaScript لتصفّح المجموعة · Please enable JavaScript to explore the collection.</p></noscript>

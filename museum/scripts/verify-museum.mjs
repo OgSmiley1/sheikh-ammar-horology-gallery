@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 import path from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 const root = path.resolve(new URL('..', import.meta.url).pathname);
 const fail = (message) => { throw new Error(message); };
@@ -27,7 +28,23 @@ for (const [route, doc] of Object.entries(html)) {
 const app = read('dist/app.js');
 for (const token of ['applyLanguage', 'changeLanguage', 'openDetail', 'renderFeatured', 'initScreen', 'initExhibition', 'prefers-reduced-motion', 'royalImage'])
   if (!app.includes(token)) fail(`app.js: missing runtime feature ${token}`);
-if (/youtube|<video/i.test(app)) fail('app.js: no YouTube or native video player');
+// Films (owner direction, 29 Sep 2026): «المجموعة بعدسة الإعلام» on the Collection page only.
+// Nothing from the video host may load with a page: the static HTML carries no player, no
+// iframe and no host name (checked above), and app.js may reach the host only through
+// loadFilmApi(), called from playFilm(), which runs on a visitor's click. Privacy-enhanced
+// host only; never a native <video>.
+if (/<video|<iframe/i.test(app)) fail('app.js: no native video element or literal iframe');
+const hosts = [...app.matchAll(/https:\/\/[a-z.-]*youtube[a-z.-]*\.com[^'"`\s]*/gi)].map(m => m[0]);
+if (hosts.some(h => !['https://www.youtube.com/iframe_api', 'https://www.youtube-nocookie.com'].includes(h))) fail(`app.js: unexpected video host reference ${hosts.join(', ')}`);
+const loadCalls = [...app.matchAll(/(?<!function )loadFilmApi\(\)/g)].length;
+const playBody = (app.split('async function playFilm(')[1] || '').split('\nfunction ')[0];
+if (hosts.length && (loadCalls !== 1 || !playBody.includes('loadFilmApi()'))) fail('app.js: the film API may load only from playFilm, on a click');
+if (!/fig\.querySelector\('\.film-play'\)\?\.addEventListener\('click'/.test(app)) fail('app.js: films must start only from their play control');
+for (const [route, doc] of Object.entries(html)) {
+  const films = [...doc.matchAll(/<figure class="film" data-film="([\w-]{11})">/g)].map(m => m[1]);
+  if (films.length && route !== 'dist/collection/index.html') fail(`${route}: films belong on the Collection page only`);
+  if (route === 'dist/collection/index.html' && films.join() !== 'Air31Kly7Ys,HFt8kspnTwg') fail(`${route}: expected the two owner-supplied films, found ${films.join() || 'none'}`);
+}
 for (const retired of ['vision.js', 'vision.css', 'reading.css', 'watchmaking.js', 'collection-film.mp4'])
   if (existsSync(path.join(root, 'dist', retired))) fail(`dist/${retired} was retired and must not return`);
 
@@ -44,6 +61,46 @@ for (const [fg, bg] of [['ink', 'paper'], ['ink-2', 'paper'], ['bronze', 'paper'
   if (r < 7) fail(`styles.css: --${fg} on --${bg} is ${r.toFixed(2)}:1, below WCAG AAA 7:1`);
 }
 if (!/\.on-night \.body-2\{color:var\(--moon-2\)\}|\.on-night \.body-2\{color:var\(--moon-2\)/.test(css)) fail('styles.css: body copy on dark sections must switch to the light tone');
+
+// The marbled paper behind every light page: its darkest vein, in every mood the hour
+// can carry (dawn → sand → pearl), under the grain at its mean, still holds AAA for
+// every text colour that sits on paper.
+const royal = read('dist/royal.js');
+const vec = prefix => { const m = royal.match(new RegExp(`${prefix}vec3\\(([.\\d]+),([.\\d]+),([.\\d]+)\\)`)); if (!m) fail(`royal.js: paper shader colour ${prefix} missing`); return m.slice(1).map(Number); };
+const moods = ['dawn=', 'sand=', 'pearl='].map(vec), veinTint = vec('vein=base\\*');
+const grainOpacity = Number((css.match(/html::after\{[^}]*opacity:([.\d]+)/) || fail('styles.css: film grain missing'))[1]);
+if (grainOpacity > .05) fail(`styles.css: film grain at ${grainOpacity} would muddy the paper`);
+const lumRGB = c => { const l = c.map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4); return .2126 * l[0] + .7152 * l[1] + .0722 * l[2]; };
+let darkest = null;
+for (let m = 0; m <= 2.0001; m += .02) {
+  const [a, b, f] = m < 1 ? [moods[0], moods[1], m] : [moods[1], moods[2], m - 1];
+  const vein = a.map((v, i) => (v + (b[i] - v) * f) * veinTint[i]).map(v => v * (1 - grainOpacity) + .5 * grainOpacity);
+  if (!darkest || lumRGB(vein) < lumRGB(darkest)) darkest = vein;
+}
+for (const fg of ['ink', 'ink-2', 'bronze']) {
+  const r = (lumRGB(darkest) + .05) / (lum(token(fg)) + .05);
+  if (r < 7) fail(`royal.js: --${fg} on the paper shader's darkest vein is ${r.toFixed(2)}:1, below WCAG AAA 7:1`);
+}
+const paperFloor = (lumRGB(darkest) + .05) / (lum(token('bronze')) + .05);
+
+// The motion language: three curves and nothing else, in CSS and in GSAP alike.
+// Each CSS curve is the published bezier of its GSAP twin, so both speak one language.
+const TWINS = { entry: 'cubic-bezier(.16,1,.3,1)', ambient: 'cubic-bezier(.37,0,.63,1)', hover: 'cubic-bezier(.33,1,.68,1)' };
+const curves = [...new Set(css.match(/cubic-bezier\([^)]*\)/g) || [])];
+if (curves.length !== 3 || !Object.entries(TWINS).every(([n, c]) => css.includes(`--ease-${n}:${c}`))) fail(`styles.css: the motion language is expo.out, sine.inOut and power2.out as --ease-entry/ambient/hover, found ${curves.join(' ')}`);
+for (const decl of css.match(/(?:transition|animation)(?:-timing-function)?:[^;}]*/g) || [])
+  if (/(?<![-\w])(?:linear|ease|ease-in|ease-out|ease-in-out)(?![-\w])/.test(decl)) fail(`styles.css: "${decl}" uses a curve outside the three`);
+if (!/const EASE = \{ entry: 'expo\.out', ambient: 'sine\.inOut', hover: 'power2\.out' \}/.test(royal)) fail('royal.js: GSAP eases must be the same three curves');
+if (/ease:\s*['"]/.test(royal)) fail('royal.js: every GSAP ease goes through EASE');
+
+// Weight: the motion libraries load only from royal.js, and never under reduced motion;
+// the whole of the shipped script stays inside the build pack's budget
+// (~70 KB gzip added on top of the ~14 KB app.js that preceded it).
+for (const [route, doc] of Object.entries(html)) if (doc.includes('/vendor/')) fail(`${route}: vendor scripts load from royal.js, not the page`);
+if (!/if \(reduce\) reduced\(\); else motion\(\);/.test(royal)) fail('royal.js: reduced motion must never fetch the motion libraries');
+const gz = file => gzipSync(readFileSync(path.join(root, file)), { level: 9 }).length;
+const scriptKB = ['dist/vendor/gsap.min.js', 'dist/vendor/lenis.min.js', 'dist/royal.js', 'dist/app.js'].reduce((s, f) => s + gz(f), 0) / 1024;
+if (scriptKB > 84) fail(`scripts weigh ${scriptKB.toFixed(1)} KB gzip, over the 84 KB budget`);
 
 const watchmaking = html['dist/watchmaking/index.html'];
 for (const tokenText of ['Timeless timepieces.', 'One of not many', 'Chronograph', 'Tourbillon', 'Dual Time &amp; GMT', 'Perpetual Calendar', 'Minute Repeater', 'Split-seconds Chronograph / Rattrapante', 'World Time', 'A turbine is not a tourbillon.'])
@@ -93,4 +150,5 @@ if (royalFiles.length !== 45) fail(`assets/royal: expected 45 images, found ${ro
 if (statSync(path.join(root, 'dist/images/sheikh/sheikh-portrait-1.webp')).size < 10000) fail('hero portrait missing');
 
 console.log(`Museum verification passed: ${routes.length} routes, ${data.watches.length} records, each shown with His Highness (${data.watches.filter(w => w.royalPairing === 'photograph').length} photographs, ${data.watches.filter(w => w.royalPairing === 'portrait').length} portrait pairings).`);
+console.log(`Motion: three curves; paper shader floor ${paperFloor.toFixed(2)}:1 for bronze; scripts ${scriptKB.toFixed(1)} KB gzip.`);
 console.log(`Provenance: ${pending['owner-confirmed']} confirmed by the owner, ${pending['pending-owner']} awaiting the owner, ${pending['cited-no-url']} citations without links, ${pending['url-cited']} links not re-checked; ${data.watches.filter(w => w.identityReview).length} identity reviews.`);

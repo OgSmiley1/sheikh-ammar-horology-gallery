@@ -50,6 +50,7 @@ function shell({ page, route, titleAr, titleEn, descAr, main, sheet = true }) {
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 <script defer src="/app.js"></script>
+<script defer src="/royal.js"></script>
 </head>
 <body data-page="${page}">
 ${b('a', 'انتقل إلى المحتوى', 'Skip to content', 'class="skip" href="#main"')}
@@ -58,7 +59,7 @@ ${b('a', 'انتقل إلى المحتوى', 'Skip to content', 'class="skip" hr
 <a class="wordmark" href="/" aria-label="الشيخ عمّار بن حميد النعيمي — الصفحة الرئيسية" data-label-ar="الشيخ عمّار بن حميد النعيمي — الصفحة الرئيسية" data-label-en="Sheikh Ammar bin Humaid Al Nuaimi — home"><span class="mark" data-ar="الشيخ عمّار بن حميد النعيمي" data-en="Sheikh Ammar bin Humaid Al Nuaimi">الشيخ عمّار بن حميد النعيمي</span><span class="sub" data-ar="مجموعة الساعات · ولي عهد عجمان" data-en="The Horological Collection · Crown Prince of Ajman">مجموعة الساعات · ولي عهد عجمان</span></a>
 <button class="lang-toggle" id="lang" lang="en" aria-label="Switch to English">EN</button>
 </header>
-<div class="menu" id="siteMenu">
+<div class="menu" id="siteMenu" data-lenis-prevent>
 <nav id="navigation" aria-label="التنقل الرئيسي" data-label-ar="التنقل الرئيسي" data-label-en="Main navigation">${nav}</nav>
 <figure class="menu-figure"><img src="/images/sheikh/sheikh-portrait-2.jpg" alt="" width="891" height="768" loading="lazy"></figure>
 <div class="menu-foot">${b('span', 'عجمان · الإمارات العربية المتحدة', 'Ajman · United Arab Emirates')}<span id="ajmanTime" dir="ltr"></span></div>
@@ -76,7 +77,7 @@ ${b('p', 'مجموعة خاصة تُعرض للتأمّل، لا للبيع.', '
 </footer>
 ${sheet ? `<dialog class="sheet" id="detail" aria-labelledby="detailTitle">
 <div class="sheet-bar">${b('p', 'من المجموعة', 'From the collection', 'class="label"')}<div class="actions"><button id="detailLang" lang="en" aria-label="Switch to English">EN</button><button id="detailClose" class="close" aria-label="إغلاق" data-label-ar="إغلاق" data-label-en="Close">×</button></div></div>
-<div class="sheet-body" id="detailBody"><div id="detailContent"></div></div>
+<div class="sheet-body" id="detailBody" data-lenis-prevent><div id="detailContent"></div></div>
 <div class="sheet-nav"><button id="detailPrev">${b('span', 'القطعة السابقة', 'Previous')}</button><p id="detailPosition" dir="ltr" aria-live="polite"></p><button id="detailNext">${b('span', 'القطعة التالية', 'Next')}</button></div>
 </dialog>` : ''}
 <noscript><p style="padding:2rem;text-align:center">يرجى تفعيل JavaScript لتصفّح المجموعة · Please enable JavaScript to explore the collection.</p></noscript>
@@ -94,6 +95,7 @@ const home = shell({
   main: `<section class="hero" aria-labelledby="heroTitle">
 <figure class="hero-media"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-ar="صاحب السمو الشيخ عمّار بن حميد النعيمي" data-alt-en="His Highness Sheikh Ammar bin Humaid Al Nuaimi" width="840" height="1280" fetchpriority="high"></figure>
 <div class="hero-copy">
+<svg class="hero-ring" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="98" pathLength="1"/></svg>
 <p class="invite" id="invite" hidden></p>
 ${b('p', 'عجمان · الإمارات العربية المتحدة', 'Ajman · United Arab Emirates', 'class="label"')}
 ${b('h1', 'للوقت قدر.<em>وللساعات حكاية.</em>', 'Time has its measure.<em>Every timepiece, its story.</em>', 'class="display" id="heroTitle"')}
@@ -131,6 +133,15 @@ ${b('p', 'قطعة اليوم', 'The piece of the day', 'class="label"')}
 ${b('p', 'تتبدّل كل يوم مع شروق الشمس على عجمان.', 'It changes every day with the sunrise over Ajman.', 'class="fine"')}
 </div>
 </div>
+</section>
+
+<section class="crown-room on-night" id="crown" aria-labelledby="crownTitle">
+<div class="inner center">
+${b('p', 'قطع التاج', 'The Crown Pieces', 'class="label"')}
+${b('h2', 'ستُّ قطع. كلٌّ منها واحدةٌ من قِلّة.', 'Six pieces. Each, one of not many.', 'class="title" id="crownTitle"')}
+${b('p', 'ستُّ صورٍ للندرة في مجموعة سموّه، كما يسجّلها سجلّ المجموعة: ندرةُ البقاء، والرمز، والآلية، واليد، والفن، والخاتمة.', 'Six kinds of rarity in His Highness’s collection, as its ledger records them: of survival, of an emblem, of a mechanism, of a hand, of art, and of an ending.', 'class="body-2" style="margin-inline:auto"')}
+</div>
+<ol class="crowns" id="crownPieces" aria-busy="true"></ol>
 </section>
 
 <section class="section white" id="featured" aria-labelledby="featuredTitle">
@@ -213,6 +224,16 @@ ${b('p', 'المجموعة', 'The Collection', 'class="label"')}
 ${b('h1', 'للنفائس تفاصيلها.', 'Distinction is in the details.', 'class="display" id="collectionTitle"')}
 <span class="rule" aria-hidden="true"></span>
 ${b('p', 'خمسٌ وأربعون قطعة من ثماني دور، امتدّت عبر سبعة عقود — كلٌّ منها إلى جانب صاحب السمو، وكلٌّ منها حكايةٌ يعرفها هواة الصنعة.', 'Forty-five timepieces from eight maisons, spanning seven decades — each shown with His Highness, each a story the connoisseurs of the craft already know.', 'class="lede"')}
+</section>
+<section class="films on-night" id="films" aria-labelledby="filmsTitle">
+<div class="inner center">
+${b('p', 'بعدسة الإعلام', 'Through the media’s lens', 'class="label"')}
+${b('h2', 'المجموعة بعدسة الإعلام.', 'The collection, through the media’s lens.', 'class="title" id="filmsTitle"')}
+</div>
+<div class="film-grid">
+<figure class="film" data-film="Air31Kly7Ys"><div class="film-frame"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="" width="840" height="1280" loading="lazy"><button type="button" class="film-play" aria-label="شاهد الفيلم الأول" data-label-ar="شاهد الفيلم الأول" data-label-en="Watch the first film"><span class="ring" aria-hidden="true"></span>${b('span', 'الفيلم الأول', 'Film I', 'class="film-name"')}</button></div></figure>
+<figure class="film" data-film="HFt8kspnTwg"><div class="film-frame"><img src="/images/sheikh-examining-watches.webp" alt="" width="1179" height="1607" loading="lazy"><button type="button" class="film-play" aria-label="شاهد الفيلم الثاني" data-label-ar="شاهد الفيلم الثاني" data-label-en="Watch the second film"><span class="ring" aria-hidden="true"></span>${b('span', 'الفيلم الثاني', 'Film II', 'class="film-name"')}</button></div></figure>
+</div>
 </section>
 <section class="section" id="collection" aria-labelledby="collectionTitle" style="padding-top:0">
 <div class="tools">
@@ -350,12 +371,6 @@ const records = [
   ['احتياطي الطاقة', 'Power reserve', 'المدة التقريبية التي تعمل فيها الحركة بعد التعبئة الكاملة.', 'How long a fully wound movement runs before it needs more energy.'],
   ['التعقيدات', 'Complications', 'الوظائف الميكانيكية الإضافية التي تتجاوز عرض الوقت الأساسي.', 'Mechanical functions beyond the basic indication of time.']
 ];
-const ticks = Array.from({ length: 60 }, (_, i) => {
-  const a = i * 6 * Math.PI / 180, r1 = i % 5 ? 166 : 156, r2 = 172;
-  const p = (r) => `${(200 + r * Math.sin(a)).toFixed(1)} ${(200 - r * Math.cos(a)).toFixed(1)}`;
-  return `<line x1="${p(r1).split(' ')[0]}" y1="${p(r1).split(' ')[1]}" x2="${p(r2).split(' ')[0]}" y2="${p(r2).split(' ')[1]}" stroke-width="${i % 5 ? .6 : 1.6}"/>`;
-}).join('');
-
 // ————— the anatomy stage: a still illustration, not any one maison's watch, that
 // turns to its caseback for the six parts you can only see there. Pure line art —
 // no library, no engine, the same technique as the live dial above it. —————
@@ -368,6 +383,11 @@ const bezelTicks = Array.from({ length: 60 }, (_, i) => {
   const [x1, y1] = polar(200, 200, 176, i * 6), [x2, y2] = polar(200, 200, i % 5 ? 182 : 186, i * 6);
   return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${i % 5 ? .5 : 1.3}"/>`;
 }).join('');
+// N°1–N°12: numbered hotspots pinned to each part's place on the drawing
+const HOTSPOTS = { case: [62, 330], bezel: [72, 72], crystal: [138, 124], dial: [200, 300], hands: [176, 168], crown: [356, 200],
+  calibre: [200, 336], escapement: [196, 246], balance: [138, 262], barrel: [262, 146], rotor: [286, 214], bridges: [158, 108] };
+const hotspots = front => anatomy.map(([ar, en, , , part], i) => ({ part, i })).filter(({ part }) => BACK_PARTS.has(part) !== front)
+  .map(({ part, i }) => { const [x, y] = HOTSPOTS[part]; return `<g class="hotspot" data-part="${part}" data-n="${i + 1}" transform="translate(${x} ${y})"><circle class="hot-hit" r="24"/><circle class="hot-dot" r="12"/><text y="4.5" data-num="${i + 1}">${i + 1}</text></g>`; }).join('');
 const stageFace = (side) => {
   const front = side === 'front';
   const body = front ? `
@@ -405,30 +425,86 @@ const stageFace = (side) => {
   return `<svg class="face ${front ? 'front' : 'back'}" viewBox="0 0 400 400" fill="none" stroke="#d8bd8a" aria-hidden="true">${front ? '<defs><radialGradient id="sheen" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#3a362d" stop-opacity=".35"/><stop offset="60%" stop-color="#3a362d" stop-opacity="0"/></radialGradient></defs>' : ''}
 <circle class="part" data-part="case" cx="200" cy="200" r="192" stroke-width="6"/>
 ${body}
+<g class="hotspots">${hotspots(front)}</g>
 </svg>`;
 };
 const watchStage = `<div class="stage" id="watchStage"><div class="stage-inner" id="stageInner">${stageFace('front')}${stageFace('back')}</div></div>`;
+// ————— the time machine: one watch, drawn once —————
+// Ticks at 28,800 vph in Ajman time until a hand touches it; then the crown sets the
+// hands through the years the models in the collection were introduced (1954→2025).
+// Pure SVG. Required ids: #hourHand #minuteHand #secondHand #yearWindow #crown #eraHand.
+const tmPolar = (r, deg, cx = 200, cy = 200) => { const a = (deg - 90) * Math.PI / 180; return [+(cx + r * Math.cos(a)).toFixed(2), +(cy + r * Math.sin(a)).toFixed(2)]; };
+const tmLine = (r1, r2, deg, w, extra = '') => { const [x1, y1] = tmPolar(r1, deg), [x2, y2] = tmPolar(r2, deg); return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${w}"${extra}/>`; };
+const tmSunburst = Array.from({ length: 144 }, (_, i) => tmLine(8, 158, i * 2.5, .5)).join('');
+const tmRings = Array.from({ length: 12 }, (_, i) => `<circle cx="200" cy="200" r="${38 + i * 10}" stroke-width=".35"/>`).join('');
+const tmTrack = Array.from({ length: 60 }, (_, i) => tmLine(i % 5 ? 170 : 166, 176, i * 6, i % 5 ? .6 : 1.4)).join('');
+const tmIndices = Array.from({ length: 12 }, (_, i) => {
+  if (i === 0) return [-4.2, 4.2].map(d => { const [x, y] = tmPolar(141, d); return `<rect x="${x - 3}" y="${y - 12}" width="6" height="24" rx="1" transform="rotate(${d} ${x} ${y})"/>`; }).join('');
+  if (i === 3) return ''; // the crown side stays clear
+  if (i === 6) return ''; // the year aperture sits at six
+  if (i === 9) return ''; // the era register sits at nine
+  const [x, y] = tmPolar(141, i * 30); return `<rect x="${x - 3}" y="${y - 12}" width="6" height="24" rx="1" transform="rotate(${i * 30} ${x} ${y})"/>`;
+}).join('');
+const TM_DECADES = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+const tmEraTicks = TM_DECADES.map((_, i) => { const d = -120 + i * (240 / 7); const [x1, y1] = tmPolar(22, d, 124, 200), [x2, y2] = tmPolar(28, d, 124, 200); return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${i % 2 ? .6 : 1.1}"/>`; }).join('');
+const tmDigits = [0, 1, 2, 3].map(c => `<g class="tm-digit" data-col="${c}" transform="translate(0 0)">${Array.from({ length: 10 }, (_, d) => `<text x="${170 + c * 20}" y="${282 + d * 34}" data-d="${d}">${d}</text>`).join('')}</g>`).join('');
+const tmKnurl = Array.from({ length: 14 }, (_, i) => `<line x1="398" x2="428" y1="${176 + i * 4}" y2="${176 + i * 4}"/>`).join('');
+const timeMachineSVG = `<svg class="tm-watch" id="timeMachine" viewBox="0 0 440 400" role="slider" tabindex="0" aria-valuemin="1954" aria-valuemax="2025" aria-valuenow="2025" aria-label="آلة الزمن — أدِر التاج لتختار عاماً" data-label-ar="آلة الزمن — أدِر التاج لتختار عاماً" data-label-en="The time machine — turn the crown to choose a year">
+<defs>
+<linearGradient id="tmMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a7046"/><stop offset=".45" stop-color="#e6cf9f"/><stop offset=".55" stop-color="#b8975f"/><stop offset="1" stop-color="#5d4a2c"/></linearGradient>
+<radialGradient id="tmDialFill" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#23201b"/><stop offset=".7" stop-color="#121110"/><stop offset="1" stop-color="#0b0a09"/></radialGradient>
+<radialGradient id="tmGlass" cx="30%" cy="22%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".09"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<clipPath id="tmDialClip"><circle cx="200" cy="200" r="158"/></clipPath>
+<clipPath id="tmYearClip"><rect x="160" y="258" width="80" height="32" rx="2"/></clipPath>
+<clipPath id="tmCrownClip"><rect x="396" y="176" width="34" height="48" rx="6"/></clipPath>
+</defs>
+<g class="tm-crown" id="crown">
+<rect class="tm-stem" x="386" y="192" width="16" height="16" fill="url(#tmMetal)"/>
+<rect x="396" y="176" width="34" height="48" rx="6" fill="url(#tmMetal)"/>
+<g clip-path="url(#tmCrownClip)" stroke="#3b2f1c" stroke-width="1.2" opacity=".75"><g class="tm-knurl" id="tmKnurl">${tmKnurl}</g></g>
+<rect class="tm-crown-hit" x="374" y="150" width="66" height="100" fill="transparent" stroke="none"/>
+</g>
+<circle cx="200" cy="200" r="194" fill="url(#tmMetal)"/>
+<circle cx="200" cy="200" r="186" fill="#16140f"/>
+<g class="tm-track" stroke="#d8bd8a" opacity=".85">${tmTrack}</g>
+<circle cx="200" cy="200" r="160" fill="url(#tmDialFill)"/>
+<g class="tm-guilloche" clip-path="url(#tmDialClip)" stroke="var(--era-line, #d8bd8a)" opacity=".16">${tmSunburst}${tmRings}</g>
+<g class="tm-indices" fill="url(#tmMetal)">${tmIndices}</g>
+<text class="tm-mono" x="200" y="104" text-anchor="middle">ع</text>
+<g class="tm-era-register" stroke="#d8bd8a" fill="none"><circle cx="124" cy="200" r="30" stroke-width=".8" opacity=".6"/>${tmEraTicks}<g id="eraHand"><line x1="124" y1="200" x2="124" y2="176" stroke-width="1.6" stroke-linecap="round"/><circle cx="124" cy="200" r="3" fill="#d8bd8a" stroke="none"/></g></g>
+<rect x="156" y="254" width="88" height="40" rx="3" fill="url(#tmMetal)"/>
+<rect x="160" y="258" width="80" height="32" rx="2" fill="#f3efe7"/>
+<g class="tm-year" id="yearWindow" clip-path="url(#tmYearClip)">${tmDigits}</g>
+<g id="hourHand" class="tm-hand"><polygon points="200,214 193,200 200,108 207,200" fill="url(#tmMetal)"/></g>
+<g id="minuteHand" class="tm-hand"><polygon points="200,218 196,200 200,58 204,200" fill="url(#tmMetal)"/></g>
+<g id="secondHand" class="tm-hand"><line x1="200" y1="238" x2="200" y2="52" stroke="#f3efe7" stroke-width="1.1"/><circle cx="200" cy="228" r="4.5" fill="#f3efe7"/></g>
+<circle cx="200" cy="200" r="6" fill="url(#tmMetal)"/><circle cx="200" cy="200" r="2" fill="#16140f"/>
+<circle cx="200" cy="200" r="160" fill="url(#tmGlass)" pointer-events="none"/>
+</svg>`;
+
 const watchmaking = shell({
   page: 'watchmaking', route: '/watchmaking/',
   titleAr: 'صناعة الساعات | الشيخ عمّار بن حميد النعيمي', titleEn: 'Watchmaking | Sheikh Ammar bin Humaid Al Nuaimi',
   descAr: 'فن صناعة الساعات — دليل ثنائي اللغة إلى تشريح الساعة والتعقيدات وقراءة السجل التقني.',
-  sheet: false,
   main: `<section class="craft-hero on-night" aria-labelledby="craftTitle">
-<div>
+<canvas class="dust" id="tmDust" aria-hidden="true"></canvas>
+<div class="craft-words">
 ${b('p', 'فن صناعة الساعات', 'The Art of Watchmaking', 'class="label"')}
 ${b('h1', 'قطعٌ تتجاوز الزمن.', 'Timeless timepieces.', 'class="display" id="craftTitle"')}
 <p class="craft-manifesto" data-ar="واحدةٌ من قِلّة." data-en="One of not many">واحدةٌ من قِلّة.</p>
 ${b('p', 'من الميناء إلى نظام الإفلات، ومن التوربيون إلى مُكرِّر الدقائق: دليلٌ يعيدك إلى كل قطعة بعينٍ أدقّ.', 'From dial to escapement, from tourbillon to minute repeater: a guide that returns you to each timepiece with a keener eye.', 'class="body-2"')}
 <a class="link" href="#anatomy">${b('span', 'اكتشف تشريح القطعة', 'Discover the anatomy')}<span aria-hidden="true">↓</span></a>
 </div>
-<div class="dial" aria-hidden="true"><svg viewBox="0 0 400 400" fill="none" stroke="#d8bd8a">
-<circle cx="200" cy="200" r="190" stroke-width=".8" opacity=".55"/><circle cx="200" cy="200" r="178" stroke-width="1.2"/>
-<g opacity=".9">${ticks}</g>
-<circle cx="200" cy="262" r="34" stroke-width=".7" opacity=".7"/><circle cx="142" cy="200" r="30" stroke-width=".7" opacity=".7"/><circle cx="258" cy="200" r="30" stroke-width=".7" opacity=".7"/>
-<line class="hand" id="hourHand" x1="200" y1="210" x2="200" y2="112" stroke-width="3" stroke-linecap="round"/>
-<line class="hand" id="minuteHand" x1="200" y1="214" x2="200" y2="62" stroke-width="2" stroke-linecap="round"/>
-<line class="hand" id="secondHand" x1="200" y1="226" x2="200" y2="48" stroke="#f3efe7" stroke-width=".8"/>
-<circle cx="200" cy="200" r="4" fill="#d8bd8a"/></svg></div>
+<div class="tm" id="tm">
+${timeMachineSVG}
+<div class="tm-caption">
+<p class="tm-era" id="eraCaption" aria-live="polite"></p>
+<p class="tm-hint" id="tmHint" data-ar="أدِر التاج — أو الميناء — لتسافر عبر السنين التي طُرحت فيها طُرز مجموعته." data-en="Turn the crown — or the dial — to travel through the years the models in his collection were introduced.">أدِر التاج — أو الميناء — لتسافر عبر السنين التي طُرحت فيها طُرز مجموعته.</p>
+<button type="button" class="tm-now" id="tmNow" hidden>${b('span', 'عودة إلى الآن', 'Return to the present')}</button>
+</div>
+</div>
+<nav class="era-rail" id="eraRail" aria-label="العقود" data-label-ar="العقود" data-label-en="The decades"></nav>
+<div class="era-cards" id="eraCards" aria-live="polite"></div>
 </section>
 <nav class="chapters" aria-label="فصول فن صناعة الساعات" data-label-ar="فصول فن صناعة الساعات" data-label-en="Watchmaking chapters">
 <a href="#anatomy"><span aria-hidden="true">01</span>${b('b', 'تشريح الساعة', 'Anatomy')}</a>
@@ -447,7 +523,7 @@ ${watchStage}
 <p class="stage-caption" id="stageCaption" aria-live="polite"></p>
 </div>
 <div class="anatomy anatomy-grid" id="anatomyGrid">
-${anatomy.map(([ar, en, pAr, pEn, part], i) => `<article><button type="button" class="anatomy-card" data-part="${part}" aria-pressed="false" aria-describedby="stageCaption"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>${b('h3', ar, en)}${b('p', pAr, pEn)}</button></article>`).join('\n')}
+${anatomy.map(([ar, en, pAr, pEn, part], i) => `<article><button type="button" class="anatomy-card" data-part="${part}" data-n="${i + 1}" aria-pressed="false" aria-describedby="stageCaption">${b('span', arabicDigits(String(i + 1).padStart(2, '0')), 'N° ' + String(i + 1).padStart(2, '0'), 'class="num" aria-hidden="true"')}${b('h3', ar, en)}${b('p', pAr, pEn)}</button></article>`).join('\n')}
 </div>
 </div>
 </section>
