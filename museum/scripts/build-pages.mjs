@@ -210,6 +210,25 @@ ${b('h2', 'ثماني دور، وسبعة عقود من صناعة الساعا�
 </section>`
 });
 
+// The written story that replaced the second film (owner, 2 Oct 2026). Every claim is
+// taken from the piece's own ledger record; no prices, by the collection's discretion.
+const STORY = [
+  ['rolex-daytona-6263-quraysh-hawk', 'رولكس · دايتونا 6263', 'Rolex · Daytona 6263', 'الصقر', 'The hawk',
+    'تبدأ الحكاية برمزٍ يعرفه أهل الخليج قبل أن يعرفوا الساعات: صقر قريش، مستقرٌّ بين عدّادات دايتونا الكلاسيكية. التكوين المألوف يبقى متزناً، لكن حضوره يصبح مختلفاً — كأن الميناء صار شارةً لا أداةً لقياس الوقت فحسب.',
+    'The story begins with an emblem the Gulf knew long before it knew watches: the Quraysh hawk, settled among the counters of a classical Daytona. The familiar composition keeps its balance, yet its presence changes — the dial becomes an insignia, not only an instrument.'],
+  ['rolex-6100-chinese-dragon-cloisonne', 'رولكس · 6100', 'Rolex · 6100', 'التنين', 'The dragon',
+    'ثم ينتقل النظر إلى الفن الزخرفي: أسلاكٌ من الذهب ترسم هيئة التنين أولاً، ثم تمنحه المينا الزجاجية ألوانه. في علبةٍ بقطر 34 مم يلتقي فن «غراند فو» بالميكانيكا — لقاءٌ نادرٌ لا يتكرر كثيراً.',
+    'Then the eye turns to decorative art: gold wire draws the dragon first, and grand-feu enamel gives it colour. In a 34 mm case, cloisonné meets mechanics — a meeting rarely repeated.'],
+  ['patek-philippe-calatrava', 'باتيك فيليب · 5278/500G-001', 'Patek Philippe · 5278/500G-001', 'الحصان', 'The horse',
+    'ولأن السيرة الرسمية تذكر الفروسية بين اهتمامات سموّه، يأتي الحصان في موضعه: مشغولٌ على الميناء، يجاور فن مُكرِّر الدقائق. قطعةٌ تُرى وتُسمع معاً — صورةٌ تتأملها، ونغمةٌ تقرع الوقت عند الطلب.',
+    'And since the official biography records horsemanship among His Highness’s interests, the horse finds its place: worked into the dial beside the art of the minute repeater. A piece seen and heard at once — an image to contemplate, a chime that strikes the time on demand.'],
+  ['fp-journe-tourbillon-souverain', 'إف. بي. جورن · توربيون سوفران', 'F.P. Journe · Tourbillon Souverain', 'اليشم', 'The jade',
+    'عند جورن يهدأ الإيقاع: أخضر اليشم الطبيعي يجاور قفص التوربيون في تكوين خاص. عمق الحجر يقابل انتظام الحركة، فتلتقي الأرض والآلة على ميناءٍ واحد.',
+    'With Journe the rhythm slows: natural green jade sits beside the tourbillon cage in a special configuration. The depth of the stone answers the regularity of the movement — earth and machine on one dial.'],
+  ['patek-philippe-world-time-5230g-011-manama', 'باتيك فيليب · 5230G-011', 'Patek Philippe · 5230G-011', 'المنامة', 'Manama',
+    'وتنتهي الحكاية حيث بدأت: في الخليج. على حلقة مدن التوقيت العالمي تظهر المنامة بين عواصم العالم — لمسةٌ خليجية داخل عرضٍ يجمع مناطق الأرض في نظرة واحدة.',
+    'And the story ends where it began: in the Gulf. On the world-time city ring, Manama appears among the capitals — a Gulf touch within a display that gathers the earth’s time zones in a single glance.']
+];
 // ————— Collection —————
 const collection = shell({
   page: 'collection', route: '/collection/',
@@ -230,10 +249,28 @@ ${b('p', 'خمسٌ وأربعون قطعة من ثماني دور، امتدّت
 ${b('p', 'بعدسة الإعلام', 'Through the media’s lens', 'class="label"')}
 ${b('h2', 'المجموعة بعدسة الإعلام.', 'The collection, through the media’s lens.', 'class="title" id="filmsTitle"')}
 </div>
-<div class="film-grid">
-<figure class="film" data-film="Air31Kly7Ys"><div class="film-frame"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="" width="840" height="1280" loading="lazy"><button type="button" class="film-play" aria-label="شاهد الفيلم الأول" data-label-ar="شاهد الفيلم الأول" data-label-en="Watch the first film"><span class="ring" aria-hidden="true"></span>${b('span', 'الفيلم الأول', 'Film I', 'class="film-name"')}</button></div></figure>
-<figure class="film" data-film="HFt8kspnTwg"><div class="film-frame"><img src="/images/sheikh-examining-watches.webp" alt="" width="1179" height="1607" loading="lazy"><button type="button" class="film-play" aria-label="شاهد الفيلم الثاني" data-label-ar="شاهد الفيلم الثاني" data-label-en="Watch the second film"><span class="ring" aria-hidden="true"></span>${b('span', 'الفيلم الثاني', 'Film II', 'class="film-name"')}</button></div></figure>
+<div class="film-grid single">
+<figure class="film" data-film="Air31Kly7Ys"><div class="film-frame"><img src="/images/sheikh/sheikh-portrait-1.webp" alt="" width="840" height="1280" loading="lazy"><button type="button" class="film-play" aria-label="شاهد الفيلم" data-label-ar="شاهد الفيلم" data-label-en="Watch the film"><span class="ring" aria-hidden="true"></span>${b('span', 'الفيلم', 'The film', 'class="film-name"')}</button></div></figure>
 </div>
+</section>
+<section class="section story" id="story" aria-labelledby="storyTitle">
+<div class="inner center">
+${b('p', 'حكاية المجموعة', 'The story of the collection', 'class="label"')}
+${b('h2', 'خمس قطع، وخمسة أبواب إلى ذائقة واحدة.', 'Five timepieces. Five doors into one discernment.', 'class="title" id="storyTitle"')}
+${b('p', 'لا تُروى المجموعة بالأرقام، بل بالرموز التي تحملها: صقرٌ وتنين، وحصانٌ وحجرٌ كريم، ومدينةٌ خليجية على ميناء يجمع العالم.', 'A collection is not told in figures, but in the emblems it carries: a hawk and a dragon, a horse and a stone, and a Gulf city on a dial that gathers the world.', 'class="body-2" style="margin-inline:auto"')}
+</div>
+<ol class="story-chapters">
+${STORY.map(([slug, nAr, nEn, hAr, hEn, pAr, pEn], i) => `<li class="chapter reveal">
+<figure><img src="/assets/royal/${slug}.webp" alt="" width="800" height="800" loading="lazy"></figure>
+<div class="chapter-words">
+<span class="chapter-num" aria-hidden="true" data-ar="${['الأول','الثاني','الثالث','الرابع','الخامس'][i]}" data-en="${['I','II','III','IV','V'][i]}">${['الأول','الثاني','الثالث','الرابع','الخامس'][i]}</span>
+${b('p', nAr, nEn, 'class="maison"')}
+${b('h3', hAr, hEn)}
+${b('p', pAr, pEn)}
+<button type="button" class="link" data-open-slug="${slug}">${b('span', 'تأمّل القطعة', 'Look closer')}${arrow}</button>
+</div>
+</li>`).join('\n')}
+</ol>
 </section>
 <section class="section" id="collection" aria-labelledby="collectionTitle" style="padding-top:0">
 <div class="tools">
@@ -520,6 +557,7 @@ ${b('p', 'من الميناء والعقارب إلى العيار ونظام ا
 <div class="anatomy-layout">
 <div class="stage-col">
 ${watchStage}
+${b('p', 'اسحب لتدوير الساعة، أو المس جزءاً منها.', 'Drag to turn the watch, or touch one of its parts.', 'class="stage-hint"')}
 <p class="stage-caption" id="stageCaption" aria-live="polite"></p>
 </div>
 <div class="anatomy anatomy-grid" id="anatomyGrid">

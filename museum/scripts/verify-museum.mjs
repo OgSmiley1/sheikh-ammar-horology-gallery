@@ -43,7 +43,7 @@ if (!/fig\.querySelector\('\.film-play'\)\?\.addEventListener\('click'/.test(app
 for (const [route, doc] of Object.entries(html)) {
   const films = [...doc.matchAll(/<figure class="film" data-film="([\w-]{11})">/g)].map(m => m[1]);
   if (films.length && route !== 'dist/collection/index.html') fail(`${route}: films belong on the Collection page only`);
-  if (route === 'dist/collection/index.html' && films.join() !== 'Air31Kly7Ys,HFt8kspnTwg') fail(`${route}: expected the two owner-supplied films, found ${films.join() || 'none'}`);
+  if (route === 'dist/collection/index.html' && films.join() !== 'Air31Kly7Ys') fail(`${route}: expected the one owner-kept film, found ${films.join() || 'none'}`);
 }
 for (const retired of ['vision.js', 'vision.css', 'reading.css', 'watchmaking.js', 'collection-film.mp4'])
   if (existsSync(path.join(root, 'dist', retired))) fail(`dist/${retired} was retired and must not return`);
@@ -102,6 +102,16 @@ const gz = file => gzipSync(readFileSync(path.join(root, file)), { level: 9 }).l
 const scriptKB = ['dist/vendor/gsap.min.js', 'dist/vendor/lenis.min.js', 'dist/royal.js', 'dist/app.js'].reduce((s, f) => s + gz(f), 0) / 1024;
 if (scriptKB > 84) fail(`scripts weigh ${scriptKB.toFixed(1)} KB gzip, over the 84 KB budget`);
 
+// The 3D anatomy watch: a separate bundle that only the Watchmaking stage may fetch,
+// on demand, with WebGL; never named by a page, never part of the page budget above.
+for (const [route, doc] of Object.entries(html)) if (doc.includes('watch3d')) fail(`${route}: watch3d.js loads from app.js on demand, not from the page`);
+if ((app.match(/import\('\/watch3d\.js'\)/g) || []).length !== 1 || !/WebGL2RenderingContext[\s\S]{0,200}IntersectionObserver[\s\S]{0,400}import\('\/watch3d\.js'\)/.test(app)) fail('app.js: the 3D watch may load only from the anatomy stage, with WebGL, as it nears the screen');
+const w3dKB = gz('dist/watch3d.js') / 1024;
+if (w3dKB > 160) fail(`watch3d.js weighs ${w3dKB.toFixed(1)} KB gzip, over its 160 KB budget`);
+const w3dSrc = read('scripts/watch3d.src.js');
+for (const part of ['case', 'bezel', 'crystal', 'dial', 'hands', 'crown', 'calibre', 'escapement', 'balance', 'barrel', 'rotor', 'bridges'])
+  if (!new RegExp(`add\\('${part}'`).test(w3dSrc)) fail(`watch3d: the ${part} is not a 3D part`);
+
 const watchmaking = html['dist/watchmaking/index.html'];
 for (const tokenText of ['Timeless timepieces.', 'One of not many', 'Chronograph', 'Tourbillon', 'Dual Time &amp; GMT', 'Perpetual Calendar', 'Minute Repeater', 'Split-seconds Chronograph / Rattrapante', 'World Time', 'A turbine is not a tourbillon.'])
   if (!watchmaking.includes(tokenText)) fail(`watchmaking guide: missing ${tokenText}`);
@@ -150,5 +160,5 @@ if (royalFiles.length !== 45) fail(`assets/royal: expected 45 images, found ${ro
 if (statSync(path.join(root, 'dist/images/sheikh/sheikh-portrait-1.webp')).size < 10000) fail('hero portrait missing');
 
 console.log(`Museum verification passed: ${routes.length} routes, ${data.watches.length} records, each shown with His Highness (${data.watches.filter(w => w.royalPairing === 'photograph').length} photographs, ${data.watches.filter(w => w.royalPairing === 'portrait').length} portrait pairings).`);
-console.log(`Motion: three curves; paper shader floor ${paperFloor.toFixed(2)}:1 for bronze; scripts ${scriptKB.toFixed(1)} KB gzip.`);
+console.log(`Motion: three curves; paper shader floor ${paperFloor.toFixed(2)}:1 for bronze; scripts ${scriptKB.toFixed(1)} KB gzip; 3D watch ${w3dKB.toFixed(1)} KB gzip, on demand.`);
 console.log(`Provenance: ${pending['owner-confirmed']} confirmed by the owner, ${pending['pending-owner']} awaiting the owner, ${pending['cited-no-url']} citations without links, ${pending['url-cited']} links not re-checked; ${data.watches.filter(w => w.identityReview).length} identity reviews.`);

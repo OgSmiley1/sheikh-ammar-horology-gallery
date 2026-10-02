@@ -13,6 +13,29 @@ Updated: 2 October 2026
   URL: https://museum-vision-production.up.railway.app
 - To preview a later commit, reconnect `museum-vision` to that SHA. Production is released only
   by the owner's merge to `main`, then reconnecting `museum-current` (see 26 Sep notes).
+- **Owner review of the preview (2 Oct), acted on in the same PR:**
+  - *Films:* only `Air31Kly7Ys` stays. The second film (prices on screen) became a written
+    story on the Collection page: five chapters, each drawn from its piece's ledger record, each
+    with the royal image, and no prices. The player crop is now proportional (`-9%/118%`), not
+    a fixed 60 px, so phones no longer lose the picture.
+  - *Royal images:* the four third-party composites that laid a render over His Highness are
+    now diptychs (him | the complete watch). The maker cut-outs' half-transparent smears are
+    flattened onto black. Four new owner-supplied photographs show him wearing the Tourbillon
+    Souverain (jade), the 5278 "Horse", the 5470P and the 5178G; the last two move from
+    portrait pairings to photographs (38 photographs, 7 portrait pairings). Not used, by rule:
+    the RM 67-01 posts (the Ruler, his father), the Tudor post (a different man), and the
+    5531G, 5610 and black split-seconds chronograph (not in the ledger; the owner decides).
+  - *Anatomy:* a 3D watch (`scripts/watch3d.src.js`, bundled by `scripts/build-watch3d.mjs`
+    into `dist/watch3d.js`, 149.6 KB gzip, gated at 160) now carries all twelve parts as real
+    objects: case and lugs, bezel, sapphire crystal, dial and indices, hands on Ajman time, a
+    knurled crown and pushers, and a running movement behind an exhibition caseback (barrel,
+    train, escapement, balance and hairspring, rotor, skeleton bridges and jewels). Choosing a
+    part turns the watch to it, lifts the crystal or bezel away, and parks the rotor clear;
+    dragging turns it; tapping a part selects its card. It loads only on Watchmaking, only
+    with WebGL, only as the stage nears the screen; the SVG drawing remains the fallback. A
+    generic watch, not a maison's design — no Cartier or other model was copied.
+  - *Phones:* the chapter bar no longer sticks, so the stage sits under the masthead on an
+    opaque ground and the cards never show behind it.
 - PR #42 (Codex) adds shared Claude/Codex rules only (`AGENTS.md`, three skills mirrored in
   `.claude/skills/` and `.agents/skills/`); no site code.
 

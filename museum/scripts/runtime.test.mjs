@@ -429,7 +429,7 @@ test('six crown pieces, each shown with His Highness and numbered in the reading
 test('films load nothing until asked, then play under our own controls', async () => {
   const { dom, w, doc } = await mount('collection', 'en');
   const figs = [...doc.querySelectorAll('.film[data-film]')];
-  assert.deepEqual(figs.map(f => f.dataset.film), ['Air31Kly7Ys', 'HFt8kspnTwg']);
+  assert.deepEqual(figs.map(f => f.dataset.film), ['Air31Kly7Ys']);
   const api = () => [...doc.querySelectorAll('script[src*="youtube"]')];
   assert.equal(api().length, 0, 'nothing from the video host at load');
   for (const f of figs) assert.match(f.querySelector('img').getAttribute('src'), /^\/images\/(sheikh\/|sheikh-examining-watches)/, 'our poster, not the host thumbnail');
@@ -452,6 +452,21 @@ test('films load nothing until asked, then play under our own controls', async (
   figs[0].querySelector('[data-film-act="close"]').click();
   assert.ok(!figs[0].classList.contains('playing'));
   assert.equal(figs[0].querySelector('.film-stage'), null);
+  dom.window.close();
+});
+
+test('the second film is told as a written story, and each chapter opens its piece', async () => {
+  const { dom, doc } = await mount('collection', 'en');
+  const chapters = [...doc.querySelectorAll('.story-chapters .chapter')];
+  assert.equal(chapters.length, 5);
+  for (const c of chapters) {
+    const slug = c.querySelector('[data-open-slug]').dataset.openSlug;
+    assert.ok(data.watches.some(w => w.slug === slug), `${slug} is in the ledger`);
+    assert.equal(c.querySelector('img').getAttribute('src'), `/assets/royal/${slug}.webp`);
+  }
+  assert.doesNotMatch(doc.querySelector('#story').textContent, /\$|US\$|AED|million|مليون/i, 'no prices in the story');
+  chapters[2].querySelector('[data-open-slug]').click();
+  assert.equal(doc.querySelector('#detailTitle').textContent, data.watches.find(w => w.slug === 'patek-philippe-calatrava').nameEn);
   dom.window.close();
 });
 

@@ -45,14 +45,21 @@ WATCH_BOX = {
 
 PHOTOGRAPHS = {
     'rolex-daytona-diw-motley-carbon': ('museum/dist/assets/watches/rolex-daytona-diw-motley-carbon.webp', 'cover-top'),
-    'fp-journe-tourbillon-souverain': ('museum/dist/assets/watches/fp-journe-tourbillon-souverain.webp', 'cover'),
-    'patek-philippe-calatrava': ('museum/dist/assets/watches/patek-philippe-calatrava.webp', 'cover'),
-    # square from the top drops the publisher mark in the lower corner
-    'artisans-de-geneve-andrea-pirlo-rolex-submariner': ('museum/dist/assets/watches/andrea-pirlo-submariner.jpg', (0, 0, 1020, 1020)),
+    # Third-party composites lay the maker's render over His Highness. Re-cut each as a
+    # diptych so the render never covers him and the watch is shown whole beside him.
+    # owner-supplied 2 Oct 2026: His Highness wearing each piece, the maker's image of the
+    # same piece beside him. Boxes stop short of every publisher mark, label and price.
+    'fp-journe-tourbillon-souverain': ('museum/source-media/fp-journe-tourbillon-souverain-jade-sheikh-ammar.jpg', ('split', (0, 0, 700, 1220), (0.0, 0.3), (760, 150, 1440, 1220), 'contain')),
+    'patek-philippe-calatrava': ('museum/source-media/patek-5278-horse-sheikh-ammar.jpg', ('split', (420, 140, 1080, 1250), (0.1, 0.3), ('museum/source-media/patek-5278-horse-sheikh-ammar-2.jpg', (80, 250, 660, 1330)), 'contain')),
+    'patek-philippe-grand-complications-110th-second-monopusher-chronograph': ('museum/source-media/patek-5470p-sheikh-ammar.jpg', ('split', (495, 60, 1080, 1270), (0.0, 0.3), (0, 330, 500, 1170), 'contain')),
+    'patek-philippe-grand-complications-minute-repeater': ('museum/source-media/patek-5178g-sheikh-ammar.jpg', ('split', (450, 0, 1080, 1290), (0.0, 0.3), (70, 520, 460, 1225), 'contain')),
+    # both boxes stop short of the publisher mark in the lower right
+    'artisans-de-geneve-andrea-pirlo-rolex-submariner': ('museum/dist/assets/watches/andrea-pirlo-submariner.jpg', ('split', (240, 0, 640, 600), (0.5, 0.3), (90, 600, 400, 1140), 'contain')),
     # one photograph, re-cut as a diptych: His Highness (right of frame) | the dragon dial (left)
     'rolex-6100-chinese-dragon-cloisonne': ('museum/dist/assets/watches/rolex-6100-sheikh-original.jpg', ('split', (480, 0, 1262, 835), (0.62, 0.3), (40, 0, 480, 835))),
     # owner-supplied clean original, 26 Sept 2026: no publisher mark, no pasted render
-    'lederer-cic-39-inverto-titanium': ('museum/source-media/lederer-cic-39-sheikh-ammar-clean.jpg', (0, 420, 960, 1380)),
+    # the piece is too small on his wrist to read, so its plate stands beside him
+    'lederer-cic-39-inverto-titanium': ('museum/source-media/lederer-cic-39-sheikh-ammar-clean.jpg', ('split', (0, 250, 820, 1890), (0.5, 0.3), 'museum/dist/assets/plates/lederer-cic-39-inverto-titanium.webp', 'contain')),
     # owner-supplied 26 Sept 2026. His Highness with the piece on his wrist | the maker's
     # render from the same post. Both boxes stop short of the price badge and publisher mark.
     'fp-journe-chronographe-monopoussoir-rattrapante-titanium': ('museum/source-media/fp-journe-chronographe-rattrapante-sheikh-ammar.jpg', ('split', (372, 160, 882, 1180), (0.5, 0.5), (60, 590, 366, 1015), 'contain')),
@@ -91,6 +98,31 @@ def contain_on_blur(im, w, h):
     return back
 
 
+def desmear(im, bg, run=16, tol=40):
+    """Background removal on some maker images smeared the watch's edge pixels out to
+    the frame in horizontal streaks. A streak is a run of near-identical pixels that
+    reaches the image edge; paint every such run back to the background."""
+    im = im.copy()
+    px = im.load()
+    w, h = im.size
+    near = lambda a, b: sum(abs(a[i] - b[i]) for i in range(3)) <= tol
+    for y in range(h):
+        for xs in (range(w - 1, 0, -1), range(0, w - 1)):
+            xs = list(xs)
+            step = -1 if xs[0] > xs[-1] else 1
+            n = 0
+            edge = px[xs[0], y]
+            for x in xs:
+                if near(px[x + step, y], edge):
+                    n += 1
+                else:
+                    break
+            if n >= run and not near(px[xs[0], y], bg):
+                for x in xs[:n + 1]:
+                    px[x, y] = bg
+    return im
+
+
 def trim_to_watch(im):
     """Crop a maker's image to the watch, ignoring flat background and edge artefacts."""
     rgb = im.convert('RGB')
@@ -113,14 +145,30 @@ def trim_to_watch(im):
     return rgb.crop((max(0, x0 - pad), max(0, y0 - pad), min(w, x1 + pad), min(h, y1 + pad))), bg
 
 
+def flatten(src):
+    """Maker cut-outs carry their background-removal smears as half-transparent pixels.
+    Keep only the solid watch and set it on black."""
+    im = Image.open(src)
+    if 'A' not in im.getbands():
+        return im.convert('RGB')
+    im = im.convert('RGBA')
+    alpha = im.getchannel('A').point(lambda v: 255 if v >= 200 else 0)
+    alpha = alpha.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(0.8))
+    out = Image.new('RGB', im.size, (0, 0, 0))
+    out.paste(im.convert('RGB'), (0, 0), alpha)
+    return out
+
+
 def watch_panel(slug, src):
-    im = Image.open(src).convert('RGB')
+    im = flatten(src)
     if slug in WATCH_BOX:
         f = WATCH_BOX[slug]
         watch = im.crop((round(f[0] * im.width), round(f[1] * im.height), round(f[2] * im.width), round(f[3] * im.height)))
         bg = watch.getpixel((2, 2))
     else:
+        im = desmear(im, im.getpixel((2, 2)))
         watch, bg = trim_to_watch(im)
+    watch = desmear(watch, bg)
     panel = Image.new('RGB', (HALF, SIZE), bg)
     scale = min((HALF - 40) / watch.width, (SIZE - 120) / watch.height)
     watch = watch.resize((round(watch.width * scale), round(watch.height * scale)), Image.LANCZOS)
@@ -165,7 +213,17 @@ def main():
                 out = Image.new('RGB', (SIZE, SIZE))
                 out.paste(cover(im.crop(person_box), HALF, SIZE, focus), (0, 0))
                 fit_panel = contain_on_blur if fit == ['contain'] else cover
-                panel = fit_panel(im.crop(watch_box), HALF, SIZE)
+                if isinstance(watch_box, tuple) and isinstance(watch_box[0], str):
+                    other, box = watch_box
+                    panel = fit_panel(Image.open(ROOT / other).convert('RGB').crop(box), HALF, SIZE)
+                elif isinstance(watch_box, str):
+                    plate, _ = trim_to_watch(Image.open(ROOT / watch_box).convert('RGB'))
+                    plate = plate.resize((plate.width * 3, plate.height * 3), Image.LANCZOS)
+                    panel = Image.new('RGB', (HALF, SIZE), plate.getpixel((2, 2)))
+                    plate.thumbnail((HALF - 24, SIZE - 120), Image.LANCZOS)
+                    panel.paste(plate, ((HALF - plate.width) // 2, (SIZE - plate.height) // 2))
+                else:
+                    panel = fit_panel(im.crop(watch_box), HALF, SIZE)
                 out.paste(panel, (HALF, 0))
             elif isinstance(mode, tuple):
                 out = im.crop(mode).resize((SIZE, SIZE), Image.LANCZOS)

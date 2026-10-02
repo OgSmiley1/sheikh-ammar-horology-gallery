@@ -171,6 +171,13 @@ function card(w, opts = {}) {
   return `<article class="piece${opts.reveal ? ' reveal' : ''}"><button type="button" class="card" data-watch="${esc(w.slug)}" aria-label="${esc(t('explore') + ' — ' + local(w, 'name'))}">${royalFigure(w, { lot: opts.lot, loading: opts.loading })}<div class="meta"><span class="maison">${esc(maison(w))}</span><h3>${esc(local(w, 'name'))}</h3><span class="ref" dir="ltr">${esc(reference(w))}</span><span class="discover">${esc(t('explore'))}</span></div></button></article>`;
 }
 const bySlug = slug => state.all.find(w => w.slug === slug);
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-open-slug]');
+  if (!b) return;
+  const slugs = [...document.querySelectorAll('[data-open-slug]')].map(x => x.dataset.openSlug);
+  const w = bySlug(b.dataset.openSlug);
+  if (w) { state.list = slugs.map(bySlug).filter(Boolean); openDetail(w); }
+});
 const FEATURED = ['rolex-6100-chinese-dragon-cloisonne', 'patek-philippe-perpetual-calendar-5270p-green', 'patek-philippe-nautilus-perpetual-calendar-5740'];
 const HOME_SIX = ['rolex-daytona-6263-quraysh-hawk', 'fp-journe-tourbillon-souverain', 'patek-philippe-perpetual-calendar-5271p-blue-sapphire', 'audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce', 'fp-journe-chronometre-a-resonance-platinum-grey', 'richard-mille-rm-26-02-tourbillon-evil-eye'];
 
@@ -439,8 +446,10 @@ const STAGE_BACK_PARTS = new Set(['calibre', 'escapement', 'balance', 'barrel', 
 function initAnatomyStage() {
   const stage = $('#watchStage'), grid = $('#anatomyGrid'), inner = $('#stageInner'), caption = $('#stageCaption');
   if (!stage || !grid || !inner) return;
+  let w3d = null;
   const choose = btn => {
     const part = btn.dataset.part, n = Number(btn.dataset.n);
+    w3d?.select(part);
     $$('.anatomy-card').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
     stage.classList.add('picked');
     stage.querySelectorAll('.part,.hotspot').forEach(g => g.classList.toggle('hl', g.dataset.part === part));
@@ -462,6 +471,21 @@ function initAnatomyStage() {
     const btn = hot && grid.querySelector(`.anatomy-card[data-part="${hot.dataset.part}"]`);
     if (btn) choose(btn);
   });
+  // the 3D watch: fetched only here, only with WebGL, only as the stage nears the screen
+  if (!window.WebGL2RenderingContext || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    io.disconnect();
+    import('/watch3d.js').then(m => {
+      w3d = m.mount(stage, {
+        reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
+        onPick: part => { const btn = grid.querySelector(`.anatomy-card[data-part="${part}"]`); if (btn) choose(btn); }
+      });
+      const sel = grid.querySelector('.anatomy-card[aria-pressed="true"]');
+      if (sel) w3d.select(sel.dataset.part);
+    }).catch(() => stage.classList.remove('has-3d'));
+  }, { rootMargin: '600px 0px' });
+  io.observe(stage);
 }
 function renderHotspotNumbers() {
   $$('.hotspot text[data-num]').forEach(el => { el.textContent = state.ar ? indic(el.dataset.num) : el.dataset.num; });

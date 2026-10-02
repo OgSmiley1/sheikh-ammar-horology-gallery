@@ -291,7 +291,21 @@ main{display:block}
 /* ————— the films ————— */
 .films{background:var(--night);color:var(--moon);padding:clamp(3.5rem,8vw,6rem) var(--gutter)}
 .film-grid{display:grid;gap:1.75rem;max-width:var(--max);margin:clamp(2rem,5vw,3.5rem) auto 0}
-@media (min-width:900px){.film-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:900px){.film-grid:not(.single){grid-template-columns:1fr 1fr}}
+.film-grid.single{max-width:980px}
+/* ————— the story of the collection ————— */
+.story-chapters{list-style:none;margin:clamp(2.5rem,6vw,4.5rem) auto 0;padding:0;max-width:var(--max);display:grid;gap:clamp(3rem,8vw,6rem)}
+.chapter{display:grid;gap:clamp(1.25rem,3vw,2.5rem);align-items:center}
+.chapter figure{margin:0;aspect-ratio:1;overflow:hidden;background:#0b0a09}
+.chapter figure img{width:100%;height:100%;object-fit:cover}
+.chapter-num{display:block;font:300 clamp(2.4rem,6vw,3.6rem)/1 'Cormorant Garamond',serif;color:var(--bronze);margin-bottom:.75rem}
+:root[lang=ar] .chapter-num{font:300 clamp(1.6rem,4vw,2.2rem)/1.2 'Amiri',serif}
+.chapter .maison{margin:0 0 .4rem}
+.chapter h3{font:400 clamp(1.8rem,4vw,2.6rem)/1.15 'Cormorant Garamond',serif;margin:0 0 1rem}
+:root[lang=ar] .chapter h3{font:400 clamp(1.7rem,4vw,2.4rem)/1.35 'Amiri',serif}
+.chapter p:not(.maison){max-width:34rem}
+.chapter .link{margin-top:1rem;display:inline-flex;gap:.6rem;align-items:center;min-height:44px}
+@media (min-width:860px){.chapter{grid-template-columns:1fr 1fr}.chapter:nth-child(even) figure{order:2}}
 .film{margin:0;position:relative}
 .film-frame{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
 .film-frame>img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;transition:transform 1.2s var(--ease-entry),opacity .6s var(--ease-ambient)}
@@ -306,7 +320,7 @@ main{display:block}
 :root[lang=ar] .film-name{font:500 1rem/1 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
 .film-stage{position:absolute;inset:0;z-index:3;overflow:hidden;background:#000}
 /* the frame we show crops the host's title bar and logo band */
-.film-stage iframe{position:absolute;left:0;top:-60px;width:100%;height:calc(100% + 120px);border:0}
+.film-stage iframe{position:absolute;left:0;top:-9%;width:100%;height:118%;border:0}
 .film.loading .film-stage::after{content:'';position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px;border:1px solid rgba(216,189,138,.3);border-top-color:var(--gold);border-radius:50%;animation:spin 1.2s var(--ease-ambient) infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .film-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
@@ -543,6 +557,23 @@ blockquote.epigraph{margin:2rem auto 0;padding:0;border:none;max-width:640px}
 .stage.picked .hotspot{opacity:1}
 .stage-inner.flipped .face.front,.stage-inner:not(.flipped) .face.back{pointer-events:none}
 @media (prefers-reduced-motion:reduce){.stage-inner{transition:none}}
+/* the 3D watch replaces the drawing once it loads */
+.stage3d{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+.stage3d:active{cursor:grabbing}
+.stage.has-3d{max-width:none;perspective:none}
+.stage.has-3d .stage-inner{display:none}
+.stage-hint{display:none;text-align:center;margin:.25rem 0 0;color:var(--ink-2);font:400 .72rem/1.4 'Jost',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+:root[lang=ar] .stage-hint{font:400 .85rem/1.5 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
+.stage.has-3d~.stage-hint{display:block}
+@media (min-width:980px){.anatomy-layout{grid-template-columns:minmax(380px,46%) 1fr}}
+/* phones: the chapter bar no longer follows the reader, so the watch can sit under the
+   masthead on an opaque ground and never shows the text scrolling behind it */
+@media (max-width:979px){
+.chapters{position:static}
+.stage-col{top:var(--header);border-bottom:1px solid var(--hair);box-shadow:0 14px 18px -16px rgba(20,18,14,.35);padding:.25rem 0 .6rem}
+.stage.has-3d{aspect-ratio:auto;height:min(42svh,360px)}
+.stage-caption{margin-top:.5rem}
+}
 .anatomy{display:grid;gap:0;border-top:1px solid var(--hair)}
 @media (min-width:620px){.anatomy-layout .anatomy{grid-template-columns:repeat(2,1fr)}}
 .anatomy article{border-bottom:1px solid var(--hair)}
