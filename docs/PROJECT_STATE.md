@@ -1,6 +1,20 @@
 # Sheikh Ammar Horology Museum — Current Project State
 
-Updated: 29 September 2026
+Updated: 2 October 2026
+
+## 2 October 2026 — `museum-vision` is now the preview of PR #43
+- **Live site (unchanged):** `museum-current` → https://museum-current-production.up.railway.app,
+  deployment `c0fe8fe2`, serving `main` @ `88013ab`. GitHub Pages (`docs/`) is historical, not the site.
+- **Preview:** Railway's free plan refused a new service, so the owner chose to reuse the legacy
+  `museum-vision` (idle; last build failed 26 Sep). It is now pinned to `feat/one-of-not-many`
+  @ `847b068`, built by `museum/Dockerfile` (which runs `npm test`), started with
+  `node scripts/serve.mjs`, healthcheck `/healthz`, no watch patterns (the old `__retired__/never/**` pattern, and then
+  `museum/**` on a docs-only commit, made Railway skip the build). Sleep mode stays on.
+  URL: https://museum-vision-production.up.railway.app
+- To preview a later commit, reconnect `museum-vision` to that SHA. Production is released only
+  by the owner's merge to `main`, then reconnecting `museum-current` (see 26 Sep notes).
+- PR #42 (Codex) adds shared Claude/Codex rules only (`AGENTS.md`, three skills mirrored in
+  `.claude/skills/` and `.agents/skills/`); no site code.
 
 ## 29 September 2026 — "One of not many" (branch `feat/one-of-not-many`, draft PR — not merged, not deployed)
 Built from the owner's *Cloud Code Build Pack — One of Not Many*. The companion vision brief
