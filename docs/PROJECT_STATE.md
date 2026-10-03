@@ -1,6 +1,141 @@
 # Sheikh Ammar Horology Museum — Current Project State
 
-Updated: 27 September 2026
+Updated: 3 October 2026
+
+## 3 October 2026 — content integrity rule, and a polish pass (uncommitted until the owner says so)
+**The rule (now gated in `verify-museum.mjs`):** the site is His Highness's own collection. A
+watch seen only on another family member, or a photograph of someone else, never enters it,
+whatever a spotter's caption says. Uncertain attributions stay unpublished and are flagged.
+No "Al Nuaimi family" section. The gate refuses, with the evidence recorded beside each rule:
+- RM 67-01 — the posts show H.H. Sheikh Humaid bin Rashid Al Nuaimi, Ruler of Ajman;
+- RM 27-03 and any mention of Sheikh Rashid bin Humaid bin Rashid Al Nuaimi — the three
+  Time Keeper KW photographs the owner sent on 3 Oct show him, not His Highness. They were
+  **not added**; their SHA-256 hashes are blocked in `dist/` and `source-media/`;
+- Tudor Black Bay — the post names Sheikh Ammar but shows a different man;
+- the "Time Keeper" publisher mark;
+- any wear claim without a photograph of His Highness.
+Mutation-tested: a renamed copy of a refused photograph and an "RM 27-03" name both fail.
+
+**Audit findings left as they are (need the owner):** the 6264 and 6241 Daytonas still look
+like one watch (`identityReview` on both); four model names repeat (Tourbillon Souverain,
+Daytona Paul Newman, Royal Oak Perpetual Calendar, Calatrava), each a different reference.
+
+**Polish in this pass:** gzip for text from `serve.mjs` (watches.json 184→33 KB, watch3d.js
+581→150 KB; first-view weight down 30–70% per page); the 320 px English masthead and the
+Collection search no longer overflow; the maison filter row fades at its edge to show it
+scrolls; the detail sheet returns focus to whatever opened it (story chapters included);
+Arabic spec values use Arabic-Indic digits like the year; failed photographs everywhere show
+the quiet "image unavailable" note, and decorative reel frames simply drop out.
+
+## 2 October 2026 — `museum-vision` is now the preview of PR #43
+- **Live site (unchanged):** `museum-current` → https://museum-current-production.up.railway.app,
+  deployment `c0fe8fe2`, serving `main` @ `88013ab`. GitHub Pages (`docs/`) is historical, not the site.
+- **Preview:** Railway's free plan refused a new service, so the owner chose to reuse the legacy
+  `museum-vision` (idle; last build failed 26 Sep). It is now pinned to `feat/one-of-not-many`
+  @ `847b068`, built by `museum/Dockerfile` (which runs `npm test`), started with
+  `node scripts/serve.mjs`, healthcheck `/healthz`, no watch patterns (the old `__retired__/never/**` pattern, and then
+  `museum/**` on a docs-only commit, made Railway skip the build). Sleep mode stays on.
+  URL: https://museum-vision-production.up.railway.app
+- To preview a later commit, reconnect `museum-vision` to that SHA. Production is released only
+  by the owner's merge to `main`, then reconnecting `museum-current` (see 26 Sep notes).
+- **Owner review of the preview (2 Oct), acted on in the same PR:**
+  - *Films:* only `Air31Kly7Ys` stays. The second film (prices on screen) became a written
+    story on the Collection page: five chapters, each drawn from its piece's ledger record, each
+    with the royal image, and no prices. The player crop is now proportional (`-9%/118%`), not
+    a fixed 60 px, so phones no longer lose the picture.
+  - *Royal images:* the four third-party composites that laid a render over His Highness are
+    now diptychs (him | the complete watch). The maker cut-outs' half-transparent smears are
+    flattened onto black. Four new owner-supplied photographs show him wearing the Tourbillon
+    Souverain (jade), the 5278 "Horse", the 5470P and the 5178G; the last two move from
+    portrait pairings to photographs (38 photographs, 7 portrait pairings). Not used, by rule:
+    the RM 67-01 posts (the Ruler, his father), the Tudor post (a different man), and the
+    5531G, 5610 and black split-seconds chronograph (not in the ledger; the owner decides).
+  - *Anatomy:* a 3D watch (`scripts/watch3d.src.js`, bundled by `scripts/build-watch3d.mjs`
+    into `dist/watch3d.js`, 149.6 KB gzip, gated at 160) now carries all twelve parts as real
+    objects: case and lugs, bezel, sapphire crystal, dial and indices, hands on Ajman time, a
+    knurled crown and pushers, and a running movement behind an exhibition caseback (barrel,
+    train, escapement, balance and hairspring, rotor, skeleton bridges and jewels). Choosing a
+    part turns the watch to it, lifts the crystal or bezel away, and parks the rotor clear;
+    dragging turns it; tapping a part selects its card. It loads only on Watchmaking, only
+    with WebGL, only as the stage nears the screen; the SVG drawing remains the fallback. A
+    generic watch, not a maison's design — no Cartier or other model was copied.
+  - *Phones:* the chapter bar no longer sticks, so the stage sits under the masthead on an
+    opaque ground and the cards never show behind it.
+- PR #42 (Codex) adds shared Claude/Codex rules only (`AGENTS.md`, three skills mirrored in
+  `.claude/skills/` and `.agents/skills/`); no site code.
+
+## 29 September 2026 — "One of not many" (branch `feat/one-of-not-many`, draft PR — not merged, not deployed)
+Built from the owner's *Cloud Code Build Pack — One of Not Many*. The companion vision brief
+(`cloud-code-brief-one-of-not-many.md`) was **not** attached — the build pack arrived twice —
+so every judgement of tone below was made from the pack alone. The owner reviews before any merge.
+
+**Audit appendix (commit `e8a7bca`, executed first, line by line).** Nav back to plain names
+(الرئيسية / المجموعة / المعرض / صاحب السمو / صناعة الساعات) — this **supersedes the 27 Sept
+Diwan / Riwaq / Craft names** below. «مجلس الوقت / The Majlis of Time» is gone from wordmark,
+veil, colophon and titles, replaced by his name. The two AI-written couplets are replaced by the
+owner's line «الوقتُ انعكاسٌ للقيادة والانضباط والوعي الراقي», **unattributed** — no published
+source was found in that exact wording. Outbound timeline links removed; sources kept in
+`build-pages.mjs` as provenance only. Not needed: `collection-film.mp4`, stale
+`watchmaking.js` / `vision.*` are not on main; every page already had a `<title>`.
+
+**Motion foundation.** GSAP **core only** (3.15.0) + Lenis (1.3.26), self-hosted in
+`dist/vendor/`, refreshed only by `scripts/vendor.mjs` (pinned). No ScrollTrigger / Draggable /
+Inertia / SplitText / Flip — the museum's own reveal, drag, inertia and word-split code replaces
+them (with them the budget would have been ~68 KB before any of our code). `dist/royal.js` is the
+motion layer and the **only** place the libraries load; under `prefers-reduced-motion` it paints
+one still frame of the paper and fetches nothing. One loop: `gsap.ticker` drives Lenis and the
+paper. **Three curves, nothing else**, CSS and GSAP alike: entry `expo.out` = `--ease-entry`,
+ambient `sine.inOut` = `--ease-ambient`, hover `power2.out` = `--ease-hover` (150 ms).
+
+**The paper.** Raw WebGL1 marbling, half resolution, 24 fps, behind every light page. Its mood
+follows Ajman's hour (dawn → sand → pearl). Film grain at 3.5 % over everything; gold dust in the
+dark rooms (Time Machine, crown room). The veins are deliberately shallow: bronze labels hold
+**7.18:1** on the darkest vein with the grain at its mean (gated — a first draft measured 6.98).
+
+**The Time Machine** (Watchmaking hero). A drawn watch that keeps Ajman time at rest (8 beats/s)
+and names *the present* to screen readers. Pull and turn the crown (or the dial, wheel, keys) and
+the hands, era register and year aperture travel 1954 → 2025, clicking into detents at each year
+a model in the ledger was introduced; the decade's pieces appear beneath. Decade rail with counts,
+`#era-1970s`-style deep links, ← → mirrored in Arabic, Escape returns to the present, haptic tick
+only under a hand on the crown. Every year and count comes from `watches.json`.
+
+**Crown pieces** (Home, «ستُّ قطع. كلٌّ منها واحدةٌ من قِلّة.»). Chosen by one rule: six kinds of
+rarity, each named from the piece's own ledger record — survival (6100 Chinese Dragon), emblem
+(6263 Quraysh), mechanism (3939HP), hand (FFC), art (RM 68-01 Kongo), ending (5711 Olive). Each
+enthroned with His Highness, with a liquid-metal hover on fine pointers only. **Owner to confirm
+the six.**
+
+**Films** (Collection only): `Air31Kly7Ys`, `HFt8kspnTwg`, behind our own posters of His Highness.
+Nothing from the host loads until the play button is pressed; then the no-cookie player runs with
+`controls:0` under our own pause / mute / close bar, its title and chrome cropped out of frame. If it
+cannot load, a quiet bilingual note says so. **The IDs could not be played from the build sandbox
+(egress blocked), so the owner should press play once on a preview.**
+
+**Also:** the veil exits as a clip-path wipe with a hard 7 s fallback and tells the hero when it
+lifts; anatomy hotspots N°1–N°12 sit on the stage below the Time Machine, and the callout carries
+the card's own number; a jeweller's cursor and magnetic buttons on fine pointers only, appearing
+on the first mouse move.
+
+**Weight.** All shipped script 59.3 KB gzip (gated ≤ 84): GSAP 28.3 + Lenis 5.4 + `royal.js` 6.3 +
+`app.js` 20.5. Added over main ≈ **46.7 KB** against the pack's ~70 KB.
+
+**Gates added** (`verify-museum.mjs`, all mutation-checked — 14 mutations, 14 caught): shader AAA
+floor, grain ceiling, the three curves pinned to their GSAP twins, no bare keyword curves, vendor
+never in a page, reduced motion never fetches, script budget, and the owner's film rule (host
+references, one API load from `playFilm`, click-only start, Collection-only, exact IDs).
+**Tests:** 47 (was 37) — Time Machine in both readings, deep link, crowns, films (one load, our
+controls, error path), hotspots, veil event, `royal.js` smoke; windows now always close, so a
+failing test can no longer hang the run. Rendered gate 160/160.
+
+**Flagged, deliberately not fixed** (each needs the owner):
+- `rolex-daytona-paul-newman-6264-green-strap` and `rolex-daytona-6241-john-player-special` — the
+  images look like the same watch (identity review open).
+- Undated: `rolex-daytona-diw-motley-carbon`, `artisans-de-geneve-andrea-pirlo-rolex-submariner`
+  (shown under "Undated" on the rail). `rolex-daytona-6265-black-dial` carries only "1970s", so it
+  sits in that decade with no detent.
+- The 45th piece (`fp-journe-chronographe-monopoussoir-rattrapante-titanium`) — still unrequested
+  by the build pack; untouched.
+- 13 citations without URLs — untouched.
 
 ## 27 September 2026 — nav names, a verse, and the anatomy stage (rest of the wider pass)
 The owner chose the recommended option on all four questions this pass raised (see the

@@ -1,4 +1,4 @@
-import { test } from 'node:test';
+import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
@@ -8,10 +8,16 @@ const code = readFileSync(new URL('../dist/app.js', import.meta.url), 'utf8');
 const files = { home: 'index.html', collection: 'collection/index.html', biography: 'his-highness/index.html', exhibition: 'exhibition/index.html', watchmaking: 'watchmaking/index.html' };
 const paths = { home: '', collection: 'collection/', biography: 'his-highness/', exhibition: 'exhibition/', watchmaking: 'watchmaking/' };
 
+// every window is closed at the end even if its test throws first — an open window
+// keeps its animation frames running and would hold the run open forever
+const opened = [];
+after(() => opened.forEach(w => w.close()));
+
 async function mount(route = 'collection', lang = 'ar', { reduce = false, fail = false, hash = '' } = {}) {
   const html = readFileSync(new URL('../dist/' + files[route], import.meta.url), 'utf8');
   const dom = new JSDOM(html, { url: 'https://museum.test/' + paths[route] + hash, runScripts: 'outside-only', pretendToBeVisual: true });
   const w = dom.window, timers = [];
+  opened.push(w);
   w.localStorage.setItem('museum-language', lang);
   w.matchMedia = () => ({ matches: reduce, addEventListener() {} });
   w.IntersectionObserver = class { observe() {} unobserve() {} };
@@ -337,3 +343,189 @@ test('detail sheet carries a loupe over the royal image', async () => {
   assert.ok(doc.querySelector('#zoom .loupe'));
   dom.window.close();
 });
+
+// ————— One of not many —————
+const decadeOf = x => { const y = Number(x.yearReleased); if (y) return Math.floor(y / 10) * 10; const m = /^(\d{4})s$/.exec(x.yearLabelEn || ''); return m ? Number(m[1]) : null; };
+const key = (w, el, k) => el.dispatchEvent(new w.KeyboardEvent('keydown', { key: k, bubbles: true }));
+
+for (const lang of ['ar', 'en'])
+  test('the time machine travels the ledger by crown, key and rail ' + lang, async () => {
+    const { dom, w, doc } = await mount('watchmaking', lang, { reduce: true });
+    const svg = doc.querySelector('#timeMachine');
+    const eras = [...doc.querySelectorAll('#eraRail [data-era]')].map(b => b.dataset.era);
+    const undated = data.watches.filter(x => decadeOf(x) === null);
+    assert.deepEqual(eras, ['1950', '1960', '1970', '1980', '1990', '2000', '2010', '2020', ...(undated.length ? ['undated'] : [])]);
+    assert.equal(svg.getAttribute('aria-valuetext'), lang === 'ar' ? 'الآن — بتوقيت عجمان' : 'Now — Ajman time', 'at rest it names the present');
+    assert.equal(doc.querySelectorAll('#eraCards .era-card').length, 0);
+    // the digits in the year window follow the reading
+    assert.equal(doc.querySelector('#yearWindow text[data-d="7"]').textContent, lang === 'ar' ? '٧' : '7');
+
+    key(w, svg, 'Home');
+    assert.equal(svg.getAttribute('aria-valuenow'), '1954');
+    assert.match(svg.getAttribute('aria-valuetext'), lang === 'ar' ? /^١٩٥٤ — الخمسينيات/ : /^1954 — The 1950s/, 'the year it reaches is announced');
+    assert.ok(doc.querySelector('#tm').classList.contains('travelling'));
+    assert.equal(doc.querySelector('#tmNow').hidden, false);
+    // forward is toward the reading direction: ← in Arabic, → in English
+    key(w, svg, lang === 'ar' ? 'ArrowLeft' : 'ArrowRight');
+    const next = Number(svg.getAttribute('aria-valuenow'));
+    const detents = [...new Set(data.watches.map(x => Number(x.yearReleased)).filter(Boolean))].sort((a, b) => a - b);
+    assert.equal(next, detents.find(y => y > 1954), 'the crown clicks to the next year the ledger holds');
+    key(w, svg, lang === 'ar' ? 'ArrowRight' : 'ArrowLeft');
+    assert.equal(svg.getAttribute('aria-valuenow'), '1954');
+
+    doc.querySelector('#eraRail [data-era="1970"]').click();
+    assert.match(svg.getAttribute('aria-valuenow'), /^197\d$/);
+    assert.equal(doc.querySelector('#eraRail [data-era="1970"]').getAttribute('aria-pressed'), 'true');
+    assert.equal(w.location.hash, '#era-1970s');
+    const seventies = data.watches.filter(x => decadeOf(x) === 1970);
+    assert.equal(doc.querySelectorAll('#eraCards .era-card').length, seventies.length);
+    for (const img of doc.querySelectorAll('#eraCards img')) assert.match(img.getAttribute('src'), /^\/assets\/royal\//);
+    doc.querySelector('#eraCards [data-watch]').click();
+    assert.equal(doc.querySelector('#detail').open, true, 'an era card opens its sheet');
+    doc.querySelector('#detailClose').click();
+
+    if (undated.length) {
+      doc.querySelector('#eraRail [data-era="undated"]').click();
+      assert.equal(doc.querySelectorAll('#eraCards .era-card').length, undated.length);
+      assert.equal(w.location.hash, '#era-undated');
+    }
+    // a language switch mid-journey re-announces the year in the new language
+    doc.querySelector('#eraRail [data-era="1960"]').click();
+    doc.querySelector('#lang').click();
+    assert.match(svg.getAttribute('aria-valuetext'), lang === 'ar' ? /The 1960s/ : /الستينيات/);
+    doc.querySelector('#lang').click();
+
+    key(w, svg, 'Escape');
+    assert.ok(!doc.querySelector('#tm').classList.contains('travelling'));
+    assert.equal(doc.querySelector('#tmNow').hidden, true);
+    assert.equal(svg.getAttribute('aria-valuetext'), lang === 'ar' ? 'الآن — بتوقيت عجمان' : 'Now — Ajman time');
+    assert.equal(w.location.hash, '');
+    dom.window.close();
+  });
+
+test('an era link opens the time machine on its decade', async () => {
+  const { dom, doc } = await mount('watchmaking', 'ar', { reduce: true, hash: '#era-1960s' });
+  assert.equal(doc.querySelector('#eraRail [data-era="1960"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(doc.querySelectorAll('#eraCards .era-card').length, data.watches.filter(x => decadeOf(x) === 1960).length);
+  dom.window.close();
+});
+
+test('six crown pieces, each shown with His Highness and numbered in the reading', async () => {
+  const crowns = ['rolex-6100-chinese-dragon-cloisonne', 'rolex-daytona-6263-quraysh-hawk', 'patek-philippe-minute-repeater-tourbillon-3939hp',
+    'fp-journe-ffc-francis-ford-coppola-calibre-13003', 'richard-mille-rm-68-01-tourbillon-cyril-kongo', 'patek-philippe-nautilus-5711-1300a-olive-green'];
+  const { dom, doc } = await mount('home', 'ar');
+  const stages = [...doc.querySelectorAll('#crownPieces .crown-stage')];
+  assert.deepEqual(stages.map(s => s.dataset.watch), crowns);
+  stages.forEach((s, i) => assert.equal(s.querySelector('img').getAttribute('src'), data.watches.find(x => x.slug === crowns[i]).royalImage));
+  assert.deepEqual([...doc.querySelectorAll('.crown-num')].map(n => n.textContent), ['١', '٢', '٣', '٤', '٥', '٦']);
+  doc.querySelector('#lang').click();
+  assert.deepEqual([...doc.querySelectorAll('.crown-num')].map(n => n.textContent), ['I', 'II', 'III', 'IV', 'V', 'VI']);
+  assert.match(doc.querySelector('#crownPieces').textContent, /The rarity of survival/);
+  doc.querySelectorAll('#crownPieces .crown-stage')[3].click();
+  assert.equal(doc.querySelector('#detailTitle').textContent, data.watches.find(x => x.slug === crowns[3]).nameEn);
+  dom.window.close();
+});
+
+test('films load nothing until asked, then play under our own controls', async () => {
+  const { dom, w, doc } = await mount('collection', 'en');
+  const figs = [...doc.querySelectorAll('.film[data-film]')];
+  assert.deepEqual(figs.map(f => f.dataset.film), ['Air31Kly7Ys']);
+  const api = () => [...doc.querySelectorAll('script[src*="youtube"]')];
+  assert.equal(api().length, 0, 'nothing from the video host at load');
+  for (const f of figs) assert.match(f.querySelector('img').getAttribute('src'), /^\/images\/(sheikh\/|sheikh-examining-watches)/, 'our poster, not the host thumbnail');
+  figs[0].querySelector('.film-play').click();
+  figs[0].querySelector('.film-play').click();
+  assert.equal(api().length, 1, 'the API script is requested once, on the click');
+  assert.equal(api()[0].src, 'https://www.youtube.com/iframe_api');
+  const made = [];
+  w.YT = { Player: class { constructor(el, opts) { made.push(opts); opts.events.onReady({ target: { playVideo() {} } }); } destroy() {} } };
+  w.onYouTubeIframeAPIReady();
+  await new Promise(r => setImmediate(r));
+  assert.equal(made.length, 1);
+  assert.equal(made[0].host, 'https://www.youtube-nocookie.com');
+  assert.equal(made[0].videoId, 'Air31Kly7Ys');
+  assert.equal(made[0].playerVars.controls, 0);
+  assert.equal(made[0].playerVars.rel, 0);
+  assert.ok(figs[0].classList.contains('playing'));
+  assert.deepEqual([...figs[0].querySelectorAll('.film-bar button')].map(b => b.textContent), ['Pause', 'Mute', 'Close the film']);
+  assert.doesNotMatch(doc.querySelector('#films').textContent, /youtube/i, 'no host title or channel in our frame');
+  figs[0].querySelector('[data-film-act="close"]').click();
+  assert.ok(!figs[0].classList.contains('playing'));
+  assert.equal(figs[0].querySelector('.film-stage'), null);
+  dom.window.close();
+});
+
+test('the second film is told as a written story, and each chapter opens its piece', async () => {
+  const { dom, doc } = await mount('collection', 'en');
+  const chapters = [...doc.querySelectorAll('.story-chapters .chapter')];
+  assert.equal(chapters.length, 5);
+  for (const c of chapters) {
+    const slug = c.querySelector('[data-open-slug]').dataset.openSlug;
+    assert.ok(data.watches.some(w => w.slug === slug), `${slug} is in the ledger`);
+    assert.equal(c.querySelector('img').getAttribute('src'), `/assets/royal/${slug}.webp`);
+  }
+  assert.doesNotMatch(doc.querySelector('#story').textContent, /\$|US\$|AED|million|مليون/i, 'no prices in the story');
+  chapters[2].querySelector('[data-open-slug]').click();
+  assert.equal(doc.querySelector('#detailTitle').textContent, data.watches.find(w => w.slug === 'patek-philippe-calatrava').nameEn);
+  dom.window.close();
+});
+
+test('a film that cannot load says so, in the reader\'s language', async () => {
+  const { dom, w, doc } = await mount('collection', 'ar');
+  const fig = doc.querySelector('.film[data-film]');
+  fig.querySelector('.film-play').click();
+  doc.querySelector('script[src*="youtube"]').dispatchEvent(new w.Event('error'));
+  await new Promise(r => setImmediate(r));
+  assert.match(fig.querySelector('.film-note').textContent, /تعذّر تشغيل الفيلم/);
+  assert.ok(!fig.classList.contains('loading'));
+  dom.window.close();
+});
+
+test('anatomy hotspots N°1–N°12 answer the cards, and the callout keeps the card\'s number', async () => {
+  const { dom, w, doc } = await mount('watchmaking', 'en');
+  const hots = [...doc.querySelectorAll('.hotspot')];
+  assert.equal(hots.length, 12);
+  assert.deepEqual(hots.map(h => Number(h.querySelector('text').textContent)).sort((a, b) => a - b), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  const crown = doc.querySelector('.hotspot[data-part="crown"]');
+  crown.querySelector('.hot-hit').dispatchEvent(new w.MouseEvent('click', { bubbles: true }));
+  const card = doc.querySelector('.anatomy-card[data-part="crown"]');
+  assert.equal(card.getAttribute('aria-pressed'), 'true');
+  const caption = doc.querySelector('#stageCaption');
+  assert.equal(caption.querySelector('.callout-n').textContent, card.querySelector('.num').textContent);
+  doc.querySelector('.anatomy-card[data-part="escapement"]').click();
+  assert.ok(doc.querySelector('#stageInner').classList.contains('flipped'), 'the movement parts turn the watch over');
+  doc.querySelector('#lang').click();
+  assert.match(caption.querySelector('.callout-n').textContent, /^[٠-٩]+$/);
+  assert.deepEqual(hots.map(h => h.querySelector('text').textContent).every(t => /^[٠-٩]+$/.test(t)), true);
+  dom.window.close();
+});
+
+test('the veil tells the motion layer when it lifts, and lifts at once under reduced motion', async () => {
+  const first = await mount('home', 'ar');
+  let heard = 0;
+  first.doc.addEventListener('museum:veil', () => heard++);
+  assert.equal(first.doc.documentElement.dataset.veil, undefined);
+  first.doc.querySelector('#veil').click();
+  assert.equal(first.doc.documentElement.dataset.veil, 'lifted');
+  assert.equal(heard, 1);
+  first.doc.querySelector('#veil').click();
+  assert.equal(heard, 1, 'lifts once');
+  first.dom.window.close();
+  const calm = await mount('home', 'ar', { reduce: true });
+  assert.equal(calm.doc.documentElement.dataset.veil, 'lifted');
+  calm.dom.window.close();
+});
+
+const royalCode = readFileSync(new URL('../dist/royal.js', import.meta.url), 'utf8');
+for (const reduce of [true, false])
+  test(`the motion layer ${reduce ? 'stays still' : 'fetches only its two libraries'} ${reduce ? 'under reduced motion' : 'otherwise'}`, async () => {
+    const { dom, w, doc } = await mount('home', 'ar', { reduce });
+    w.HTMLCanvasElement.prototype.getContext = () => null; // no WebGL here: the paper must bow out quietly
+    w.eval(royalCode);
+    await new Promise(r => setImmediate(r));
+    const vendor = [...doc.querySelectorAll('script[src*="/vendor/"]')].map(s => s.getAttribute('src'));
+    assert.deepEqual(vendor, reduce ? [] : ['/vendor/gsap.min.js', '/vendor/lenis.min.js']);
+    assert.equal(doc.querySelector('canvas.paper'), null);
+    assert.ok(!doc.documentElement.classList.contains('has-cursor'), 'the cursor waits for a hand');
+    dom.window.close();
+  });

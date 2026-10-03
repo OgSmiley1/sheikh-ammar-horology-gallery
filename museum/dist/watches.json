@@ -1417,17 +1417,17 @@
       "imageWidth": 1284,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/patek-philippe-grand-complications-minute-repeater.webp",
-      "royalPairing": "portrait",
-      "imageClass": "portrait_pair",
-      "wornClaim": false,
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
       "provenance": [
         {
           "type": "owner_archive",
-          "subject": "portrait",
-          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "subject": "photograph",
+          "source": "source-media/patek-5178g-sheikh-ammar.jpg (watch-spotter post showing His Highness wearing the piece; publisher marks, labels and prices cropped out)",
           "url": null,
-          "date": null,
-          "permission": "gathered by the owner from public social media; owner-confirmed 26 Sep 2026",
+          "date": "2026-10-02",
+          "permission": "gathered by the owner from public social media and supplied 2 Oct 2026",
           "status": "owner-confirmed"
         },
         {
@@ -1988,10 +1988,10 @@
         {
           "type": "owner_archive",
           "subject": "photograph",
-          "source": "archive fp-journe-tourbillon-souverain.webp (Public appearance crop; product details remain source-reviewed)",
+          "source": "source-media/fp-journe-tourbillon-souverain-jade-sheikh-ammar.jpg (watch-spotter post showing His Highness wearing the piece; publisher marks, labels and prices cropped out)",
           "url": null,
-          "date": null,
-          "permission": "gathered by the owner from public social media; owner-confirmed 26 Sep 2026",
+          "date": "2026-10-02",
+          "permission": "gathered by the owner from public social media and supplied 2 Oct 2026",
           "status": "owner-confirmed"
         },
         {
@@ -2123,17 +2123,17 @@
       "imageWidth": 1284,
       "imageHeight": 1800,
       "royalImage": "/assets/royal/patek-philippe-grand-complications-110th-second-monopusher-chronograph.webp",
-      "royalPairing": "portrait",
-      "imageClass": "portrait_pair",
-      "wornClaim": false,
+      "royalPairing": "photograph",
+      "imageClass": "wrist",
+      "wornClaim": true,
       "provenance": [
         {
           "type": "owner_archive",
-          "subject": "portrait",
-          "source": "images/sheikh/sheikh-portrait-1.webp, images/sheikh/sheikh-portrait-2.jpg, images/sheikh-examining-watches.webp",
+          "subject": "photograph",
+          "source": "source-media/patek-5470p-sheikh-ammar.jpg (watch-spotter post showing His Highness wearing the piece; publisher marks, labels and prices cropped out)",
           "url": null,
-          "date": null,
-          "permission": "gathered by the owner from public social media; owner-confirmed 26 Sep 2026",
+          "date": "2026-10-02",
+          "permission": "gathered by the owner from public social media and supplied 2 Oct 2026",
           "status": "owner-confirmed"
         },
         {
@@ -2416,10 +2416,10 @@
         {
           "type": "owner_archive",
           "subject": "photograph",
-          "source": "archive patek-philippe-calatrava.webp (Public appearance image; model association kept editorially bounded)",
+          "source": "source-media/patek-5278-horse-sheikh-ammar.jpg + patek-5278-horse-sheikh-ammar-2.jpg (watch-spotter post showing His Highness wearing the piece; publisher marks, labels and prices cropped out)",
           "url": null,
-          "date": null,
-          "permission": "gathered by the owner from public social media; owner-confirmed 26 Sep 2026",
+          "date": "2026-10-02",
+          "permission": "gathered by the owner from public social media and supplied 2 Oct 2026",
           "status": "owner-confirmed"
         }
       ]

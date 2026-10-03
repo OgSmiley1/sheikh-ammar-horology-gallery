@@ -1,5 +1,5 @@
 'use strict';
-// The Majlis of Time — one runtime for every page.
+// Sheikh Ammar bin Humaid Al Nuaimi — the horological collection. One runtime for every page.
 // Static copy is bilingual in the markup (data-ar / data-en); this file swaps it,
 // renders the collection from /watches.json, and runs the detail sheet, the
 // screening room and the exhibition. Arabic is the default language.
@@ -25,6 +25,10 @@ const words = {
     royalAlt: w => `صاحب السمو الشيخ عمّار بن حميد النعيمي — ${w}`,
     open: 'افتح القائمة', close: 'أغلق القائمة', lang: 'Switch to English',
     pause: 'إيقاف مؤقت', resume: 'متابعة', tourPlay: 'جولة تلقائية', tourPause: 'إيقاف الجولة',
+    tmNow: 'الآن — بتوقيت عجمان', tmUndated: 'بلا عام طرح موثّق', tmThisYear: 'طُرح طرازها في هذا العام',
+    tmNone: 'لا قطعة في المجموعة طُرح طرازها في هذا العقد.', tmUndatedNote: 'قطعٌ لم يُسجَّل عام طرح طرازها في سجل المجموعة.',
+    tmCount: n => n === 1 ? 'قطعة واحدة' : n === 2 ? 'قطعتان' : n <= 10 ? `${indic(n)} قطع` : `${indic(n)} قطعة`,
+    tmValue: (y, era, n) => `${indic(y)} — ${era}، ${n}`,
     craftGuide: 'تأمّل القطعة',
     image: 'تعذّر عرض الصورة', ajman: 'الوقت في عجمان',
     invite: n => `بدعوةٍ خاصة · ${n}`, edition: n => `نسخةٌ خاصة، أُعدّت خصيصاً · ${n}`,
@@ -44,6 +48,10 @@ const words = {
     royalAlt: w => `His Highness Sheikh Ammar bin Humaid Al Nuaimi — ${w}`,
     open: 'Open menu', close: 'Close menu', lang: 'التبديل إلى العربية',
     pause: 'Pause', resume: 'Resume', tourPlay: 'Guided tour', tourPause: 'Pause the tour',
+    tmNow: 'Now — Ajman time', tmUndated: 'Undated', tmThisYear: 'Model introduced this year',
+    tmNone: 'No piece in the collection was introduced in this decade.', tmUndatedNote: 'Pieces whose model year is not recorded in the collection ledger.',
+    tmCount: n => n === 1 ? 'one piece' : `${n} pieces`,
+    tmValue: (y, era, n) => `${y} — ${era}, ${n}`,
     craftGuide: 'Look closer',
     image: 'Image unavailable', ajman: 'Time in Ajman',
     invite: n => `A private invitation · ${n}`, edition: n => `A private edition, prepared for ${n}`,
@@ -150,10 +158,8 @@ function tickClock() {
   const pad = n => String(n).padStart(2, '0');
   const label = $('#ajmanTime');
   if (label) label.textContent = `${t('ajman')} · ${state.ar ? indic(pad(h) + ':' + pad(m)) : pad(h) + ':' + pad(m)}`;
-  const rot = (id, deg) => $(id)?.setAttribute('transform', `rotate(${deg.toFixed(2)} 200 200)`);
-  rot('#hourHand', (h % 12) * 30 + m * .5);
-  rot('#minuteHand', m * 6 + s * .1);
-  rot('#secondHand', s * 6);
+  // under reduced motion the time machine's hands step once a second from here
+  if (reduceMotion() && !TM.travelling) tmLive();
 }
 
 // ————— cards —————
@@ -165,6 +171,13 @@ function card(w, opts = {}) {
   return `<article class="piece${opts.reveal ? ' reveal' : ''}"><button type="button" class="card" data-watch="${esc(w.slug)}" aria-label="${esc(t('explore') + ' — ' + local(w, 'name'))}">${royalFigure(w, { lot: opts.lot, loading: opts.loading })}<div class="meta"><span class="maison">${esc(maison(w))}</span><h3>${esc(local(w, 'name'))}</h3><span class="ref" dir="ltr">${esc(reference(w))}</span><span class="discover">${esc(t('explore'))}</span></div></button></article>`;
 }
 const bySlug = slug => state.all.find(w => w.slug === slug);
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-open-slug]');
+  if (!b) return;
+  const slugs = [...document.querySelectorAll('[data-open-slug]')].map(x => x.dataset.openSlug);
+  const w = bySlug(b.dataset.openSlug);
+  if (w) { state.list = slugs.map(bySlug).filter(Boolean); openDetail(w); }
+});
 const FEATURED = ['rolex-6100-chinese-dragon-cloisonne', 'patek-philippe-perpetual-calendar-5270p-green', 'patek-philippe-nautilus-perpetual-calendar-5740'];
 const HOME_SIX = ['rolex-daytona-6263-quraysh-hawk', 'fp-journe-tourbillon-souverain', 'patek-philippe-perpetual-calendar-5271p-blue-sapphire', 'audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce', 'fp-journe-chronometre-a-resonance-platinum-grey', 'richard-mille-rm-26-02-tourbillon-evil-eye'];
 
@@ -203,7 +216,7 @@ function renderMaisons() {
   list.innerHTML = [...new Set(state.all.map(w => w.brand))].map(b => `<li>${esc(state.ar ? maisonAr[b] || b : b)}</li>`).join('');
 }
 function renderAll() {
-  renderFilters(); renderGrid(); renderFeatured(); renderMaisons(); buildFrames(); buildReel(); renderToday(); renderDial(); renderGuest();
+  renderFilters(); renderGrid(); renderFeatured(); renderMaisons(); buildFrames(); buildReel(); renderToday(); renderDial(); renderGuest(); renderTimeMachine(); renderCrowns(); renderHotspotNumbers();
   observeReveals();
 }
 
@@ -259,7 +272,7 @@ function renderDetail() {
 <p class="label story-label detail-kicker">${esc(t('editorialRecord'))}</p>
 <p class="story description">${esc(local(w, 'editorial') || local(w, 'description'))}</p>
 <h3 class="specs-title detail-tech-title">${esc(t('technicalRecord'))}</h3>
-<dl class="specs">${specs.map(([k, v]) => `<div><dt>${esc(t(k))}</dt><dd${k === 'reference' ? ' dir="ltr"' : ''}>${esc(v)}</dd></div>`).join('')}</dl>
+<dl class="specs">${specs.map(([k, v]) => `<div><dt>${esc(t(k))}</dt><dd${k === 'reference' ? ' dir="ltr"' : ''}>${esc(k === 'reference' || !state.ar ? v : indic(v))}</dd></div>`).join('')}</dl>
 ${complicationLinks(w)}
 <p style="margin-top:2rem"><a class="link" href="/watchmaking/#complications"><span>${esc(t('understandCraft'))}</span><span class="arrow" aria-hidden="true">→</span></a></p>
 </div></div>`;
@@ -286,7 +299,7 @@ function openDetail(w) {
   state.selected = w;
   renderDetail();
   const d = $('#detail');
-  if (!d.open) d.showModal();
+  if (!d.open) { state.opener = document.activeElement; d.showModal(); }
   $('#detailBody').scrollTop = 0;
   $('#detailTitle').focus({ preventScroll: true });
 }
@@ -304,7 +317,9 @@ function initDetail() {
   d.addEventListener('close', () => {
     const slug = state.selected?.slug;
     state.selected = null;
-    $$('[data-watch]').find(el => el.dataset.watch === slug)?.focus({ preventScroll: true });
+    const back = state.opener?.isConnected && state.opener !== document.body ? state.opener : $$('[data-watch]').find(el => el.dataset.watch === slug);
+    state.opener = null;
+    back?.focus({ preventScroll: true });
   });
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-watch]');
@@ -397,7 +412,7 @@ const REEL_FRAMES = [
   { slug: 'fp-journe-chronometre-a-resonance-platinum-grey', ar: 'من الساعات التي يعرفها الهواة بالاسم قبل أن يروها — والآن، على معصم سموّه.', en: 'A watch connoisseurs know by name before they ever see one — and here, on His Highness’s wrist.' },
   { slug: 'richard-mille-rm-68-01-tourbillon-cyril-kongo', ar: 'عملٌ فنيٌّ بقدر ما هو آلة، اختاره سموّه لأن الصنعة عنده لا تقلّ عن الفن.', en: 'As much artwork as mechanism — chosen because, to His Highness, craft and art ask the same standard.' },
   { slug: 'audemars-piguet-royal-oak-flying-tourbillon-salmon-26522ce', ar: 'توربيونٌ طائر يتابعه الهواة بإعجاب — واحدةٌ من قِلّة حول العالم.', en: 'A flying tourbillon collectors follow with real admiration — one of very few in the world.' },
-  { slug: 'fp-journe-chronographe-monopoussoir-rattrapante-titanium', ar: 'إضافةٌ حديثة إلى المجلس، توثّق ذائقةً لا تتوقف عن الاكتشاف.', en: 'A recent addition to the majlis — proof that this eye for craft never stops looking.' },
+  { slug: 'fp-journe-chronographe-monopoussoir-rattrapante-titanium', ar: 'إضافةٌ حديثة إلى المجموعة، توثّق ذائقةً لا تتوقف عن الاكتشاف.', en: 'A recent addition to the collection — proof that this eye for craft never stops looking.' },
   { slug: 'rolex-6100-chinese-dragon-cloisonne', ar: 'من أندر ما صنعت رولكس على الإطلاق — قطعةٌ يحلم بها كثيرون، وامتلكها القليل.', en: 'Among the rarest pieces Rolex ever made — a piece many dream of, and very few have owned.' }
 ];
 const reel = { i: 0, timer: null };
@@ -433,20 +448,395 @@ const STAGE_BACK_PARTS = new Set(['calibre', 'escapement', 'balance', 'barrel', 
 function initAnatomyStage() {
   const stage = $('#watchStage'), grid = $('#anatomyGrid'), inner = $('#stageInner'), caption = $('#stageCaption');
   if (!stage || !grid || !inner) return;
-  grid.addEventListener('click', e => {
-    const btn = e.target.closest('.anatomy-card');
-    if (!btn) return;
-    const part = btn.dataset.part;
+  let w3d = null;
+  const choose = btn => {
+    const part = btn.dataset.part, n = Number(btn.dataset.n);
+    w3d?.select(part);
     $$('.anatomy-card').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
     stage.classList.add('picked');
-    stage.querySelectorAll('.part').forEach(g => g.classList.toggle('hl', g.dataset.part === part));
+    stage.querySelectorAll('.part,.hotspot').forEach(g => g.classList.toggle('hl', g.dataset.part === part));
     inner.classList.toggle('flipped', STAGE_BACK_PARTS.has(part));
-    const h3 = btn.querySelector('h3');
+    const h3 = btn.querySelector('h3'), para = btn.querySelector('p'), label = btn.querySelector('.num');
     if (caption && h3) {
-      caption.dataset.ar = h3.dataset.ar; caption.dataset.en = h3.dataset.en;
-      caption.textContent = state.ar ? h3.dataset.ar : h3.dataset.en;
+      // the callout: the card's own N°, the part, and what it does — kept in step with the language switch
+      const html = (num, title, text) => `<span class="callout-n">${esc(num)}</span><b class="callout-title">${esc(title)}</b><span class="callout-text">${esc(text)}</span>`;
+      caption.setAttribute('data-html', '');
+      caption.dataset.ar = html(label?.dataset.ar || indic(n), h3.dataset.ar, para?.dataset.ar || '');
+      caption.dataset.en = html(label?.dataset.en || 'N° ' + n, h3.dataset.en, para?.dataset.en || '');
+      caption.innerHTML = state.ar ? caption.dataset.ar : caption.dataset.en;
     }
+  };
+  grid.addEventListener('click', e => { const btn = e.target.closest('.anatomy-card'); if (btn) choose(btn); });
+  // the numbered hotspots on the drawing choose the same part as its card
+  stage.addEventListener('click', e => {
+    const hot = e.target.closest('.hotspot');
+    const btn = hot && grid.querySelector(`.anatomy-card[data-part="${hot.dataset.part}"]`);
+    if (btn) choose(btn);
   });
+  // the 3D watch: fetched only here, only with WebGL, only as the stage nears the screen
+  if (!window.WebGL2RenderingContext || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    io.disconnect();
+    import('/watch3d.js').then(m => {
+      w3d = m.mount(stage, {
+        reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
+        onPick: part => { const btn = grid.querySelector(`.anatomy-card[data-part="${part}"]`); if (btn) choose(btn); }
+      });
+      const sel = grid.querySelector('.anatomy-card[aria-pressed="true"]');
+      if (sel) w3d.select(sel.dataset.part);
+    }).catch(() => stage.classList.remove('has-3d'));
+  }, { rootMargin: '600px 0px' });
+  io.observe(stage);
+}
+function renderHotspotNumbers() {
+  $$('.hotspot text[data-num]').forEach(el => { el.textContent = state.ar ? indic(el.dataset.num) : el.dataset.num; });
+}
+
+// ————— the crown pieces: six kinds of rarity, each named by the ledger's own record —————
+const CROWNS = [
+  { slug: 'rolex-6100-chinese-dragon-cloisonne', ar: 'ندرة البقاء', en: 'The rarity of survival' },
+  { slug: 'rolex-daytona-6263-quraysh-hawk', ar: 'ندرة الرمز', en: 'The rarity of an emblem' },
+  { slug: 'patek-philippe-minute-repeater-tourbillon-3939hp', ar: 'ندرة الآلية', en: 'The rarity of a mechanism' },
+  { slug: 'fp-journe-ffc-francis-ford-coppola-calibre-13003', ar: 'ندرة اليد', en: 'The rarity of a hand' },
+  { slug: 'richard-mille-rm-68-01-tourbillon-cyril-kongo', ar: 'ندرة الفن', en: 'The rarity of art' },
+  { slug: 'patek-philippe-nautilus-5711-1300a-olive-green', ar: 'ندرة الخاتمة', en: 'The rarity of an ending' }
+];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+function renderCrowns() {
+  const list = $('#crownPieces');
+  if (!list || state.loading) return;
+  list.innerHTML = CROWNS.map((c, i) => {
+    const w = bySlug(c.slug);
+    if (!w) return '';
+    const src = esc(royalImage(w)), year = w.yearReleased ? tmNum(w.yearReleased) : local(w, 'yearLabel');
+    const pairing = w.royalPairing === 'portrait' ? t('pairedPortrait') : t('pairedPhotograph');
+    return `<li class="crown reveal" style="--i:${i}">
+<button type="button" class="crown-stage" data-watch="${esc(w.slug)}" aria-label="${esc(t('explore') + ' — ' + local(w, 'name'))}">
+<span class="crown-num" aria-hidden="true">${state.ar ? indic(i + 1) : ROMAN[i]}</span>
+<span class="crown-figure"><img src="${src}" alt="${esc(t('royalAlt')(local(w, 'name')))}" width="800" height="800" loading="lazy" decoding="async"><span class="crown-liquid" aria-hidden="true" style="background-image:url('${src}')"></span></span><svg class="crown-frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x=".5" y=".5" width="99" height="99" pathLength="1"/></svg>
+</button>
+<div class="crown-words"><p class="crown-kind">${esc(state.ar ? c.ar : c.en)}</p><h3>${esc(local(w, 'name'))}</h3><p class="crown-meta"><span>${esc(maison(w))}</span><span dir="ltr">${esc(year)}</span></p><p class="crown-line">${esc(local(w, 'editorial'))}</p><p class="crown-pairing">${esc(pairing)}</p></div>
+</li>`;
+  }).join('');
+  list.setAttribute('aria-busy', 'false');
+}
+
+// ————— the films: the collection through the media's lens —————
+// Nothing from the video host loads until a visitor asks for the film. Our poster, our
+// controls; the host's own titles and chrome sit outside the frame we show.
+const FILM_API = 'https://www.youtube.com/iframe_api', FILM_HOST = 'https://www.youtube-nocookie.com';
+let filmApi = null;
+function loadFilmApi() {
+  if (window.YT?.Player) return Promise.resolve(window.YT);
+  return filmApi ||= new Promise((resolve, reject) => {
+    const previous = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => { previous?.(); resolve(window.YT); };
+    const tag = document.createElement('script');
+    tag.src = FILM_API; tag.async = true;
+    tag.onerror = () => { filmApi = null; reject(Error('film')); };
+    document.head.append(tag);
+  });
+}
+const filmWords = { ar: { play: 'تشغيل', pause: 'إيقاف مؤقت', mute: 'كتم الصوت', unmute: 'تشغيل الصوت', close: 'إغلاق الفيلم', failed: 'تعذّر تشغيل الفيلم الآن. يُرجى المحاولة لاحقاً.' },
+  en: { play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Sound on', close: 'Close the film', failed: 'The film could not be played just now. Please try again later.' } };
+const fw = k => filmWords[state.ar ? 'ar' : 'en'][k];
+function closeFilm(fig) {
+  fig._player?.destroy?.(); fig._player = null;
+  fig.classList.remove('playing', 'loading');
+  fig.querySelector('.film-stage')?.remove();
+  fig.querySelector('.film-bar')?.remove();
+  fig.querySelector('.film-play')?.focus({ preventScroll: true });
+}
+async function playFilm(fig) {
+  if (fig.classList.contains('playing') || fig.classList.contains('loading')) return;
+  $$('.film.playing').forEach(closeFilm);
+  fig.classList.add('loading');
+  const frame = fig.querySelector('.film-frame');
+  const stage = document.createElement('div'); stage.className = 'film-stage';
+  const mount = document.createElement('div'); stage.append(mount); frame.append(stage);
+  const bar = document.createElement('div'); bar.className = 'film-bar';
+  bar.innerHTML = `<button type="button" data-film-act="toggle" aria-pressed="false">${esc(fw('pause'))}</button><button type="button" data-film-act="mute" aria-pressed="false">${esc(fw('mute'))}</button><button type="button" data-film-act="close">${esc(fw('close'))}</button>`;
+  fig.append(bar);
+  try {
+    const YT = await loadFilmApi();
+    fig._player = new YT.Player(mount, { host: FILM_HOST, videoId: fig.dataset.film,
+      playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1, fs: 0, disablekb: 1 },
+      events: { onReady: e => { fig.classList.replace('loading', 'playing'); e.target.playVideo(); bar.querySelector('button')?.focus({ preventScroll: true }); },
+        onError: () => { closeFilm(fig); fig.querySelector('.film-note')?.remove(); fig.insertAdjacentHTML('beforeend', `<p class="film-note" role="status">${esc(fw('failed'))}</p>`); } } });
+  } catch {
+    closeFilm(fig);
+    fig.insertAdjacentHTML('beforeend', `<p class="film-note" role="status">${esc(fw('failed'))}</p>`);
+  }
+}
+function initFilms() {
+  $$('.film').forEach(fig => {
+    fig.querySelector('.film-play')?.addEventListener('click', () => { fig.querySelector('.film-note')?.remove(); playFilm(fig); });
+    fig.addEventListener('click', e => {
+      const b = e.target.closest('[data-film-act]'), p = fig._player;
+      if (!b) return;
+      if (b.dataset.filmAct === 'close') return closeFilm(fig);
+      if (!p) return;
+      if (b.dataset.filmAct === 'toggle') {
+        const paused = p.getPlayerState?.() === 2;
+        paused ? p.playVideo() : p.pauseVideo();
+        b.setAttribute('aria-pressed', String(!paused)); b.textContent = paused ? fw('pause') : fw('play');
+      }
+      if (b.dataset.filmAct === 'mute') {
+        const muted = p.isMuted?.();
+        muted ? p.unMute() : p.mute();
+        b.setAttribute('aria-pressed', String(!muted)); b.textContent = muted ? fw('mute') : fw('unmute');
+      }
+    });
+  });
+}
+
+// ————— the time machine —————
+// The Watchmaking hero watch beats in Ajman time until a hand touches it. Then the
+// crown comes out (the seconds hand stops, as it does when a watch is set) and turning
+// it — or the dial — carries the hands through the years the models in the collection
+// were introduced, 1954 to 2025. Every year, decade and count comes from watches.json.
+const TM = { start: 1954, end: 2025, t: 2025, v: 0, travelling: false, drag: null, raf: 0, live: 0, year: null, decade: null,
+  pieces: [], undated: [], detents: [], sec: 0, visible: true, hinted: false };
+const TM_DECADES = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+const TM_DECADE_NAMES = { 1950: ['الخمسينيات', 'The 1950s'], 1960: ['الستينيات', 'The 1960s'], 1970: ['السبعينيات', 'The 1970s'], 1980: ['الثمانينيات', 'The 1980s'],
+  1990: ['التسعينيات', 'The 1990s'], 2000: ['العقد الأول من الألفية', 'The 2000s'], 2010: ['العقد الثاني من الألفية', 'The 2010s'], 2020: ['العقد الثالث من الألفية', 'The 2020s'] };
+const TM_YEARS_PER_TURN = 5, TM_PX_PER_YEAR = 22;
+const tmDecadeOf = w => { const y = Number(w.yearReleased); if (y) return Math.floor(y / 10) * 10; const m = /^(\d{4})s$/.exec(w.yearLabelEn || ''); return m ? Number(m[1]) : null; };
+const tmEraName = d => TM_DECADE_NAMES[d]?.[state.ar ? 0 : 1] || '';
+const tmClamp = y => Math.min(TM.end, Math.max(TM.start, y));
+const tmNum = v => state.ar ? indic(v) : String(v);
+function tmSetYearWindow(year) {
+  const digits = String(year).padStart(4, '0');
+  $$('#yearWindow .tm-digit').forEach((g, c) => g.setAttribute('transform', `translate(0 ${-34 * Number(digits[c])})`));
+}
+function tmHands(h, m, s) {
+  const rot = (id, deg) => $(id)?.setAttribute('transform', `rotate(${deg.toFixed(2)} 200 200)`);
+  rot('#hourHand', h); rot('#minuteHand', m); rot('#secondHand', s);
+}
+function tmEraHand(t) {
+  const deg = -120 + Math.max(0, Math.min(7, (t - 1950) / 10)) * (240 / 7);
+  $('#eraHand')?.setAttribute('transform', `rotate(${deg.toFixed(2)} 124 200)`);
+}
+// Ajman keeps UTC+4 all year; eight beats a second, like a 28,800 vph calibre.
+function tmLive() {
+  const d = new Date(Date.now() + 4 * 3600e3), ms = d.getUTCMilliseconds();
+  const s = d.getUTCSeconds() + (reduceMotion() ? 0 : Math.floor(ms / 125) / 8), m = d.getUTCMinutes() + s / 60, h = (d.getUTCHours() % 12) + m / 60;
+  TM.sec = s * 6;
+  tmHands(h * 30, m * 6, TM.sec);
+  const year = d.getUTCFullYear();
+  if (TM.year !== year) { TM.year = year; tmSetYearWindow(year); }
+  tmEraHand(year);
+}
+function tmLoop() {
+  cancelAnimationFrame(TM.live);
+  if (TM.travelling || reduceMotion() || !TM.visible || document.hidden) return;
+  tmLive();
+  TM.live = requestAnimationFrame(tmLoop);
+}
+// the state of the machine at a (fractional) year
+function tmRender() {
+  const t = TM.t, frac = t - Math.floor(t);
+  tmHands(((t - TM.start) / 12 * 360) % 360, frac * 360, TM.sec);
+  tmEraHand(t);
+  $('#tmKnurl')?.setAttribute('transform', `translate(0 ${((t * 24) % 4).toFixed(2)})`);
+  const year = Math.floor(t + 1e-6);
+  if (year !== TM.year) { TM.year = year; tmSetYearWindow(year); tmOnYear(year); }
+  const era = $('#tm'); if (era) era.style.setProperty('--era', ((t - TM.start) / (TM.end - TM.start)).toFixed(3));
+}
+function tmOnYear(year) {
+  const svg = $('#timeMachine');
+  const decade = Math.floor(year / 10) * 10;
+  svg?.setAttribute('aria-valuenow', String(year));
+  tmRestLabel();
+  // a detent is felt only under a hand on the crown — never on a deep link or a rail jump
+  if (TM.drag && TM.detents.includes(year) && !reduceMotion() && navigator.userActivation?.isActive !== false) try { navigator.vibrate?.(6); } catch {}
+  if (decade !== TM.decade) { TM.decade = decade; tmRenderEra(); }
+  else tmMarkYear();
+}
+function tmCard(w) {
+  const year = w.yearReleased ? tmNum(w.yearReleased) : local(w, 'yearLabel') || t('tmUndated');
+  return `<article class="era-card" data-year="${esc(w.yearReleased || '')}"><button type="button" data-watch="${esc(w.slug)}" aria-label="${esc(t('explore') + ' — ' + local(w, 'name'))}"><figure><img src="${esc(royalImage(w))}" alt="" width="800" height="800" loading="lazy" decoding="async"></figure><span class="era-card-year" dir="ltr">${esc(year)}</span><span class="era-card-maison">${esc(maison(w))}</span><span class="era-card-name">${esc(local(w, 'name'))}</span></button></article>`;
+}
+function tmRenderEra() {
+  const box = $('#eraCards'), cap = $('#eraCaption');
+  if (!box || !cap) return;
+  if (!TM.travelling && TM.decade === null) {
+    cap.textContent = t('tmNow');
+    box.innerHTML = '';
+    tmMarkRail();
+    return;
+  }
+  const undated = TM.decade === 'undated';
+  const list = undated ? TM.undated : TM.pieces.filter(w => tmDecadeOf(w) === TM.decade).sort((a, b) => (a.yearReleased || 0) - (b.yearReleased || 0));
+  const title = undated ? t('tmUndated') : tmEraName(TM.decade);
+  cap.innerHTML = `<span class="tm-era-name">${esc(title)}</span><span class="tm-era-count">${esc(list.length ? t('tmCount')(list.length) : t('tmNone'))}</span>${undated ? `<span class="tm-era-note">${esc(t('tmUndatedNote'))}</span>` : ''}`;
+  box.innerHTML = list.map((w, i) => tmCard(w).replace('<article class="era-card"', `<article class="era-card" style="--i:${i}"`)).join('');
+  tmMarkYear(); tmMarkRail();
+}
+function tmMarkYear() {
+  $$('#eraCards .era-card').forEach(c => c.classList.toggle('now', Number(c.dataset.year) === TM.year));
+}
+function tmMarkRail() {
+  $$('#eraRail [data-era]').forEach(b => b.setAttribute('aria-pressed', String(TM.travelling && String(TM.decade) === b.dataset.era)));
+}
+// what the slider announces, in the current language: at rest the watch keeps today's
+// time, so it names the present rather than a year it is not showing
+function tmRestLabel() {
+  const svg = $('#timeMachine');
+  if (!svg) return;
+  if (!TM.travelling || !TM.year) return svg.setAttribute('aria-valuetext', t('tmNow'));
+  const decade = Math.floor(TM.year / 10) * 10;
+  svg.setAttribute('aria-valuetext', t('tmValue')(TM.year, tmEraName(decade), t('tmCount')(TM.pieces.filter(w => tmDecadeOf(w) === decade).length)));
+}
+function renderTimeMachine() {
+  const rail = $('#eraRail');
+  if (!rail || state.loading) return;
+  TM.pieces = state.all.filter(w => tmDecadeOf(w) !== null);
+  TM.undated = state.all.filter(w => tmDecadeOf(w) === null);
+  TM.detents = [...new Set(TM.pieces.map(w => Number(w.yearReleased)).filter(Boolean))].sort((a, b) => a - b);
+  const count = d => TM.pieces.filter(w => tmDecadeOf(w) === d).length;
+  rail.innerHTML = TM_DECADES.map(d => `<button type="button" data-era="${d}" aria-pressed="false" class="${count(d) ? '' : 'empty'}"><b dir="ltr">${esc(tmNum(d))}</b><span>${esc(count(d) ? t('tmCount')(count(d)) : '—')}</span></button>`).join('')
+    + (TM.undated.length ? `<button type="button" data-era="undated" aria-pressed="false"><b>${esc(t('tmUndated'))}</b><span>${esc(t('tmCount')(TM.undated.length))}</span></button>` : '');
+  $$('#yearWindow text').forEach(el => { el.textContent = tmNum(el.dataset.d); });
+  const hint = $('#tmHint'); if (hint) hint.hidden = TM.travelling;
+  tmRestLabel();
+  tmRenderEra();
+  if (!TM.hinted) { TM.hinted = true; const m = /^#era-(\d{4})s$/.exec(location.hash) || (location.hash === '#era-undated' ? [0, 'undated'] : null); if (m) tmGoDecade(m[1] === 'undated' ? 'undated' : Number(m[1]), false); }
+}
+function tmBegin() {
+  if (TM.travelling) return;
+  TM.travelling = true;
+  cancelAnimationFrame(TM.live);
+  TM.t = tmClamp(TM.year || TM.end);
+  $('#tm')?.classList.add('travelling');
+  const now = $('#tmNow'), hint = $('#tmHint');
+  if (now) now.hidden = false;
+  if (hint) hint.hidden = true;
+  TM.decade = null; TM.year = null;
+  tmRender();
+}
+function tmEnd() {
+  cancelAnimationFrame(TM.raf);
+  const present = new Date(Date.now() + 4 * 3600e3).getUTCFullYear();
+  const finish = () => {
+    TM.travelling = false; TM.decade = null; TM.year = null;
+    $('#tm')?.classList.remove('travelling');
+    const now = $('#tmNow'), hint = $('#tmHint');
+    if (now) now.hidden = true;
+    if (hint) hint.hidden = false;
+    if (location.hash.startsWith('#era-')) history.replaceState(null, '', location.pathname + location.search);
+    tmRestLabel(); tmRenderEra(); tmLive(); tmLoop();
+    $('#timeMachine')?.focus({ preventScroll: true });
+  };
+  if (reduceMotion()) return finish();
+  tmTween(tmClamp(present), finish);
+}
+// ease the machine to a year: an expo-out, as everything that arrives on this site
+function tmTween(target, done) {
+  cancelAnimationFrame(TM.raf);
+  const from = TM.t, dist = Math.abs(target - from), dur = Math.min(2200, 500 + dist * 40), t0 = performance.now();
+  if (reduceMotion() || dist < .001) { TM.t = target; tmRender(); return done?.(); }
+  const step = now => {
+    const k = Math.min(1, (now - t0) / dur), e = k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
+    TM.t = from + (target - from) * e; tmRender();
+    if (k < 1) TM.raf = requestAnimationFrame(step); else done?.();
+  };
+  TM.raf = requestAnimationFrame(step);
+}
+// the nearest year a model in the collection was introduced — the crown's detents
+function tmDetent(t, dir = 0) {
+  const d = TM.detents;
+  if (!d.length) return Math.round(t);
+  if (dir > 0) return d.find(y => y > t + .01) ?? d[d.length - 1];
+  if (dir < 0) return [...d].reverse().find(y => y < t - .01) ?? d[0];
+  return d.reduce((a, b) => Math.abs(b - t) < Math.abs(a - t) ? b : a);
+}
+function tmGoDecade(decade, hash = true) {
+  tmBegin();
+  if (decade === 'undated') {
+    TM.decade = 'undated'; tmRenderEra();
+    if (hash) history.replaceState(null, '', '#era-undated');
+    return;
+  }
+  const first = TM.detents.find(y => Math.floor(y / 10) * 10 === decade) ?? decade;
+  TM.decade = decade;
+  tmTween(tmClamp(first), () => { TM.decade = null; TM.year = null; tmRender(); });
+  if (hash) history.replaceState(null, '', `#era-${decade}s`);
+}
+// inertia after a throw, then settle into the nearest detent
+function tmCoast() {
+  cancelAnimationFrame(TM.raf);
+  let last = performance.now();
+  const step = now => {
+    const dt = Math.min(.05, (now - last) / 1000); last = now;
+    TM.t = tmClamp(TM.t + TM.v * dt);
+    TM.v *= Math.exp(-3.2 * dt);
+    if (TM.t === TM.start || TM.t === TM.end) TM.v = 0;
+    tmRender();
+    if (Math.abs(TM.v) > .7) TM.raf = requestAnimationFrame(step);
+    else tmTween(tmDetent(TM.t));
+  };
+  TM.raf = requestAnimationFrame(step);
+}
+function initTimeMachine() {
+  const svg = $('#timeMachine');
+  if (!svg) return;
+  const pt = e => { const r = svg.getBoundingClientRect(); return { x: (e.clientX - r.left) * 440 / r.width, y: (e.clientY - r.top) * 400 / r.height }; };
+  const angle = p => Math.atan2(p.y - 200, p.x - 200) * 180 / Math.PI;
+  svg.addEventListener('pointerdown', e => {
+    if (e.button !== undefined && e.button !== 0) return;
+    const p = pt(e), crown = e.target.closest?.('#crown');
+    if (!crown && Math.hypot(p.x - 200, p.y - 200) > 196) return;
+    e.preventDefault();
+    tmBegin();
+    cancelAnimationFrame(TM.raf);
+    TM.drag = { mode: crown ? 'crown' : 'dial', y: p.y, a: angle(p), samples: [[performance.now(), TM.t]] };
+    svg.setPointerCapture?.(e.pointerId);
+    svg.classList.add('dragging');
+  });
+  svg.addEventListener('pointermove', e => {
+    const g = TM.drag; if (!g) return;
+    const p = pt(e);
+    if (g.mode === 'crown') { TM.t = tmClamp(TM.t + (g.y - p.y) / TM_PX_PER_YEAR); g.y = p.y; }
+    else { const a = angle(p); let da = a - g.a; if (da > 180) da -= 360; if (da < -180) da += 360; g.a = a; TM.t = tmClamp(TM.t + da / 360 * TM_YEARS_PER_TURN); }
+    const now = performance.now(); g.samples.push([now, TM.t]); while (g.samples.length > 2 && now - g.samples[0][0] > 90) g.samples.shift();
+    tmRender();
+  });
+  const release = e => {
+    const g = TM.drag; if (!g) return;
+    TM.drag = null; svg.classList.remove('dragging');
+    try { svg.releasePointerCapture?.(e.pointerId); } catch {}
+    const [a, b] = [g.samples[0], g.samples[g.samples.length - 1]];
+    TM.v = b[0] > a[0] ? (b[1] - a[1]) / ((b[0] - a[0]) / 1000) : 0;
+    if (reduceMotion()) { TM.v = 0; TM.t = tmDetent(TM.t); tmRender(); } else tmCoast();
+  };
+  svg.addEventListener('pointerup', release);
+  svg.addEventListener('pointercancel', release);
+  let wheelTimer;
+  svg.addEventListener('wheel', e => {
+    e.preventDefault();
+    tmBegin(); cancelAnimationFrame(TM.raf);
+    TM.t = tmClamp(TM.t + e.deltaY / 120); tmRender();
+    clearTimeout(wheelTimer); wheelTimer = setTimeout(() => tmTween(tmDetent(TM.t)), 220);
+  }, { passive: false });
+  svg.addEventListener('keydown', e => {
+    const fwd = state.ar ? 'ArrowLeft' : 'ArrowRight', back = state.ar ? 'ArrowRight' : 'ArrowLeft';
+    const go = y => { e.preventDefault(); tmBegin(); tmTween(tmClamp(y)); };
+    if (e.key === fwd || e.key === 'ArrowUp') go(tmDetent(TM.t, 1));
+    else if (e.key === back || e.key === 'ArrowDown') go(tmDetent(TM.t, -1));
+    else if (e.key === 'PageUp') go(TM.t + 10);
+    else if (e.key === 'PageDown') go(TM.t - 10);
+    else if (e.key === 'Home') go(TM.start);
+    else if (e.key === 'End') go(TM.end);
+    else if (e.key === 'Escape' && TM.travelling) { e.preventDefault(); tmEnd(); }
+  });
+  $('#eraRail')?.addEventListener('click', e => { const b = e.target.closest('[data-era]'); if (b) tmGoDecade(b.dataset.era === 'undated' ? 'undated' : Number(b.dataset.era)); });
+  $('#tmNow')?.addEventListener('click', tmEnd);
+  const hero = $('.craft-hero');
+  if (hero && 'IntersectionObserver' in window) new IntersectionObserver(([en]) => { TM.visible = en.isIntersecting; tmLoop(); }).observe(hero);
+  document.addEventListener('visibilitychange', tmLoop);
+  tmLive(); tmLoop();
 }
 
 // ————— exhibition —————
@@ -512,8 +902,8 @@ function guestName() {
   try { name = new URLSearchParams(location.search).get('for') || ''; } catch {}
   name = name.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 60);
   try {
-    if (name) sessionStorage.setItem('majlis-guest', name);
-    else name = sessionStorage.getItem('majlis-guest') || '';
+    if (name) sessionStorage.setItem('ammar-guest', name);
+    else name = sessionStorage.getItem('ammar-guest') || '';
   } catch {}
   return name;
 }
@@ -529,12 +919,16 @@ function initVeil() {
   const veil = $('#veil');
   if (!veil) return;
   let seen = false;
-  try { seen = sessionStorage.getItem('majlis-veil') === '1'; sessionStorage.setItem('majlis-veil', '1'); } catch {}
-  if (seen || reduceMotion()) return;
+  try { seen = sessionStorage.getItem('ammar-veil') === '1'; sessionStorage.setItem('ammar-veil', '1'); } catch {}
+  // the motion layer choreographs the hero after this; it listens for 'museum:veil'
+  const lifted = () => { document.documentElement.dataset.veil = 'lifted'; document.dispatchEvent(new Event('museum:veil')); };
+  if (seen || reduceMotion()) return lifted();
   veil.hidden = false;
   veil.setAttribute('aria-hidden', 'true');
-  const lift = () => { veil.classList.add('lift'); setTimeout(() => { veil.hidden = true; }, 900); };
+  let done = false;
+  const lift = () => { if (done) return; done = true; veil.classList.add('lift'); lifted(); setTimeout(() => { veil.hidden = true; }, 1100); };
   const timer = setTimeout(lift, 2000);
+  setTimeout(() => { lift(); veil.hidden = true; }, 7000); // the hard fallback: never a veil past seven seconds
   veil.addEventListener('click', () => { clearTimeout(timer); lift(); }, { once: true });
   document.addEventListener('keydown', () => { clearTimeout(timer); lift(); }, { once: true });
 }
@@ -692,7 +1086,10 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('error', e => {
   const img = e.target;
-  if (img.tagName === 'IMG' && img.closest('.royal,.zoom')) {
+  // a decorative reel frame that fails is simply skipped
+  if (img.tagName === 'IMG' && img.closest('.frame')) { img.closest('.frame').hidden = true; return; }
+  if (img.tagName === 'IMG' && img.closest('.royal,.zoom,.crown-figure,.era-card,.chapter,#dialCentre,.royal-frame')) {
+    if (img.dataset.failed) return; img.dataset.failed = '1';
     img.hidden = true;
     const note = document.createElement('span');
     note.className = 'status'; note.textContent = t('image');
@@ -705,10 +1102,13 @@ initDetail();
 initScreen();
 initExhibition();
 initAnatomyStage();
+initTimeMachine();
+initFilms();
 applyLanguage();
 tickClock();
 setInterval(tickClock, 1000);
 initDial();
 initVeil();
-if (!$('#grid') && !$('#featuredGrid') && !$('#frames') && page !== 'exhibition') state.loading = false;
+// pages that show no timepieces never fetch the ledger
+if (!$('#grid') && !$('#featuredGrid') && !$('#frames') && !$('#eraRail') && !$('#crownPieces') && page !== 'exhibition') state.loading = false;
 else load();
