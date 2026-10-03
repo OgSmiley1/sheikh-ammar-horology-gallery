@@ -128,6 +128,8 @@ em{font-style:italic}
 :root[lang=ar] .wordmark .mark{font-size:clamp(1.08rem,4.4vw,1.55rem)}
 @media (max-width:560px){.wordmark .sub{font-size:.5rem;letter-spacing:.14em}:root[lang=ar] .wordmark .sub{font-size:.66rem}.menu-toggle>span:last-child{display:none}}
 @media (max-width:480px){.wordmark .sub{display:none}}
+/* the narrowest phones: the name takes two centred lines rather than pushing the language button off screen */
+@media (max-width:360px){.wordmark .mark{white-space:normal;text-align:center;line-height:1.08;max-width:12.5rem}:root[lang=ar] .wordmark .mark{max-width:none;white-space:nowrap}}
 .lang-toggle{justify-self:end;min-height:44px;min-width:44px;font:400 .74rem/1 'Jost',sans-serif;letter-spacing:.22em}
 .lang-toggle[lang=ar]{font:500 .98rem/1 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
 
@@ -330,17 +332,18 @@ main{display:block}
 .film-note{color:var(--moon-2);margin:.75rem 0 0}
 
 /* ————— collection ————— */
-.tools{max-width:var(--max);margin:0 auto;display:grid;gap:1.25rem;border-block:1px solid var(--hair);padding:1rem 0}
-@media (min-width:900px){.tools{grid-template-columns:1fr auto;align-items:center}}
+.tools{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem;border-block:1px solid var(--hair);padding:1rem 0}
+@media (min-width:900px){.tools{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
 .filters{display:flex;gap:1.75rem;overflow-x:auto;scrollbar-width:none;padding:.2rem 0}
 .filters::-webkit-scrollbar{display:none}
+@media (max-width:899px){.filters{-webkit-mask-image:linear-gradient(90deg,transparent,#000 1rem,#000 calc(100% - 2.25rem),transparent);mask-image:linear-gradient(90deg,transparent,#000 1rem,#000 calc(100% - 2.25rem),transparent);padding-inline:1rem}}
 .filter{flex:none;min-height:44px;min-width:44px;font:400 .72rem/1 'Jost',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid transparent;padding-top:2px}
 :root[lang=ar] .filter{font:500 .95rem/1 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
 .filter[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
 .search{display:flex;align-items:center;gap:1rem}
 .search label{font:400 .7rem/1 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
 :root[lang=ar] .search label{font:500 .92rem/1 'IBM Plex Sans Arabic',sans-serif;letter-spacing:0}
-.search input{flex:1;min-width:0;width:16rem;min-height:44px;border:0;border-bottom:1px solid var(--ink-2);background:transparent;font:300 1rem/1 var(--sans);color:var(--ink);padding:0 .2rem;border-radius:0}
+.search input{flex:1;min-width:0;width:min(16rem,100%);min-height:44px;border:0;border-bottom:1px solid var(--ink-2);background:transparent;font:300 1rem/1 var(--sans);color:var(--ink);padding:0 .2rem;border-radius:0}
 .search input::placeholder{color:var(--ink-2);opacity:1}
 .search input:focus{outline:none;border-color:var(--ink)}
 .count{max-width:var(--max);margin:1.25rem auto 0;color:var(--ink-2);font-size:.92rem}

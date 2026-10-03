@@ -1,6 +1,31 @@
 # Sheikh Ammar Horology Museum — Current Project State
 
-Updated: 2 October 2026
+Updated: 3 October 2026
+
+## 3 October 2026 — content integrity rule, and a polish pass (uncommitted until the owner says so)
+**The rule (now gated in `verify-museum.mjs`):** the site is His Highness's own collection. A
+watch seen only on another family member, or a photograph of someone else, never enters it,
+whatever a spotter's caption says. Uncertain attributions stay unpublished and are flagged.
+No "Al Nuaimi family" section. The gate refuses, with the evidence recorded beside each rule:
+- RM 67-01 — the posts show H.H. Sheikh Humaid bin Rashid Al Nuaimi, Ruler of Ajman;
+- RM 27-03 and any mention of Sheikh Rashid bin Humaid bin Rashid Al Nuaimi — the three
+  Time Keeper KW photographs the owner sent on 3 Oct show him, not His Highness. They were
+  **not added**; their SHA-256 hashes are blocked in `dist/` and `source-media/`;
+- Tudor Black Bay — the post names Sheikh Ammar but shows a different man;
+- the "Time Keeper" publisher mark;
+- any wear claim without a photograph of His Highness.
+Mutation-tested: a renamed copy of a refused photograph and an "RM 27-03" name both fail.
+
+**Audit findings left as they are (need the owner):** the 6264 and 6241 Daytonas still look
+like one watch (`identityReview` on both); four model names repeat (Tourbillon Souverain,
+Daytona Paul Newman, Royal Oak Perpetual Calendar, Calatrava), each a different reference.
+
+**Polish in this pass:** gzip for text from `serve.mjs` (watches.json 184→33 KB, watch3d.js
+581→150 KB; first-view weight down 30–70% per page); the 320 px English masthead and the
+Collection search no longer overflow; the maison filter row fades at its edge to show it
+scrolls; the detail sheet returns focus to whatever opened it (story chapters included);
+Arabic spec values use Arabic-Indic digits like the year; failed photographs everywhere show
+the quiet "image unavailable" note, and decorative reel frames simply drop out.
 
 ## 2 October 2026 — `museum-vision` is now the preview of PR #43
 - **Live site (unchanged):** `museum-current` → https://museum-current-production.up.railway.app,

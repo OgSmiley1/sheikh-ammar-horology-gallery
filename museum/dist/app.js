@@ -272,7 +272,7 @@ function renderDetail() {
 <p class="label story-label detail-kicker">${esc(t('editorialRecord'))}</p>
 <p class="story description">${esc(local(w, 'editorial') || local(w, 'description'))}</p>
 <h3 class="specs-title detail-tech-title">${esc(t('technicalRecord'))}</h3>
-<dl class="specs">${specs.map(([k, v]) => `<div><dt>${esc(t(k))}</dt><dd${k === 'reference' ? ' dir="ltr"' : ''}>${esc(v)}</dd></div>`).join('')}</dl>
+<dl class="specs">${specs.map(([k, v]) => `<div><dt>${esc(t(k))}</dt><dd${k === 'reference' ? ' dir="ltr"' : ''}>${esc(k === 'reference' || !state.ar ? v : indic(v))}</dd></div>`).join('')}</dl>
 ${complicationLinks(w)}
 <p style="margin-top:2rem"><a class="link" href="/watchmaking/#complications"><span>${esc(t('understandCraft'))}</span><span class="arrow" aria-hidden="true">→</span></a></p>
 </div></div>`;
@@ -299,7 +299,7 @@ function openDetail(w) {
   state.selected = w;
   renderDetail();
   const d = $('#detail');
-  if (!d.open) d.showModal();
+  if (!d.open) { state.opener = document.activeElement; d.showModal(); }
   $('#detailBody').scrollTop = 0;
   $('#detailTitle').focus({ preventScroll: true });
 }
@@ -317,7 +317,9 @@ function initDetail() {
   d.addEventListener('close', () => {
     const slug = state.selected?.slug;
     state.selected = null;
-    $$('[data-watch]').find(el => el.dataset.watch === slug)?.focus({ preventScroll: true });
+    const back = state.opener?.isConnected && state.opener !== document.body ? state.opener : $$('[data-watch]').find(el => el.dataset.watch === slug);
+    state.opener = null;
+    back?.focus({ preventScroll: true });
   });
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-watch]');
@@ -1084,7 +1086,10 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('error', e => {
   const img = e.target;
-  if (img.tagName === 'IMG' && img.closest('.royal,.zoom')) {
+  // a decorative reel frame that fails is simply skipped
+  if (img.tagName === 'IMG' && img.closest('.frame')) { img.closest('.frame').hidden = true; return; }
+  if (img.tagName === 'IMG' && img.closest('.royal,.zoom,.crown-figure,.era-card,.chapter,#dialCentre,.royal-frame')) {
+    if (img.dataset.failed) return; img.dataset.failed = '1';
     img.hidden = true;
     const note = document.createElement('span');
     note.className = 'status'; note.textContent = t('image');

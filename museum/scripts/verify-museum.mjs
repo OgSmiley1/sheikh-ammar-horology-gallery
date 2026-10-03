@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
 
@@ -154,6 +155,27 @@ for (const watch of data.watches) {
     pending[p.status]++;
   }
 }
+
+// Content integrity: this is His Highness's collection alone. A watch seen only on another
+// member of the family, or a photograph of someone else, stays out — even when a spotter's
+// caption says otherwise. Each rule records the evidence that excluded it.
+const NOT_HIS = [
+  [/RM\s?-?67-01\b|rm-67-01/i, 'RM 67-01: the posts show H.H. Sheikh Humaid bin Rashid Al Nuaimi, Ruler of Ajman'],
+  [/RM\s?-?27-03\b|rm-27-03/i, 'RM 27-03: the posts (Time Keeper KW, 3 Oct 2026) name Sheikh Rashid bin Humaid bin Rashid Al Nuaimi'],
+  [/راشد بن حميد بن راشد|Rashid bin Humaid bin Rashid/i, 'Sheikh Rashid bin Humaid bin Rashid Al Nuaimi is not the subject of this collection'],
+  [/\bTudor\b|تيودور|79360/i, 'Tudor Black Bay: the post names Sheikh Ammar but shows a different man'],
+  [/Time Keeper/i, 'a publisher mark; never shown']
+];
+const corpus = [...Object.entries(html), ['dist/watches.json', read('dist/watches.json')], ['dist/app.js', app]];
+for (const [re, why] of NOT_HIS) for (const [file, text] of corpus) if (re.test(text)) fail(`${file}: excluded from His Highness's collection — ${why}`);
+// the three photographs refused on 3 Oct 2026 (another family member); by content hash, so
+// a renamed copy is caught too
+const REFUSED = new Set(['502d60abae2595332b1d38083471bcc8b91d89d18ed8af63a31cd7a7cf33f04f', '386316e09175896d3690aad1513fd968a3faef8047082d434e37a19bd7e39c57', '434713e4cb5c733ce95142f9a5655fdc3aa4912e04c726296bfb0c338b93a8ef']);
+const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]);
+for (const file of [...walk(path.join(root, 'dist')), ...(existsSync(path.join(root, 'source-media')) ? walk(path.join(root, 'source-media')) : [])])
+  if (/\.(jpe?g|png|webp|avif)$/i.test(file) && REFUSED.has(createHash('sha256').update(readFileSync(file)).digest('hex'))) fail(`${path.relative(root, file)}: a refused photograph (not His Highness)`);
+// a wear claim needs a photograph of him; a portrait pairing never claims wear
+for (const w of data.watches) if (w.wornClaim && !w.provenance.some(p => p.type === 'owner_archive' && p.subject === 'photograph')) fail(`watches.json: ${w.slug} claims wear without a photograph of His Highness`);
 
 const royalFiles = readdirSync(path.join(root, 'dist/assets/royal'));
 if (royalFiles.length !== 45) fail(`assets/royal: expected 45 images, found ${royalFiles.length}`);
